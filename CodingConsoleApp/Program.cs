@@ -3562,6 +3562,7 @@ namespace CodingConsoleApp
                 superCell = new string[aToz.Length]; //22 
                 lockingCell = new string[aToz.Length]; // 22 
 
+                string all = "";
                 int c = 0; int l = 0; int s = 0; int sl = 0;
 
                 foreach (var item in aToz)
@@ -3571,7 +3572,9 @@ namespace CodingConsoleApp
                         if (i != 3)
                         {
                             allCell[c] = item + i.ToString();
-                            c++;
+
+                            all += allCell[c].ToString();
+                            c++;                           
                         }
                         //if (i == 4)
                         //{
@@ -3588,6 +3591,8 @@ namespace CodingConsoleApp
                 }
                 allCell[176] = "Y";
                 allCell[177] = "Z";
+                all += allCell[176].ToString();
+                all += allCell[177].ToString();
 
                 if (customSuperQuantity > 0)
                 {
@@ -3781,8 +3786,214 @@ namespace CodingConsoleApp
                 superLockingCell = new string[0];
                 return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
             }
+            else if (id == 2)// for max2 132/33/2  
+            {
+                string[] aTok = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K" };
+                string[] lToV = new[] { "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
+
+                allCell = new string[167]; //  167
+
+                superCell = new string[33]; //33
+
+                lockingCell = new string[22]; // 22
+
+                // 167 - 33 - 22 = 112 std cell
+
+                int c = 0; int l = 0; int s = 0;
+                foreach (var item in aToz)
+                {
+                    for (int i = 1; i < 10; i++)
+                    {
+
+                        if ((i != 3) && (i != 5))  // 3 & 5 exclude
+                        {
+                            allCell[c] = item + i.ToString();
+                            c++;
+                        }
+
+                        //if (i == 4)
+                        //{
+                        //    superCell[s] = item + i.ToString();
+                        //    s++;
+                        //}
+
+                        //if ((i == 6) && (aTok.Contains(item)))   // 6A to K include
+                        //{
+                        //    superCell[s] = item + i.ToString();
+                        //    s++;
+                        //}
+
+                        if (i == 9)
+                        {
+                            lockingCell[l] = item + i.ToString();
+                            l++;
+                        }
+                    }
+                }
+
+                foreach (var item in lToV)
+                {
+                    for (int i = 1; i < 10; i++)
+                    {
+                        if ((i == 5) && (lToV.Contains(item)))   // 5 L to V include
+                        {
+                            allCell[c] = item + i.ToString();
+                            c++;
+                        }
+                    }
+                }
 
 
+                allCell[165] = "Y";
+                allCell[166] = "Z";
+
+                if (customSuperQuantity > 0)
+                {
+                    superLockingCell = new string[customSuperQuantity];
+                    superCell = new string[aToz.Length * 2 - customSuperQuantity];
+                    string[] firstArray; string[] secondArray;
+
+                    stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
+                                            "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
+                                            "Q2","R2","S2","T2","U2","V2",
+                                            "L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5",
+                                            "L6","M6", "N6","O6","P6","Q6","R6","S6","T6","U6","V6",
+                                            "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",  "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
+                                            "A8","B8","C8","D8","E8","F8","G8", "H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8", "R8","S8","T8","U8","V8"
+                                            };
+
+
+                    lockingCell = new[] { "A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
+                                                 "K9","L9","M9","N9","O9","P9","Q9","R9","S9","T9","U9","V9" };
+
+                    if (customSuperQuantity == 5)
+                    {
+
+                        superCell = new[] { "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4",
+                                            "T4","U4","V4","A6","B6","C6","D6","E6","F6" };  // same as Standard
+
+                        superLockingCell = new[] { "G6","H6", "I6", "J6", "K6" };
+
+
+                    }
+                    else if (customSuperQuantity == 10)
+                    {
+
+                        // firstArray = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
+                        //secondArray = new[] { "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
+                       
+
+                        superCell = new[] { "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4",
+                                            "T4","U4","V4","A6" };  // same as Standard
+
+                        superLockingCell = new[] { "B6", "C6", "D6", "E6", "F6","G6", "H6", "I6", "J6", "K6" };
+
+                    }
+                    else if (customSuperQuantity == 15)
+                    {
+                      
+
+                        superCell = new[] { "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4"};  // same as Standard
+
+                        superLockingCell = new[] { "S4", "T4","U4","V4","A6" ,"B6", "C6", "D6", "E6", "F6", "G6", "H6", "I6", "J6", "K6" };
+
+                    }
+                    else
+                    {
+                        firstArray = new string[0];
+                        secondArray = new string[0];
+                    }
+
+                   // SuperQuantityCellCalulationForTwo(firstArray, secondArray, superLockingCell, superCell);
+                   // stdCell = allCell.Except(superCell).Except(lockingCell).Except(superLockingCell).ToArray();
+
+                    return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+                }
+
+                if (customStandardQuantity > 0)
+                {
+
+                    lockingCell = new string[aToz.Length + customStandardQuantity]; // 22 + 15
+                    superLockingCell = new string[customStandardQuantity]; // always null
+                    string[] fstArray;
+
+                    if (customStandardQuantity == 5)
+                    {
+                        fstArray = new[] { "A", "B", "C", "D", "E" };
+
+                        stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
+                                            "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
+                                            "Q2","R2","S2","T2","U2","V2","L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5","L6","M6",
+                                            "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
+                                            "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8",
+                                            "H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8"
+                                         };
+
+                        superCell = new[] { "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4",
+                                            "T4","U4","V4","A6","B6","C6","D6","E6","F6","G6","H6","I6", "J6","K6" };  // same as Standard
+
+                        lockingCell = new[] { "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
+                                                 "K9","L9","M9","N9","O9","P9","Q9","R9","S9","T9","U9","V9" };
+                      
+
+                        //stdCell = allCell.Except(superCell).Except(lockingCell).Except(superLockingCell).ToArray();
+                    }
+                    else if (customStandardQuantity == 10)
+                    {
+
+                        stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
+                                            "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
+                                            "Q2","R2","S2","T2","U2","V2","L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5","L6","M6",
+                                            "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
+                                            "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8",
+                                            "H8","I8","J8","K8","L8"
+                                         };
+
+                        superCell = new[] { "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4",
+                                            "T4","U4","V4","A6","B6","C6","D6","E6","F6","G6","H6","I6", "J6","K6" };  // same as Standard
+
+                        lockingCell = new[] {"M8", "N8", "O8", "P8", "Q8",  "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
+                                                 "K9","L9","M9","N9","O9","P9","Q9","R9","S9","T9","U9","V9" };
+                    
+
+                    }
+                    else if (customStandardQuantity == 15)
+                    {
+                        stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
+                                            "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
+                                            "Q2","R2","S2","T2","U2","V2","L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5","L6","M6",
+                                            "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
+                                            "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8"
+                                            
+                                         };
+
+                        superCell = new[] { "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4",
+                                            "T4","U4","V4","A6","B6","C6","D6","E6","F6","G6","H6","I6", "J6","K6" };  // same as Standard
+
+                        lockingCell = new[] {"H8","I8","J8","K8","L8","M8", "N8", "O8", "P8", "Q8",  "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
+                                                 "K9","L9","M9","N9","O9","P9","Q9","R9","S9","T9","U9","V9" };
+
+                    }
+                    else
+                    {
+                        stdCell = new string[0];
+                    }
+
+                    //StandardQuantityCellCalulationForOne(fstArray, aToz, lockingCell, superCell);
+                   // stdCell = allCell.Except(superCell).Except(lockingCell).ToArray();
+
+                    return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell); // superLockingCell  null here
+                }
+
+
+
+                superCell = new string[0];
+                lockingCell = new string[0];
+                stdCell = new string[0];
+                superLockingCell = new string[0];
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+            }
+           
             else
             {
                 superCell = new string[0];
@@ -3795,6 +4006,53 @@ namespace CodingConsoleApp
 
 
         }
+
+        private static void StandardQuantityCellCalulationForTwo(string[] firstArray, string[] secondArray, string[] lockingCell, string[] superCell)
+        {
+            int s = 0; int l = 0;
+
+            foreach (var item in firstArray) // dynamic a to e
+            {
+                lockingCell[l] = item + "8";
+                l++;
+            }
+
+            foreach (var item in secondArray) // a to z
+            {
+                superCell[s] = item + "4";  // item = F4 .... V4
+                s++;
+
+                superCell[s] = item + "6";  // item = F4 .... V4
+                s++;
+
+                lockingCell[l] = item + "9";
+                l++;
+            }
+        }
+
+        private static void SuperQuantityCellCalulationForTwo(string[] firstArray, string[] secondArray, string[] superLockingCell, string[] superCell)
+        {
+            int s = 0; int sl = 0;
+
+            foreach (var item in firstArray)
+            {
+                superLockingCell[sl] = item + "4";
+                sl++;
+
+                superCell[s] = item + "6";  // item = F4 .... V4
+                s++;
+            }
+
+            foreach (var item in secondArray)
+            {
+                superCell[s] = item + "4";  // item = F4 .... V4
+                s++;
+
+                superCell[s] = item + "6";  // item = F4 .... V4
+                s++;
+            }
+        }
+
 
         private static void StandardQuantityCellCalulationForOne(string[] firstArray, string[] secondArray, string[] lockingCell, string[] superCell)
         {
@@ -4140,7 +4398,7 @@ namespace CodingConsoleApp
 
            // CellCalculation(11);
 
-            CellCalculationCustom(1, -5, 5, "C");
+            CellCalculationCustom(3, 5, -5, "C");
 
             /*
             TreeNode one = new TreeNode(1);
