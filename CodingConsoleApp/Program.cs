@@ -3573,6 +3573,11 @@ namespace CodingConsoleApp
                             allCell[c] = item + i.ToString();
                             c++;
                         }
+                        //if (i == 4)
+                        //{
+                        //    superCell[s] = item + i.ToString();
+                        //    s++;
+                        //}
                         if (i == 9)
                         {
                             lockingCell[l] = item + i.ToString();
@@ -3586,105 +3591,37 @@ namespace CodingConsoleApp
 
                 if (customSuperQuantity > 0)
                 {
-                    s = 0;
-                    superLockingCell = new string[customSuperQuantity];
-                    //superCell = null;
+                    superLockingCell = new string[customSuperQuantity];                   
                     superCell = new string[aToz.Length - customSuperQuantity];
+                    string[] firstArray; string[] secondArray;
 
                     if (customSuperQuantity == 5)
                     {
 
-                        string[] aToE = new[] { "A", "B", "C", "D", "E" };
-
-                        foreach (var item in aToz)
-                        {
-                            for (int i = 1; i < 10; i++)
-                            {
-
-                                if ((i == 4) && (aToE.Contains(item)))   // 8A to E include locking
-                                {
-                                    superLockingCell[sl] = item + i.ToString();
-                                    sl++;
-                                }
-                            }
-                        }
-                        string[] fToz = new[] { "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
-
-                        foreach (var item in fToz)
-                        {
-                            for (int i = 1; i < 10; i++)
-                            {
-                                if ((i == 4) && (fToz.Contains(item)))   // 5 L to V include
-                                {
-                                    superCell[s] = item + i.ToString();
-                                    s++;
-                                }
-                            }
-                        }
-
+                        firstArray = new[] { "A", "B", "C", "D", "E" };
+                        secondArray = new[] { "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };                     
 
                     }
                     else if (customSuperQuantity == 10)
                     {
 
-                        string[] aToJ = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
-                        foreach (var item in aToz)
-                        {
-                            for (int i = 1; i < 10; i++)
-                            {
-
-                                if ((i == 4) && (aToJ.Contains(item)))   // 8A to E include locking
-                                {
-                                    superLockingCell[sl] = item + i.ToString();
-                                    sl++;
-                                }
-                            }
-                        }
-                        string[] kTov = new[] { "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
-
-                        foreach (var item in kTov)
-                        {
-                            for (int i = 1; i < 10; i++)
-                            {
-                                if ((i == 4) && (kTov.Contains(item)))   // 5 L to V include
-                                {
-                                    superCell[s] = item + i.ToString();
-                                    s++;
-                                }
-                            }
-                        }
+                        firstArray = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
+                        secondArray = new[] { "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" }; 
 
                     }
                     else if (customSuperQuantity == 15)
                     {
-                        string[] aToO = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O" };
-                        foreach (var item in aToz)
-                        {
-                            for (int i = 1; i < 10; i++)
-                            {
-
-                                if ((i == 4) && (aToO.Contains(item)))   // 8A to E include locking
-                                {
-                                    superLockingCell[sl] = item + i.ToString();
-                                    sl++;
-                                }
-                            }
-                        }
-                        string[] pTov = new[] { "P", "Q", "R", "S", "T", "U", "V" };
-
-                        foreach (var item in pTov)
-                        {
-                            for (int i = 1; i < 10; i++)
-                            {
-                                if ((i == 4) && (pTov.Contains(item)))   // 5 L to V include
-                                {
-                                    superCell[s] = item + i.ToString();
-                                    s++;
-                                }
-                            }
-                        }
+                        firstArray = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O" };
+                        secondArray = new[] { "P", "Q", "R", "S", "T", "U", "V" };
 
                     }
+                    else
+                    {
+                        firstArray = new string[0];
+                        secondArray = new string[0];
+                    }
+
+                    SuperQuantityCellCalulation(firstArray, secondArray, superLockingCell, superCell);
 
                     stdCell = allCell.Except(superCell).Except(lockingCell).Except(superLockingCell).ToArray();
 
@@ -3695,96 +3632,31 @@ namespace CodingConsoleApp
                 {
 
                     lockingCell = new string[aToz.Length + customStandardQuantity]; // 22 + 15
-                    superLockingCell = new string[customStandardQuantity];
-
-                     c = 0;  l = 0;  s = 0;  sl = 0;
+                    superLockingCell = new string[customStandardQuantity]; // always null
+                    string[] fstArray ;
 
                     if (customStandardQuantity == 5)
                     {
-                        string[] aToE = new[] { "A", "B", "C", "D", "E" };
-                        foreach (var item in aToz)
-                        {
-                            for (int i = 1; i < 10; i++)
-                            {
-                                
-
-                                if ((i == 8) && (aToE.Contains(item)))   // 8A to E include locking
-                                {
-                                    lockingCell[l] = item + i.ToString();
-                                    l++;
-                                }
-
-                                if (i == 4)
-                                {
-                                    superCell[s] = item + i.ToString();
-                                    s++;
-                                }
-                                if ((i == 9) )   // 8A to E include locking
-                                {
-                                    lockingCell[l] = item + i.ToString();
-                                    l++;
-                                }
-                            }
-                        }
-
+                        fstArray = new[] { "A", "B", "C", "D", "E" };                       
                     }
                     else if (customStandardQuantity == 10)
                     {
-                        string[] aToJ = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
-                        foreach (var item in aToz)
-                        {
-                            for (int i = 1; i < 10; i++)
-                            {
-
-                                if ((i == 8) && (aToJ.Contains(item)))   // 8A to E include locking
-                                {
-                                    lockingCell[l] = item + i.ToString();
-                                    l++;
-                                }
-
-                                if (i == 4)
-                                {
-                                    superCell[s] = item + i.ToString();
-                                    s++;
-                                }
-                                if ((i == 9))   // 8A to E include locking
-                                {
-                                    lockingCell[l] = item + i.ToString();
-                                    l++;
-                                }
-                            }
-                        }
+                        fstArray = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };   
 
                     }
                     else if (customStandardQuantity == 15)
                     {
-                        string[] aToO = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O" };
-                        foreach (var item in aToz)
-                        {
-                            for (int i = 1; i < 10; i++)
-                            {
-
-                                if ((i == 8) && (aToO.Contains(item)))   // 8A to E include locking
-                                {
-                                    lockingCell[l] = item + i.ToString();
-                                    l++;
-                                }
-                                if (i == 4)
-                                {
-                                    superCell[s] = item + i.ToString();
-                                    s++;
-                                }
-                                if ((i == 9))   // 8A to E include locking
-                                {
-                                    lockingCell[l] = item + i.ToString();
-                                    l++;
-                                }
-                            }
-                        }
+                        fstArray = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O" };
                     }
+                    else
+                    {
+                            fstArray = new string[0];
+                    }
+
+                    StandardQuantityCellCalulation(fstArray, aToz, lockingCell, superCell);
                     stdCell = allCell.Except(superCell).Except(lockingCell).ToArray();
 
-                    return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+                    return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell); // superLockingCell  null here
                 }
 
 
@@ -3796,7 +3668,119 @@ namespace CodingConsoleApp
                 return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
 
             }
+            else if (id == 1)// for max2 110/44/2  su
+            {
+                allCell = new string[aToz.Length * 7 + 2]; // 22 * 7 + 2 = 154 + 2 = 156
+                superCell = new string[aToz.Length * 2]; //44 
+                lockingCell = new string[aToz.Length]; // 22
 
+                int c = 0; int l = 0; int s = 0;
+                foreach (var item in aToz)
+                {
+                    for (int i = 1; i < 10; i++)
+                    {
+                        if ((i != 3) && (i != 5))
+                        {
+                            allCell[c] = item + i.ToString();
+                            c++;
+                        }
+
+                        //if ((i == 4) || (i == 6))
+                        //{
+                        //    superCell[s] = item + i.ToString();
+                        //    s++;
+                        //}
+
+                        if (i == 9)
+                        {
+                            lockingCell[l] = item + i.ToString();
+                            l++;
+                        }
+                    }
+                }
+
+
+                allCell[154] = "Y";
+                allCell[155] = "Z";
+
+                if (customSuperQuantity > 0)
+                {
+                    superLockingCell = new string[customSuperQuantity];
+                    superCell = new string[aToz.Length*2 - customSuperQuantity];
+                    string[] firstArray; string[] secondArray;
+
+                    if (customSuperQuantity == 5)
+                    {
+
+                        firstArray = new[] { "A", "B", "C", "D", "E" };
+                        secondArray = new[] { "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
+
+                    }
+                    else if (customSuperQuantity == 10)
+                    {
+
+                        firstArray = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
+                        secondArray = new[] { "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
+
+                    }
+                    else if (customSuperQuantity == 15)
+                    {
+                        firstArray = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O" };
+                        secondArray = new[] { "P", "Q", "R", "S", "T", "U", "V" };
+
+                    }
+                    else
+                    {
+                        firstArray = new string[0];
+                        secondArray = new string[0];
+                    }
+
+                    SuperQuantityCellCalulationForOne(firstArray, secondArray, superLockingCell, superCell);
+
+                    stdCell = allCell.Except(superCell).Except(lockingCell).Except(superLockingCell).ToArray();
+
+                    return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+                }
+
+                if (customStandardQuantity > 0)
+                {
+
+                    lockingCell = new string[aToz.Length + customStandardQuantity]; // 22 + 15
+                    superLockingCell = new string[customStandardQuantity]; // always null
+                    string[] fstArray;
+
+                    if (customStandardQuantity == 5)
+                    {
+                        fstArray = new[] { "A", "B", "C", "D", "E" };
+                    }
+                    else if (customStandardQuantity == 10)
+                    {
+                        fstArray = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
+
+                    }
+                    else if (customStandardQuantity == 15)
+                    {
+                        fstArray = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O" };
+                    }
+                    else
+                    {
+                        fstArray = new string[0];
+                    }
+
+                    StandardQuantityCellCalulationForOne(fstArray, aToz, lockingCell, superCell);
+                    stdCell = allCell.Except(superCell).Except(lockingCell).ToArray();
+
+                    return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell); // superLockingCell  null here
+                }
+
+
+
+                superCell = new string[0];
+                lockingCell = new string[0];
+                stdCell = new string[0];
+                superLockingCell = new string[0];
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+            }
 
 
             else
@@ -3811,6 +3795,90 @@ namespace CodingConsoleApp
 
 
         }
+
+        private static void StandardQuantityCellCalulationForOne(string[] firstArray, string[] secondArray, string[] lockingCell, string[] superCell)
+        {
+            int s = 0; int l = 0;
+
+            foreach (var item in firstArray) // dynamic a to e
+            {
+                lockingCell[l] = item + "8";
+                l++;
+            }
+
+            foreach (var item in secondArray) // a to z
+            {
+                superCell[s] = item + "4";  // item = F4 .... V4
+                s++;
+
+                superCell[s] = item + "6";  // item = F4 .... V4
+                s++;
+
+                lockingCell[l] = item + "9";
+                l++;
+            }
+        }
+
+        private static void SuperQuantityCellCalulationForOne(string[] firstArray, string[] secondArray, string[] superLockingCell, string[] superCell)
+        {
+            int s = 0; int sl = 0;
+
+            foreach (var item in firstArray)
+            {
+                superLockingCell[sl] = item + "4";
+                sl++;
+
+                superCell[s] = item + "6";  // item = F4 .... V4
+                s++;
+            }
+
+            foreach (var item in secondArray)
+            {
+                superCell[s] = item + "4";  // item = F4 .... V4
+                s++;
+
+                superCell[s] = item + "6";  // item = F4 .... V4
+                s++;
+            }
+        }
+
+        private static void SuperQuantityCellCalulation(string[] firstArray, string[] secondArray, string[] superLockingCell, string[] superCell)
+        {
+            int s = 0; int sl = 0;
+
+            foreach (var item in firstArray)
+            {               
+                superLockingCell[sl] = item + "4";
+                sl++;                    
+            }
+
+            foreach (var item in secondArray)
+            {
+                superCell[s] = item + "4";  // item = F4 .... V4
+                s++;
+            }
+        }
+
+        private static void StandardQuantityCellCalulation(string[] firstArray, string[] secondArray, string[] lockingCell, string[] superCell)
+        {
+            int s = 0;  int l = 0;
+
+            foreach (var item in firstArray) // dynamic a to e
+            {
+                lockingCell[l] = item + "8";
+                l++;
+            }
+
+            foreach (var item in secondArray) // a to z
+            {
+                superCell[s] = item + "4";
+                s++;
+
+                lockingCell[l] = item + "9";
+                l++;
+            }          
+        }
+
 
         /*
          
@@ -4072,7 +4140,7 @@ namespace CodingConsoleApp
 
            // CellCalculation(11);
 
-            CellCalculationCustom(3, -1, 15, "C");
+            CellCalculationCustom(1, -5, 5, "C");
 
             /*
             TreeNode one = new TreeNode(1);
