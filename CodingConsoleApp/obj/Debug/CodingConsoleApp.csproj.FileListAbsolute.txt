@@ -10,3 +10,15 @@ D:\MY Home Project\CodingConsoleApp\CodingConsoleApp\bin\Debug\Lucene.Net.dll
 D:\MY Home Project\CodingConsoleApp\CodingConsoleApp\bin\Debug\Lucene.Net.pdb
 D:\MY Home Project\CodingConsoleApp\CodingConsoleApp\bin\Debug\Lucene.Net.xml
 D:\MY Home Project\CodingConsoleApp\CodingConsoleApp\obj\Debug\CodingConsoleApp.csproj.CopyComplete
+D:\MY Home Project\ConsoleApp\CodingConsoleApp\bin\Debug\CodingConsoleApp.exe.config
+D:\MY Home Project\ConsoleApp\CodingConsoleApp\bin\Debug\CodingConsoleApp.exe
+D:\MY Home Project\ConsoleApp\CodingConsoleApp\bin\Debug\CodingConsoleApp.pdb
+D:\MY Home Project\ConsoleApp\CodingConsoleApp\bin\Debug\ICSharpCode.SharpZipLib.dll
+D:\MY Home Project\ConsoleApp\CodingConsoleApp\bin\Debug\Lucene.Net.dll
+D:\MY Home Project\ConsoleApp\CodingConsoleApp\bin\Debug\Lucene.Net.pdb
+D:\MY Home Project\ConsoleApp\CodingConsoleApp\bin\Debug\Lucene.Net.xml
+D:\MY Home Project\ConsoleApp\CodingConsoleApp\obj\Debug\CodingConsoleApp.csproj.AssemblyReference.cache
+D:\MY Home Project\ConsoleApp\CodingConsoleApp\obj\Debug\CodingConsoleApp.csproj.CoreCompileInputs.cache
+D:\MY Home Project\ConsoleApp\CodingConsoleApp\obj\Debug\CodingConsoleApp.csproj.CopyComplete
+D:\MY Home Project\ConsoleApp\CodingConsoleApp\obj\Debug\CodingConsoleApp.exe
+D:\MY Home Project\ConsoleApp\CodingConsoleApp\obj\Debug\CodingConsoleApp.pdb
