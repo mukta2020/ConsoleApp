@@ -3033,9 +3033,139 @@ namespace CodingConsoleApp
             return res[0];
         }
 
-       
 
-       
+
+
+        private static void StandardQuantityCellCalulationForTwo(string[] firstArray, string[] secondArray, string[] lockingCell, string[] superCell)
+        {
+            int s = 0; int l = 0;
+
+            foreach (var item in firstArray) // dynamic a to e
+            {
+                lockingCell[l] = item + "8";
+                l++;
+            }
+
+            foreach (var item in secondArray) // a to z
+            {
+                superCell[s] = item + "4";  // item = F4 .... V4
+                s++;
+
+                superCell[s] = item + "6";  // item = F4 .... V4
+                s++;
+
+                lockingCell[l] = item + "9";
+                l++;
+            }
+        }
+
+        private static void SuperQuantityCellCalulationForTwo(string[] firstArray, string[] secondArray, string[] superLockingCell, string[] superCell)
+        {
+            int s = 0; int sl = 0;
+
+            foreach (var item in firstArray)
+            {
+                superLockingCell[sl] = item + "4";
+                sl++;
+
+                superCell[s] = item + "6";  // item = F4 .... V4
+                s++;
+            }
+
+            foreach (var item in secondArray)
+            {
+                superCell[s] = item + "4";  // item = F4 .... V4
+                s++;
+
+                superCell[s] = item + "6";  // item = F4 .... V4
+                s++;
+            }
+        }
+
+
+        private static void StandardQuantityCellCalulationForOne(string[] firstArray, string[] secondArray, string[] lockingCell, string[] superCell)
+        {
+            int s = 0; int l = 22;
+
+            foreach (var item in firstArray) // dynamic a to e
+            {
+                lockingCell[l] = item + "8";
+                l++;
+            }
+
+            foreach (var item in secondArray) // a to z
+            {
+                superCell[s] = item + "4";  // item = F4 .... V4
+                s++;
+
+                superCell[s] = item + "6";  // item = F4 .... V4
+                s++;
+
+                //lockingCell[l] = item + "9";
+                //l++;
+            }
+        }
+
+        private static void SuperQuantityCellCalulationForOne(string[] firstArray, string[] secondArray, string[] superLockingCell, string[] superCell)
+        {
+            int s = 0; int sl = 0;
+
+            foreach (var item in firstArray)
+            {
+                superLockingCell[sl] = item + "4";
+                sl++;
+
+                superCell[s] = item + "6";  // item = F4 .... V4
+                s++;
+            }
+
+            foreach (var item in secondArray)
+            {
+                superCell[s] = item + "4";  // item = F4 .... V4
+                s++;
+
+                superCell[s] = item + "6";  // item = F4 .... V4
+                s++;
+            }
+        }
+
+        private static void SuperQuantityCellCalulation(string[] firstArray, string[] secondArray, string[] superLockingCell, string[] superCell)
+        {
+            int s = 0; int sl = 0;
+
+            foreach (var item in firstArray)
+            {
+                superLockingCell[sl] = item + "4";
+                sl++;
+            }
+
+            foreach (var item in secondArray)
+            {
+                superCell[s] = item + "4";  // item = F4 .... V4
+                s++;
+            }
+        }
+
+        private static void StandardQuantityCellCalulation(string[] firstArray, string[] secondArray, string[] lockingCell, string[] superCell)
+        {
+            int s = 0; int l = 0;
+
+            foreach (var item in firstArray) // dynamic a to e
+            {
+                lockingCell[l] = item + "8";
+                l++;
+            }
+
+            foreach (var item in secondArray) // a to z
+            {
+                superCell[s] = item + "4";
+                s++;
+
+                lockingCell[l] = item + "9";
+                l++;
+            }
+        }
+
 
 
         private static Tuple<string[], string[], string[] , string[]> CellCalculationForBoth(int id, int customSuperQuantity, int customStandardQuantity, string config)
@@ -5059,6 +5189,1707 @@ namespace CodingConsoleApp
         }
 
 
+        //private static Tuple<string[], string[]> CellCalculation(int? id, int customSuperQuantity, int customStandardQuantity)
+        //{
+        //    string[] aToz = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
+        //    string[] allCell;
+        //    string[] superCell;
+        //    string[] superLockingCell;
+        //    string[] stdCell2;
+        //    string[] stdCell;
+        //    string[] stdLockingCell;
+
+        //    if (id == 3)// for max2 154/22/2
+        //    {
+        //        allCell = new string[aToz.Length * 8 + 2]; // 176 + 2 = 178
+        //        superCell = new string[aToz.Length]; //22 
+        //                                             // lockingCell = new string[0]; // 22
+
+        //        int c = 0; int s = 0;
+        //        foreach (var item in aToz)
+        //        {
+        //            for (int i = 1; i < 10; i++)
+        //            {
+        //                if (i != 3)
+        //                {
+        //                    allCell[c] = item + i.ToString();
+        //                    c++;
+        //                }
+        //                if (i == 4)
+        //                {
+        //                    superCell[s] = item + i.ToString();
+        //                    s++;
+        //                }
+        //                //if (i == 9)
+        //                //{
+        //                //    lockingCell[l] = item + i.ToString();
+        //                //    l++;
+        //                //}
+        //            }
+        //        }
+        //        allCell[176] = "Y";
+        //        allCell[177] = "Z";
+
+        //        stdCell = allCell.Except(superCell).ToArray(); // 154 for max2 154/22/2
+        //        return new Tuple<string[], string[]>(superCell, stdCell);
+        //    }
+        //    else if (id == 1)// for max2 110/44/2  su
+        //    {
+        //        allCell = new string[aToz.Length * 7 + 2]; // 22 * 7 + 2 = 154 + 2 = 156
+        //        superCell = new string[aToz.Length * 2]; //44 
+        //        //lockingCell = new string[aToz.Length]; // 22
+
+        //        int c = 0; int s = 0;
+        //        foreach (var item in aToz)
+        //        {
+        //            for (int i = 1; i < 10; i++)
+        //            {
+        //                if ((i != 3) && (i != 5))
+        //                {
+        //                    allCell[c] = item + i.ToString();
+        //                    c++;
+        //                }
+
+        //                if ((i == 4) || (i == 6))
+        //                {
+        //                    superCell[s] = item + i.ToString();
+        //                    s++;
+        //                }
+
+
+        //            }
+        //        }
+
+        //        allCell[154] = "Y";
+        //        allCell[155] = "Z";
+
+        //        stdCell = allCell.Except(superCell).ToArray(); // 154 for max2 154/22/2
+        //        return new Tuple<string[], string[]>(superCell, stdCell);
+        //    }
+
+        //    else if (id == 2)// for max2 132/33/2  
+        //    {
+        //        string[] aTok = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K" };
+        //        string[] lToV = new[] { "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
+
+        //        allCell = new string[167]; // 176 - 11 = 165 + 2 = 167
+
+        //        superCell = new string[33]; //33
+
+        //        //lockingCell = new string[22]; // 22
+
+        //        // 167 - 33 - 22 = 112 std cell
+
+        //        int c = 0; int s = 0;
+        //        foreach (var item in aToz)
+        //        {
+        //            for (int i = 1; i < 10; i++)
+        //            {
+
+        //                if ((i != 3) && (i != 5))  // 3 & 5 exclude
+        //                {
+        //                    allCell[c] = item + i.ToString();
+        //                    c++;
+        //                }
+
+        //                if (i == 4)
+        //                {
+        //                    superCell[s] = item + i.ToString();
+        //                    s++;
+        //                }
+
+        //                if ((i == 6) && (aTok.Contains(item)))   // 6A to K include
+        //                {
+        //                    superCell[s] = item + i.ToString();
+        //                    s++;
+        //                }
+
+        //                //if (i == 9)
+        //                //{
+        //                //    lockingCell[l] = item + i.ToString();
+        //                //    l++;
+        //                //}
+        //            }
+        //        }
+
+        //        foreach (var item in lToV)
+        //        {
+        //            for (int i = 1; i < 10; i++)
+        //            {
+        //                if ((i == 5) && (lToV.Contains(item)))   // 5 L to V include
+        //                {
+        //                    allCell[c] = item + i.ToString();
+        //                    c++;
+        //                }
+        //            }
+        //        }
+
+        //        allCell[165] = "Y";
+        //        allCell[166] = "Z";
+
+        //        stdCell = allCell.Except(superCell).ToArray(); // 154 for max2 154/22/2
+
+        //        return new Tuple<string[], string[]>(superCell, stdCell);
+        //    }
+
+        //    else if (id == 4)// for max2 110/44/2  Full Manifold Max 2
+        //    {
+        //        allCell = new string[aToz.Length * 7 + 2]; // 22 * 7 + 2 = 154 + 2 = 156
+        //        superCell = new string[aToz.Length * 2]; //44 
+        //                                                 // lockingCell = new string[aToz.Length]; // 22
+
+        //        int c = 0; int s = 0;
+        //        foreach (var item in aToz)
+        //        {
+        //            for (int i = 1; i < 10; i++)
+        //            {
+        //                if ((i != 1) && (i != 3))
+        //                {
+        //                    allCell[c] = item + i.ToString();
+        //                    c++;
+        //                }
+
+        //                if ((i == 2) || (i == 4))
+        //                {
+        //                    superCell[s] = item + i.ToString();
+        //                    s++;
+        //                }
+
+        //                //if (i == 9)
+        //                //{
+        //                //    lockingCell[l] = item + i.ToString();
+        //                //    l++;
+        //                //}
+        //            }
+        //        }
+
+        //        allCell[154] = "Y";
+        //        allCell[155] = "Z";
+
+        //        stdCell = allCell.Except(superCell).ToArray(); // 154 for max2 154/22/2
+
+        //        return new Tuple<string[], string[]>(superCell, stdCell);
+        //    }
+
+        //    else if (id == 5)// for max2 132/33/2   Full Manifold Max 2
+        //    {
+        //        string[] aTok = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K" };
+        //        string[] lToV = new[] { "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
+
+        //        allCell = new string[167]; // 176 - 11 = 165 + 2 = 167
+
+        //        superCell = new string[33]; //33
+
+        //        // lockingCell = new string[22]; // 22
+
+        //        // 167 - 33 - 22 = 112 std cell
+
+        //        int c = 0; int s = 0;
+        //        foreach (var item in aToz)
+        //        {
+        //            for (int i = 1; i < 10; i++)
+        //            {
+
+        //                if ((i != 1) && (i != 3))  //  1 & 3 exclude
+        //                {
+        //                    allCell[c] = item + i.ToString();
+        //                    c++;
+        //                }
+
+        //                if (i == 2)
+        //                {
+        //                    superCell[s] = item + i.ToString();
+        //                    s++;
+        //                }
+
+        //                if ((i == 4) && (aTok.Contains(item)))   // 4 A- K include
+        //                {
+        //                    superCell[s] = item + i.ToString();
+        //                    s++;
+        //                }
+
+        //                //if (i == 9)
+        //                //{
+        //                //    lockingCell[l] = item + i.ToString();
+        //                //    l++;
+        //                //}
+        //            }
+        //        }
+
+        //        foreach (var item in lToV)
+        //        {
+        //            for (int i = 1; i < 10; i++)
+        //            {
+        //                if ((i == 3) && (lToV.Contains(item)))   // 3 L to V include
+        //                {
+        //                    allCell[c] = item + i.ToString();
+        //                    c++;
+        //                }
+        //            }
+        //        }
+
+        //        allCell[165] = "Y";
+        //        allCell[166] = "Z";
+
+        //        stdCell = allCell.Except(superCell).ToArray(); // 154 for max2 154/22/2
+        //        return new Tuple<string[], string[]>(superCell, stdCell);
+        //    }
+        //    else if (id == 6)// for max2 154/22/2  Full Manifold Max 2​
+        //    {
+        //        allCell = new string[aToz.Length * 8 + 2]; // 176 + 2 = 178
+        //        superCell = new string[aToz.Length]; //22 
+        //        //lockingCell = new string[aToz.Length]; // 22
+
+        //        int c = 0; int s = 0;
+        //        foreach (var item in aToz)
+        //        {
+        //            for (int i = 1; i < 10; i++)
+        //            {
+        //                if (i != 1)
+        //                {
+        //                    allCell[c] = item + i.ToString();
+        //                    c++;
+        //                }
+        //                if (i == 2)
+        //                {
+        //                    superCell[s] = item + i.ToString();
+        //                    s++;
+        //                }
+        //                //if (i == 9)
+        //                //{
+        //                //    lockingCell[l] = item + i.ToString();
+        //                //    l++;
+        //                //}
+        //            }
+        //        }
+        //        allCell[176] = "Y";
+        //        allCell[177] = "Z";
+
+        //        stdCell = allCell.Except(superCell).ToArray(); // 154 for max2 154/22/2
+        //        return new Tuple<string[], string[]>(superCell, stdCell);
+        //    }
+
+        //    else if (id == 7)// for max2 176/11/2   Full Manifold Max 2
+        //    {
+        //        string[] aTok = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K" };
+        //        string[] lToV = new[] { "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
+
+        //        allCell = new string[189]; // 
+
+        //        superCell = new string[11]; //11
+
+        //        //lockingCell = new string[22]; // 22
+
+        //        // 156 std cell 
+
+        //        int c = 0; int s = 0;
+        //        foreach (var item in aToz)
+        //        {
+        //            for (int i = 1; i < 10; i++)
+        //            {
+
+        //                if ((i != 1))  //  1  exclude
+        //                {
+        //                    allCell[c] = item + i.ToString();
+        //                    c++;
+        //                }
+
+        //                if ((i == 2) && (aTok.Contains(item)))   // 2 A- K include
+        //                {
+        //                    superCell[s] = item + i.ToString();
+        //                    s++;
+        //                }
+
+        //                //if (i == 9)
+        //                //{
+        //                //    lockingCell[l] = item + i.ToString();
+        //                //    l++;
+        //                //}
+        //            }
+        //        }
+
+        //        foreach (var item in lToV)
+        //        {
+        //            for (int i = 1; i < 10; i++)
+        //            {
+        //                if ((i == 1) && (lToV.Contains(item)))   // 1 L to V include
+        //                {
+        //                    allCell[c] = item + i.ToString();
+        //                    c++;
+        //                }
+        //            }
+        //        }
+
+        //        allCell[187] = "Y";
+        //        allCell[188] = "Z";
+
+        //        stdCell = allCell.Except(superCell).ToArray(); // 154 for max2 154/22/2
+        //        return new Tuple<string[], string[]>(superCell, stdCell);
+        //    }
+        //    else if (id == 8)// for max2 128/36   Max 2 – CVS Full  128 stdLocking cell , 36 superLockingCell
+        //    {
+        //        string[] aToN = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N" };
+        //        string[] oToV = new[] { "O", "P", "Q", "R", "S", "T", "U", "V" };
+
+        //        allCell = new string[164];
+        //        superLockingCell = new string[36];
+
+        //        // 167 - 33 - 22 = 112 std cell
+
+        //        int c = 0; int l = 0; int s = 0;
+        //        foreach (var item in aToz)
+        //        {
+        //            for (int i = 1; i < 10; i++)
+        //            {
+
+        //                if ((i != 1) && (i != 3))  //  1 & 3 exclude
+        //                {
+        //                    allCell[c] = item + i.ToString();
+        //                    c++;
+        //                }
+
+        //                if (i == 2)
+        //                {
+        //                    superLockingCell[s] = item + i.ToString();
+        //                    s++;
+        //                }
+
+        //                if ((i == 4) && (aToN.Contains(item)))   // 4 A- K include
+        //                {
+        //                    superLockingCell[s] = item + i.ToString();
+        //                    s++;
+        //                }
+
+        //            }
+        //        }
+
+        //        foreach (var item in oToV)
+        //        {
+        //            for (int i = 1; i < 10; i++)
+        //            {
+        //                if ((i == 3) && (oToV.Contains(item)))   // 3 O to V include
+        //                {
+        //                    allCell[c] = item + i.ToString();
+        //                    c++;
+        //                }
+        //            }
+        //        }
+
+        //        allCell[162] = "Y";
+        //        allCell[163] = "Z";
+
+        //        stdLockingCell = allCell.Except(superLockingCell).ToArray(); // 154 for max2 154/22/2
+
+        //        return new Tuple<string[], string[]>(superLockingCell, stdLockingCell);
+        //    }
+        //    else if (id == 9)// for max2 110/45  Max 2 – Kroger Std --110 Std Locking & 45 Locking Super Cells - Displayed​ 
+        //    {
+        //        allCell = new string[154]; // 110 + 45 =155
+
+        //        superLockingCell = new string[aToz.Length * 2 + 1];
+
+        //        int c = 0; int l = 0; int s = 0;
+        //        foreach (var item in aToz)
+        //        {
+        //            for (int i = 1; i < 10; i++)
+        //            {
+        //                if ((i != 1) && (i != 3))
+        //                {
+        //                    allCell[c] = item + i.ToString();
+        //                    c++;
+        //                }
+        //                if ((i == 2) || (i == 4))
+        //                {
+        //                    superLockingCell[s] = item + i.ToString();
+        //                    s++;
+        //                }
+        //            }
+        //        }
+        //        superLockingCell[44] = "Y";
+
+        //        stdLockingCell = allCell.Except(superLockingCell).ToArray(); // 154 for max2 154/22/2
+
+        //        return new Tuple<string[], string[]>(superLockingCell, stdLockingCell);
+        //    }
+        //    else if (id == 10)// 22 Std Locking & 88 Super Cells - Displayed
+        //    {
+        //        allCell = new string[aToz.Length * 5]; // 22 * 5 = 110
+        //        stdCell2 = new string[aToz.Length]; //22 
+
+        //        int c = 0; int s = 0;
+        //        foreach (var item in aToz)
+        //        {
+        //            for (int i = 1; i < 10; i++)
+        //            {
+        //                if ((i != 1) && (i != 3) && (i != 6) && (i != 8)) // 1
+        //                {
+        //                    allCell[c] = item + i.ToString();
+        //                    c++;
+        //                }
+        //                if (i == 5)
+        //                {
+        //                    stdCell2[s] = item + i.ToString();
+        //                    s++;
+        //                }
+        //            }
+        //        }
+
+        //        string[] superCell2 = allCell.Except(stdCell2).ToArray(); // 154 for max2 154/22/2
+
+        //        return new Tuple<string[], string[]>(superCell2, stdCell2);
+        //    }
+        //    else if (id == 11)// Max 2(Full Only)Full Standard 198/0/2=200
+        //    {
+        //        allCell = new string[aToz.Length * 9 + 2];
+        //        superCell = new string[0];
+        //        // lockingCell = new string[aToz.Length];
+
+        //        int c = 0; int s = 0;
+        //        foreach (var item in aToz)
+        //        {
+        //            for (int i = 1; i < 10; i++)
+        //            {
+        //                if ((i != 1) && (i != 3) && (i != 6) && (i != 8))  // 3 & 5 exclude
+        //                {
+        //                    allCell[c] = item + i.ToString();
+        //                    c++;
+        //                }
+
+        //                //if ((i == 2) || (i == 4) || (i == 7) || (i == 9))
+        //                //{
+        //                //    superCell[s] = item + i.ToString();
+        //                //    s++;
+        //                //}
+
+        //                //if (i == 9)
+        //                //{
+        //                //    lockingCell[l] = item + i.ToString();
+        //                //    l++;
+        //                //}
+        //            }
+        //        }
+        //        allCell[198] = "Y";
+        //        allCell[199] = "Z";
+
+        //        stdCell = allCell.Except(superCell).ToArray(); // 154 for max2 154/22/2
+        //        return new Tuple<string[], string[]>(superCell, stdCell);
+        //    }
+
+        //    else
+        //    {
+        //        superCell = new string[0];
+        //        //  lockingCell = new string[0];
+        //        stdCell = new string[0];
+        //        return new Tuple<string[], string[]>(superCell, stdCell);
+
+        //    }
+
+        //}
+
+        //private static Tuple<string[], string[], string[], string[]> CellCalculationCustom(int? id, int customSuperQuantity, int customStandardQuantity, string config)
+        //{
+        //    string[] aToz = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
+
+        //    string[] superCell;
+        //    string[] lockingCell;
+        //    string[] superLockingCell;
+        //    string[] stdCell;
+
+        //    if (id == 3)// for max2 154/22/2
+        //    {
+        //        if (customSuperQuantity > 0)
+        //        {
+        //            superLockingCell = new string[customSuperQuantity];
+        //            superCell = new string[aToz.Length * 2 - customSuperQuantity];
+
+
+
+        //            stdCell = new[] { "A1"," B1"," C1"," D1"," E1"," F1"," G1"," H1"," I1"," J1"," K1"," L1"," M1"," N1"," O1"," P1"," Q1"," R1"," S1"," T1"," U1"," V1"
+        //                            ,"A2"," B2"," C2"," D2"," E2"," F2"," G2"," H2"," I2"," J2"," K2"," L2"," M2"," N2"," O2"," P2"," Q2"," R2"," S2"," T2"," U2"," V2"
+        //                            ,"A5"," B5"," C5"," D5"," E5"," F5"," G5"," H5"," I5"," J5"," K5"," L5"," M5"," N5"," O5"," P5"," Q5"," R5"," S5"," T5"," U5"," V5"
+        //                            ,"A6"," B6"," C6"," D6"," E6"," F6"," G6"," H6"," I6"," J6"," K6"," L6"," M6"," N6"," O6"," P6"," Q6"," R6"," S6"," T6"," U6"," V6"
+        //                            ,"A7"," B7"," C7"," D7"," E7"," F7"," G7"," H7"," I7"," J7"," K7"," L7"," M7"," N7"," O7"," P7"," Q7"," R7"," S7"," T7"," U7"," V7"
+        //                            ,"A8"," B8"," C8"," D8"," E8"," F8"," G8"," H8"," I8"," J8"," K8"," L8"," M8"," N8"," O8"," P8"," Q8"," R8"," S8"," T8"," U8"," V8"
+        //                            ,"A9", " B9", " C9", " D9", " E9", " F9", " G9", " H9", " I9", " J9", " K9", " L9", " M9", " N9", " O9", " P9", " Q9", " R9", " S9", " T9", " U9", " V9"};
+
+        //            lockingCell = new string[0];
+
+        //            if (customSuperQuantity == 5)
+        //            {
+        //                superCell = new[] { "A4", " B4", " C4", " D4", " E4", " F4", " G4", " H4", " I4", " J4", " K4", " L4", " M4", " N4", " O4", " P4", " Q4" }; // same as Standard
+
+        //                superLockingCell = new[] { "R4", " S4", " T4", " U4", " V4" };
+
+        //            }
+        //            else if (customSuperQuantity == 10)
+        //            {
+        //                superCell = new[] { "A4", " B4", " C4", " D4", " E4", " F4", " G4", " H4", " I4", " J4", " K4", " L4" }; // same as Standard
+        //                superLockingCell = new[] { "M4", " N4", " O4", " P4", " Q4", " R4", " S4", " T4", " U4", " V4" };
+        //            }
+        //            else if (customSuperQuantity == 15)
+        //            {
+        //                superCell = new[] { "A4", " B4", " C4", " D4", " E4", " F4", " G4" }; // same as Standard
+        //                superLockingCell = new[] { "H4", " I4", " J4", " K4", " L4", " M4", " N4", " O4", " P4", " Q4", " R4", " S4", " T4", " U4", " V4" };
+        //            }
+
+
+        //            return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+        //        }
+
+        //        if (customStandardQuantity > 0)
+        //        {
+
+        //            lockingCell = new string[customStandardQuantity]; // 22 + 15
+        //            superLockingCell = new string[0]; // always null
+        //            //string[] fstArray;
+
+        //            superCell = new[] { "A4", " B4", " C4", " D4", " E4", " F4", " G4", " H4", " I4", " J4", " K4", " L4", " M4", " N4", " O4", " P4", " Q4", " R4", " S4", " T4", " U4", " V4" }; // same as Standard
+
+
+
+        //            if (customStandardQuantity == 5)
+        //            {
+        //                stdCell = new[] { "A1"," B1"," C1"," D1"," E1"," F1"," G1"," H1"," I1"," J1"," K1"," L1"," M1"," N1"," O1"," P1"," Q1"," R1"," S1"," T1"," U1"," V1",
+        //                    "A2"," B2"," C2"," D2"," E2"," F2"," G2"," H2"," I2"," J2"," K2"," L2"," M2"," N2"," O2"," P2"," Q2"," R2"," S2"," T2"," U2"," V2"
+        //                    ,"A5"," B5"," C5"," D5"," E5"," F5"," G5"," H5"," I5"," J5"," K5"," L5"," M5"," N5"," O5"," P5"," Q5"," R5"," S5"," T5"," U5"," V5"
+        //                    ,"A6"," B6"," C6"," D6"," E6"," F6"," G6"," H6"," I6"," J6"," K6"," L6"," M6"," N6"," O6"," P6"," Q6"," R6"," S6"," T6"," U6"," V6"
+        //                    ,"A7"," B7"," C7"," D7"," E7"," F7"," G7"," H7"," I7"," J7"," K7"," L7"," M7"," N7"," O7"," P7"," Q7"," R7"," S7"," T7"," U7"," V7"
+        //                    ,"A8"," B8"," C8"," D8"," E8"," F8"," G8"," H8"," I8"," J8"," K8"," L8"," M8"," N8"," O8"," P8"," Q8" ,"R8", " S8", " T8", " U8", " V8"
+        //                    ," A9", " B9", " C9", " D9", " E9", " F9", " G9", " H9", " I9", " J9", " K9", " L9", " M9", " N9", " O9", " P9", " Q9"};
+
+        //                lockingCell = new[] { "R9", " S9", " T9", " U9", " V9" };
+
+        //            }
+        //            else if (customStandardQuantity == 10)
+        //            {
+        //                stdCell = new[] { "A1"," B1"," C1"," D1"," E1"," F1"," G1"," H1"," I1"," J1"," K1"," L1"," M1"," N1"," O1"," P1"," Q1"," R1"," S1"," T1"," U1"
+        //                ," V1","A2"," B2"," C2"," D2"," E2"," F2"," G2"," H2"," I2"," J2"," K2"," L2"," M2"," N2"," O2"," P2"," Q2"," R2"," S2"," T2"," U2"," V2"
+        //                ,"A5"," B5"," C5"," D5"," E5"," F5"," G5"," H5"," I5"," J5"," K5"," L5"," M5"," N5"," O5"," P5"," Q5"," R5"," S5"," T5"," U5"," V5"
+        //                ,"A6"," B6"," C6"," D6"," E6"," F6"," G6"," H6"," I6"," J6"," K6"," L6"," M6"," N6"," O6"," P6"," Q6"," R6"," S6"," T6"," U6"," V6"
+        //                ,"A7"," B7"," C7"," D7"," E7"," F7"," G7"," H7"," I7"," J7"," K7"," L7"," M7"," N7"," O7"," P7"," Q7"," R7"," S7"," T7"," U7"," V7"
+        //                ,"A8"," B8"," C8"," D8"," E8"," F8"," G8"," H8"," I8"," J8"," K8"," L8", "M8"," N8"," O8"," P8"," Q8"," R8"," S8"," T8"," U8"," V8"
+        //                ," A9"," B9"," C9"," D9"," E9"," F9"," G9"," H9"," I9"," J9"," K9"," L9"};
+
+        //                lockingCell = new[] { "M9", " N9", " O9", " P9", " Q9", " R9", " S9", " T9", " U9", " V9" };
+
+
+        //            }
+        //            else if (customStandardQuantity == 15)
+        //            {
+        //                stdCell = new[] { "A1"," B1"," C1"," D1"," E1"," F1"," G1"," H1"," I1"," J1"," K1"," L1"," M1"," N1"," O1"," P1"," Q1"," R1"," S1"," T1"," U1"," V1"
+        //                ,"A2"," B2"," C2"," D2"," E2"," F2"," G2"," H2"," I2"," J2"," K2"," L2"," M2"," N2"," O2"," P2"," Q2"," R2"," S2"," T2"," U2"," V2"
+        //                ,"A5"," B5"," C5"," D5"," E5"," F5"," G5"," H5"," I5"," J5"," K5"," L5"," M5"," N5"," O5"," P5"," Q5"," R5"," S5"," T5"," U5"," V5"
+        //                ,"A6"," B6"," C6"," D6"," E6"," F6"," G6"," H6"," I6"," J6"," K6"," L6"," M6"," N6"," O6"," P6"," Q6"," R6"," S6"," T6"," U6"," V6"
+        //                ,"A7"," B7"," C7"," D7"," E7"," F7"," G7"," H7"," I7"," J7"," K7"," L7"," M7"," N7"," O7"," P7"," Q7"," R7"," S7"," T7"," U7"," V7"
+        //                ,"A8"," B8"," C8"," D8"," E8"," F8"," G8", "H8"," I8"," J8"," K8"," L8"," M8"," N8"," O8"," P8"," Q8"," R8"," S8"," T8"," U8"," V8"
+        //                ," A9"," B9"," C9"," D9"," E9"," F9"," G9"};
+
+        //                lockingCell = new[] { "H9", " I9", " J9", " K9", " L9", " M9", " N9", " O9", " P9", " Q9", " R9", " S9", " T9", " U9", " V9" };
+        //            }
+        //            else
+        //            {
+        //                stdCell = new string[0];
+        //                superCell = new string[0];
+        //            }
+        //            return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+
+        //        }
+        //        else
+        //        {
+        //            stdCell = new string[0];
+        //            superCell = new string[0];
+        //            lockingCell = new string[0];
+        //            superLockingCell = new string[0];
+
+        //        }
+
+        //        return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+        //    }
+        //    else if (id == 1)// for max2 110/44/2 su
+        //    {
+        //        if (customSuperQuantity > 0)
+        //        {
+        //            superLockingCell = new string[customSuperQuantity];
+        //            superCell = new string[aToz.Length * 2 - customSuperQuantity];
+        //            //string[] firstArray; string[] secondArray;
+
+        //            stdCell = new[] { "A1"," B1"," C1"," D1"," E1"," F1"," G1"," H1"," I1"," J1"," K1"," L1"," M1"," N1"," O1"," P1"," Q1"," R1"," S1"," T1"," U1"," V1"
+        //                ,"A2"," B2"," C2"," D2"," E2"," F2"," G2"," H2"," I2"," J2"," K2"," L2"," M2"," N2"," O2"," P2"," Q2"," R2"," S2"," T2"," U2"," V2"
+        //                ," A7"," B7"," C7"," D7"," E7"," F7"," G7"," H7"," I7"," J7"," K7"," L7"," M7"," N7"," O7"," P7"," Q7"," R7"," S7"," T7"," U7"," V7"
+        //                ," A8"," B8"," C8"," D8"," E8"," F8"," G8"," H8"," I8"," J8"," K8"," L8"," M8"," N8"," O8"," P8"," Q8"," R8"," S8"," T8"," U8"," V8"
+        //                 ,"A9", " B9", " C9", " D9", " E9", " F9", " G9", " H9", " I9", " J9", " K9", " L9", " M9", " N9", " O9", " P9", " Q9", " R9", " S9", " T9", " U9", " V9"   };
+
+        //            lockingCell = new string[0];
+
+
+        //            if (customSuperQuantity == 5)
+        //            {
+        //                superCell = new[] { "A4"," B4"," C4"," D4"," E4"," F4"," G4"," H4"," I4"," J4"," K4"," L4"," M4"," N4"," O4"," P4"," Q4"," R4"," S4"," T4"," U4"," V4"
+        //                                     ,"A6"," B6"," C6"," D6"," E6"," F6"," G6"," H6"," I6"," J6"," K6"," L6"," M6"," N6"," O6"," P6"," Q6" }; // same as Standard
+
+        //                superLockingCell = new[] { "R4", " S4", " T4", " U4", " V4" };
+
+        //            }
+        //            else if (customSuperQuantity == 10)
+        //            {
+        //                superCell = new[] { "A4"," B4"," C4"," D4"," E4"," F4"," G4"," H4"," I4"," J4"," K4"," L4"," M4"," N4"," O4"," P4"," Q4"," R4"," S4"," T4"," U4"," V4"
+        //                                                    ,"A6"," B6"," C6"," D6"," E6"," F6"," G6"," H6"," I6"," J6"," K6"," L6" }; // same as Standard
+
+        //                superLockingCell = new[] { "M4", " N4", " O4", " P4", " Q4", " R4", " S4", " T4", " U4", " V4" };
+
+        //            }
+        //            else if (customSuperQuantity == 15)
+        //            {
+        //                superCell = new[] { "A4"," B4"," C4"," D4"," E4"," F4"," G4"," H4"," I4"," J4"," K4"," L4"," M4"," N4"," O4"," P4"," Q4"," R4"," S4"," T4"," U4"," V4"
+        //                                     ,"A6"," B6"," C6"," D6"," E6"," F6"," G6" }; // same as Standard
+        //                superLockingCell = new[] { "H4", " I4", " J4", " K4", " L4", " M4", " N4", " O4", " P4", " Q4", " R4", " S4", " T4", " U4", " V4" };
+        //            }
+
+        //            return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+        //        }
+
+        //        if (customStandardQuantity > 0)
+        //        {
+        //            lockingCell = new string[customStandardQuantity]; // 22 + 15
+        //            superLockingCell = new string[0]; // always null   
+
+        //            superCell = new[] { "A4"," B4"," C4"," D4"," E4"," F4"," G4"," H4"," I4"," J4"," K4"," L4"," M4"," N4"," O4"," P4"," Q4"," R4"," S4"," T4"," U4"," V4"
+        //                                ,"A6"," B6"," C6"," D6"," E6"," F6"," G6"," H6"," I6"," J6"," K6"," L6"," M6"," N6"," O6"," P6"," Q6"," R6"," S6"," T6"," U6"," V6" }; // same as Standard
+
+        //            if (customStandardQuantity == 5)
+        //            {
+        //                stdCell = new[] { "A1"," B1"," C1"," D1"," E1"," F1"," G1"," H1"," I1"," J1"," K1"," L1"," M1"," N1"," O1"," P1"," Q1"," R1"," S1"," T1"," U1"," V1"
+        //                                ,"A2"," B2"," C2"," D2"," E2"," F2"," G2"," H2"," I2"," J2"," K2"," L2"," M2"," N2"," O2"," P2"," Q2"," R2"," S2"," T2"," U2"," V2"
+        //                                ,"A7"," B7"," C7"," D7"," E7"," F7"," G7"," H7"," I7"," J7"," K7"," L7"," M7"," N7"," O7"," P7"," Q7"," R7"," S7"," T7"," U7"," V7"
+        //                                ,"A8"," B8"," C8"," D8"," E8"," F8"," G8"," H8"," I8"," J8"," K8"," L8"," M8"," N8"," O8"," P8"," Q8"
+        //                                ,"R8"," S8"," T8"," U8"," V8"," A9"," B9"," C9"," D9"," E9"," F9"," G9"," H9"," I9"," J9"," K9"," L9"," M9"," N9",
+        //                                        " O9"," P9", "Q9"};
+
+
+        //                lockingCell = new[] { "R9", " S9", " T9", " U9", " V9" };
+        //            }
+        //            else if (customStandardQuantity == 10)
+        //            {
+
+        //                stdCell = new[] { "A1"," B1"," C1"," D1"," E1"," F1"," G1"," H1"," I1"," J1"," K1"," L1"," M1"," N1"," O1"," P1"," Q1"," R1"," S1"," T1"," U1"," V1"
+        //                            ,"A2"," B2"," C2"," D2"," E2"," F2"," G2"," H2"," I2"," J2"," K2"," L2"," M2"," N2"," O2"," P2"," Q2"," R2"," S2"," T2"," U2"," V2"
+        //                            ,"A7"," B7"," C7"," D7"," E7"," F7"," G7"," H7"," I7"," J7"," K7"," L7"," M7"," N7"," O7"," P7"," Q7"," R7"," S7"," T7"," U7"," V7"
+        //                            ,"A8"," B8"," C8"," D8"," E8"," F8"," G8"," H8"," I8"," J8"," K8"," L8"
+        //                            ,"M8"," N8"," O8"," P8"," Q8"," R8"," S8"," T8"," U8"," V8"," A9"," B9"," C9"," D9"," E9"," F9"," G9"," H9"," I9"," J9"," K9"," L9"};
+
+        //                lockingCell = new[] { "M9", " N9", " O9", " P9", " Q9", " R9", " S9", " T9", " U9", " V9" };
+        //            }
+        //            else if (customStandardQuantity == 15)
+        //            {
+        //                stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1"," I1"," J1"," K1"," L1"," M1"," N1"," O1"," P1"," Q1"," R1"," S1"," T1","U1"," V1"
+        //                                ,"A2"," B2"," C2"," D2"," E2"," F2"," G2"," H2"," I2"," J2"," K2"," L2"," M2"," N2"," O2"," P2"," Q2"," R2"," S2"," T2"," U2"," V2"
+        //                                ,"A7"," B7"," C7"," D7"," E7"," F7"," G7"," H7"," I7"," J7"," K7"," L7"," M7"," N7"," O7"," P7"," Q7"," R7"," S7"," T7"," U7"," V7"
+        //                                ,"A8"," B8"," C8"," D8"," E8"," F8"," G8", "H8"," I8"," J8"," K8"," L8"," M8"," N8"," O8"," P8"," Q8"," R8"," S8"," T8"," U8"," V8"
+        //                                ," A9"," B9"," C9"," D9"," E9"," F9"," G9"};
+
+
+        //                lockingCell = new[] { "H9", " I9", " J9", " K9", " L9", " M9", " N9", " O9", " P9", " Q9", " R9", " S9", " T9", " U9", " V9" };
+
+        //            }
+        //            else
+        //            {
+        //                stdCell = new string[0];
+        //                superCell = new string[0];
+        //            }
+
+        //        }
+        //        else
+        //        {
+        //            stdCell = new string[0];
+        //            superLockingCell = new string[0];
+        //            superCell = new string[0];
+        //            lockingCell = new string[0];
+
+        //        }
+
+        //        return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell); // superLockingCell null here
+        //    }
+        //    else if (id == 2)// for max2 132/33/2  
+        //    {
+
+        //        if (customSuperQuantity > 0)
+        //        {
+        //            superLockingCell = new string[customSuperQuantity];
+        //            superCell = new string[aToz.Length * 2 - customSuperQuantity];
+        //            //string[] firstArray; string[] secondArray;
+
+        //            stdCell = new[] {      "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1", "T1","U1","V1",
+        //                                  "A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2","Q2","R2","S2","T2","U2","V2",
+        //                                    "L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5",
+        //                                    "L6","M6", "N6","O6","P6","Q6","R6","S6","T6","U6","V6",
+        //                                    "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",  "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
+        //                                    "A8","B8","C8","D8","E8","F8","G8", "H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8", "R8","S8","T8","U8","V8"
+        //                                    ,"A9","B9","C9","D9","E9","F9","G9","H9","I9","J9","K9","L9","M9","N9","O9","P9","Q9","R9","S9","T9","U9","V9"};
+
+
+        //            lockingCell = new string[0];
+
+        //            if (customSuperQuantity == 5)
+        //            {
+
+        //                superCell = new[] { "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4",
+        //                                    "T4","U4","V4","A6","B6","C6","D6","E6","F6" };  // same as Standard
+
+        //                superLockingCell = new[] { "G6", "H6", "I6", "J6", "K6" };
+
+
+        //            }
+        //            else if (customSuperQuantity == 10)
+        //            {
+
+        //                // firstArray = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
+        //                //secondArray = new[] { "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
+
+
+        //                superCell = new[] { "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4",
+        //                                    "T4","U4","V4","A6" };  // same as Standard
+
+        //                superLockingCell = new[] { "B6", "C6", "D6", "E6", "F6", "G6", "H6", "I6", "J6", "K6" };
+
+        //            }
+        //            else if (customSuperQuantity == 15)
+        //            {
+        //                superCell = new[] { "A4", "B4", "C4", "D4", "E4", "F4", "G4", "H4", "I4", "J4", "K4", "L4", "M4", "N4", "O4", "P4", "Q4", "R4" };  // same as Standard
+
+        //                superLockingCell = new[] { "S4", "T4", "U4", "V4", "A6", "B6", "C6", "D6", "E6", "F6", "G6", "H6", "I6", "J6", "K6" };
+
+        //            }
+        //            else
+        //            {
+        //                //firstArray = new string[0];
+        //                //secondArray = new string[0];
+        //            }
+
+        //            // SuperQuantityCellCalulationForTwo(firstArray, secondArray, superLockingCell, superCell);
+        //            // stdCell = allCell.Except(superCell).Except(lockingCell).Except(superLockingCell).ToArray();
+
+        //            return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+        //        }
+
+        //        if (customStandardQuantity > 0)
+        //        {
+        //            superLockingCell = new string[0];
+        //            lockingCell = new string[customStandardQuantity]; // 22 + 15
+        //                                                              // 
+
+        //            superCell = new[] { "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4",
+        //                                    "T4","U4","V4","A6","B6","C6","D6","E6","F6","G6","H6","I6", "J6","K6" };  // same as Standard
+
+
+        //            if (customStandardQuantity == 5)
+        //            {
+
+        //                stdCell = new[] {   "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1","T1","U1","V1",
+        //                                   "A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2","Q2","R2","S2","T2","U2","V2",
+        //                                    "L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5",
+        //                                    "L6","M6","N6","O6","P6","Q6","R6","S6","T6","U6","V6",
+        //                                    "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7","K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
+        //                                    "A8","B8","C8","D8","E8","F8","G8", "H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8"
+        //                                    ,"R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9","K9","L9","M9","N9","O9","P9","Q9"};
+
+
+
+        //                lockingCell = new[] { "R9", "S9", "T9", "U9", "V9" };
+
+        //            }
+        //            else if (customStandardQuantity == 10)
+        //            {
+
+        //                stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
+        //                                    "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
+        //                                    "Q2","R2","S2","T2","U2","V2","L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5","L6","M6",
+        //                                    "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
+        //                                    "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8",
+        //                                    "H8","I8","J8","K8","L8"
+        //                                    ,"M8", "N8", "O8", "P8", "Q8",  "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9", "K9","L9",
+        //                                 };
+
+
+
+        //                lockingCell = new[] { "M9", "N9", "O9", "P9", "Q9", "R9", "S9", "T9", "U9", "V9" };
+
+
+        //            }
+        //            else if (customStandardQuantity == 15)
+        //            {
+        //                stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
+        //                                    "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
+        //                                    "Q2","R2","S2","T2","U2","V2","L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5","L6","M6",
+        //                                    "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
+        //                                    "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8"
+        //                                    ,"H8","I8","J8","K8","L8","M8", "N8", "O8", "P8", "Q8", "R8","S8","T8","U8","V8"
+        //                                    ,"A9","B9","C9","D9","E9","F9","G9"
+        //                                 };
+
+
+        //                lockingCell = new[] { "H9", "I9", "J9", "K9", "L9", "M9", "N9", "O9", "P9", "Q9", "R9", "S9", "T9", "U9", "V9" };
+
+        //            }
+        //            else
+        //            {
+        //                stdCell = new string[0];
+        //                superCell = new string[0];
+        //            }
+
+
+        //            return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell); // superLockingCell  null here
+        //        }
+
+
+
+        //        superCell = new string[0];
+        //        lockingCell = new string[0];
+        //        stdCell = new string[0];
+        //        superLockingCell = new string[0];
+        //        return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+        //    }
+
+        //    else if (id == 4)// for max2 154/22/2  Full Manifold Max 2​
+        //    {
+        //        if (customSuperQuantity > 0)
+        //        {
+        //            superLockingCell = new string[customSuperQuantity];
+        //            superCell = new string[aToz.Length * 2 - customSuperQuantity];
+        //            //string[] firstArray; string[] secondArray;
+
+        //            stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
+        //                                    "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
+        //                                    "Q2","R2","S2","T2","U2","V2",
+        //                                    "L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5",
+        //                                    "L6","M6", "N6","O6","P6","Q6","R6","S6","T6","U6","V6",
+        //                                    "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",  "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
+        //                                    "A8","B8","C8","D8","E8","F8","G8", "H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8", "R8","S8","T8","U8","V8"
+        //                                    , "A9","B9","C9","D9","E9","F9","G9","H9","I9","J9","K9","L9","M9","N9","O9","P9","Q9","R9","S9","T9","U9","V9"};
+
+
+        //            lockingCell = new string[0];
+
+        //            if (customSuperQuantity == 5)
+        //            {
+
+        //                superCell = new[] { "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4",
+        //                                    "T4","U4","V4","A6","B6","C6","D6","E6","F6" };  // same as Standard
+
+        //                superLockingCell = new[] { "G6", "H6", "I6", "J6", "K6" };
+
+
+        //            }
+        //            else if (customSuperQuantity == 10)
+        //            {
+
+        //                // firstArray = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
+        //                //secondArray = new[] { "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
+
+
+        //                superCell = new[] { "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4",
+        //                                    "T4","U4","V4","A6" };  // same as Standard
+
+        //                superLockingCell = new[] { "B6", "C6", "D6", "E6", "F6", "G6", "H6", "I6", "J6", "K6" };
+
+        //            }
+        //            else if (customSuperQuantity == 15)
+        //            {
+
+
+        //                superCell = new[] { "A4", "B4", "C4", "D4", "E4", "F4", "G4", "H4", "I4", "J4", "K4", "L4", "M4", "N4", "O4", "P4", "Q4", "R4" };  // same as Standard
+
+        //                superLockingCell = new[] { "S4", "T4", "U4", "V4", "A6", "B6", "C6", "D6", "E6", "F6", "G6", "H6", "I6", "J6", "K6" };
+
+        //            }
+        //            else
+        //            {
+        //                //firstArray = new string[0];
+        //                //secondArray = new string[0];
+        //            }
+
+        //            // SuperQuantityCellCalulationForTwo(firstArray, secondArray, superLockingCell, superCell);
+        //            // stdCell = allCell.Except(superCell).Except(lockingCell).Except(superLockingCell).ToArray();
+
+        //            return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+        //        }
+
+        //        if (customStandardQuantity > 0)
+        //        {
+
+        //            lockingCell = new string[customStandardQuantity]; // 22 + 15
+        //            superLockingCell = new string[0]; // always null
+        //            //string[] fstArray;
+
+        //            superCell = new[] { "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4",
+        //                                    "T4","U4","V4","A6","B6","C6","D6","E6","F6","G6","H6","I6", "J6","K6" };  // same as Standard
+
+        //            if (customStandardQuantity == 5)
+        //            {
+        //                //fstArray = new[] { "A", "B", "C", "D", "E" };
+
+        //                stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
+        //                                    "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
+        //                                    "Q2","R2","S2","T2","U2","V2","L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5","L6","M6",
+        //                                    "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
+        //                                    "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8",
+        //                                    "H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8", "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
+        //                                         "K9","L9","M9","N9","O9","P9","Q9"
+        //                                 };
+
+
+
+        //                lockingCell = new[] { "R9", "S9", "T9", "U9", "V9" };
+
+
+        //                //stdCell = allCell.Except(superCell).Except(lockingCell).Except(superLockingCell).ToArray();
+        //            }
+        //            else if (customStandardQuantity == 10)
+        //            {
+
+        //                stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
+        //                                    "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
+        //                                    "Q2","R2","S2","T2","U2","V2","L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5","L6","M6",
+        //                                    "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
+        //                                    "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8",
+        //                                    "H8","I8","J8","K8","L8", "M8", "N8", "O8", "P8", "Q8",  "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
+        //                                         "K9","L9"
+        //                                 };
+
+
+
+        //                lockingCell = new[] { "M9", "N9", "O9", "P9", "Q9", "R9", "S9", "T9", "U9", "V9" };
+
+
+        //            }
+        //            else if (customStandardQuantity == 15)
+        //            {
+        //                stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
+        //                                    "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
+        //                                    "Q2","R2","S2","T2","U2","V2","L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5","L6","M6",
+        //                                    "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
+        //                                    "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8"
+        //                                    ,"H8","I8","J8","K8","L8","M8", "N8", "O8", "P8", "Q8",  "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9"
+        //                                 };
+
+
+
+        //                lockingCell = new[] { "H9", "I9", "J9", "K9", "L9", "M9", "N9", "O9", "P9", "Q9", "R9", "S9", "T9", "U9", "V9" };
+
+        //            }
+        //            else
+        //            {
+        //                stdCell = new string[0];
+        //                superCell = new string[0];
+        //            }
+
+        //            //StandardQuantityCellCalulationForOne(fstArray, aToz, lockingCell, superCell);
+        //            // stdCell = allCell.Except(superCell).Except(lockingCell).ToArray();
+
+        //            return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell); // superLockingCell  null here
+        //        }
+
+
+
+        //        superCell = new string[0];
+        //        lockingCell = new string[0];
+        //        stdCell = new string[0];
+        //        superLockingCell = new string[0];
+        //        return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+        //    }
+
+        //    else if (id == 5)// for max2 110/44/2  Full Manifold Max 2
+        //    {
+
+        //        if (customSuperQuantity > 0)
+        //        {
+        //            superLockingCell = new string[customSuperQuantity];
+        //            superCell = new string[aToz.Length * 2 - customSuperQuantity];
+        //            lockingCell = new string[0];
+
+        //            stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
+        //                                    "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
+        //                                    "Q2","R2","S2","T2","U2","V2",
+        //                                    "L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5",
+        //                                    "L6","M6", "N6","O6","P6","Q6","R6","S6","T6","U6","V6",
+        //                                    "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",  "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
+        //                                    "A8","B8","C8","D8","E8","F8","G8", "H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8", "R8","S8","T8","U8","V8"
+        //                                    ,"A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
+        //                                         "K9","L9","M9","N9","O9","P9","Q9","R9","S9","T9","U9","V9"};
+
+
+
+        //            if (customSuperQuantity == 5)
+        //            {
+
+        //                superCell = new[] { "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4",
+        //                                    "T4","U4","V4","A6","B6","C6","D6","E6","F6" };  // same as Standard
+
+        //                superLockingCell = new[] { "G6", "H6", "I6", "J6", "K6" };
+
+
+        //            }
+        //            else if (customSuperQuantity == 10)
+        //            {
+
+
+        //                superCell = new[] { "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4",
+        //                                    "T4","U4","V4","A6" };  // same as Standard
+
+        //                superLockingCell = new[] { "B6", "C6", "D6", "E6", "F6", "G6", "H6", "I6", "J6", "K6" };
+
+        //            }
+        //            else if (customSuperQuantity == 15)
+        //            {
+
+
+        //                superCell = new[] { "A4", "B4", "C4", "D4", "E4", "F4", "G4", "H4", "I4", "J4", "K4", "L4", "M4", "N4", "O4", "P4", "Q4", "R4" };  // same as Standard
+
+        //                superLockingCell = new[] { "S4", "T4", "U4", "V4", "A6", "B6", "C6", "D6", "E6", "F6", "G6", "H6", "I6", "J6", "K6" };
+
+        //            }
+        //            else
+        //            {
+
+        //            }
+
+
+        //            return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+        //        }
+
+        //        if (customStandardQuantity > 0)
+        //        {
+
+        //            lockingCell = new string[customStandardQuantity]; // 22 + 15
+        //            superLockingCell = new string[0]; // always null
+        //            //string[] fstArray;
+        //            superCell = new[] { "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4",
+        //                                    "T4","U4","V4","A6","B6","C6","D6","E6","F6","G6","H6","I6", "J6","K6" };  // same as Standard
+
+        //            if (customStandardQuantity == 5)
+        //            {
+        //                //fstArray = new[] { "A", "B", "C", "D", "E" };
+
+        //                stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
+        //                                    "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
+        //                                    "Q2","R2","S2","T2","U2","V2","L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5","L6","M6",
+        //                                    "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
+        //                                    "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8",
+        //                                    "H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8","R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
+        //                                         "K9","L9","M9","N9","O9","P9","Q9"
+        //                                 };
+
+
+        //                lockingCell = new[] { "R9", "S9", "T9", "U9", "V9" };
+
+
+        //                //stdCell = allCell.Except(superCell).Except(lockingCell).Except(superLockingCell).ToArray();
+        //            }
+        //            else if (customStandardQuantity == 10)
+        //            {
+
+        //                stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
+        //                                    "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
+        //                                    "Q2","R2","S2","T2","U2","V2","L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5","L6","M6",
+        //                                    "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
+        //                                    "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8",
+        //                                    "H8","I8","J8","K8","L8","M8", "N8", "O8", "P8", "Q8",  "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
+        //                                         "K9","L9"
+        //                                 };
+
+
+
+        //                lockingCell = new[] { "M9", "N9", "O9", "P9", "Q9", "R9", "S9", "T9", "U9", "V9" };
+
+
+        //            }
+        //            else if (customStandardQuantity == 15)
+        //            {
+        //                stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
+        //                                    "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
+        //                                    "Q2","R2","S2","T2","U2","V2","L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5","L6","M6",
+        //                                    "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
+        //                                    "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8"
+        //                                    ,"H8","I8","J8","K8","L8","M8", "N8", "O8", "P8", "Q8",  "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9"
+        //                                 };
+
+
+
+        //                lockingCell = new[] { "H9", "I9", "J9", "K9", "L9", "M9", "N9", "O9", "P9", "Q9", "R9", "S9", "T9", "U9", "V9" };
+
+        //            }
+        //            else
+        //            {
+        //                stdCell = new string[0];
+        //                superCell = new string[0];
+        //            }
+
+        //            return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell); // superLockingCell  null here
+        //        }
+
+
+
+        //        superCell = new string[0];
+        //        lockingCell = new string[0];
+        //        stdCell = new string[0];
+        //        superLockingCell = new string[0];
+        //        return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+
+        //    }
+        //    else if (id == 6)// for max2 132/33/2  
+        //    {
+
+        //        if (customSuperQuantity > 0)
+        //        {
+        //            superLockingCell = new string[customSuperQuantity];
+        //            superCell = new string[aToz.Length * 2 - customSuperQuantity];
+        //            // string[] firstArray; string[] secondArray;
+
+        //            stdCell = new[] {      "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1","T1","U1","V1",
+        //                                   "A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2","Q2","R2","S2","T2","U2","V2",
+        //                                    "A5","B5","C5","D5","E5","F5","G5","H5","I5","J5","K5", "L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5",
+        //                                    "A6","B6","C6","D6","E6","F6","G6","H6","I6","J6","K6","L6","M6","N6","O6","P6","Q6","R6","S6","T6","U6","V6",
+        //                                   "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",  "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
+        //                                   "A8","B8","C8","D8","E8","F8","G8", "H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8", "R8","S8","T8","U8","V8"
+        //                                   ,"A9", "B9", "C9", "D9", "E9", "F9", "G9", "H9", "I9", "J9", "K9", "L9", "M9", "N9", "O9", "P9", "Q9", "R9", "S9", "T9", "U9", "V9"  };
+
+
+        //            lockingCell = new string[0];
+
+        //            if (customSuperQuantity == 5)
+        //            {
+
+        //                superCell = new[] { "A4", "B4", "C4", "D4", "E4", "F4", "G4", "H4", "I4", "J4", "K4", "L4", "M4", "N4", "O4", "P4", "Q4" };  // same as Standard
+
+        //                superLockingCell = new[] { "R4", "S4", "T4", "U4", "V4" };
+
+
+        //            }
+        //            else if (customSuperQuantity == 10)
+        //            {
+
+        //                superCell = new[] { "A4", "B4", "C4", "D4", "E4", "F4", "G4", "H4", "I4", "J4", "K4", "L4" };  // same as Standard
+
+        //                superLockingCell = new[] { "M4", "N4", "O4", "P4", "Q4", "R4", "S4", "T4", "U4", "V4" };
+
+        //            }
+        //            else if (customSuperQuantity == 15)
+        //            {
+        //                superCell = new[] { "A4", "B4", "C4", "D4", "E4", "F4", "G4" };  // 
+
+        //                superLockingCell = new[] { "H4", "I4", "J4", "K4", "L4", "M4", "N4", "O4", "P4", "Q4", "R4", "S4", "T4", "U4", "V4" };
+
+        //            }
+        //            else
+        //            {
+        //                //firstArray = new string[0];
+        //                //secondArray = new string[0];
+        //            }
+
+        //            // SuperQuantityCellCalulationForTwo(firstArray, secondArray, superLockingCell, superCell);
+        //            // stdCell = allCell.Except(superCell).Except(lockingCell).Except(superLockingCell).ToArray();
+
+        //            return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+        //        }
+
+        //        if (customStandardQuantity > 0)
+        //        {
+        //            superLockingCell = new string[0];
+        //            lockingCell = new string[customStandardQuantity]; // 22 + 15
+
+        //            superCell = new[] { "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4", "T4","U4","V4",
+        //                                "A6","B6","C6","D6","E6","F6","G6","H6","I6", "J6","K6" , "L6","M6","N6","O6","P6","Q6","R6","S6","T6","U6","V6"};  // same as Standard
+
+
+        //            if (customStandardQuantity == 5)
+        //            {
+
+        //                stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1","T1","U1","V1",
+        //                                   "A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2","Q2","R2","S2","T2","U2","V2",
+        //                                    "A5","B5","C5","D5","E5","F5","G5","H5","I5","J5","K5", "L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5",
+        //                                    "A6","B6","C6","D6","E6","F6","G6","H6","I6","J6","K6","L6","M6","N6","O6","P6","Q6","R6","S6","T6","U6","V6",
+        //                                    "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7","K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
+        //                                    "A8","B8","C8","D8","E8","F8","G8","H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8","R8","S8","T8","U8","V8"
+        //                                    ,"A9","B9","C9","D9","E9","F9","G9","H9","I9","J9","K9","L9","M9","N9","O9","P9","Q9",
+        //                                 };
+
+
+        //                lockingCell = new[] { "R9", "S9", "T9", "U9", "V9" };
+
+        //            }
+        //            else if (customStandardQuantity == 10)
+        //            {
+
+        //                stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1","T1","U1","V1",
+        //                                   "A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2","Q2","R2","S2","T2","U2","V2",
+        //                                    "A5","B5","C5","D5","E5","F5","G5","H5","I5","J5","K5", "L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5",
+        //                                    "A6","B6","C6","D6","E6","F6","G6","H6","I6","J6","K6","L6","M6","N6","O6","P6","Q6","R6","S6","T6","U6","V6",
+        //                                    "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7","K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
+        //                                    "A8","B8","C8","D8","E8","F8","G8","H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8","R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
+        //                                         "K9","L9"
+        //                                 };
+
+
+        //                lockingCell = new[] { "M9", "N9", "O9", "P9", "Q9", "R9", "S9", "T9", "U9", "V9" };
+
+
+        //            }
+        //            else if (customStandardQuantity == 15)
+        //            {
+        //                stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1","T1","U1","V1",
+        //                                   "A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2","Q2","R2","S2","T2","U2","V2",
+        //                                    "A5","B5","C5","D5","E5","F5","G5","H5","I5","J5","K5", "L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5",
+        //                                    "A6","B6","C6","D6","E6","F6","G6","H6","I6","J6","K6","L6","M6","N6","O6","P6","Q6","R6","S6","T6","U6","V6",
+        //                                    "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7","K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
+        //                                    "A8","B8","C8","D8","E8","F8","G8","H8","I8","J8","K8","L8", "M8","N8","O8","P8","Q8","R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9"
+        //                                 };
+
+
+        //                lockingCell = new[] { "H9", "I9", "J9", "K9", "L9", "M9", "N9", "O9", "P9", "Q9", "R9", "S9", "T9", "U9", "V9" };
+
+
+        //            }
+        //            else
+        //            {
+        //                stdCell = new string[0];
+        //            }
+
+        //            return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell); // superLockingCell  null here
+        //        }
+
+
+
+        //        superCell = new string[0];
+        //        lockingCell = new string[0];
+        //        stdCell = new string[0];
+        //        superLockingCell = new string[0];
+        //        return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+        //    }
+        //    else if (id == 7)// for max2 132/33/2  
+        //    {
+        //        if (customSuperQuantity > 0)
+        //        {
+        //            superLockingCell = new string[customSuperQuantity];
+        //            superCell = new string[aToz.Length * 2 - customSuperQuantity];
+        //            //string[] firstArray; string[] secondArray;
+
+        //            stdCell = new[] {      "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1","T1","U1","V1",
+        //                                   "A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2","Q2","R2","S2","T2","U2","V2",
+        //                                   "L4", "M4", "N4","O4","P4", "Q4",
+        //                                    "A5","B5","C5","D5","E5","F5","G5","H5","I5","J5","K5", "L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5",
+        //                                    "A6","B6","C6","D6","E6","F6","G6","H6","I6","J6","K6","L6","M6","N6","O6","P6","Q6","R6","S6","T6","U6","V6",
+        //                                   "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",  "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
+        //                                   "A8","B8","C8","D8","E8","F8","G8", "H8", "I8", "J8", "K8", "L8", "M8", "N8", "O8", "P8", "Q8", "R8", "S8", "T8", "U8", "V8",
+        //                                "A9", "B9", "C9", "D9", "E9", "F9", "G9", "H9", "I9", "J9", "K9", "L9", "M9", "N9", "O9", "P9", "Q9", "R9", "S9", "T9", "U9", "V9"
+        //                                    };
+
+
+        //            lockingCell = new string[0];
+
+        //            if (customSuperQuantity == 5)
+        //            {
+
+        //                superCell = new[] { "A4", "B4", "C4", "D4", "E4", "F4" };  // same as Standard
+
+        //                superLockingCell = new[] { "G4", "H4", "I4", "J4", "K4" };
+
+
+        //            }
+        //            else if (customSuperQuantity == 10)
+        //            {
+
+        //                superCell = new[] { "A4" };
+
+        //                superLockingCell = new[] { "B4", "C4", "D4", "E4", "F4", "G4", "H4", "I4", "J4", "K4" };
+
+        //            }
+        //            else if (customSuperQuantity == 15)
+        //            {
+
+        //                superCell = new string[0];  // message
+
+        //                superLockingCell = new string[0];
+
+        //            }
+        //            else
+        //            {
+        //                //firstArray = new string[0];
+        //                //secondArray = new string[0];
+        //            }
+
+        //            // SuperQuantityCellCalulationForTwo(firstArray, secondArray, superLockingCell, superCell);
+        //            // stdCell = allCell.Except(superCell).Except(lockingCell).Except(superLockingCell).ToArray();
+
+        //            return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+        //        }
+
+        //        if (customStandardQuantity > 0)
+        //        {
+        //            superLockingCell = new string[0];
+        //            lockingCell = new string[customStandardQuantity]; // 22 + 15
+
+        //            superCell = new[] { "A4", "B4", "C4", "D4", "E4", "F4", "G4", "H4", "I4", "J4", "K4" };  // same as Standard
+
+
+        //            if (customStandardQuantity == 5)
+        //            {
+
+        //                stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1","T1","U1","V1",
+        //                                   "A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2","Q2","R2","S2","T2","U2","V2",
+        //                                   "L3", "M3", "N3","O3","P3", "Q3","R3","S3", "T3","U3","V3",
+        //                                   "L4", "M4", "N4","O4","P4", "Q4","R4","S4", "T4","U4","V4",
+        //                                    "A5","B5","C5","D5","E5","F5","G5","H5","I5","J5","K5", "L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5",
+        //                                    "A6","B6","C6","D6","E6","F6","G6","H6","I6","J6","K6","L6","M6","N6","O6","P6","Q6","R6","S6","T6","U6","V6",
+        //                                    "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7","K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
+        //                                    "A8","B8","C8","D8","E8","F8","G8","H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8",
+        //                                    "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
+        //                                         "K9","L9","M9","N9","O9","P9","Q9"
+        //                                 };
+
+
+        //                lockingCell = new[] { "R9", "S9", "T9", "U9", "V9" };
+
+        //            }
+        //            else if (customStandardQuantity == 10)
+        //            {
+
+        //                stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1","T1","U1","V1",
+        //                                   "A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2","Q2","R2","S2","T2","U2","V2",
+        //                                   "L3", "M3", "N3","O3","P3", "Q3","R3","S3", "T3","U3","V3",
+        //                                   "L4", "M4", "N4","O4","P4", "Q4","R4","S4", "T4","U4","V4",
+        //                                    "A5","B5","C5","D5","E5","F5","G5","H5","I5","J5","K5", "L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5",
+        //                                    "A6","B6","C6","D6","E6","F6","G6","H6","I6","J6","K6","L6","M6","N6","O6","P6","Q6","R6","S6","T6","U6","V6",
+        //                                    "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7","K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
+        //                                    "A8","B8","C8","D8","E8","F8","G8","H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8", "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
+        //                                         "K9","L9"
+        //                                 };
+
+
+        //                lockingCell = new[] { "M9", "N9", "O9", "P9", "Q9", "R9", "S9", "T9", "U9", "V9" };
+
+
+        //            }
+        //            else if (customStandardQuantity == 15)
+        //            {
+        //                stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1","T1","U1","V1",
+        //                                   "A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2","Q2","R2","S2","T2","U2","V2",
+        //                                   "L3", "M3", "N3","O3","P3", "Q3","R3","S3", "T3","U3","V3",
+        //                                   "L4", "M4", "N4","O4","P4", "Q4","R4","S4", "T4","U4","V4",
+        //                                    "A5","B5","C5","D5","E5","F5","G5","H5","I5","J5","K5", "L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5",
+        //                                    "A6","B6","C6","D6","E6","F6","G6","H6","I6","J6","K6","L6","M6","N6","O6","P6","Q6","R6","S6","T6","U6","V6",
+        //                                    "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7","K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
+        //                                    "A8","B8","C8","D8","E8","F8","G8","H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8", "R8","S8","T8","U8","V8",
+        //                                        "A9","B9","C9","D9","E9","F9","G9"
+        //                                 };
+
+
+        //                lockingCell = new[] { "H9", "I9", "J9", "K9", "L9", "M9", "N9", "O9", "P9", "Q9", "R9", "S9", "T9", "U9", "V9" };
+
+
+        //            }
+        //            else
+        //            {
+        //                stdCell = new string[0];
+        //            }
+
+        //            return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell); // superLockingCell  null here
+        //        }
+
+
+
+        //        superCell = new string[0];
+        //        lockingCell = new string[0];
+        //        stdCell = new string[0];
+        //        superLockingCell = new string[0];
+        //        return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+        //    }
+        //    else if (id == 8)// for max2 198/0/2  Full Manifold Max 2​
+        //    {
+
+        //        if (customSuperQuantity > 0)
+        //        {
+        //            superLockingCell = new string[customSuperQuantity];
+        //            superCell = new string[aToz.Length * 2 - customSuperQuantity];
+        //            // string[] firstArray; string[] secondArray;
+
+        //            stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
+        //                                    "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
+        //                                    "Q2","R2","S2","T2","U2","V2",
+        //                                    "L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5",
+        //                                    "L6","M6", "N6","O6","P6","Q6","R6","S6","T6","U6","V6",
+        //                                    "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",  "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
+        //                                    "A8","B8","C8","D8","E8","F8","G8", "H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8", "R8","S8","T8","U8","V8",
+        //                                    "A9","B9","C9","D9","E9","F9","G9","H9","I9","J9","K9","L9","M9","N9","O9","P9","Q9","R9","S9","T9","U9","V9"
+        //                                    };
+
+
+        //            lockingCell = new string[0];
+
+        //            if (customSuperQuantity == 5)
+        //            {
+
+        //                superCell = new string[0];  // 
+
+        //                superLockingCell = new string[0];
+        //            }
+        //            else if (customSuperQuantity == 10)
+        //            {
+
+        //                superCell = new string[0];  // 
+
+        //                superLockingCell = new string[0];
+
+        //            }
+        //            else if (customSuperQuantity == 15)
+        //            {
+
+
+        //                superCell = new string[0];  // 
+
+        //                superLockingCell = new string[0];
+        //            }
+        //            else
+        //            {
+        //                //firstArray = new string[0];
+        //                //secondArray = new string[0];
+        //            }
+
+        //            // SuperQuantityCellCalulationForTwo(firstArray, secondArray, superLockingCell, superCell);
+        //            // stdCell = allCell.Except(superCell).Except(lockingCell).Except(superLockingCell).ToArray();
+
+        //            return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+        //        }
+
+        //        if (customStandardQuantity > 0)
+        //        {
+
+        //            lockingCell = new string[aToz.Length + customStandardQuantity]; // 22 + 15
+        //            superLockingCell = new string[customStandardQuantity]; // always null
+        //                                                                   // string[] fstArray;
+        //            superCell = new[] { "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4",
+        //                                    "T4","U4","V4","A6","B6","C6","D6","E6","F6","G6","H6","I6", "J6","K6" };  // same as Standard
+
+        //            if (customStandardQuantity == 5)
+        //            {
+        //                // fstArray = new[] { "A", "B", "C", "D", "E" };
+
+        //                stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
+        //                                    "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
+        //                                    "Q2","R2","S2","T2","U2","V2","L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5","L6","M6",
+        //                                    "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
+        //                                    "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8",
+        //                                    "H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8", "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
+        //                                         "K9","L9","M9","N9","O9","P9","Q9"
+        //                                 };
+
+
+
+        //                lockingCell = new[] { "R9", "S9", "T9", "U9", "V9" };
+
+
+        //                //stdCell = allCell.Except(superCell).Except(lockingCell).Except(superLockingCell).ToArray();
+        //            }
+        //            else if (customStandardQuantity == 10)
+        //            {
+
+        //                stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
+        //                                    "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
+        //                                    "Q2","R2","S2","T2","U2","V2","L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5","L6","M6",
+        //                                    "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
+        //                                    "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8",
+        //                                    "H8","I8","J8","K8","L8", "M8", "N8", "O8", "P8", "Q8",  "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
+        //                                         "K9","L9"
+        //                                 };
+
+
+
+        //                lockingCell = new[] { "M9", "N9", "O9", "P9", "Q9", "R9", "S9", "T9", "U9", "V9" };
+
+
+        //            }
+        //            else if (customStandardQuantity == 15)
+        //            {
+        //                stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
+        //                                    "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
+        //                                    "Q2","R2","S2","T2","U2","V2","L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5","L6","M6",
+        //                                    "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
+        //                                    "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8"
+        //                                    ,"H8","I8","J8","K8","L8","M8", "N8", "O8", "P8", "Q8",  "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9",
+        //                                 };
+
+
+        //                lockingCell = new[] { "H9", "I9", "J9", "K9", "L9", "M9", "N9", "O9", "P9", "Q9", "R9", "S9", "T9", "U9", "V9" };
+
+        //            }
+        //            else
+        //            {
+        //                stdCell = new string[0];
+        //                superCell = new string[0];
+        //            }
+
+        //            return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell); // superLockingCell  null here
+        //        }
+
+
+
+        //        superCell = new string[0];
+        //        lockingCell = new string[0];
+        //        stdCell = new string[0];
+        //        superLockingCell = new string[0];
+        //        return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+
+        //    }
+
+        //    else if (id == 11)// for 22 Std  & 88 Super Cells    Max 2 – Lite​
+        //    {
+        //        if (customSuperQuantity > 0)
+        //        {
+        //            superLockingCell = new string[customSuperQuantity];
+        //            superCell = new string[aToz.Length * 2 - customSuperQuantity];
+        //            //string[] firstArray; string[] secondArray;
+
+        //            stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
+        //                                    "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
+        //                                    "Q2","R2","S2","T2","U2","V2",
+        //                                    "L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5",
+        //                                    "L6","M6", "N6","O6","P6","Q6","R6","S6","T6","U6","V6",
+        //                                    "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",  "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
+        //                                    "A8","B8","C8","D8","E8","F8","G8", "H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8", "R8","S8","T8","U8","V8"
+        //                                    ,"A9","B9","C9","D9","E9","F9","G9","H9","I9","J9", "K9","L9","M9","N9","O9","P9","Q9","R9","S9","T9","U9","V9"
+        //                                    };
+
+
+        //            lockingCell = new string[0];
+
+        //            if (customSuperQuantity == 5)
+        //            {
+
+        //                superCell = new[] { "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4",
+        //                                    "T4","U4","V4","A6","B6","C6","D6","E6","F6" };  // same as Standard
+
+        //                superLockingCell = new[] { "G6", "H6", "I6", "J6", "K6" };
+
+
+        //            }
+        //            else if (customSuperQuantity == 10)
+        //            {
+
+        //                // firstArray = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
+        //                //secondArray = new[] { "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
+
+
+        //                superCell = new[] { "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4",
+        //                                    "T4","U4","V4","A6" };  // same as Standard
+
+        //                superLockingCell = new[] { "B6", "C6", "D6", "E6", "F6", "G6", "H6", "I6", "J6", "K6" };
+
+        //            }
+        //            else if (customSuperQuantity == 15)
+        //            {
+
+
+        //                superCell = new[] { "A4", "B4", "C4", "D4", "E4", "F4", "G4", "H4", "I4", "J4", "K4", "L4", "M4", "N4", "O4", "P4", "Q4", "R4" };  // same as Standard
+
+        //                superLockingCell = new[] { "S4", "T4", "U4", "V4", "A6", "B6", "C6", "D6", "E6", "F6", "G6", "H6", "I6", "J6", "K6" };
+
+        //            }
+        //            else
+        //            {
+        //                //firstArray = new string[0];
+        //                //secondArray = new string[0];
+        //            }
+
+        //            return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+        //        }
+
+        //        if (customStandardQuantity > 0)
+        //        {
+
+        //            lockingCell = new string[customStandardQuantity]; // 22 + 15
+        //            superLockingCell = new string[0];
+
+        //            superCell = new[] { "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4",
+        //                                    "T4","U4","V4","A6","B6","C6","D6","E6","F6","G6","H6","I6", "J6","K6" };
+
+
+        //            if (customStandardQuantity == 5)
+        //            {
+
+        //                stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
+        //                                    "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
+        //                                    "Q2","R2","S2","T2","U2","V2","L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5","L6","M6",
+        //                                    "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
+        //                                    "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8",
+        //                                    "H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8","R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
+        //                                         "K9","L9","M9","N9","O9","P9","Q9"
+        //                                 };
+
+
+
+        //                lockingCell = new[] { "R9", "S9", "T9", "U9", "V9" };
+
+        //            }
+        //            else if (customStandardQuantity == 10)
+        //            {
+
+        //                stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
+        //                                    "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
+        //                                    "Q2","R2","S2","T2","U2","V2","L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5","L6","M6",
+        //                                    "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
+        //                                    "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8",
+        //                                    "H8","I8","J8","K8","L8", "M8", "N8", "O8", "P8", "Q8",  "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
+        //                                         "K9","L9"
+        //                                 };
+
+
+
+        //                lockingCell = new[] { "M9", "N9", "O9", "P9", "Q9", "R9", "S9", "T9", "U9", "V9" };
+
+
+        //            }
+        //            else if (customStandardQuantity == 15)
+        //            {
+        //                stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
+        //                                    "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
+        //                                    "Q2","R2","S2","T2","U2","V2","L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5","L6","M6",
+        //                                    "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
+        //                                    "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8"
+        //                                    ,"H8","I8","J8","K8","L8","M8", "N8", "O8", "P8", "Q8",  "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9",
+        //                                 };
+
+
+        //                lockingCell = new[] { "H9", "I9", "J9", "K9", "L9", "M9", "N9", "O9", "P9", "Q9", "R9", "S9", "T9", "U9", "V9" };
+
+        //            }
+        //            else
+        //            {
+        //                stdCell = new string[0];
+        //                superCell = new string[0];
+        //            }
+        //            return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell); // superLockingCell  null here
+        //        }
+
+        //        superCell = new string[0];
+        //        lockingCell = new string[0];
+        //        stdCell = new string[0];
+        //        superLockingCell = new string[0];
+        //        return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+
+        //    }
+
+        //    else
+        //    {
+        //        superCell = new string[0];
+        //        lockingCell = new string[0];
+        //        stdCell = new string[0];
+        //        superLockingCell = new string[0];
+        //        return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+
+        //    }
+
+
+        //}
+
+
         private static Tuple<string[], string[]> CellCalculation(int? id, int customSuperQuantity, int customStandardQuantity)
         {
             string[] aToz = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
@@ -5519,11 +7350,13 @@ namespace CodingConsoleApp
                 {
                     for (int i = 1; i < 10; i++)
                     {
-                        if ((i != 1) && (i != 3) && (i != 6) && (i != 8))  // 3 & 5 exclude
-                        {
-                            allCell[c] = item + i.ToString();
-                            c++;
-                        }
+
+                        allCell[c] = item + i.ToString();
+                        c++;
+
+                        //if ((i != 1) && (i != 3) && (i != 6) && (i != 8))  // 3 & 5 exclude
+                        //{
+                        //}
 
                         //if ((i == 2) || (i == 4) || (i == 7) || (i == 9))
                         //{
@@ -5580,7 +7413,8 @@ namespace CodingConsoleApp
                                     ,"A6"," B6"," C6"," D6"," E6"," F6"," G6"," H6"," I6"," J6"," K6"," L6"," M6"," N6"," O6"," P6"," Q6"," R6"," S6"," T6"," U6"," V6"
                                     ,"A7"," B7"," C7"," D7"," E7"," F7"," G7"," H7"," I7"," J7"," K7"," L7"," M7"," N7"," O7"," P7"," Q7"," R7"," S7"," T7"," U7"," V7"
                                     ,"A8"," B8"," C8"," D8"," E8"," F8"," G8"," H8"," I8"," J8"," K8"," L8"," M8"," N8"," O8"," P8"," Q8"," R8"," S8"," T8"," U8"," V8"
-                                    ,"A9", " B9", " C9", " D9", " E9", " F9", " G9", " H9", " I9", " J9", " K9", " L9", " M9", " N9", " O9", " P9", " Q9", " R9", " S9", " T9", " U9", " V9"};
+                                    ,"A9", " B9", " C9", " D9", " E9", " F9", " G9", " H9", " I9", " J9", " K9", " L9", " M9", " N9", " O9", " P9", " Q9", " R9", " S9", 
+                                    " T9", " U9", " V9" ,"Y","Z" };
 
                     lockingCell = new string[0];
 
@@ -5625,7 +7459,7 @@ namespace CodingConsoleApp
                             ,"A6"," B6"," C6"," D6"," E6"," F6"," G6"," H6"," I6"," J6"," K6"," L6"," M6"," N6"," O6"," P6"," Q6"," R6"," S6"," T6"," U6"," V6"
                             ,"A7"," B7"," C7"," D7"," E7"," F7"," G7"," H7"," I7"," J7"," K7"," L7"," M7"," N7"," O7"," P7"," Q7"," R7"," S7"," T7"," U7"," V7"
                             ,"A8"," B8"," C8"," D8"," E8"," F8"," G8"," H8"," I8"," J8"," K8"," L8"," M8"," N8"," O8"," P8"," Q8" ,"R8", " S8", " T8", " U8", " V8"
-                            ," A9", " B9", " C9", " D9", " E9", " F9", " G9", " H9", " I9", " J9", " K9", " L9", " M9", " N9", " O9", " P9", " Q9"};
+                            ," A9", " B9", " C9", " D9", " E9", " F9", " G9", " H9", " I9", " J9", " K9", " L9", " M9", " N9", " O9", " P9", " Q9" ,"Y","Z" };
 
                         lockingCell = new[] { "R9", " S9", " T9", " U9", " V9" };
 
@@ -5638,8 +7472,8 @@ namespace CodingConsoleApp
                         ,"A6"," B6"," C6"," D6"," E6"," F6"," G6"," H6"," I6"," J6"," K6"," L6"," M6"," N6"," O6"," P6"," Q6"," R6"," S6"," T6"," U6"," V6"
                         ,"A7"," B7"," C7"," D7"," E7"," F7"," G7"," H7"," I7"," J7"," K7"," L7"," M7"," N7"," O7"," P7"," Q7"," R7"," S7"," T7"," U7"," V7"
                         ,"A8"," B8"," C8"," D8"," E8"," F8"," G8"," H8"," I8"," J8"," K8"," L8", "M8"," N8"," O8"," P8"," Q8"," R8"," S8"," T8"," U8"," V8"
-                        ," A9"," B9"," C9"," D9"," E9"," F9"," G9"," H9"," I9"," J9"," K9"," L9"};
-
+                        ," A9"," B9"," C9"," D9"," E9"," F9"," G9"," H9"," I9"," J9"," K9"," L9" ,"Y","Z" };
+                         
                         lockingCell = new[] { "M9", " N9", " O9", " P9", " Q9", " R9", " S9", " T9", " U9", " V9" };
 
 
@@ -5652,7 +7486,7 @@ namespace CodingConsoleApp
                         ,"A6"," B6"," C6"," D6"," E6"," F6"," G6"," H6"," I6"," J6"," K6"," L6"," M6"," N6"," O6"," P6"," Q6"," R6"," S6"," T6"," U6"," V6"
                         ,"A7"," B7"," C7"," D7"," E7"," F7"," G7"," H7"," I7"," J7"," K7"," L7"," M7"," N7"," O7"," P7"," Q7"," R7"," S7"," T7"," U7"," V7"
                         ,"A8"," B8"," C8"," D8"," E8"," F8"," G8", "H8"," I8"," J8"," K8"," L8"," M8"," N8"," O8"," P8"," Q8"," R8"," S8"," T8"," U8"," V8"
-                        ," A9"," B9"," C9"," D9"," E9"," F9"," G9"};
+                        ," A9"," B9"," C9"," D9"," E9"," F9"," G9","Y","Z" };
 
                         lockingCell = new[] { "H9", " I9", " J9", " K9", " L9", " M9", " N9", " O9", " P9", " Q9", " R9", " S9", " T9", " U9", " V9" };
                     }
@@ -5687,7 +7521,8 @@ namespace CodingConsoleApp
                         ,"A2"," B2"," C2"," D2"," E2"," F2"," G2"," H2"," I2"," J2"," K2"," L2"," M2"," N2"," O2"," P2"," Q2"," R2"," S2"," T2"," U2"," V2"
                         ," A7"," B7"," C7"," D7"," E7"," F7"," G7"," H7"," I7"," J7"," K7"," L7"," M7"," N7"," O7"," P7"," Q7"," R7"," S7"," T7"," U7"," V7"
                         ," A8"," B8"," C8"," D8"," E8"," F8"," G8"," H8"," I8"," J8"," K8"," L8"," M8"," N8"," O8"," P8"," Q8"," R8"," S8"," T8"," U8"," V8"
-                         ,"A9", " B9", " C9", " D9", " E9", " F9", " G9", " H9", " I9", " J9", " K9", " L9", " M9", " N9", " O9", " P9", " Q9", " R9", " S9", " T9", " U9", " V9"   };
+                         ,"A9", " B9", " C9", " D9", " E9", " F9", " G9", " H9", " I9", " J9", " K9", " L9", " M9", " N9", " O9", " P9", " Q9", " R9",
+                        " S9", " T9", " U9", "V9","Y","Z"   };
 
                     lockingCell = new string[0];
 
@@ -5733,7 +7568,7 @@ namespace CodingConsoleApp
                                         ,"A7"," B7"," C7"," D7"," E7"," F7"," G7"," H7"," I7"," J7"," K7"," L7"," M7"," N7"," O7"," P7"," Q7"," R7"," S7"," T7"," U7"," V7"
                                         ,"A8"," B8"," C8"," D8"," E8"," F8"," G8"," H8"," I8"," J8"," K8"," L8"," M8"," N8"," O8"," P8"," Q8"
                                         ,"R8"," S8"," T8"," U8"," V8"," A9"," B9"," C9"," D9"," E9"," F9"," G9"," H9"," I9"," J9"," K9"," L9"," M9"," N9",
-                                                " O9"," P9", "Q9"};
+                                                " O9"," P9", "Q9","Y","Z" };
 
 
                         lockingCell = new[] { "R9", " S9", " T9", " U9", " V9" };
@@ -5745,7 +7580,8 @@ namespace CodingConsoleApp
                                     ,"A2"," B2"," C2"," D2"," E2"," F2"," G2"," H2"," I2"," J2"," K2"," L2"," M2"," N2"," O2"," P2"," Q2"," R2"," S2"," T2"," U2"," V2"
                                     ,"A7"," B7"," C7"," D7"," E7"," F7"," G7"," H7"," I7"," J7"," K7"," L7"," M7"," N7"," O7"," P7"," Q7"," R7"," S7"," T7"," U7"," V7"
                                     ,"A8"," B8"," C8"," D8"," E8"," F8"," G8"," H8"," I8"," J8"," K8"," L8"
-                                    ,"M8"," N8"," O8"," P8"," Q8"," R8"," S8"," T8"," U8"," V8"," A9"," B9"," C9"," D9"," E9"," F9"," G9"," H9"," I9"," J9"," K9"," L9"};
+                                    ,"M8"," N8"," O8"," P8"," Q8"," R8"," S8"," T8"," U8"," V8"," A9"," B9"," C9"," D9"," E9",
+                            " F9"," G9"," H9"," I9"," J9"," K9"," L9" ,"Y","Z" };
 
                         lockingCell = new[] { "M9", " N9", " O9", " P9", " Q9", " R9", " S9", " T9", " U9", " V9" };
                     }
@@ -5755,7 +7591,7 @@ namespace CodingConsoleApp
                                         ,"A2"," B2"," C2"," D2"," E2"," F2"," G2"," H2"," I2"," J2"," K2"," L2"," M2"," N2"," O2"," P2"," Q2"," R2"," S2"," T2"," U2"," V2"
                                         ,"A7"," B7"," C7"," D7"," E7"," F7"," G7"," H7"," I7"," J7"," K7"," L7"," M7"," N7"," O7"," P7"," Q7"," R7"," S7"," T7"," U7"," V7"
                                         ,"A8"," B8"," C8"," D8"," E8"," F8"," G8", "H8"," I8"," J8"," K8"," L8"," M8"," N8"," O8"," P8"," Q8"," R8"," S8"," T8"," U8"," V8"
-                                        ," A9"," B9"," C9"," D9"," E9"," F9"," G9"};
+                                        ," A9"," B9"," C9"," D9"," E9"," F9"," G9" ,"Y","Z" };
 
 
                         lockingCell = new[] { "H9", " I9", " J9", " K9", " L9", " M9", " N9", " O9", " P9", " Q9", " R9", " S9", " T9", " U9", " V9" };
@@ -5794,7 +7630,7 @@ namespace CodingConsoleApp
                                             "L6","M6", "N6","O6","P6","Q6","R6","S6","T6","U6","V6",
                                             "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",  "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
                                             "A8","B8","C8","D8","E8","F8","G8", "H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8", "R8","S8","T8","U8","V8"
-                                            ,"A9","B9","C9","D9","E9","F9","G9","H9","I9","J9","K9","L9","M9","N9","O9","P9","Q9","R9","S9","T9","U9","V9"};
+                                            ,"A9","B9","C9","D9","E9","F9","G9","H9","I9","J9","K9","L9","M9","N9","O9","P9","Q9","R9","S9","T9","U9","V9","Y","Z" };
 
 
                     lockingCell = new string[0];
@@ -5829,15 +7665,7 @@ namespace CodingConsoleApp
                         superLockingCell = new[] { "S4", "T4", "U4", "V4", "A6", "B6", "C6", "D6", "E6", "F6", "G6", "H6", "I6", "J6", "K6" };
 
                     }
-                    else
-                    {
-                        //firstArray = new string[0];
-                        //secondArray = new string[0];
-                    }
-
-                    // SuperQuantityCellCalulationForTwo(firstArray, secondArray, superLockingCell, superCell);
-                    // stdCell = allCell.Except(superCell).Except(lockingCell).Except(superLockingCell).ToArray();
-
+                    
                     return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
                 }
 
@@ -5860,7 +7688,8 @@ namespace CodingConsoleApp
                                             "L6","M6","N6","O6","P6","Q6","R6","S6","T6","U6","V6",
                                             "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7","K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
                                             "A8","B8","C8","D8","E8","F8","G8", "H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8"
-                                            ,"R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9","K9","L9","M9","N9","O9","P9","Q9"};
+                                            ,"R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9","K9","L9",
+                            "M9","N9","O9","P9","Q9" ,"Y","Z" };
 
 
 
@@ -5876,7 +7705,8 @@ namespace CodingConsoleApp
                                             "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
                                             "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8",
                                             "H8","I8","J8","K8","L8"
-                                            ,"M8", "N8", "O8", "P8", "Q8",  "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9", "K9","L9",
+                                            ,"M8", "N8", "O8", "P8", "Q8",  "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9",
+                            "H9","I9","J9", "K9","L9","Y","Z"
                                          };
 
 
@@ -5893,7 +7723,7 @@ namespace CodingConsoleApp
                                             "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
                                             "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8"
                                             ,"H8","I8","J8","K8","L8","M8", "N8", "O8", "P8", "Q8", "R8","S8","T8","U8","V8"
-                                            ,"A9","B9","C9","D9","E9","F9","G9"
+                                            ,"A9","B9","C9","D9","E9","F9","G9","Y","Z"
                                          };
 
 
@@ -5927,14 +7757,12 @@ namespace CodingConsoleApp
                     superCell = new string[aToz.Length * 2 - customSuperQuantity];
                     //string[] firstArray; string[] secondArray;
 
-                    stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
-                                            "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
-                                            "Q2","R2","S2","T2","U2","V2",
-                                            "L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5",
-                                            "L6","M6", "N6","O6","P6","Q6","R6","S6","T6","U6","V6",
+                    stdCell = new[] {  "A5","B5","C5","D5","E5","F5","G5","H5","I5","J5","K5", "L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5",
+                                           "A6","B6","C6","D6","E6","F6","G6","H6","I6","J6","K6", "L6","M6","N6","O6","P6","Q6","R6","S6","T6","U6","V6",
                                             "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",  "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
                                             "A8","B8","C8","D8","E8","F8","G8", "H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8", "R8","S8","T8","U8","V8"
-                                            , "A9","B9","C9","D9","E9","F9","G9","H9","I9","J9","K9","L9","M9","N9","O9","P9","Q9","R9","S9","T9","U9","V9"};
+                                            , "A9","B9","C9","D9","E9","F9","G9","H9","I9","J9","K9","L9","M9","N9","O9","P9","Q9",
+                        "R9","S9","T9","U9","V9","Y","Z" };
 
 
                     lockingCell = new string[0];
@@ -5942,10 +7770,10 @@ namespace CodingConsoleApp
                     if (customSuperQuantity == 5)
                     {
 
-                        superCell = new[] { "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4",
-                                            "T4","U4","V4","A6","B6","C6","D6","E6","F6" };  // same as Standard
+                        superCell = new[] { "A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2", "Q2","R2","S2","T2","U2","V2",
+                        "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4" };  // same as Standard
 
-                        superLockingCell = new[] { "G6", "H6", "I6", "J6", "K6" };
+                        superLockingCell = new[] { "R4", "S4", "T4", "U4", "V4" };
 
 
                     }
@@ -5956,20 +7784,19 @@ namespace CodingConsoleApp
                         //secondArray = new[] { "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
 
 
-                        superCell = new[] { "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4",
-                                            "T4","U4","V4","A6" };  // same as Standard
+                        superCell = new[] { "A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2", "Q2","R2","S2","T2","U2","V2",
+                        "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4" };  // same as Standard
 
-                        superLockingCell = new[] { "B6", "C6", "D6", "E6", "F6", "G6", "H6", "I6", "J6", "K6" };
+                        superLockingCell = new[] { "M4", "N4", "O4", "P4", "Q4","R4", "S4", "T4", "U4", "V4" };
 
                     }
                     else if (customSuperQuantity == 15)
                     {
 
+                        superCell = new[] { "A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2", "Q2","R2","S2","T2","U2","V2",
+                        "A4","B4","C4", "D4","E4","F4", "G4" };  // same as Standard
 
-                        superCell = new[] { "A4", "B4", "C4", "D4", "E4", "F4", "G4", "H4", "I4", "J4", "K4", "L4", "M4", "N4", "O4", "P4", "Q4", "R4" };  // same as Standard
-
-                        superLockingCell = new[] { "S4", "T4", "U4", "V4", "A6", "B6", "C6", "D6", "E6", "F6", "G6", "H6", "I6", "J6", "K6" };
-
+                        superLockingCell = new[] { "H4", "I4", "J4", "K4", "L4", "M4", "N4", "O4", "P4", "Q4", "R4", "S4", "T4", "U4", "V4" };
                     }
                     else
                     {
@@ -5990,20 +7817,18 @@ namespace CodingConsoleApp
                     superLockingCell = new string[0]; // always null
                     //string[] fstArray;
 
-                    superCell = new[] { "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4",
-                                            "T4","U4","V4","A6","B6","C6","D6","E6","F6","G6","H6","I6", "J6","K6" };  // same as Standard
+                    superCell = new[] { "A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2", "Q2","R2","S2","T2","U2","V2",
+                        "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4","T4","U4","V4" };  // same as Standard
 
                     if (customStandardQuantity == 5)
                     {
                         //fstArray = new[] { "A", "B", "C", "D", "E" };
 
-                        stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
-                                            "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
-                                            "Q2","R2","S2","T2","U2","V2","L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5","L6","M6",
-                                            "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
-                                            "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8",
-                                            "H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8", "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
-                                                 "K9","L9","M9","N9","O9","P9","Q9"
+                        stdCell = new[] { "A5","B5","C5","D5","E5","F5","G5","H5","I5","J5","K5", "L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5",
+                                           "A6","B6","C6","D6","E6","F6","G6","H6","I6","J6","K6", "L6","M6","N6","O6","P6","Q6","R6","S6","T6","U6","V6",
+                                            "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7", "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
+                                            "A8","B8","C8","D8","E8","F8","G8"  ,"H8","I8","J8","K8","L8","M8", "N8", "O8", "P8", "Q8",  "R8","S8","T8","U8","V8",
+                                            "A9","B9","C9","D9","E9","F9","G9", "H9", "I9", "J9", "K9", "L9", "M9", "N9", "O9", "P9", "Q9","Y","Z"
                                          };
 
 
@@ -6011,18 +7836,15 @@ namespace CodingConsoleApp
                         lockingCell = new[] { "R9", "S9", "T9", "U9", "V9" };
 
 
-                        //stdCell = allCell.Except(superCell).Except(lockingCell).Except(superLockingCell).ToArray();
                     }
                     else if (customStandardQuantity == 10)
                     {
 
-                        stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
-                                            "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
-                                            "Q2","R2","S2","T2","U2","V2","L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5","L6","M6",
-                                            "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
-                                            "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8",
-                                            "H8","I8","J8","K8","L8", "M8", "N8", "O8", "P8", "Q8",  "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
-                                                 "K9","L9"
+                        stdCell = new[] { "A5","B5","C5","D5","E5","F5","G5","H5","I5","J5","K5", "L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5",
+                                           "A6","B6","C6","D6","E6","F6","G6","H6","I6","J6","K6", "L6","M6","N6","O6","P6","Q6","R6","S6","T6","U6","V6",
+                                            "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7", "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
+                                            "A8","B8","C8","D8","E8","F8","G8"  ,"H8","I8","J8","K8","L8","M8", "N8", "O8", "P8", "Q8",  "R8","S8","T8","U8","V8",
+                                            "A9","B9","C9","D9","E9","F9","G9", "H9", "I9", "J9", "K9", "L9","Y","Z"
                                          };
 
 
@@ -6033,12 +7855,11 @@ namespace CodingConsoleApp
                     }
                     else if (customStandardQuantity == 15)
                     {
-                        stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
-                                            "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
-                                            "Q2","R2","S2","T2","U2","V2","L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5","L6","M6",
-                                            "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
-                                            "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8"
-                                            ,"H8","I8","J8","K8","L8","M8", "N8", "O8", "P8", "Q8",  "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9"
+                        stdCell = new[] { "A5","B5","C5","D5","E5","F5","G5","H5","I5","J5","K5", "L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5",
+                                           "A6","B6","C6","D6","E6","F6","G6","H6","I6","J6","K6", "L6","M6","N6","O6","P6","Q6","R6","S6","T6","U6","V6",
+                                            "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7", "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
+                                            "A8","B8","C8","D8","E8","F8","G8"  ,"H8","I8","J8","K8","L8","M8", "N8", "O8", "P8", "Q8",  "R8","S8","T8","U8","V8",
+                                            "A9","B9","C9","D9","E9","F9","G9","Y","Z"
                                          };
 
 
@@ -6084,7 +7905,7 @@ namespace CodingConsoleApp
                                             "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",  "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
                                             "A8","B8","C8","D8","E8","F8","G8", "H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8", "R8","S8","T8","U8","V8"
                                             ,"A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
-                                                 "K9","L9","M9","N9","O9","P9","Q9","R9","S9","T9","U9","V9"};
+                                                 "K9","L9","M9","N9","O9","P9","Q9","R9","S9","T9","U9","V9","Y","Z" };
 
 
 
@@ -6145,7 +7966,7 @@ namespace CodingConsoleApp
                                             "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
                                             "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8",
                                             "H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8","R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
-                                                 "K9","L9","M9","N9","O9","P9","Q9"
+                                                 "K9","L9","M9","N9","O9","P9","Q9","Y","Z"
                                          };
 
 
@@ -6163,7 +7984,7 @@ namespace CodingConsoleApp
                                             "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
                                             "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8",
                                             "H8","I8","J8","K8","L8","M8", "N8", "O8", "P8", "Q8",  "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
-                                                 "K9","L9"
+                                                 "K9","L9","Y","Z"
                                          };
 
 
@@ -6179,7 +8000,8 @@ namespace CodingConsoleApp
                                             "Q2","R2","S2","T2","U2","V2","L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5","L6","M6",
                                             "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
                                             "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8"
-                                            ,"H8","I8","J8","K8","L8","M8", "N8", "O8", "P8", "Q8",  "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9"
+                                            ,"H8","I8","J8","K8","L8","M8", "N8", "O8", "P8", "Q8",  "R8","S8","T8","U8","V8","A9","B9","C9",
+                            "D9","E9","F9","G9","Y","Z"
                                          };
 
 
@@ -6220,7 +8042,8 @@ namespace CodingConsoleApp
                                             "A6","B6","C6","D6","E6","F6","G6","H6","I6","J6","K6","L6","M6","N6","O6","P6","Q6","R6","S6","T6","U6","V6",
                                            "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",  "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
                                            "A8","B8","C8","D8","E8","F8","G8", "H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8", "R8","S8","T8","U8","V8"
-                                           ,"A9", "B9", "C9", "D9", "E9", "F9", "G9", "H9", "I9", "J9", "K9", "L9", "M9", "N9", "O9", "P9", "Q9", "R9", "S9", "T9", "U9", "V9"  };
+                                           ,"A9", "B9", "C9", "D9", "E9", "F9", "G9", "H9", "I9", "J9", "K9", "L9", "M9", "N9", "O9", "P9", 
+                        "Q9", "R9", "S9", "T9", "U9", "V9" ,"Y","Z"  };
 
 
                     lockingCell = new string[0];
@@ -6279,7 +8102,7 @@ namespace CodingConsoleApp
                                             "A6","B6","C6","D6","E6","F6","G6","H6","I6","J6","K6","L6","M6","N6","O6","P6","Q6","R6","S6","T6","U6","V6",
                                             "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7","K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
                                             "A8","B8","C8","D8","E8","F8","G8","H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8","R8","S8","T8","U8","V8"
-                                            ,"A9","B9","C9","D9","E9","F9","G9","H9","I9","J9","K9","L9","M9","N9","O9","P9","Q9",
+                                            ,"A9","B9","C9","D9","E9","F9","G9","H9","I9","J9","K9","L9","M9","N9","O9","P9","Q9","Y","Z"
                                          };
 
 
@@ -6295,7 +8118,7 @@ namespace CodingConsoleApp
                                             "A6","B6","C6","D6","E6","F6","G6","H6","I6","J6","K6","L6","M6","N6","O6","P6","Q6","R6","S6","T6","U6","V6",
                                             "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7","K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
                                             "A8","B8","C8","D8","E8","F8","G8","H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8","R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
-                                                 "K9","L9"
+                                                 "K9","L9","Y","Z"
                                          };
 
 
@@ -6310,7 +8133,8 @@ namespace CodingConsoleApp
                                             "A5","B5","C5","D5","E5","F5","G5","H5","I5","J5","K5", "L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5",
                                             "A6","B6","C6","D6","E6","F6","G6","H6","I6","J6","K6","L6","M6","N6","O6","P6","Q6","R6","S6","T6","U6","V6",
                                             "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7","K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
-                                            "A8","B8","C8","D8","E8","F8","G8","H8","I8","J8","K8","L8", "M8","N8","O8","P8","Q8","R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9"
+                                            "A8","B8","C8","D8","E8","F8","G8","H8","I8","J8","K8","L8", "M8","N8","O8","P8","Q8","R8","S8","T8","U8","V8",
+                            "A9","B9","C9","D9","E9","F9","G9","Y","Z"
                                          };
 
 
@@ -6349,7 +8173,8 @@ namespace CodingConsoleApp
                                             "A6","B6","C6","D6","E6","F6","G6","H6","I6","J6","K6","L6","M6","N6","O6","P6","Q6","R6","S6","T6","U6","V6",
                                            "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",  "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
                                            "A8","B8","C8","D8","E8","F8","G8", "H8", "I8", "J8", "K8", "L8", "M8", "N8", "O8", "P8", "Q8", "R8", "S8", "T8", "U8", "V8",
-                                        "A9", "B9", "C9", "D9", "E9", "F9", "G9", "H9", "I9", "J9", "K9", "L9", "M9", "N9", "O9", "P9", "Q9", "R9", "S9", "T9", "U9", "V9"
+                                        "A9", "B9", "C9", "D9", "E9", "F9", "G9", "H9", "I9", "J9", "K9", "L9", "M9", "N9", "O9", "P9", "Q9", "R9", "S9", 
+                        "T9", "U9", "V9" ,"Y","Z"
                                             };
 
 
@@ -6412,7 +8237,7 @@ namespace CodingConsoleApp
                                             "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7","K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
                                             "A8","B8","C8","D8","E8","F8","G8","H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8",
                                             "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
-                                                 "K9","L9","M9","N9","O9","P9","Q9"
+                                                 "K9","L9","M9","N9","O9","P9","Q9" ,"Y","Z"
                                          };
 
 
@@ -6430,7 +8255,7 @@ namespace CodingConsoleApp
                                             "A6","B6","C6","D6","E6","F6","G6","H6","I6","J6","K6","L6","M6","N6","O6","P6","Q6","R6","S6","T6","U6","V6",
                                             "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7","K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
                                             "A8","B8","C8","D8","E8","F8","G8","H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8", "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
-                                                 "K9","L9"
+                                                 "K9","L9","Y","Z"
                                          };
 
 
@@ -6448,7 +8273,7 @@ namespace CodingConsoleApp
                                             "A6","B6","C6","D6","E6","F6","G6","H6","I6","J6","K6","L6","M6","N6","O6","P6","Q6","R6","S6","T6","U6","V6",
                                             "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7","K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
                                             "A8","B8","C8","D8","E8","F8","G8","H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8", "R8","S8","T8","U8","V8",
-                                                "A9","B9","C9","D9","E9","F9","G9"
+                                                "A9","B9","C9","D9","E9","F9","G9" ,"Y","Z"
                                          };
 
 
@@ -6472,7 +8297,7 @@ namespace CodingConsoleApp
                 superLockingCell = new string[0];
                 return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
             }
-            else if (id == 8)// for max2 198/0/2  Full Manifold Max 2​
+            else if (id == 11)// for max2 198/0/2  Full Manifold Max 2​
             {
 
                 if (customSuperQuantity > 0)
@@ -6488,7 +8313,8 @@ namespace CodingConsoleApp
                                             "L6","M6", "N6","O6","P6","Q6","R6","S6","T6","U6","V6",
                                             "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",  "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
                                             "A8","B8","C8","D8","E8","F8","G8", "H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8", "R8","S8","T8","U8","V8",
-                                            "A9","B9","C9","D9","E9","F9","G9","H9","I9","J9","K9","L9","M9","N9","O9","P9","Q9","R9","S9","T9","U9","V9"
+                                            "A9","B9","C9","D9","E9","F9","G9","H9","I9","J9","K9","L9","M9","N9","O9","P9","Q9",
+                        "R9","S9","T9","U9","V9" ,"Y","Z"
                                             };
 
 
@@ -6548,7 +8374,7 @@ namespace CodingConsoleApp
                                             "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
                                             "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8",
                                             "H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8", "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
-                                                 "K9","L9","M9","N9","O9","P9","Q9"
+                                                 "K9","L9","M9","N9","O9","P9","Q9","Y","Z"
                                          };
 
 
@@ -6567,7 +8393,7 @@ namespace CodingConsoleApp
                                             "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
                                             "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8",
                                             "H8","I8","J8","K8","L8", "M8", "N8", "O8", "P8", "Q8",  "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
-                                                 "K9","L9"
+                                                 "K9","L9","Y","Z"
                                          };
 
 
@@ -6583,7 +8409,8 @@ namespace CodingConsoleApp
                                             "Q2","R2","S2","T2","U2","V2","L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5","L6","M6",
                                             "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
                                             "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8"
-                                            ,"H8","I8","J8","K8","L8","M8", "N8", "O8", "P8", "Q8",  "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9",
+                                            ,"H8","I8","J8","K8","L8","M8", "N8", "O8", "P8", "Q8",  "R8","S8","T8","U8","V8","A9","B9","C9",
+                            "D9","E9","F9","G9","Y","Z"
                                          };
 
 
@@ -6609,22 +8436,16 @@ namespace CodingConsoleApp
 
             }
 
-            else if (id == 11)// for 22 Std  & 88 Super Cells    Max 2 – Lite​
+            else if (id == 10)// for 22 Std  & 88 Super Cells    Max 2 – Lite​
             {
                 if (customSuperQuantity > 0)
                 {
                     superLockingCell = new string[customSuperQuantity];
-                    superCell = new string[aToz.Length * 2 - customSuperQuantity];
+                    superCell = new string[aToz.Length * 4 - customSuperQuantity];
                     //string[] firstArray; string[] secondArray;
 
-                    stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
-                                            "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
-                                            "Q2","R2","S2","T2","U2","V2",
-                                            "L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5",
-                                            "L6","M6", "N6","O6","P6","Q6","R6","S6","T6","U6","V6",
-                                            "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",  "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
-                                            "A8","B8","C8","D8","E8","F8","G8", "H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8", "R8","S8","T8","U8","V8"
-                                            ,"A9","B9","C9","D9","E9","F9","G9","H9","I9","J9", "K9","L9","M9","N9","O9","P9","Q9","R9","S9","T9","U9","V9"
+                    stdCell = new[] { "A5", "B5","C5","D5","E5","F5","G5","H5","I5","J5","K5","L5","M5","N5","O5","P5","Q5","R5","S5",
+                                            "T5","U5","V5","Y","Z"
                                             };
 
 
@@ -6633,10 +8454,14 @@ namespace CodingConsoleApp
                     if (customSuperQuantity == 5)
                     {
 
-                        superCell = new[] { "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4",
-                                            "T4","U4","V4","A6","B6","C6","D6","E6","F6" };  // same as Standard
+                        superCell = new[] {"A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
+                                            "Q2","R2","S2","T2","U2","V2", "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4",
+                                            "T4","U4","V4", "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
+                                            "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7", "A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
+                                                 "K9","L9","M9","N9","O9","P9","Q9"
+                        };  // same as Standard
 
-                        superLockingCell = new[] { "G6", "H6", "I6", "J6", "K6" };
+                        superLockingCell = new[] { "R9", "S9", "T9", "U9", "V9" };
 
 
                     }
@@ -6647,20 +8472,26 @@ namespace CodingConsoleApp
                         //secondArray = new[] { "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
 
 
-                        superCell = new[] { "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4",
-                                            "T4","U4","V4","A6" };  // same as Standard
+                        superCell = new[] {"A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
+                                            "Q2","R2","S2","T2","U2","V2", "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4",
+                                            "T4","U4","V4", "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
+                                            "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7", "A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
+                                                 "K9","L9"
+                        };  // same as Standard
 
-                        superLockingCell = new[] { "B6", "C6", "D6", "E6", "F6", "G6", "H6", "I6", "J6", "K6" };
-
+                        superLockingCell = new[] { "M9", "N9", "O9", "P9", "Q9", "R9", "S9", "T9", "U9", "V9" };
                     }
                     else if (customSuperQuantity == 15)
                     {
 
 
-                        superCell = new[] { "A4", "B4", "C4", "D4", "E4", "F4", "G4", "H4", "I4", "J4", "K4", "L4", "M4", "N4", "O4", "P4", "Q4", "R4" };  // same as Standard
+                        superCell = new[] {"A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
+                                            "Q2","R2","S2","T2","U2","V2", "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4",
+                                            "T4","U4","V4", "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
+                                            "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7", "A9","B9","C9","D9","E9","F9","G9"
+                        };  // same as Standard
 
-                        superLockingCell = new[] { "S4", "T4", "U4", "V4", "A6", "B6", "C6", "D6", "E6", "F6", "G6", "H6", "I6", "J6", "K6" };
-
+                        superLockingCell = new[] { "H9", "I9", "J9", "K9", "L9", "M9", "N9", "O9", "P9", "Q9", "R9", "S9", "T9", "U9", "V9" };
                     }
                     else
                     {
@@ -6677,57 +8508,44 @@ namespace CodingConsoleApp
                     lockingCell = new string[customStandardQuantity]; // 22 + 15
                     superLockingCell = new string[0];
 
-                    superCell = new[] { "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4",
-                                            "T4","U4","V4","A6","B6","C6","D6","E6","F6","G6","H6","I6", "J6","K6" };
+                    superCell = new[] {"A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
+                                            "Q2","R2","S2","T2","U2","V2", "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4", "M4", "N4","O4","P4", "Q4","R4","S4",
+                                            "T4","U4","V4", "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
+                                            "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7", "A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
+                                                 "K9","L9","M9","N9","O9","P9","Q9", "R9", "S9", "T9", "U9", "V9" };
 
 
                     if (customStandardQuantity == 5)
                     {
 
-                        stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
-                                            "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
-                                            "Q2","R2","S2","T2","U2","V2","L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5","L6","M6",
-                                            "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
-                                            "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8",
-                                            "H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8","R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
-                                                 "K9","L9","M9","N9","O9","P9","Q9"
+                        stdCell = new[] { "A5", "B5","C5","D5","E5","F5","G5","H5","I5","J5","K5","L5","M5","N5","O5","P5","Q5","Y","Z"
                                          };
 
 
 
-                        lockingCell = new[] { "R9", "S9", "T9", "U9", "V9" };
+                        lockingCell = new[] { "R5", "S5", "T5", "U5", "V5" };
 
                     }
                     else if (customStandardQuantity == 10)
                     {
 
-                        stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
-                                            "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
-                                            "Q2","R2","S2","T2","U2","V2","L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5","L6","M6",
-                                            "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
-                                            "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8",
-                                            "H8","I8","J8","K8","L8", "M8", "N8", "O8", "P8", "Q8",  "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9","H9","I9","J9",
-                                                 "K9","L9"
+                        stdCell = new[] { "A5", "B5","C5","D5","E5","F5","G5","H5","I5","J5","K5","L5","Y","Z"
                                          };
 
 
 
-                        lockingCell = new[] { "M9", "N9", "O9", "P9", "Q9", "R9", "S9", "T9", "U9", "V9" };
+                        lockingCell = new[] { "M5", "N5", "O5", "P5", "Q5", "R5", "S5", "T5", "U5", "V5" };
 
 
                     }
                     else if (customStandardQuantity == 15)
                     {
-                        stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
-                                            "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
-                                            "Q2","R2","S2","T2","U2","V2","L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5","L6","M6",
-                                            "N6","O6","P6","Q6","R6","S6","T6","U6","V6","A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",
-                                            "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7","A8","B8","C8","D8","E8","F8","G8"
-                                            ,"H8","I8","J8","K8","L8","M8", "N8", "O8", "P8", "Q8",  "R8","S8","T8","U8","V8","A9","B9","C9","D9","E9","F9","G9",
+                        stdCell = new[] { "A5", "B5","C5","D5","E5","F5","G5","Y","Z"
                                          };
 
 
-                        lockingCell = new[] { "H9", "I9", "J9", "K9", "L9", "M9", "N9", "O9", "P9", "Q9", "R9", "S9", "T9", "U9", "V9" };
+
+                        lockingCell = new[] { "H5", "I5", "J5", "K5", "L5", "M5", "N5", "O5", "P5", "Q5", "R5", "S5", "T5", "U5", "V5" };
 
                     }
                     else
@@ -6759,393 +8577,6 @@ namespace CodingConsoleApp
 
         }
 
-
-
-
-        private static void StandardQuantityCellCalulationForTwo(string[] firstArray, string[] secondArray, string[] lockingCell, string[] superCell)
-        {
-            int s = 0; int l = 0;
-
-            foreach (var item in firstArray) // dynamic a to e
-            {
-                lockingCell[l] = item + "8";
-                l++;
-            }
-
-            foreach (var item in secondArray) // a to z
-            {
-                superCell[s] = item + "4";  // item = F4 .... V4
-                s++;
-
-                superCell[s] = item + "6";  // item = F4 .... V4
-                s++;
-
-                lockingCell[l] = item + "9";
-                l++;
-            }
-        }
-
-        private static void SuperQuantityCellCalulationForTwo(string[] firstArray, string[] secondArray, string[] superLockingCell, string[] superCell)
-        {
-            int s = 0; int sl = 0;
-
-            foreach (var item in firstArray)
-            {
-                superLockingCell[sl] = item + "4";
-                sl++;
-
-                superCell[s] = item + "6";  // item = F4 .... V4
-                s++;
-            }
-
-            foreach (var item in secondArray)
-            {
-                superCell[s] = item + "4";  // item = F4 .... V4
-                s++;
-
-                superCell[s] = item + "6";  // item = F4 .... V4
-                s++;
-            }
-        }
-
-
-        private static void StandardQuantityCellCalulationForOne(string[] firstArray, string[] secondArray, string[] lockingCell, string[] superCell)
-        {
-            int s = 0; int l = 22;
-
-            foreach (var item in firstArray) // dynamic a to e
-            {
-                lockingCell[l] = item + "8";
-                l++;
-            }
-
-            foreach (var item in secondArray) // a to z
-            {
-                superCell[s] = item + "4";  // item = F4 .... V4
-                s++;
-
-                superCell[s] = item + "6";  // item = F4 .... V4
-                s++;
-
-                //lockingCell[l] = item + "9";
-                //l++;
-            }
-        }
-
-        private static void SuperQuantityCellCalulationForOne(string[] firstArray, string[] secondArray, string[] superLockingCell, string[] superCell)
-        {
-            int s = 0; int sl = 0;
-
-            foreach (var item in firstArray)
-            {
-                superLockingCell[sl] = item + "4";
-                sl++;
-
-                superCell[s] = item + "6";  // item = F4 .... V4
-                s++;
-            }
-
-            foreach (var item in secondArray)
-            {
-                superCell[s] = item + "4";  // item = F4 .... V4
-                s++;
-
-                superCell[s] = item + "6";  // item = F4 .... V4
-                s++;
-            }
-        }
-
-        private static void SuperQuantityCellCalulation(string[] firstArray, string[] secondArray, string[] superLockingCell, string[] superCell)
-        {
-            int s = 0; int sl = 0;
-
-            foreach (var item in firstArray)
-            {               
-                superLockingCell[sl] = item + "4";
-                sl++;                    
-            }
-
-            foreach (var item in secondArray)
-            {
-                superCell[s] = item + "4";  // item = F4 .... V4
-                s++;
-            }
-        }
-
-        private static void StandardQuantityCellCalulation(string[] firstArray, string[] secondArray, string[] lockingCell, string[] superCell)
-        {
-            int s = 0;  int l = 0;
-
-            foreach (var item in firstArray) // dynamic a to e
-            {
-                lockingCell[l] = item + "8";
-                l++;
-            }
-
-            foreach (var item in secondArray) // a to z
-            {
-                superCell[s] = item + "4";
-                s++;
-
-                lockingCell[l] = item + "9";
-                l++;
-            }          
-        }
-
-
-        /*
-         
-         * public class CustomerAndRecomemdedDrugInfo
-    {
-        public Guid CustomerId { get; set; }
-        public string CustomerName { get; set; }
-        public string CaseNumber { get; set; }
-        public int SubDeviceTypeId { get; set; }
-        public string SubDeviceName { get; set; }
-        public string TargetInstallDate { get; set; }
-        public string CreatedDate { get; set; }
-        public int StatusId { get; set; }
-
-        public List<RecomendedDrugDto> drugs = new List<RecomendedDrugDto>();  // analysis
-
-
-        public List<RecomendedDrugDto> notOralDrugs = new List<RecomendedDrugDto>();  // 
-        public List<RecomendedDrugDto> excludedDrugs = new List<RecomendedDrugDto>();
-        public List<RecomendedDrugDto> notAvailableDrugs = new List<RecomendedDrugDto>();
-    }
-
-
-
-        [HttpGet("LoadDrugRecommendationScreen​")] // apply algorithm here
-        public async Task<IActionResult> LoadDrugRecommendationScreen​([FromQuery] Guid customerId)
-        {
-            var msg = new MessageHelperDto();
-            try
-            {
-                CustomerLog customer = await _repository.CustomerLog.GetCustomerIdAsync(customerId);
-
-                CustomerAndRecomemdedDrugInfo customerAndRecomemdedDrugInfo = new CustomerAndRecomemdedDrugInfo();
-                customerAndRecomemdedDrugInfo.CustomerId = customerId;
-                customerAndRecomemdedDrugInfo.CustomerName = customer.CustomerName;
-                customerAndRecomemdedDrugInfo.CaseNumber = customer.CaseNumber;
-                customerAndRecomemdedDrugInfo.CreatedDate = customer.CreatedDate.ToString("dd-MMM-yyyy");
-                customerAndRecomemdedDrugInfo.TargetInstallDate = customer.TargetInstallDate != null ? customer.TargetInstallDate.Value.ToString("dd-MMM-yyyy") : null;
-                customerAndRecomemdedDrugInfo.StatusId = customer.StatusId;
-                customerAndRecomemdedDrugInfo.SubDeviceTypeId = (int)customer.SubDeviceTypeId;
-                if (customer.SubDeviceType != null)
-                {
-                    customerAndRecomemdedDrugInfo.SubDeviceName = customer.SubDeviceType.SubDeviceTypeName;
-                }
-
-
-                List<Canister> canisterList = await _repository.Canister.GetAllCanisterByCustomerId(customer.Id);
-                var customSuperQuantity = canisterList.Where(s => s.Size == "Super").Select(s => s.Quantity).Sum();
-                var customStandardQuantity = canisterList.Where(s => s.Size == "Standard").Select(s => s.Quantity).Sum();
-
-                int superCellCount = 0;
-                int lockingCellCount = 0;
-                int regularCellCount = 0;
-                double maxRatio = 0;
-                var allCellTuple = CellCalculation((int)customer.SubDeviceTypeId, customSuperQuantity, customStandardQuantity);
-                string[] superCell = allCellTuple.Item1;
-                string[] lockingCell = allCellTuple.Item2;
-                string[] regularCell = allCellTuple.Item3;
-
-                List<RecomendedDrugDto> recomendedDrugList = new List<RecomendedDrugDto>();
-                List<RecomendedDrugDto> finalRecomendedDrugList = new List<RecomendedDrugDto>();
-                List<RecomendedDrugDto> notOralDrugList = new List<RecomendedDrugDto>();
-                List<RecomendedDrugDto> excludedDrugList = new List<RecomendedDrugDto>();
-                List<RecomendedDrugDto> notAvailableDrugList = new List<RecomendedDrugDto>();
-
-                var fileDrugs = await _repository.FileUploadDrug.GetAllUploadedDrugByCustomerId(customerId);
-
-                foreach (var fileDrug in fileDrugs)
-                {
-                    var drug = await _repository.Drug.GetInformationfromDrugTable(fileDrug.NDC);
-
-                    RecomendedDrugDto recDrug = new RecomendedDrugDto();
-                    recDrug.NDC = fileDrug.NDC;
-                    recDrug.Name = fileDrug.DrugName;
-                    recDrug.Strength = fileDrug.Strength;
-                    recDrug.Usage = fileDrug.Usage;
-                    recDrug.NoOfOrder = fileDrug.NoOfOrder == null ? 0 : (int)fileDrug.NoOfOrder;
-                    recDrug.Otc = fileDrug.Otc;
-                    recDrug.UnitQty = fileDrug.UnitQty == null ? 0 : (int)fileDrug.UnitQty;
-                    recDrug.RxQty = fileDrug.RxQty == null ? 0 : (int)fileDrug.RxQty;
-
-                    if (drug == null)
-                    {
-                        recDrug.Tab = "New Drug"; // 13668013611 for not available at DrugDB
-                        recDrug.Automate = "Alt";
-                        recDrug.Schedule = fileDrug.Schedule;
-                        recomendedDrugList.Add(recDrug);
-                        continue;
-                    }
-                    recDrug.PackageSize = (int)drug.PackageSize;
-                    recDrug.RecSuperCell = "No";
-                    recDrug.RecLockingCell = "No";
-                    recDrug.DrugName = drug.DrugName;
-                    recDrug.Strength = drug.Strength;
-                    recDrug.Manufacturer = drug.Manufacturer;
-                    recDrug.SCH = drug.Schedule;
-                    recDrug.Tab = "Available";
-                    recDrug.Automate = "Alt";
-
-                    double packageSize = Convert.ToDouble(drug.PackageSize);
-                    recDrug.Schedule = drug.Schedule;//schedule value "0" , "1"
-                    recDrug.PackageSizefitstandardcell = true;
-
-                    int thirtyDramCapacity = 0;
-                    if (drug.ThirtyDramCapacity != null && drug.ThirtyDramCapacity != 0)
-                    {
-                        thirtyDramCapacity = Convert.ToInt32(drug.ThirtyDramCapacity);
-                    }
-                    else
-                    {
-                        recDrug.ThirtyDramCapacity = "DCR";
-                        recomendedDrugList.Add(recDrug);
-                        continue;
-                    }
-                    recDrug.ThirtyDramCapacity = thirtyDramCapacity.ToString();
-                    recDrug.CellCapacity = thirtyDramCapacity * 4.5;
-                    recDrug.SuperCellCapacity = thirtyDramCapacity * 15;
-
-                    if (thirtyDramCapacity > 0)
-                    {
-                        recDrug.Ratio = Math.Round((double)fileDrug.Usage / thirtyDramCapacity, 2);
-                        maxRatio = Math.Max(maxRatio, recDrug.Ratio);
-                    }
-                    recDrug.PackageSizefitstandardcell = packageSize > recDrug.CellCapacity ? false : true;
-
-
-
-                    if (drug.RouteOfAdministration == "ORAL") // if not oral then ?????
-                    {
-                        recomendedDrugList.Add(recDrug);
-                    }
-                    //else if (drug.DNU_MAX = 1)
-                    //{
-                    //    excludedDrugList.Add(recDrug);
-                    //}
-                    else
-                    {
-                        notOralDrugList.Add(recDrug);
-                    }
-                }
-
-                #region supercell Assign
-                var packageSizefitstandardcellFalseDrugList = recomendedDrugList.OrderByDescending(o => o.Usage).Where(w => w.PackageSizefitstandardcell == false).ToList();
-                foreach (var recDrug in packageSizefitstandardcellFalseDrugList)
-                {
-                    if (superCellCount < superCell.Length)
-                    {
-                        recDrug.RecSuperCell = "Yes";  //  true based on top usage and PackageSizefitstandardcell = False // suppose 10 is true
-                        recDrug.CellLoc = superCell[superCellCount];
-                        recDrug.CellType = "Super Cell";
-                        recDrug.Tab = "Available";
-                        recDrug.Automate = "Yes";
-                        superCellCount++;
-
-                        finalRecomendedDrugList.Add(recDrug); // still 10
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-
-                var topRatioDrugList = recomendedDrugList.OrderByDescending(o => o.Ratio).Where(w => w.PackageSizefitstandardcell == false).ToList();
-                topRatioDrugList = topRatioDrugList.Except(finalRecomendedDrugList).ToList();
-
-                foreach (var recDrug in topRatioDrugList)
-                {
-                    if (superCellCount < superCell.Length)
-                    {
-                        recDrug.RecSuperCell = "Yes"; // based on highest ratio and PackageSizefitstandardcell = False
-                        recDrug.CellLoc = superCell[superCellCount];
-                        recDrug.CellType = "Super Cell";
-                        recDrug.Tab = "Available";
-                        recDrug.Automate = "Yes";
-                        superCellCount++;
-
-                        finalRecomendedDrugList.Add(recDrug); // remaining drugs ...untill 22
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-
-                #endregion
-
-                #region LockingCell Assign
-                var notZeroScheduleDrugList = recomendedDrugList.OrderByDescending(o => o.Usage).Where(w => w.Schedule != "0").ToList(); // 
-                notZeroScheduleDrugList = notZeroScheduleDrugList.Except(finalRecomendedDrugList).ToList();
-
-                foreach (var recDrug in notZeroScheduleDrugList)
-                {
-                    if (lockingCellCount < lockingCell.Length)
-                    {
-                        if ((recDrug.Schedule != "0")) // C1 highest use , C2 highest use , C3 highest use, "4" and "5" ??? i.e  != 0
-                        {
-                            recDrug.RecLockingCell = "Yes"; // If C-II cannot fill all locking cells, then fill with highest use C-III and continue. 
-                            recDrug.CellLoc = lockingCell[lockingCellCount];
-                            recDrug.CellType = "Locking Cell";
-                            recDrug.Tab = "Available";
-                            recDrug.Automate = "Yes";
-                            lockingCellCount++;
-                            finalRecomendedDrugList.Add(recDrug);
-                        }
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-                #endregion
-
-                #region RegularCell Assign
-                var remainingDrugList = recomendedDrugList.OrderByDescending(o => o.Usage).Except(finalRecomendedDrugList).ToList(); // remaining drugs
-                foreach (var recDrug in remainingDrugList)
-                {
-                    if (regularCellCount < regularCell.Length)
-                    {
-                        recDrug.CellLoc = regularCell[regularCellCount];
-                        recDrug.CellType = "Regular Cell";
-                        recDrug.Tab = "Available";
-                        recDrug.Automate = "Yes";
-                        regularCellCount++;
-                        finalRecomendedDrugList.Add(recDrug);
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-                #endregion
-
-                customerAndRecomemdedDrugInfo.drugs = finalRecomendedDrugList;
-                var remainingDrugList2 = recomendedDrugList.Except(finalRecomendedDrugList).ToList();
-                customerAndRecomemdedDrugInfo.drugs.AddRange(remainingDrugList2);
-
-                customerAndRecomemdedDrugInfo.notOralDrugs = notOralDrugList;
-                customerAndRecomemdedDrugInfo.excludedDrugs = excludedDrugList;
-                customerAndRecomemdedDrugInfo.notAvailableDrugs = notAvailableDrugList;
-
-                return Ok(customerAndRecomemdedDrugInfo);
-
-            }
-            catch (Exception ex)
-            {
-                msg.StatusCode = 400;
-                msg.Message = ex.Message;
-                return BadRequest(msg);
-            }
-
-
-        }
-
-        */
 
 
         public static int calculateDesktopProductIDs(char[] productID)
@@ -7247,7 +8678,7 @@ namespace CodingConsoleApp
 
             //CellCalculation(11,0,0);
 
-            //CellCalculationCustom(3, -5, 5, "C");
+            CellCalculationCustom(6, -10, 15, "C");
 
 
             #region Linked List
