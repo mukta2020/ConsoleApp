@@ -8506,6 +8506,8 @@ namespace CodingConsoleApp
             string[] aToV = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
             string[] aTok = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K" };
             string[] lToV = new[] { "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
+            string[] aToN = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N" };
+            string[] oToV = new[] { "O", "P", "Q", "R", "S", "T", "U", "V" };
 
             string[] superCell = new string[0];
             string[] newSuperCell = new string[0];
@@ -8523,18 +8525,18 @@ namespace CodingConsoleApp
 
                 foreach (var item in aToV)
                 {                   
-                    superCell[s] = item + "4";
+                    superCell[s] = item + "2";
                     s++;
                 }
                 foreach (var item in aToV)
                 {                  
-                    superCell[s] = item + "6";
+                    superCell[s] = item + "4";
                     s++;
                 }
 
                 for (int i = 1; i < 10; i++)
                 {
-                    if( (i == 1) || (i == 2) || (i == 7) || (i == 8) || (i == 9) )
+                    if( (i == 5) || (i == 6) || (i == 7) || (i == 8) || (i == 9) )
                     {
                         foreach (var item in aToV)
                         {
@@ -8565,18 +8567,18 @@ namespace CodingConsoleApp
 
                 foreach (var item in aToV) // 22
                 {
-                    superCell[s] = item + "4";
+                    superCell[s] = item + "2";
                     s++;
                 }
                 foreach (var item in aTok) // 11
                 {
-                    superCell[s] = item + "6";
+                    superCell[s] = item + "4";
                     s++;
                 }
 
                 for (int i = 1; i < 10; i++)
                 {
-                    if ((i == 1) || (i == 2) || (i == 7) || (i == 8) || (i == 9))
+                    if ((i == 5) || (i == 6) || (i == 7) || (i == 8) || (i == 9))
                     {
                         foreach (var item in aToV)
                         {
@@ -8584,7 +8586,7 @@ namespace CodingConsoleApp
                             sd++;
                         }
                     }
-                    if ((i == 5) || (i == 6))
+                    if ((i == 3) || (i == 4))
                     {
                         foreach (var item in lToV)
                         {
@@ -8607,8 +8609,363 @@ namespace CodingConsoleApp
                 }
                 return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
             }
+            else if (id == 3)// for max2 154/22/2
+            {
+                superCell = new string[22];
+                stdCell = new string[156];
+                int s = 0; int sd = 0;
+
+                foreach (var item in aToV) // 22
+                {
+                    superCell[s] = item + "2";
+                    s++;
+                }
+               
+
+                for (int i = 3; i < 10; i++)
+                {
+                    foreach (var item in aToV)
+                    {
+                        stdCell[sd] = item + i.ToString();
+                        sd++;
+                    }
+                }
+
+                stdCell[154] = "Y";
+                stdCell[155] = "Z";
+
+                if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
+                {
+                    var val = SuperAndStandardQuantityCalculation(customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                    superCell = val.Item1;
+                    lockingCell = val.Item2;
+                    superLockingCell = val.Item3;
+                    stdCell = val.Item4;
+                }
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+            }
+            else if (id == 4)// for max2 110/44/2  su   same as id 1
+            {
+                superCell = new string[aToV.Length * 2]; //44               
+                stdCell = new string[112];
+                int s = 0; int sd = 0;
+
+                foreach (var item in aToV)
+                {
+                    superCell[s] = item + "2";
+                    s++;
+                }
+                foreach (var item in aToV)
+                {
+                    superCell[s] = item + "4";
+                    s++;
+                }
+
+                for (int i = 1; i < 10; i++)
+                {
+                    if ((i == 5) || (i == 6) || (i == 7) || (i == 8) || (i == 9))
+                    {
+                        foreach (var item in aToV)
+                        {
+                            stdCell[sd] = item + i.ToString();
+                            sd++;
+                        }
+                    }
+                }
+
+                stdCell[110] = "Y";
+                stdCell[111] = "Z";
+
+                if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
+                {
+                    var val = SuperAndStandardQuantityCalculation(customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                    superCell = val.Item1;
+                    lockingCell = val.Item2;
+                    superLockingCell = val.Item3;
+                    stdCell = val.Item4;
+                }
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+            }
+            else if (id == 5)// for max2 132/33/2  same as id 2
+            {
+                superCell = new string[33];
+                stdCell = new string[134];
+                int s = 0; int sd = 0;
+
+                foreach (var item in aToV) // 22
+                {
+                    superCell[s] = item + "2";
+                    s++;
+                }
+                foreach (var item in aTok) // 11
+                {
+                    superCell[s] = item + "4";
+                    s++;
+                }
+
+                for (int i = 1; i < 10; i++)
+                {
+                    if ((i == 5) || (i == 6) || (i == 7) || (i == 8) || (i == 9))
+                    {
+                        foreach (var item in aToV)
+                        {
+                            stdCell[sd] = item + i.ToString();
+                            sd++;
+                        }
+                    }
+                    if ((i == 3) || (i == 4))
+                    {
+                        foreach (var item in lToV)
+                        {
+                            stdCell[sd] = item + i.ToString();
+                            sd++;
+                        }
+                    }
+                }
+
+                stdCell[132] = "Y";
+                stdCell[133] = "Z";
+
+                if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
+                {
+                    var val = SuperAndStandardQuantityCalculation(customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                    superCell = val.Item1;
+                    lockingCell = val.Item2;
+                    superLockingCell = val.Item3;
+                    stdCell = val.Item4;
+                }
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+            }
+            else if (id == 6)// for max2 154/22/2   same as id 3
+            {
+                superCell = new string[22];
+                stdCell = new string[156];
+                int s = 0; int sd = 0;
+
+                foreach (var item in aToV) // 22
+                {
+                    superCell[s] = item + "2";
+                    s++;
+                }
 
 
+                for (int i = 3; i < 10; i++)
+                {
+                    foreach (var item in aToV)
+                    {
+                        stdCell[sd] = item + i.ToString();
+                        sd++;
+                    }
+                }
+
+                stdCell[154] = "Y";
+                stdCell[155] = "Z";
+
+                if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
+                {
+                    var val = SuperAndStandardQuantityCalculation(customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                    superCell = val.Item1;
+                    lockingCell = val.Item2;
+                    superLockingCell = val.Item3;
+                    stdCell = val.Item4;
+                }
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+            }
+            else if (id == 7)// for max2 176/11/2   
+            {
+                superCell = new string[11];
+                stdCell = new string[178];
+                int s = 0; int sd = 0;
+
+                foreach (var item in aTok) // 11
+                {
+                    superCell[s] = item + "2";
+                    s++;
+                }
+
+                for (int i = 1; i < 3; i++)
+                {
+                    foreach (var item in lToV)
+                    {
+                        stdCell[sd] = item + i.ToString();
+                        sd++;
+                    }
+                }
+
+                for (int i = 3; i < 10; i++)
+                {
+                    foreach (var item in aToV)
+                    {
+                        stdCell[sd] = item + i.ToString();
+                        sd++;
+                    }
+                }
+
+                stdCell[176] = "Y";
+                stdCell[177] = "Z";
+
+                if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
+                {
+                    var val = SuperAndStandardQuantityCalculation(customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                    superCell = val.Item1;
+                    lockingCell = val.Item2;
+                    superLockingCell = val.Item3;
+                    stdCell = val.Item4;
+                }
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+            }
+            else if (id == 11)// for max2 198/0/2   
+            {
+                superCell = new string[0];
+                stdCell = new string[200];
+                int sd = 0;                 
+
+                for (int i = 1; i < 10; i++)
+                {
+                    foreach (var item in aToV)
+                    {
+                        stdCell[sd] = item + i.ToString();
+                        sd++;
+                    }
+                }
+
+                stdCell[198] = "Y";
+                stdCell[199] = "Z";
+
+                if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
+                {
+                    var val = SuperAndStandardQuantityCalculation(customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                    superCell = val.Item1;
+                    lockingCell = val.Item2;
+                    superLockingCell = val.Item3;
+                    stdCell = val.Item4;
+                }
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+            }
+            else if (id == 8)// for max2 128L/36S/
+            {
+                superLockingCell = new string[36];
+                lockingCell = new string[128];
+                int s = 0; int sd = 0;
+
+                foreach (var item in aToV) // 22
+                {
+                    superLockingCell[s] = item + "2";
+                    s++;
+                }
+
+                foreach (var item in aToN) // 14
+                {
+                    superLockingCell[s] = item + "4";
+                    s++;
+                }
+
+                for (int i = 1; i < 10; i++)
+                {
+                    if ((i == 5) || (i == 6) || (i == 7) || (i == 8) || (i == 9))
+                    {
+                        foreach (var item in aToV)
+                        {
+                            lockingCell[sd] = item + i.ToString();
+                            sd++;
+                        }
+                    }
+                    if ((i == 3) || (i == 4))
+                    {
+                        foreach (var item in oToV)
+                        {
+                            lockingCell[sd] = item + i.ToString();
+                            sd++;
+                        }
+                    }
+                }
+
+                lockingCell[126] = "Y";
+                lockingCell[127] = "Z";
+
+                
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+            }
+            else if (id == 9)// for max2 110 L /45 SL
+            {
+                superLockingCell = new string[45]; //45              
+                lockingCell = new string[110];
+                int s = 0; int sd = 0;
+
+                foreach (var item in aToV)
+                {
+                    superLockingCell[s] = item + "2";
+                    s++;
+                }
+                foreach (var item in aToV)
+                {
+                    superLockingCell[s] = item + "4";
+                    s++;
+                }
+                superLockingCell[44] = "Z";
+
+                for (int i = 1; i < 10; i++)
+                {
+                    if ((i == 5) || (i == 6) || (i == 7) || (i == 8) || (i == 9))
+                    {
+                        foreach (var item in aToV)
+                        {
+                            lockingCell[sd] = item + i.ToString();
+                            sd++;
+                        }
+                    }
+                }
+
+               
+
+                if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
+                {
+                    var val = SuperAndStandardQuantityCalculation(customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                    superCell = val.Item1;
+                    lockingCell = val.Item2;
+                    superLockingCell = val.Item3;
+                    stdCell = val.Item4;
+                }
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+            }
+            else if (id == 10)// for max2 22/88
+            {
+                superCell = new string[88];
+                stdCell = new string[22];
+                int s = 0; int sd = 0;
+
+                foreach (var item in aToV) // 22
+                {
+                    stdCell[s] = item + "5";
+                    s++;
+                }
+
+
+                for (int i = 2; i < 10; i++)
+                {
+                    if ((i == 2) || (i == 4) || (i == 7) || (i == 9) )
+                    {
+                        foreach (var item in aToV)
+                        {
+                            superCell[sd] = item + i.ToString();
+                            sd++;
+                        }
+                    }
+                    
+                }
+
+               
+
+                if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
+                {
+                    var val = SuperAndStandardQuantityCalculation(customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                    superCell = val.Item1;
+                    lockingCell = val.Item2;
+                    superLockingCell = val.Item3;
+                    stdCell = val.Item4;
+                }
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+            }
             return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
 
 
@@ -8659,7 +9016,7 @@ namespace CodingConsoleApp
 
             //CellCalculationCustom(1, 5, -15, "C");
 
-            NewCellCalculation(1, 5, -5);
+            NewCellCalculation(10, 5, -10);
 
 
             #region Linked List
