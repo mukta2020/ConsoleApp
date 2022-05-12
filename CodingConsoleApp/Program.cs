@@ -3068,139 +3068,7 @@ namespace CodingConsoleApp
 
 
 
-
-        private static void StandardQuantityCellCalulationForTwo(string[] firstArray, string[] secondArray, string[] lockingCell, string[] superCell)
-        {
-            int s = 0; int l = 0;
-
-            foreach (var item in firstArray) // dynamic a to e
-            {
-                lockingCell[l] = item + "8";
-                l++;
-            }
-
-            foreach (var item in secondArray) // a to z
-            {
-                superCell[s] = item + "4";  // item = F4 .... V4
-                s++;
-
-                superCell[s] = item + "6";  // item = F4 .... V4
-                s++;
-
-                lockingCell[l] = item + "9";
-                l++;
-            }
-        }
-
-        private static void SuperQuantityCellCalulationForTwo(string[] firstArray, string[] secondArray, string[] superLockingCell, string[] superCell)
-        {
-            int s = 0; int sl = 0;
-
-            foreach (var item in firstArray)
-            {
-                superLockingCell[sl] = item + "4";
-                sl++;
-
-                superCell[s] = item + "6";  // item = F4 .... V4
-                s++;
-            }
-
-            foreach (var item in secondArray)
-            {
-                superCell[s] = item + "4";  // item = F4 .... V4
-                s++;
-
-                superCell[s] = item + "6";  // item = F4 .... V4
-                s++;
-            }
-        }
-
-
-        private static void StandardQuantityCellCalulationForOne(string[] firstArray, string[] secondArray, string[] lockingCell, string[] superCell)
-        {
-            int s = 0; int l = 22;
-
-            foreach (var item in firstArray) // dynamic a to e
-            {
-                lockingCell[l] = item + "8";
-                l++;
-            }
-
-            foreach (var item in secondArray) // a to z
-            {
-                superCell[s] = item + "4";  // item = F4 .... V4
-                s++;
-
-                superCell[s] = item + "6";  // item = F4 .... V4
-                s++;
-
-                //lockingCell[l] = item + "9";
-                //l++;
-            }
-        }
-
-        private static void SuperQuantityCellCalulationForOne(string[] firstArray, string[] secondArray, string[] superLockingCell, string[] superCell)
-        {
-            int s = 0; int sl = 0;
-
-            foreach (var item in firstArray)
-            {
-                superLockingCell[sl] = item + "4";
-                sl++;
-
-                superCell[s] = item + "6";  // item = F4 .... V4
-                s++;
-            }
-
-            foreach (var item in secondArray)
-            {
-                superCell[s] = item + "4";  // item = F4 .... V4
-                s++;
-
-                superCell[s] = item + "6";  // item = F4 .... V4
-                s++;
-            }
-        }
-
-        private static void SuperQuantityCellCalulation(string[] firstArray, string[] secondArray, string[] superLockingCell, string[] superCell)
-        {
-            int s = 0; int sl = 0;
-
-            foreach (var item in firstArray)
-            {
-                superLockingCell[sl] = item + "4";
-                sl++;
-            }
-
-            foreach (var item in secondArray)
-            {
-                superCell[s] = item + "4";  // item = F4 .... V4
-                s++;
-            }
-        }
-
-        private static void StandardQuantityCellCalulation(string[] firstArray, string[] secondArray, string[] lockingCell, string[] superCell)
-        {
-            int s = 0; int l = 0;
-
-            foreach (var item in firstArray) // dynamic a to e
-            {
-                lockingCell[l] = item + "8";
-                l++;
-            }
-
-            foreach (var item in secondArray) // a to z
-            {
-                superCell[s] = item + "4";
-                s++;
-
-                lockingCell[l] = item + "9";
-                l++;
-            }
-        }
-
-
-
+      
         private static Tuple<string[], string[], string[], string[]> CellCalculationForBoth(int id, int customSuperQuantity, int customStandardQuantity, string config)
         {
             string[] aToz = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
@@ -7680,12 +7548,13 @@ namespace CodingConsoleApp
                     //string[] firstArray; string[] secondArray;
 
                     stdCell = new[] {      "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1", "T1","U1","V1",
-                                          "A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2","Q2","R2","S2","T2","U2","V2",
+                                           "A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2","Q2","R2","S2","T2","U2","V2",
                                             "L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5",
                                             "L6","M6", "N6","O6","P6","Q6","R6","S6","T6","U6","V6",
                                             "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",  "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
                                             "A8","B8","C8","D8","E8","F8","G8", "H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8", "R8","S8","T8","U8","V8"
-                                            ,"A9","B9","C9","D9","E9","F9","G9","H9","I9","J9","K9","L9","M9","N9","O9","P9","Q9","R9","S9","T9","U9","V9","Y","Z" };
+                                            ,"A9","B9","C9","D9","E9","F9","G9","H9","I9","J9","K9","L9","M9","N9","O9","P9","Q9","R9","S9","T9","U9","V9",
+                                            "Y","Z" };
 
 
                     lockingCell = new string[0];
@@ -8635,7 +8504,9 @@ namespace CodingConsoleApp
         private static Tuple<string[], string[], string[], string[]> NewCellCalculation(int? id, int customSuperQuantity, int customStandardQuantity)
         {
             string[] aToV = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
-           
+            string[] aTok = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K" };
+            string[] lToV = new[] { "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
+
             string[] superCell = new string[0];
             string[] newSuperCell = new string[0];
             string[] superLockingCell = new string[0];
@@ -8673,141 +8544,113 @@ namespace CodingConsoleApp
                     }                   
                 }
 
-
                 stdCell[110] = "Y";
                 stdCell[111] = "Z";
 
-
-                if (customSuperQuantity > 0)
+                if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
                 {
-                    newSuperCell = new string[superCell.Length - customSuperQuantity];
-                    for (int i = 0; i < newSuperCell.Length; i++)
-                    {
-                        newSuperCell[i] = superCell[i];
-                    }
-                    superLockingCell = superCell.Except(newSuperCell).ToArray();                    
-
-                    return new Tuple<string[], string[], string[], string[]>(newSuperCell, lockingCell, superLockingCell, stdCell);
-
+                   var val = SuperAndStandardQuantityCalculation(customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                   superCell = val.Item1;
+                   lockingCell = val.Item2;
+                   superLockingCell = val.Item3;
+                   stdCell = val.Item4;
                 }
-                if (customStandardQuantity > 0)
-                {
-                    newStdCell = new string[stdCell.Length - customStandardQuantity];
-                    for (int i = 0; i < newStdCell.Length; i++)
-                    {
-                        newStdCell[i] = stdCell[i];
-                    }
-                    newStdCell[newStdCell.Length - 1] = "Z";
-                    newStdCell[newStdCell.Length - 2] = "Y";
-
-                    lockingCell = stdCell.Except(newStdCell).ToArray();
-
-                    return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, newStdCell);
-                }
-
-
                 return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
-
             }
+            else if (id == 2)// for max2 132/33/2
+            {
+                superCell = new string[33];              
+                stdCell = new string[134];
+                int s = 0; int sd = 0;
+
+                foreach (var item in aToV) // 22
+                {
+                    superCell[s] = item + "4";
+                    s++;
+                }
+                foreach (var item in aTok) // 11
+                {
+                    superCell[s] = item + "6";
+                    s++;
+                }
+
+                for (int i = 1; i < 10; i++)
+                {
+                    if ((i == 1) || (i == 2) || (i == 7) || (i == 8) || (i == 9))
+                    {
+                        foreach (var item in aToV)
+                        {
+                            stdCell[sd] = item + i.ToString();
+                            sd++;
+                        }
+                    }
+                    if ((i == 5) || (i == 6))
+                    {
+                        foreach (var item in lToV)
+                        {
+                            stdCell[sd] = item + i.ToString();
+                            sd++;
+                        }
+                    }
+                }
+
+                stdCell[132] = "Y";
+                stdCell[133] = "Z";
+
+                if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
+                {
+                    var val = SuperAndStandardQuantityCalculation(customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                    superCell = val.Item1;
+                    lockingCell = val.Item2;
+                    superLockingCell = val.Item3;
+                    stdCell = val.Item4;
+                }
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+            }
+
 
             return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
 
 
         }
 
-        public static int calculateDesktopProductIDs(char[] productID)
+        private static Tuple<string[], string[], string[], string[]> SuperAndStandardQuantityCalculation(int customSuperQuantity, int customStandardQuantity, string[] superCell, string[] stdCell)
         {
-            int answer = 0;
-            // Write your code here
+            string[] newSuperCell = new string[0];
+            string[] newStdCell = new string[0];
+            string[] superLockingCell = new string[0];
+            string[] lockingCell = new string[0];
 
-            char[] laptopID = { 'a', 'i', 'e', 'o', 'u', 'A', 'I', 'E', 'O', 'U' };
+            if (customSuperQuantity > 0)
+            {
+                newSuperCell = new string[superCell.Length - customSuperQuantity];
+                for (int i = 0; i < newSuperCell.Length; i++)
+                {
+                    newSuperCell[i] = superCell[i];
+                }
+                superLockingCell = superCell.Except(newSuperCell).ToArray();
 
-            productID = productID.Except(laptopID).ToArray();
+                return new Tuple<string[], string[], string[], string[]>(newSuperCell, lockingCell, superLockingCell, stdCell);
 
-            answer = productID.Length;
+            }
+            if (customStandardQuantity > 0)
+            {
+                newStdCell = new string[stdCell.Length - customStandardQuantity];
+                for (int i = 0; i < newStdCell.Length; i++)
+                {
+                    newStdCell[i] = stdCell[i];
+                }
+                newStdCell[newStdCell.Length - 1] = "Z";
+                newStdCell[newStdCell.Length - 2] = "Y";
 
+                lockingCell = stdCell.Except(newStdCell).ToArray();
 
-            return answer;
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, newStdCell);
+            }
+            return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
         }
 
-        public int LargestPerimeter(int[] A)
-        {
-            Array.Sort(A);
-            for (int i = A.Length - 3; i >= 0; --i)
-                if (A[i] + A[i + 1] > A[i + 2])
-                    return A[i] + A[i + 1] + A[i + 2];
-            return 0;
-        }
        
-
-        public static List<int> inorderTraversal(TreeNode root, List<int> res)
-        {
-            if (root != null)
-            {
-                inorderTraversal(root.left, res);
-                res.Add(root.val);
-                inorderTraversal(root.right, res);
-            }
-            return res;
-        }
-        public static bool IsSameTree(TreeNode p, TreeNode q)
-        {
-            List<string> resp = new List<string>();
-            List<string> resq = new List<string>();
-            resp = preorderTraversal1(p, resp);
-            resq = preorderTraversal1(q, resq);
-
-            bool b = resp.SequenceEqual(resq);
-            return b;
-        }
-        public static List<string> preorderTraversal1(TreeNode root, List<string> res)
-        {
-            if (root != null)
-            {
-                res.Add(root.val.ToString());
-                if (root.left != null)
-                {
-                    preorderTraversal1(root.left, res);
-                }
-                else
-                {
-                    res.Add(null);
-                }
-                if (root.right != null)
-                {
-                    preorderTraversal1(root.right, res);
-                }
-                else
-                {
-                    res.Add(null);
-                }
-            }
-           
-            return res;
-        }
-        public static List<string> preorderTraversal(TreeNode root, List<string> res)
-        {
-            if (root != null)
-            {
-                res.Add(root.val.ToString());
-                preorderTraversal(root.left, res);
-                preorderTraversal(root.right, res);
-
-            }
-            return res;
-        }
-
-        public static List<int> postorderTraversal(TreeNode root, List<int> res)
-        {
-            if (root != null)
-            {
-                postorderTraversal(root.left, res);
-                postorderTraversal(root.right, res);
-                res.Add(root.val);
-            }
-            return res;
-        }
-
         static void Main(string[] args)
         {
             //max2 154/22/2
@@ -9127,6 +8970,99 @@ namespace CodingConsoleApp
             */
 
 
+        }
+
+        public static int calculateDesktopProductIDs(char[] productID)
+        {
+            int answer = 0;
+            // Write your code here
+
+            char[] laptopID = { 'a', 'i', 'e', 'o', 'u', 'A', 'I', 'E', 'O', 'U' };
+
+            productID = productID.Except(laptopID).ToArray();
+
+            answer = productID.Length;
+
+
+            return answer;
+        }
+
+        public int LargestPerimeter(int[] A)
+        {
+            Array.Sort(A);
+            for (int i = A.Length - 3; i >= 0; --i)
+                if (A[i] + A[i + 1] > A[i + 2])
+                    return A[i] + A[i + 1] + A[i + 2];
+            return 0;
+        }
+
+
+        public static List<int> inorderTraversal(TreeNode root, List<int> res)
+        {
+            if (root != null)
+            {
+                inorderTraversal(root.left, res);
+                res.Add(root.val);
+                inorderTraversal(root.right, res);
+            }
+            return res;
+        }
+        public static bool IsSameTree(TreeNode p, TreeNode q)
+        {
+            List<string> resp = new List<string>();
+            List<string> resq = new List<string>();
+            resp = preorderTraversal1(p, resp);
+            resq = preorderTraversal1(q, resq);
+
+            bool b = resp.SequenceEqual(resq);
+            return b;
+        }
+        public static List<string> preorderTraversal1(TreeNode root, List<string> res)
+        {
+            if (root != null)
+            {
+                res.Add(root.val.ToString());
+                if (root.left != null)
+                {
+                    preorderTraversal1(root.left, res);
+                }
+                else
+                {
+                    res.Add(null);
+                }
+                if (root.right != null)
+                {
+                    preorderTraversal1(root.right, res);
+                }
+                else
+                {
+                    res.Add(null);
+                }
+            }
+
+            return res;
+        }
+        public static List<string> preorderTraversal(TreeNode root, List<string> res)
+        {
+            if (root != null)
+            {
+                res.Add(root.val.ToString());
+                preorderTraversal(root.left, res);
+                preorderTraversal(root.right, res);
+
+            }
+            return res;
+        }
+
+        public static List<int> postorderTraversal(TreeNode root, List<int> res)
+        {
+            if (root != null)
+            {
+                postorderTraversal(root.left, res);
+                postorderTraversal(root.right, res);
+                res.Add(root.val);
+            }
+            return res;
         }
 
         public static ListNode RemoveElements(ListNode head, int val)
