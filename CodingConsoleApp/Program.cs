@@ -8551,7 +8551,7 @@ namespace CodingConsoleApp
 
                 if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
                 {
-                   var val = SuperAndStandardQuantityCalculation(customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                   var val = SuperAndStandardQuantityCalculation((int)id, customSuperQuantity, customStandardQuantity, superCell, stdCell);
                    superCell = val.Item1;
                    lockingCell = val.Item2;
                    superLockingCell = val.Item3;
@@ -8601,7 +8601,7 @@ namespace CodingConsoleApp
 
                 if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
                 {
-                    var val = SuperAndStandardQuantityCalculation(customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                    var val = SuperAndStandardQuantityCalculation((int)id, customSuperQuantity, customStandardQuantity, superCell, stdCell);
                     superCell = val.Item1;
                     lockingCell = val.Item2;
                     superLockingCell = val.Item3;
@@ -8636,7 +8636,7 @@ namespace CodingConsoleApp
 
                 if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
                 {
-                    var val = SuperAndStandardQuantityCalculation(customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                    var val = SuperAndStandardQuantityCalculation((int)id, customSuperQuantity, customStandardQuantity, superCell, stdCell);
                     superCell = val.Item1;
                     lockingCell = val.Item2;
                     superLockingCell = val.Item3;
@@ -8678,7 +8678,7 @@ namespace CodingConsoleApp
 
                 if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
                 {
-                    var val = SuperAndStandardQuantityCalculation(customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                    var val = SuperAndStandardQuantityCalculation((int)id, customSuperQuantity, customStandardQuantity, superCell, stdCell);
                     superCell = val.Item1;
                     lockingCell = val.Item2;
                     superLockingCell = val.Item3;
@@ -8728,7 +8728,7 @@ namespace CodingConsoleApp
 
                 if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
                 {
-                    var val = SuperAndStandardQuantityCalculation(customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                    var val = SuperAndStandardQuantityCalculation((int)id, customSuperQuantity, customStandardQuantity, superCell, stdCell);
                     superCell = val.Item1;
                     lockingCell = val.Item2;
                     superLockingCell = val.Item3;
@@ -8763,7 +8763,7 @@ namespace CodingConsoleApp
 
                 if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
                 {
-                    var val = SuperAndStandardQuantityCalculation(customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                    var val = SuperAndStandardQuantityCalculation((int)id, customSuperQuantity, customStandardQuantity, superCell, stdCell);
                     superCell = val.Item1;
                     lockingCell = val.Item2;
                     superLockingCell = val.Item3;
@@ -8806,7 +8806,7 @@ namespace CodingConsoleApp
 
                 if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
                 {
-                    var val = SuperAndStandardQuantityCalculation(customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                    var val = SuperAndStandardQuantityCalculation((int)id, customSuperQuantity, customStandardQuantity, superCell, stdCell);
                     superCell = val.Item1;
                     lockingCell = val.Item2;
                     superLockingCell = val.Item3;
@@ -8834,7 +8834,7 @@ namespace CodingConsoleApp
 
                 if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
                 {
-                    var val = SuperAndStandardQuantityCalculation(customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                    var val = SuperAndStandardQuantityCalculation((int)id, customSuperQuantity, customStandardQuantity, superCell, stdCell);
                     superCell = val.Item1;
                     lockingCell = val.Item2;
                     superLockingCell = val.Item3;
@@ -8920,7 +8920,7 @@ namespace CodingConsoleApp
 
                 if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
                 {
-                    var val = SuperAndStandardQuantityCalculation(customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                    var val = SuperAndStandardQuantityCalculation((int)id, customSuperQuantity, customStandardQuantity, superCell, stdCell);
                     superCell = val.Item1;
                     lockingCell = val.Item2;
                     superLockingCell = val.Item3;
@@ -8958,7 +8958,7 @@ namespace CodingConsoleApp
 
                 if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
                 {
-                    var val = SuperAndStandardQuantityCalculation(customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                    var val = SuperAndStandardQuantityCalculation((int)id, customSuperQuantity, customStandardQuantity, superCell, stdCell);
                     superCell = val.Item1;
                     lockingCell = val.Item2;
                     superLockingCell = val.Item3;
@@ -8971,14 +8971,39 @@ namespace CodingConsoleApp
 
         }
 
-        private static Tuple<string[], string[], string[], string[]> SuperAndStandardQuantityCalculation(int customSuperQuantity, int customStandardQuantity, string[] superCell, string[] stdCell)
+        private static Tuple<string[], string[], string[], string[]> SuperAndStandardQuantityCalculation(int id, int customSuperQuantity, int customStandardQuantity, string[] superCell, string[] stdCell)
         {
             string[] newSuperCell = new string[0];
             string[] newStdCell = new string[0];
             string[] superLockingCell = new string[0];
             string[] lockingCell = new string[0];
 
-            if (customSuperQuantity > 0)
+            if ((customSuperQuantity > 0) && (customStandardQuantity > 0) )
+            {
+                newSuperCell = new string[superCell.Length - customSuperQuantity];
+                for (int i = 0; i < newSuperCell.Length; i++)
+                {
+                    newSuperCell[i] = superCell[i];
+                }
+                superLockingCell = superCell.Except(newSuperCell).ToArray();
+
+                //.....................
+
+                newStdCell = new string[stdCell.Length - customStandardQuantity];
+                for (int i = 0; i < newStdCell.Length; i++)
+                {
+                    newStdCell[i] = stdCell[i];
+                }
+                if (id != 10)
+                {
+                    newStdCell[newStdCell.Length - 1] = "Z";
+                    newStdCell[newStdCell.Length - 2] = "Y";
+                }
+
+                lockingCell = stdCell.Except(newStdCell).ToArray();
+                return new Tuple<string[], string[], string[], string[]>(newSuperCell, lockingCell, superLockingCell, newStdCell);
+            } 
+            else if (customSuperQuantity > 0)
             {
                 newSuperCell = new string[superCell.Length - customSuperQuantity];
                 for (int i = 0; i < newSuperCell.Length; i++)
@@ -8990,20 +9015,24 @@ namespace CodingConsoleApp
                 return new Tuple<string[], string[], string[], string[]>(newSuperCell, lockingCell, superLockingCell, stdCell);
 
             }
-            if (customStandardQuantity > 0)
+            else if (customStandardQuantity > 0)
             {
                 newStdCell = new string[stdCell.Length - customStandardQuantity];
                 for (int i = 0; i < newStdCell.Length; i++)
                 {
                     newStdCell[i] = stdCell[i];
                 }
-                newStdCell[newStdCell.Length - 1] = "Z";
-                newStdCell[newStdCell.Length - 2] = "Y";
+                if (id != 10)
+                {
+                    newStdCell[newStdCell.Length - 1] = "Z";
+                    newStdCell[newStdCell.Length - 2] = "Y";
+                }
 
                 lockingCell = stdCell.Except(newStdCell).ToArray();
 
                 return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, newStdCell);
             }
+
             return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
         }
 
@@ -9016,7 +9045,7 @@ namespace CodingConsoleApp
 
             //CellCalculationCustom(1, 5, -15, "C");
 
-            NewCellCalculation(10, 5, -10);
+            NewCellCalculation(10, 5, 5);
 
 
             #region Linked List
