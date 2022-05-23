@@ -8671,15 +8671,36 @@ namespace CodingConsoleApp
             }
             return res;
         }
+        public static double FindMedianSortedArrays(int[] nums1, int[] nums2)
+        {
+            int[] num = new int[nums1.Length + nums2.Length];
+            nums1.CopyTo(num, 0);
+            nums2.CopyTo(num, nums1.Length);
+            Array.Sort(num);
+
+            int mid = 0;
+            if (num.Length % 2 == 0) // even 1 2 3 4
+            {
+                mid = num.Length / 2;
+                return (num[mid - 1] + num[mid]) / 2.0;
+            }
+            else // odd 1 2 3
+            {
+                mid = num.Length / 2;
+                return num[mid];
+            }
+
+        }
+
 
         static void Main(string[] args)
         {
-            //max2 154/22/2
 
+            int[] nums1 = { 1, 2 };
+            int[] nums2 = { 3 };
+            //Console.WriteLine(FindMedianSortedArrays(nums1, nums2));
             //CellCalculation(11,0,0);
-
-            CellCalculationCustom(6, -10, 15, "C");
-
+            // CellCalculationCustom(6, -10, 15, "C");
 
             #region Linked List
 
@@ -8694,273 +8715,277 @@ namespace CodingConsoleApp
 
             ListNode one = new ListNode(1);
             ListNode two = new ListNode(2);
-            ListNode three = new ListNode(1);
+            ListNode three = new ListNode(3);
+            ListNode four = new ListNode(4);
             one.next = two;
             two.next = three;
-            RemoveElements(one, 1);
+            three.next = four;
 
+            //DeleteMiddle(one);
+
+            ReorderList(one);
 
             #endregion
 
 
-            //........................Tree...................
+             //........................Tree...................
 
-            //#region Tree
-            //TreeNode one = new TreeNode(1);
-            //TreeNode two = new TreeNode(2);
+             //#region Tree
+             //TreeNode one = new TreeNode(1);
+             //TreeNode two = new TreeNode(2);
 
-            //TreeNode three = new TreeNode(3);
-            //TreeNode four = new TreeNode(4);
-            //TreeNode five = new TreeNode(5);
+             //TreeNode three = new TreeNode(3);
+             //TreeNode four = new TreeNode(4);
+             //TreeNode five = new TreeNode(5);
 
-            //one.left = two;
+             //one.left = two;
 
-            ////one.right = three;
-            ////two.left = four;
-            ////two.right = five;
+             ////one.right = three;
+             ////two.left = four;
+             ////two.right = five;
 
-            //List<int> res = new List<int>();
+             //List<int> res = new List<int>();
 
-            //TreeNode onee = new TreeNode(1);
-            //TreeNode twoo = new TreeNode(2);
-            //onee.right = twoo;
+             //TreeNode onee = new TreeNode(1);
+             //TreeNode twoo = new TreeNode(2);
+             //onee.right = twoo;
 
-            ////postorderTraversal(one, res);
+             ////postorderTraversal(one, res);
 
-            //var found = IsSameTree(one, onee);
+             //var found = IsSameTree(one, onee);
 
-            //foreach (var item in res)
-            //{
-            //    Console.Write(item + " ");
-            //}
+             //foreach (var item in res)
+             //{
+             //    Console.Write(item + " ");
+             //}
 
-            //#endregion
-            //.....................End Tree...............
+             //#endregion
+             //.....................End Tree...............
 
 
             #region Array
 
 
-            //string[] w = { "cool", "lock", "cook" };
-            // Console.WriteLine(CommonChars(w));
+             //string[] w = { "cool", "lock", "cook" };
+             // Console.WriteLine(CommonChars(w));
 
-            //int[][] a = new int[3][];
-            //a[0] = new int[] { 1, 3, 4 };
-            //a[1] = new int[] { 2, 1, 3 };
-            //a[2] = new int[] { 5, 2, 1 };
+             //int[][] a = new int[3][];
+             //a[0] = new int[] { 1, 3, 4 };
+             //a[1] = new int[] { 2, 1, 3 };
+             //a[2] = new int[] { 5, 2, 1 };
 
-            //Console.WriteLine(IsToeplitzMatrix(a));
+             //Console.WriteLine(IsToeplitzMatrix(a));
 
-            //int[] a = { 5, 1, 22, 25, 6, -1, 8, 10 };
-            //int[] b = { 1, 6, -1, 10 };
-            //isValidSubsequence2(a, b);
-            // isValidSubsequence("ahbgdc", "abc");
+             //int[] a = { 5, 1, 22, 25, 6, -1, 8, 10 };
+             //int[] b = { 1, 6, -1, 10 };
+             //isValidSubsequence2(a, b);
+             // isValidSubsequence("ahbgdc", "abc");
 
-            //Floyed1(5);
+             //Floyed1(5);
 
-            //Console.WriteLine(MySqrt(65));
-            // int[] a = { 1, 0, 0, 3, 2 };
-            //MoveZeroesToFirst(a);
-            //moveZeroesF(a);
-            // int[] a = { 3, 2, 2, 3 };
-            // Console.WriteLine(RemoveElement(a,3));
+             //Console.WriteLine(MySqrt(65));
+             // int[] a = { 1, 0, 0, 3, 2 };
+             //MoveZeroesToFirst(a);
+             //moveZeroesF(a);
+             // int[] a = { 3, 2, 2, 3 };
+             // Console.WriteLine(RemoveElement(a,3));
 
-            //int[] a = { 0, 0, 1, 1, 1, 2, 2, 3, 3, 4 };
-            //Console.WriteLine(removeDuplicates1(a));
-            //Console.WriteLine(CheckPerfectNumber(8128));
-            // Console.WriteLine(fib(0));
-
-
-            //int[][] a = new int[1][];
-
-            //a[0] = new int[] { 1, 2, 3 };
-            //a[1] = new int[] { 4, 5, 6 };
-            //a[2] = new int[] { 7, 8, 9 };
-
-            //Console.WriteLine(Transpose(a));
-
-            //int[][] a = new int[3][];
-
-            //a[0] = new int[]{ 3,7,8};
-            //a[1] = new int[]{ 9,11,13};
-            //a[2] = new int[]{ 15,16,17};
-
-            //Console.WriteLine(LuckyNumbers(a));
-
-            //int[] a = { -100,-98,-1,2,3,4 };
-            //Console.WriteLine(MaximumProduct(a));
-
-            //int[] a = { 1, 2, 3, 4 };
-
-            //Console.WriteLine(Construct2DArray(a, 2, 2));
-            // int[][] a = new int[2][];
-            //a[0] = new int[] { 1,2};
-            // a[1] = new int[] { 3,4};
-            // Console.WriteLine(MatrixReshape(a, 1, 4));
-
-            //int[] a = { 6, 2, 6, 5, 1, 2 };
-            // Console.WriteLine(ArrayPairSum(a));
-
-            // string[] words1 = { "leetcode", "is", "amazing", "as", "is" };
-            // string[] words2 = { "amazing", "leetcode", "is" };
-            // Console.WriteLine(CountWords(words1, words2));
+             //int[] a = { 0, 0, 1, 1, 1, 2, 2, 3, 3, 4 };
+             //Console.WriteLine(removeDuplicates1(a));
+             //Console.WriteLine(CheckPerfectNumber(8128));
+             // Console.WriteLine(fib(0));
 
 
-            //string s = "leetcode";
-            //Console.WriteLine(CheckIfPangram(s));
+             //int[][] a = new int[1][];
 
-            //int[] a = { 1, 3, 2, 2, 5, 2, 3, 7 };
-            //Console.WriteLine(FindLHS(a));
-            //int[] a = { 1, 2, 2,  1, 3 };
-            //Console.WriteLine(UniqueOccurrences(a));
+             //a[0] = new int[] { 1, 2, 3 };
+             //a[1] = new int[] { 4, 5, 6 };
+             //a[2] = new int[] { 7, 8, 9 };
 
-            //int[] a = { 28, 6, 22, 8, 44, 17 };
-            //int[] b = { 22, 28, 8, 6 };
-            //Console.WriteLine(RelativeSortArray(a,b));
-            //string s1 = "gw pk xy";
-            //string s2 = "gw aje zqd";
-            //Console.WriteLine(UncommonFromSentences(s1,s2));
+             //Console.WriteLine(Transpose(a));
 
+             //int[][] a = new int[3][];
 
-            //Console.WriteLine(IsHappy2(19));
-            //int[] a = { 4, 3, 2, 7, 8, 2, 3, 1 };
+             //a[0] = new int[]{ 3,7,8};
+             //a[1] = new int[]{ 9,11,13};
+             //a[2] = new int[]{ 15,16,17};
 
-            //Console.WriteLine(FindDuplicates(a));
+             //Console.WriteLine(LuckyNumbers(a));
 
-            //Console.WriteLine(IsValid("()[]{}"));
-            //Console.WriteLine(IsAnagram("amo", "ima"));
-            /*
-            int[] a =  { 1,2,3 };
-            int[][] b = {    new int[] { 1,2,3},
-                             new int[] { 4,5,6},
-                             new int[] { 7,8,9}
-                            };
-            int[,] c = { { 1,2,3},
-                         { 4,5,6},
-                         {7,8,9 } };
+             //int[] a = { -100,-98,-1,2,3,4 };
+             //Console.WriteLine(MaximumProduct(a));
 
-            Console.WriteLine(DiagonalSum(c)); */
+             //int[] a = { 1, 2, 3, 4 };
 
+             //Console.WriteLine(Construct2DArray(a, 2, 2));
+             // int[][] a = new int[2][];
+             //a[0] = new int[] { 1,2};
+             // a[1] = new int[] { 3,4};
+             // Console.WriteLine(MatrixReshape(a, 1, 4));
+
+             //int[] a = { 6, 2, 6, 5, 1, 2 };
+             // Console.WriteLine(ArrayPairSum(a));
+
+             // string[] words1 = { "leetcode", "is", "amazing", "as", "is" };
+             // string[] words2 = { "amazing", "leetcode", "is" };
+             // Console.WriteLine(CountWords(words1, words2));
 
 
-            //int[] id1 = { 1, 2, 2, 1 };
-            //int[] id2 = { 2, 2 };
+             //string s = "leetcode";
+             //Console.WriteLine(CheckIfPangram(s));
 
-            //Console.WriteLine(Intersection(id1, id2));
+             //int[] a = { 1, 3, 2, 2, 5, 2, 3, 7 };
+             //Console.WriteLine(FindLHS(a));
+             //int[] a = { 1, 2, 2,  1, 3 };
+             //Console.WriteLine(UniqueOccurrences(a));
 
-            // int[] nums = { 0, 1, 0, 3, 12 };
-
-            //MoveZeroes(nums);
-
-            //int[] nums1 = { 1, 2, 3, 0, 0, 0 };
-            //int m = nums1.Length;
-            //int[] nums2 = { 2, 5, 6 };
-            //int n = nums2.Length;
-
-            //Merge(nums1, m, nums2, n);
-
-            // int[] a = { 9,9,9 };
-            // Console.WriteLine(PlusOne(a));
-
-            //int[] a = { 100, 4, 200, 1, 3, 2 };
-            // Console.WriteLine(LongestConsecutive(a));
-            //int [,] d = pascal(5);
+             //int[] a = { 28, 6, 22, 8, 44, 17 };
+             //int[] b = { 22, 28, 8, 6 };
+             //Console.WriteLine(RelativeSortArray(a,b));
+             //string s1 = "gw pk xy";
+             //string s2 = "gw aje zqd";
+             //Console.WriteLine(UncommonFromSentences(s1,s2));
 
 
-            /*
-            IList<IList<int>> resultList = new List<IList<int>>();
+             //Console.WriteLine(IsHappy2(19));
+             //int[] a = { 4, 3, 2, 7, 8, 2, 3, 1 };
 
-            List<int> r1 = new List<int>() { 2 };
-            List<int> r2 = new List<int>() { 3, 4 };
-            List<int> r3 = new List<int>() { 6, 5, 7 };
-            List<int> r4 = new List<int>() { 4, 1, 8, 3 };
-            resultList.Add(r1);
-            resultList.Add(r2);
-            resultList.Add(r3);
-            resultList.Add(r4);
-            // Console.WriteLine(MinimumTotal1(resultList));
+             //Console.WriteLine(FindDuplicates(a));
 
-            // row column fixed size
-            int[,] c = { { 2, 0, 0, 0 }, { 3, 4, 0, 0 }, { 6, 5, 7, 0 }, { 4, 1, 8, 3 } };
-            // Console.WriteLine(MinimumTotal3(c));
+             //Console.WriteLine(IsValid("()[]{}"));
+             //Console.WriteLine(IsAnagram("amo", "ima"));
+             /*
+             int[] a =  { 1,2,3 };
+             int[][] b = {    new int[] { 1,2,3},
+                              new int[] { 4,5,6},
+                              new int[] { 7,8,9}
+                             };
+             int[,] c = { { 1,2,3},
+                          { 4,5,6},
+                          {7,8,9 } };
 
-            // Declare the array of two elements:
-            int[][] arr = new int[4][];
-
-            // Initialize the elements:
-            arr[0] = new int[] { 2 };
-            arr[1] = new int[] { 3, 4 };
-            arr[2] = new int[] { 6, 5, 7 };
-            arr[3] = new int[] { 4, 1, 8, 3 };
-
-            // Another way of Declare and
-            // Initialize of elements  Column not fixed
-            int[][] arr1 = { new int[] { 2},
-                             new int[] { 3,4 } ,
-                             new int[] { 6, 5, 7  },
-                             new int[] { 4, 1, 8, 3 }
-                            };
-
-            //Console.WriteLine(MinimumTotal2(arr));
-
-            int[][] d = {   new int[] { -1 },
-                            new int[] { 2, 3 },
-                            new int[] { 1, -1, -3 } };
-
-            IList<IList<int>> dList = new List<IList<int>>();
-            dList.Add(new List<int>() { -1 } );
-            dList.Add(new List<int>() { 2, 3 } );
-            dList.Add(new List<int>() { 1, -1, -3 } );
-
-            */
-
-            //Console.WriteLine(MinimumTotal(dList));
-
-            //reverse(12345);
-            //piramid4(4);
-            //int[] a = { 9,4,9,8,4};
-            //int[] b = { 4,9,5};
-            //Console.WriteLine(Intersect(a, b));
-
-            //int[] a = {1,1,1};
-            //Console.WriteLine(is121Array(a));
-
-            //int[] a = { 4, 3, 2, 7, 8, 2, 3, 1 };
-            //Console.WriteLine(FindDisappearedNumbers1(a));
-
-            //int[] a = { 0, 2, 1, 2 };
-            //int[] b = { 3, 1, 2, 0 };
-            //Console.WriteLine(equivalantArray(a, b));
+             Console.WriteLine(DiagonalSum(c)); */
 
 
-            // int[] a = { 1, 2,2,1};
 
-            //Console.WriteLine(hasNValue(a, 2));
+             //int[] id1 = { 1, 2, 2, 1 };
+             //int[] id2 = { 2, 2 };
 
-            // int[] a = { 1, 1, 1,  5, 5, 8, 8, 8 };
-            //Console.WriteLine(isStepped(a));
+             //Console.WriteLine(Intersection(id1, id2));
 
-            //Console.WriteLine(isPrimeHappy(8));
-            //Console.WriteLine(isDigitIncreasingMukta(36));
+             // int[] nums = { 0, 1, 0, 3, 12 };
 
-            //int[] nums = { 1, 2};
-            //Console.WriteLine(MajorityElement(nums));
+             //MoveZeroes(nums);
 
-            //Console.WriteLine(CanConstruct("aa", "aab"));
-            //Console.WriteLine(FirstUniqChar("aabb"));
+             //int[] nums1 = { 1, 2, 3, 0, 0, 0 };
+             //int m = nums1.Length;
+             //int[] nums2 = { 2, 5, 6 };
+             //int n = nums2.Length;
 
-            //Console.WriteLine(reverseNumber(-1234));
+             //Merge(nums1, m, nums2, n);
 
-            //int[] a = { 1, 8, 3, 2, 6 };
-            //int[] b =  {1,4};
-            //Console.WriteLine(commonArray(a, b));
-            // int[] p = { 3, 4, 5, 10 };
+             // int[] a = { 9,9,9 };
+             // Console.WriteLine(PlusOne(a));
 
-            //Console.WriteLine(POE(p));
+             //int[] a = { 100, 4, 200, 1, 3, 2 };
+             // Console.WriteLine(LongestConsecutive(a));
+             //int [,] d = pascal(5);
+
+
+             /*
+             IList<IList<int>> resultList = new List<IList<int>>();
+
+             List<int> r1 = new List<int>() { 2 };
+             List<int> r2 = new List<int>() { 3, 4 };
+             List<int> r3 = new List<int>() { 6, 5, 7 };
+             List<int> r4 = new List<int>() { 4, 1, 8, 3 };
+             resultList.Add(r1);
+             resultList.Add(r2);
+             resultList.Add(r3);
+             resultList.Add(r4);
+             // Console.WriteLine(MinimumTotal1(resultList));
+
+             // row column fixed size
+             int[,] c = { { 2, 0, 0, 0 }, { 3, 4, 0, 0 }, { 6, 5, 7, 0 }, { 4, 1, 8, 3 } };
+             // Console.WriteLine(MinimumTotal3(c));
+
+             // Declare the array of two elements:
+             int[][] arr = new int[4][];
+
+             // Initialize the elements:
+             arr[0] = new int[] { 2 };
+             arr[1] = new int[] { 3, 4 };
+             arr[2] = new int[] { 6, 5, 7 };
+             arr[3] = new int[] { 4, 1, 8, 3 };
+
+             // Another way of Declare and
+             // Initialize of elements  Column not fixed
+             int[][] arr1 = { new int[] { 2},
+                              new int[] { 3,4 } ,
+                              new int[] { 6, 5, 7  },
+                              new int[] { 4, 1, 8, 3 }
+                             };
+
+             //Console.WriteLine(MinimumTotal2(arr));
+
+             int[][] d = {   new int[] { -1 },
+                             new int[] { 2, 3 },
+                             new int[] { 1, -1, -3 } };
+
+             IList<IList<int>> dList = new List<IList<int>>();
+             dList.Add(new List<int>() { -1 } );
+             dList.Add(new List<int>() { 2, 3 } );
+             dList.Add(new List<int>() { 1, -1, -3 } );
+
+             */
+
+             //Console.WriteLine(MinimumTotal(dList));
+
+             //reverse(12345);
+             //piramid4(4);
+             //int[] a = { 9,4,9,8,4};
+             //int[] b = { 4,9,5};
+             //Console.WriteLine(Intersect(a, b));
+
+             //int[] a = {1,1,1};
+             //Console.WriteLine(is121Array(a));
+
+             //int[] a = { 4, 3, 2, 7, 8, 2, 3, 1 };
+             //Console.WriteLine(FindDisappearedNumbers1(a));
+
+             //int[] a = { 0, 2, 1, 2 };
+             //int[] b = { 3, 1, 2, 0 };
+             //Console.WriteLine(equivalantArray(a, b));
+
+
+             // int[] a = { 1, 2,2,1};
+
+             //Console.WriteLine(hasNValue(a, 2));
+
+             // int[] a = { 1, 1, 1,  5, 5, 8, 8, 8 };
+             //Console.WriteLine(isStepped(a));
+
+             //Console.WriteLine(isPrimeHappy(8));
+             //Console.WriteLine(isDigitIncreasingMukta(36));
+
+             //int[] nums = { 1, 2};
+             //Console.WriteLine(MajorityElement(nums));
+
+             //Console.WriteLine(CanConstruct("aa", "aab"));
+             //Console.WriteLine(FirstUniqChar("aabb"));
+
+             //Console.WriteLine(reverseNumber(-1234));
+
+             //int[] a = { 1, 8, 3, 2, 6 };
+             //int[] b =  {1,4};
+             //Console.WriteLine(commonArray(a, b));
+             // int[] p = { 3, 4, 5, 10 };
+
+             //Console.WriteLine(POE(p));
 
             #endregion
 
-            Program obj = new Program();
+             Program obj = new Program();
             Console.WriteLine("The generation number of object obj is: "
                                           + GC.GetGeneration(obj));
             Console.WriteLine("Total Memory:" + GC.GetTotalMemory(false));
@@ -8991,27 +9016,169 @@ namespace CodingConsoleApp
 
         }
 
+        public static void ReorderList(ListNode head)
+        {
+            if (head == null) return;
+            ListNode sp = head;
+            ListNode fp = head.next;
+
+            // find the middle
+            while (fp != null && fp.next != null)
+            {
+                sp = sp.next;
+                fp = fp.next.next;
+            }
+
+            // pointer to second half of linked list
+            ListNode second = sp.next;
+
+            // break the link from first and second half of linkedlist
+            sp.next = null;
+
+            // reverse the second half of linked list
+            ListNode prev = null;
+
+            while (second != null)
+            {
+                ListNode temp = second.next;
+                second.next = prev;
+                prev = second;
+                second = temp;
+            }
+
+
+            ListNode first = head; // root of first half
+            second = prev; // root of second half
+
+            // start creating link - 1 from first half and another form second half
+            while (second != null)
+            {
+                ListNode temp1 = first.next;
+                ListNode temp2 = second.next;
+
+                first.next = second;
+                second.next = temp1;
+
+                first = temp1;
+                second = temp2;
+            }
+        }
+
+        public static void ReorderListMy(ListNode head)
+        {
+            ListNode original = head;
+            ListNode reformLink = original;
+            ListNode reformLinkroot = reformLink;
+            // var reverseNode = ReverseList(head);
+
+            ListNode Prev = null;
+            ListNode curr = reformLink;
+            while (curr != null)
+            {
+                ListNode nextTemp = null;
+                if (curr.next != null)
+                {
+                    nextTemp = curr.next;
+                }
+                curr.next = Prev;
+                Prev = curr;
+                curr = nextTemp;
+            }
+
+            var reverseNode = Prev;
+
+            ListNode root = reverseNode;
+            ListNode retRoot = root;
+            ListNode retHeadRoot = retRoot;
+
+            int c = 0;
+            while (root != null)
+            {
+                c++;
+                root = root.next;
+            }
+            
+            int l = 0;
+            while (l < c/2)
+            {
+                l++;
+                ListNode fstTmp = retRoot.next;
+                retRoot.next = reverseNode; // 1-5
+                reverseNode.next = fstTmp; // 5-2
+
+                reverseNode = reverseNode.next;
+                retRoot = fstTmp;
+            }
+            
+        }
         public static ListNode RemoveElements(ListNode head, int val)
         {
-            ListNode cur = head;
-            while (cur != null)
+            if (head == null)
             {
-                if (cur.val == val)
-                {
-                    head = cur.next;
-                }
-                else if (cur.next.val == val)
-                {
-                    cur.next = cur.next.next;
-                }
-                
-                cur = cur.next;
-
+                return null;
             }
-            return head;
+            ListNode reformLink = head;
+            ListNode reformLinkroot = reformLink;
+
+            while (head.next != null)
+            {
+                if (head.next.val != val)
+                {
+                    reformLink.next = head.next;
+                    reformLink = reformLink.next;
+                }
+                head = head.next;
+            }
+
+            if (head.val == val)
+            {
+                reformLink.next = null;
+            }
+
+            if (reformLinkroot.val == val)
+            {
+               return reformLinkroot.next;
+            }
+            else
+            {
+                return reformLinkroot;
+            }
 
         }
 
+        public static ListNode DeleteMiddle(ListNode head)
+        {
+            ListNode root = head;
+            ListNode reformLink = head;
+            ListNode reformLinkroot = reformLink;
+
+            int count = 0;
+            List<int> values = new List<int>();
+            while (head != null)
+            {
+                count++;
+                values.Add(head.val);
+                head = head.next;
+            }
+            if (count == 1)
+            {
+                return null;
+            }
+            int mid = count / 2;
+            count = 1;
+            while (root != null)
+            {
+                if (count != mid)
+                {
+                    reformLink.next = root.next;
+                    reformLink = reformLink.next;
+                }
+                count++;
+                root = root.next;
+            }
+
+            return reformLinkroot;
+        }
 
         public static ListNode ReverseList(ListNode head)
         {
