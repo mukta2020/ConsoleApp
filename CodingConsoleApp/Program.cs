@@ -192,10 +192,10 @@ namespace CodingConsoleApp
             return new Tuple<int, int>(maxV, minV);
         }
 
-         
+
         static public int Reverse(int a)
         {
-            
+
             int r = 0;
             while (a > 0)
             {
@@ -213,7 +213,7 @@ namespace CodingConsoleApp
             int flag = 1;
             if (n < 0)
             {
-                n = - n;
+                n = -n;
                 flag = -1;
             }
             while (n != 0)
@@ -223,8 +223,8 @@ namespace CodingConsoleApp
                 reverse = reverse * 10 + mod;
             }
 
-            return flag * reverse;               
-            
+            return flag * reverse;
+
         }
 
         static int a4(int n)
@@ -246,14 +246,14 @@ namespace CodingConsoleApp
         }
 
         static int[] commonArray(int[] first, int[] second)
-        { 
-            if ((first == null)||(second == null))     return null;            
+        {
+            if ((first == null) || (second == null)) return null;
 
             int l1 = first.Length;
-            int l2 = second.Length;   
-            
-            if ( (l1== 0 ) || (l2 == 0)) return new int[0];
-            
+            int l2 = second.Length;
+
+            if ((l1 == 0) || (l2 == 0)) return new int[0];
+
 
             int[] a;
             if (l1 > l2)
@@ -263,32 +263,34 @@ namespace CodingConsoleApp
 
             int k = 0;
 
-            for (int i = 0; i< l1; i++) {
-                for (int j = 0; j < l2; j++) {
-                      if(first[i]== second[j])
-                            {
-                                a[k] = first[i];
-                                k++;
-                            }
-                }            
+            for (int i = 0; i < l1; i++)
+            {
+                for (int j = 0; j < l2; j++)
+                {
+                    if (first[i] == second[j])
+                    {
+                        a[k] = first[i];
+                        k++;
+                    }
+                }
             }
 
             int[] retArr = new int[k];
-            for(int i = 0; i< k; i++)
+            for (int i = 0; i < k; i++)
             {
                 retArr[i] = a[i];
             }
             return retArr;
         }
 
-        static int POE(int [] a)
+        static int POE(int[] a)
         {
             if (a == null) { return -1; }
-            if (a.Length < 3 ) { return -1; }
+            if (a.Length < 3) { return -1; }
             int firstHalf = a[0];
             int total = a.Sum();
 
-            for (int i = 1; i< a.Length -1; i++)
+            for (int i = 1; i < a.Length - 1; i++)
             {
                 if (firstHalf == total - firstHalf - a[i])
                 {
@@ -447,17 +449,17 @@ namespace CodingConsoleApp
             return _return;
         }
 
-        static int hasNValue1(int[]a, int n)
+        static int hasNValue1(int[] a, int n)
         {
             int[] b = new int[n];
             b[0] = a[0];
             int k = 1;
 
-            for (int i = 1; i< a.Length; i++)
+            for (int i = 1; i < a.Length; i++)
             {
                 bool found = false;
 
-                for (int j = 0; j< k; j++)
+                for (int j = 0; j < k; j++)
                 {
                     if (a[i] == b[j])
                     {
@@ -477,7 +479,7 @@ namespace CodingConsoleApp
             if (k == n)
                 return 1;
             else
-              return 0;
+                return 0;
         }
 
         static int hasNValue(int[] a, int n)
@@ -535,7 +537,7 @@ namespace CodingConsoleApp
                 return 0;
         }
 
-        static int is121Array(int[] a)            
+        static int is121Array(int[] a)
         {
             if ((a[0] != 1) || (a[a.Length - 1]) != 1)
             {
@@ -549,7 +551,7 @@ namespace CodingConsoleApp
 
             int countTwo = 0;
 
-            for (int i = 0; i< a.Length; i++)
+            for (int i = 0; i < a.Length; i++)
             {
                 if (a[i] == 1)
                 {
@@ -592,10 +594,10 @@ namespace CodingConsoleApp
         }
         static int is121Array2(int[] a)
         {
-            Dictionary<int, List<int>> myDic = new Dictionary<int, List<int>>();           
+            Dictionary<int, List<int>> myDic = new Dictionary<int, List<int>>();
 
             for (int i = 0; i < a.Length; i++)
-            {               
+            {
                 if (!myDic.Keys.Contains(a[i]))
                 {
                     List<int> l = new List<int>();
@@ -605,13 +607,13 @@ namespace CodingConsoleApp
                 else
                 {
                     myDic[a[i]].Add(i);
-                }                
+                }
             }
 
             bool one = false;
             bool two = false;
 
-            foreach(int k in myDic.Keys)
+            foreach (int k in myDic.Keys)
             {
                 if (k == 1)
                     one = true;
@@ -624,25 +626,25 @@ namespace CodingConsoleApp
                 if (k == 2)
                 {
                     List<int> l2 = myDic[2];
-                    for(int j = 0; j< l2.Count - 1; j++)
+                    for (int j = 0; j < l2.Count - 1; j++)
                     {
-                        if (l2[j] + 1 != l2[j+1])
+                        if (l2[j] + 1 != l2[j + 1])
                         {
                             return 0;
                         }
                     }
                 }
-                else if(k == 1)
+                else if (k == 1)
                 {
                     List<int> l1 = myDic[1];
-                    if(l1.Count % 2 != 0)
+                    if (l1.Count % 2 != 0)
                     {
                         return 0;
                     }
                     else
                     {
                         int fstHalf = l1.Count / 2;
-                        if ((l1[fstHalf] - l1[fstHalf-1]) <= 1)
+                        if ((l1[fstHalf] - l1[fstHalf - 1]) <= 1)
                         {
                             return 0;
                         }
@@ -662,12 +664,12 @@ namespace CodingConsoleApp
         static int is123Array(int[] a)
         {
 
-            if((a == null ) || (a.Length < 3))
+            if ((a == null) || (a.Length < 3))
             {
                 return 0;
-            }             
+            }
 
-            for (int i = 0; i< a.Length - 2 ; i += 3)
+            for (int i = 0; i < a.Length - 2; i += 3)
             {
                 if ((a[i] == 1) && (a[i + 1] == 2) && (a[i + 2] == 3))
                     continue;
@@ -676,7 +678,7 @@ namespace CodingConsoleApp
             }
             return 1;
         }
-      
+
         static bool equivalCheck(int[] a1, int[] a2)
         {
             for (int i = 0; i < a1.Length; i++)
@@ -698,7 +700,7 @@ namespace CodingConsoleApp
             return true;
         }
 
-        static int equivalantArray(int[]a1, int[] a2)
+        static int equivalantArray(int[] a1, int[] a2)
         {
             bool fstArrayEleFound = equivalCheck(a1, a2);
             bool sndArrayEleFound = equivalCheck(a2, a1);
@@ -769,7 +771,7 @@ namespace CodingConsoleApp
 
 
         /// //////////////////////////////////////// LeetCode ////////////////////////////////////////////////////////////////
-      
+
         static public IList<int> MajorityElement(int[] nums)
         {
             var hashSet = new HashSet<int>(nums);
@@ -931,7 +933,7 @@ namespace CodingConsoleApp
                     dic2[nums2[i]] += 1;
                 }
             }
-            
+
             int[] inter = new int[nums2.Length];
             int count = 0;
             foreach (int k in dic1.Keys)
@@ -948,7 +950,7 @@ namespace CodingConsoleApp
             }
 
             int[] ret = new int[count];
-            for (int i = 0; i< count; i ++)
+            for (int i = 0; i < count; i++)
             {
                 ret[i] = inter[i];
             }
@@ -958,14 +960,14 @@ namespace CodingConsoleApp
 
         public static int[] Intersect(int[] nums1, int[] nums2)
         {
-            
-           if(nums1.Length > nums2.Length)
+
+            if (nums1.Length > nums2.Length)
             {
-               return IntersectHelper(nums1, nums2);
+                return IntersectHelper(nums1, nums2);
             }
-           else
+            else
             {
-               return IntersectHelper(nums2, nums1);
+                return IntersectHelper(nums2, nums1);
             }
 
         }
@@ -978,7 +980,7 @@ namespace CodingConsoleApp
             3 3 3
             
              */
-            for (int i = 1; i<= n; i++)
+            for (int i = 1; i <= n; i++)
             {
                 for (int j = 0; j < i; j++)
                 {
@@ -1028,7 +1030,7 @@ namespace CodingConsoleApp
                 space--;
 
                 for (int j = 0; j < i; j++)
-                {                    
+                {
                     Console.Write(c++ + " ");
                     Console.Write(0 + " ");
                 }
@@ -1050,7 +1052,7 @@ namespace CodingConsoleApp
 
             for (int i = 1; i <= row; i++)
             {
-                for (int s = 0; s< space; s++)
+                for (int s = 0; s < space; s++)
                 {
                     Console.Write(0 + " ");
                 }
@@ -1090,31 +1092,31 @@ namespace CodingConsoleApp
             return a;
         }
 
-                
-        
+
+
         // pascal row column fixed size JAVA type
 
         public static int[,] pascal(int n)
         {
-            int[,] a = new int[n,n];
+            int[,] a = new int[n, n];
 
-            a[0 , 0] = 1;
+            a[0, 0] = 1;
 
-            for (int i=1; i<n; i++)
+            for (int i = 1; i < n; i++)
             {
-                a[i , 0] = 1;
+                a[i, 0] = 1;
 
-                for (int j = 1; j<i; j++ )
+                for (int j = 1; j < i; j++)
                 {
-                    a[i,j] = a[i - 1 , j - 1] + a[i - 1 , j];
+                    a[i, j] = a[i - 1, j - 1] + a[i - 1, j];
                 }
 
-                a[i,i] = 1;
+                a[i, i] = 1;
             }
 
             return a;
         }
-        
+
         // pascal row fixed column dynamic
 
         public static int[][] Pascal2(int n)
@@ -1175,15 +1177,15 @@ namespace CodingConsoleApp
             }
             return a;
         }
-        
+
         // two D array IList<IList<int>>
         public static int MinimumTotal1(IList<IList<int>> triangle)
         {
             int minTotal = 0;
-            for (int i = 0; i< triangle.Count; i++)
+            for (int i = 0; i < triangle.Count; i++)
             {
-                List<int> singleRow = triangle[i].ToList();                
-                minTotal += singleRow.Min();  
+                List<int> singleRow = triangle[i].ToList();
+                minTotal += singleRow.Min();
             }
             return minTotal;
         }
@@ -1208,7 +1210,7 @@ namespace CodingConsoleApp
             int minTotal = 0;
 
             int col = array.GetLength(1);
-            int row = array.GetLength(0);            
+            int row = array.GetLength(0);
 
             for (int i = 0; i < row; i++)
             {
@@ -1218,7 +1220,7 @@ namespace CodingConsoleApp
                 for (int j = 0; j < col; j++)
                 {
                     singleRow[k++] = array[i, j];
-                  
+
                 }
                 minTotal += singleRow.Min();
 
@@ -1231,12 +1233,12 @@ namespace CodingConsoleApp
         public static int MinimumTotal(int[][] triangle)
         {
             int l = triangle.Length;
-            for (int i = l-1 ; i > 0; i--)
+            for (int i = l - 1; i > 0; i--)
             {
-                for (int j = 0; j < triangle[i].Length -1 ; j++)
+                for (int j = 0; j < triangle[i].Length - 1; j++)
                 {
-                   int m = triangle[i][j] < triangle[i][j + 1] ? triangle[i][j] : triangle[i][j + 1];
-                   triangle[i - 1][j] += m;
+                    int m = triangle[i][j] < triangle[i][j + 1] ? triangle[i][j] : triangle[i][j + 1];
+                    triangle[i - 1][j] += m;
                 }
             }
             return triangle[0][0];
@@ -1261,7 +1263,7 @@ namespace CodingConsoleApp
             HashSet<int> h = new HashSet<int>(nums);
 
             int lc = 0;
-            for (int i = 0; i<nums.Length; i++)
+            for (int i = 0; i < nums.Length; i++)
             {
                 int ele = nums[i];
                 if (!h.Contains(ele - 1))
@@ -1274,7 +1276,7 @@ namespace CodingConsoleApp
                     }
                     lc = Math.Max(lc, c);
                 }
-                
+
             }
             return lc;
         }
@@ -1299,13 +1301,14 @@ namespace CodingConsoleApp
         public static (int[], int) ThirdMaxHelper(int[] nums)
         {
             int one = nums.Max();
-            for (int i = 0; i< nums.Length; i++)
+            for (int i = 0; i < nums.Length; i++)
             {
-                if (nums[i] == one) {
+                if (nums[i] == one)
+                {
                     nums[i] = int.MinValue;
                 }
             }
-            return (nums , one);
+            return (nums, one);
         }
         public static int ThirdMax(int[] nums)
         {
@@ -1316,7 +1319,7 @@ namespace CodingConsoleApp
             if (nums.Length < 3)
                 return fstMax;
             else
-                return  trdMax >= int.MinValue ? trdMax : fstMax;
+                return trdMax >= int.MinValue ? trdMax : fstMax;
         }
         public static int ThirdMax2(int[] nums)
         {
@@ -1335,7 +1338,8 @@ namespace CodingConsoleApp
         public static int lengthOfLIS(int[] nums)
         {
             int[] dp = new int[nums.Length];
-            for (int i =0; i<dp.Length; i++) {
+            for (int i = 0; i < dp.Length; i++)
+            {
                 dp[i] = 1;
             }
             for (int i = 0; i < nums.Length; i++)
@@ -1409,7 +1413,7 @@ namespace CodingConsoleApp
             }
             return i;
         }
-       
+
         //public static void moveZeroes(int[] nums)
         //{
         //    int j = 0; // j for 0 tracing
@@ -1442,10 +1446,10 @@ namespace CodingConsoleApp
         }
         public static void MoveZeroesToFirst(int[] nums)
         {
-            int i = nums.Length-1;
+            int i = nums.Length - 1;
             for (int j = nums.Length - 1; j >= 0; j--) // 0,1,0,3,2
             {
-                if ((nums[j] != 0) )
+                if ((nums[j] != 0))
                 {
                     int t = nums[j];
                     nums[j] = nums[i];
@@ -1467,13 +1471,14 @@ namespace CodingConsoleApp
                 previous = mid;
                 if (target == nums[mid])
                     return mid;
-                else if (target > nums[mid])                
-                    low = mid;                
-                else if (target < nums[mid])                
+                else if (target > nums[mid])
+                    low = mid;
+                else if (target < nums[mid])
                     high = mid;
                 mid = (low + high) / 2;
-                if (previous == mid) {
-                    if(target > nums[mid])
+                if (previous == mid)
+                {
+                    if (target > nums[mid])
                     {
                         mid = mid + 1;
                         break;
@@ -1489,11 +1494,12 @@ namespace CodingConsoleApp
             int cursum = nums[0];
             int maxsum = nums[0];
 
-            for (int i = 1; i< nums.Length; i++) {
+            for (int i = 1; i < nums.Length; i++)
+            {
 
                 cursum += nums[i];
                 cursum = Math.Max(cursum, nums[i]);
-                maxsum = Math.Max(maxsum,cursum);
+                maxsum = Math.Max(maxsum, cursum);
             }
             return maxsum;
         }
@@ -1501,7 +1507,7 @@ namespace CodingConsoleApp
         public static int[] PlusOne1(int[] digits)
         {
             string s = "";
-            for (int i = 0; i< digits.Length; i++)
+            for (int i = 0; i < digits.Length; i++)
             {
                 s += digits[i].ToString();
             }
@@ -1512,14 +1518,14 @@ namespace CodingConsoleApp
 
             int k = r.Length - 1;
 
-            while(d > 0)
+            while (d > 0)
             {
                 r[k] = d % 10;
                 d = d / 10;
                 k--;
             }
 
-           
+
             return r;
         }
 
@@ -1559,7 +1565,7 @@ namespace CodingConsoleApp
             {
                 int ele = nums2[i];
 
-                for (int j = 0; j < m ; j++)
+                for (int j = 0; j < m; j++)
                 {
                     if (nums1[j] > ele || nums1[j] == 0)
                     {
@@ -1625,7 +1631,7 @@ namespace CodingConsoleApp
             int r = 0;
             foreach (int k in d.Keys)
             {
-                if ( d[k] > m)
+                if (d[k] > m)
                 {
                     m = d[k];
                     r = k;
@@ -1722,10 +1728,10 @@ namespace CodingConsoleApp
             }
             return r;
         }
-    
+
         public static int[] Intersection(int[] nums1, int[] nums2)
         {
-            IEnumerable<int> both = nums1.Intersect(nums2);  
+            IEnumerable<int> both = nums1.Intersect(nums2);
             return both.ToArray();
 
         }
@@ -1751,8 +1757,8 @@ namespace CodingConsoleApp
 
         public static int SumOfUnique(int[] nums)
         {
-            Dictionary<int,int> d = new Dictionary<int,int>();
-            
+            Dictionary<int, int> d = new Dictionary<int, int>();
+
 
             for (int i = 0; i < nums.Length; i++)
             {
@@ -1783,21 +1789,21 @@ namespace CodingConsoleApp
             int d2 = 0;
             int row = mat.Length;
             int k = mat[0].Length - 1;
-          
+
 
             for (int r = 0; r < row; r++)
-            {               
+            {
                 for (int c = 0; c < mat[r].Length; c++)
                 {
                     if (r == c)
                     {
                         d1 += mat[r][c];
-                    }                   
+                    }
                 }
 
-                if (r != k) 
+                if (r != k)
                 {
-                    d2 += mat[r][k];                  
+                    d2 += mat[r][k];
                 }
 
                 k--;
@@ -1812,7 +1818,7 @@ namespace CodingConsoleApp
             int d2 = 0;
             int row = mat.GetLength(0);
             int col = mat.GetLength(1);
-            int k = col-1;
+            int k = col - 1;
 
             for (int r = 0; r < row; r++)
             {
@@ -1820,13 +1826,13 @@ namespace CodingConsoleApp
                 {
                     if (r == c)
                     {
-                        d1 += mat[r,c];
+                        d1 += mat[r, c];
                     }
                 }
 
                 if (r != k)
                 {
-                    d2 += mat[r,k];
+                    d2 += mat[r, k];
                 }
 
                 k--;
@@ -1837,18 +1843,20 @@ namespace CodingConsoleApp
         public static int[,] Pascal(int n)
         {
             int[,] m = new int[n, n];
-            for (int r= 0; r< n; r++) {
+            for (int r = 0; r < n; r++)
+            {
                 m[r, 0] = 1;
                 m[r, r] = 1;
 
-                for (int c = 1; c< r ; c++) {
+                for (int c = 1; c < r; c++)
+                {
                     m[r, c] = m[r - 1, c - 1] + m[r - 1, c];
-                }                
+                }
             }
             return m;
         }
 
-     
+
         public static bool IsAnagram(string s, string t)
         {
             Dictionary<char, int> d = new Dictionary<char, int>();
@@ -1885,7 +1893,7 @@ namespace CodingConsoleApp
                 {
                     return false;
                 }
-                if ( (d[k] != h[k]) )
+                if ((d[k] != h[k]))
                 {
                     return false;
                 }
@@ -1916,16 +1924,18 @@ namespace CodingConsoleApp
             mapping.Add(']', '[');
 
             List<char> stack = new List<char>();
-            
 
-            foreach (char c in s) {
-                if (mapping.Keys.Contains(c)) {
+
+            foreach (char c in s)
+            {
+                if (mapping.Keys.Contains(c))
+                {
                     char top = '#';
                     if (stack.Count != 0)
                     {
                         top = stack[stack.Count - 1];
                         stack.Remove(top);
-                    } 
+                    }
                     if (mapping[c] != top)
                         return false;
                 }
@@ -1944,7 +1954,7 @@ namespace CodingConsoleApp
             int l = 0, h = x;
             while (l <= h)
             {
-                int mid = (l + h ) / 2;
+                int mid = (l + h) / 2;
                 if ((mid == x / mid))
                     return mid;
                 else if (mid < x / mid)
@@ -1964,10 +1974,10 @@ namespace CodingConsoleApp
                     d = d / 2;
             }
             return d;
-        
+
         }
 
-            public static bool IsHappy2(int n)
+        public static bool IsHappy2(int n)
         {
             int i = 0;
             while (i < 50 && n != 0)
@@ -1975,7 +1985,7 @@ namespace CodingConsoleApp
                 if (n == 1) { return true; }
                 string s = n.ToString();
                 int sum = 0;
-                for(int j = 0; j< s.Length; j++)
+                for (int j = 0; j < s.Length; j++)
                 {
                     int d = Convert.ToInt32(s[j].ToString());
                     sum += d * d;
@@ -2085,7 +2095,7 @@ namespace CodingConsoleApp
             string[] strList = s1.Split(' ');
             foreach (string s in strList)
             {
-                if (!d.Keys.Contains(s)) 
+                if (!d.Keys.Contains(s))
                 {
                     d[s] = 1;
                 }
@@ -2108,7 +2118,7 @@ namespace CodingConsoleApp
 
             foreach (string k in d.Keys)
             {
-                if (d[k] == 1) 
+                if (d[k] == 1)
                 {
                     comStr[j] = k;
                     j++;
@@ -2116,7 +2126,8 @@ namespace CodingConsoleApp
             }
 
             string[] ret = new string[j];
-            for (int l = 0; l<j; l++) {
+            for (int l = 0; l < j; l++)
+            {
                 ret[l] = comStr[l];
             }
 
@@ -2128,7 +2139,7 @@ namespace CodingConsoleApp
             int i = 0;
             foreach (int item in arr2)
             {
-                for (int j = 0; j < arr1.Length; j++) 
+                for (int j = 0; j < arr1.Length; j++)
                 {
                     if (arr1[j] == item)
                     {
@@ -2140,15 +2151,18 @@ namespace CodingConsoleApp
                 }
             }
 
-            for (int k = i; k< arr1.Length; k++) {
-                for (int l = k+1; l< arr1.Length; l++) {
-                    if (arr1[l] < arr1[k]) {
+            for (int k = i; k < arr1.Length; k++)
+            {
+                for (int l = k + 1; l < arr1.Length; l++)
+                {
+                    if (arr1[l] < arr1[k])
+                    {
                         int t = arr1[l];
                         arr1[l] = arr1[k];
                         arr1[k] = t;
                     }
                 }
-            
+
             }
 
             return arr1;
@@ -2197,8 +2211,9 @@ namespace CodingConsoleApp
             int res = 0;
             foreach (int k in d.Keys)
             {
-                if (d.Keys.Contains(k+1)) {
-                    res = Math.Max(res, d[k] + d[k+1]);
+                if (d.Keys.Contains(k + 1))
+                {
+                    res = Math.Max(res, d[k] + d[k + 1]);
                 }
             }
             return res;
@@ -2219,8 +2234,10 @@ namespace CodingConsoleApp
 
             string s = "abcdefghijklmnopqrstuvwxyz";
 
-            for (int i = 0; i< s.Length; i++) {
-                if (! d.Keys.Contains(s[i].ToString())) {
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (!d.Keys.Contains(s[i].ToString()))
+                {
                     return false;
                 }
             }
@@ -2332,7 +2349,7 @@ namespace CodingConsoleApp
                         r1++;
                     }
                 }
-                
+
             }
 
             return a;
@@ -2377,7 +2394,8 @@ namespace CodingConsoleApp
             {
                 for (int c = 0; c < col; c++)
                 {
-                    if (matrix[r][c] == 0) {
+                    if (matrix[r][c] == 0)
+                    {
                         rowHas.Add(r);
                         colHas.Add(c);
                     }
@@ -2526,7 +2544,7 @@ namespace CodingConsoleApp
         public static int[] ArrayRankTransform(int[] arr)
         {
             int[] temp = new int[arr.Length];
-            Array.Copy( arr, temp,arr.Length);
+            Array.Copy(arr, temp, arr.Length);
 
             Dictionary<int, int> map = new Dictionary<int, int>();
 
@@ -2549,12 +2567,14 @@ namespace CodingConsoleApp
         public static double FindMaxAverage(int[] nums, int k)
         {
             double ma = int.MinValue;
-            for (int i = 0; i < nums.Length-k+1; i++) {
+            for (int i = 0; i < nums.Length - k + 1; i++)
+            {
                 int a = 0;
-                for (int j = i; j< i + k; j++) {
+                for (int j = i; j < i + k; j++)
+                {
                     a += nums[j];
                 }
-                double d = (a * 1.0 )/ k;
+                double d = (a * 1.0) / k;
                 ma = Math.Max(ma, d);
             }
             return ma;
@@ -2571,27 +2591,34 @@ namespace CodingConsoleApp
 
             foreach (int n in nums)
             {
-                if (n >= max1) {
+                if (n >= max1)
+                {
                     max3 = max2;
                     max2 = max1;
                     max1 = n;
-                } else if (n >= max2) {
+                }
+                else if (n >= max2)
+                {
                     max3 = max2;
                     max2 = n;
-                }else if (n >= max3)
+                }
+                else if (n >= max3)
                 {
                     max3 = n;
                 }
 
 
-                if (n <= min1) {
+                if (n <= min1)
+                {
                     min2 = min1;
                     min1 = n;
-                } else if (n<=min2) {
+                }
+                else if (n <= min2)
+                {
                     min2 = n;
                 }
             }
-            return Math.Max(min1*min2*max1 , max3 * max2 * max1);
+            return Math.Max(min1 * min2 * max1, max3 * max2 * max1);
         }
 
         public static int FindLucky(int[] arr)
@@ -2635,11 +2662,14 @@ namespace CodingConsoleApp
 
                 for (int c = 0; c < col; c++)
                 {
-                    if (matrix[r][c] == minRow) {
+                    if (matrix[r][c] == minRow)
+                    {
 
                         int maxCol = int.MinValue;
-                        for (int i = 0; i< row; i++) {
-                            if (matrix[i][c] > maxCol) {
+                        for (int i = 0; i < row; i++)
+                        {
+                            if (matrix[i][c] > maxCol)
+                            {
                                 maxCol = matrix[i][c];
                             }
                         }
@@ -2676,7 +2706,7 @@ namespace CodingConsoleApp
                 }
             }
             int[] ret = new int[row * col];
-            int p =0;
+            int p = 0;
             foreach (int k in d.Keys)
             {
                 List<int> l = d[k];
@@ -2690,13 +2720,13 @@ namespace CodingConsoleApp
                 }
                 else
                 {
-                     l.Reverse();
+                    l.Reverse();
                     foreach (int item in l)
                     {
                         ret[p] = item;
                         p++;
                     }
-                  
+
                 }
             }
             return ret;
@@ -2725,7 +2755,7 @@ namespace CodingConsoleApp
         {
             if (n == 0) return 0;
             if (n == 1) return 1;
-            return Fib(n - 1) + Fib(n - 2);         
+            return Fib(n - 1) + Fib(n - 2);
 
         }
 
@@ -2736,7 +2766,7 @@ namespace CodingConsoleApp
             int fst = 0;
             int snd = 1;
             int next = fst + snd;
-            while(n > 2)
+            while (n > 2)
             {
                 fst = snd;
                 snd = next;
@@ -2775,10 +2805,12 @@ namespace CodingConsoleApp
             else return false;
         }
 
-        public static void Floyed(int n) {
+        public static void Floyed(int n)
+        {
             int x = 1;
-            for (int r = 0; r< n; r++) {
-                for (int c = 0; c < r+1 ; c++)
+            for (int r = 0; r < n; r++)
+            {
+                for (int c = 0; c < r + 1; c++)
                 {
                     Console.Write(x + " ");
                     x++;
@@ -2793,7 +2825,7 @@ namespace CodingConsoleApp
             int x = 1;
             for (int r = 0; r < n; r++)
             {
-                int[] a = new int[r+1];
+                int[] a = new int[r + 1];
 
                 if (r % 2 == 0) x = 1;
                 else x = 0;
@@ -2823,18 +2855,19 @@ namespace CodingConsoleApp
          
          */
 
-        public static bool isValidSubsequence2(int[] array, int[] sequence) {
+        public static bool isValidSubsequence2(int[] array, int[] sequence)
+        {
             int idxa = 0;
             int idxs = 0;
-            while (idxa < array.Length && idxs <sequence.Length)
-             {
+            while (idxa < array.Length && idxs < sequence.Length)
+            {
                 if (array[idxa] == sequence[idxs])
                 {
                     idxs += 1;
                 }
 
-                idxa += 1;                 
-             }
+                idxa += 1;
+            }
 
             if (idxs == sequence.Length)
                 return true;
@@ -2913,11 +2946,11 @@ namespace CodingConsoleApp
                 }
                 return l;
             }
-         
+
             l = CommonCharsDictAndString(words[0], words[1]);
             int i = 2;
 
-            while (i< words.Length)
+            while (i < words.Length)
             {
                 string s = "";
                 foreach (var item in l)
@@ -2925,10 +2958,10 @@ namespace CodingConsoleApp
                     s += item;
                 }
 
-               l = CommonCharsDictAndString(s, words[i]);
-               i++;
-            }      
-               
+                l = CommonCharsDictAndString(s, words[i]);
+                i++;
+            }
+
             return l;
         }
 
@@ -2951,8 +2984,8 @@ namespace CodingConsoleApp
                 else
                     d2[s]++;
 
-            if(sList1.Length > sList2.Length)
-                l = CommonDict(d1,d2);
+            if (sList1.Length > sList2.Length)
+                l = CommonDict(d1, d2);
             else
                 l = CommonDict(d2, d1);
 
@@ -3035,140 +3068,8 @@ namespace CodingConsoleApp
 
 
 
-
-        private static void StandardQuantityCellCalulationForTwo(string[] firstArray, string[] secondArray, string[] lockingCell, string[] superCell)
-        {
-            int s = 0; int l = 0;
-
-            foreach (var item in firstArray) // dynamic a to e
-            {
-                lockingCell[l] = item + "8";
-                l++;
-            }
-
-            foreach (var item in secondArray) // a to z
-            {
-                superCell[s] = item + "4";  // item = F4 .... V4
-                s++;
-
-                superCell[s] = item + "6";  // item = F4 .... V4
-                s++;
-
-                lockingCell[l] = item + "9";
-                l++;
-            }
-        }
-
-        private static void SuperQuantityCellCalulationForTwo(string[] firstArray, string[] secondArray, string[] superLockingCell, string[] superCell)
-        {
-            int s = 0; int sl = 0;
-
-            foreach (var item in firstArray)
-            {
-                superLockingCell[sl] = item + "4";
-                sl++;
-
-                superCell[s] = item + "6";  // item = F4 .... V4
-                s++;
-            }
-
-            foreach (var item in secondArray)
-            {
-                superCell[s] = item + "4";  // item = F4 .... V4
-                s++;
-
-                superCell[s] = item + "6";  // item = F4 .... V4
-                s++;
-            }
-        }
-
-
-        private static void StandardQuantityCellCalulationForOne(string[] firstArray, string[] secondArray, string[] lockingCell, string[] superCell)
-        {
-            int s = 0; int l = 22;
-
-            foreach (var item in firstArray) // dynamic a to e
-            {
-                lockingCell[l] = item + "8";
-                l++;
-            }
-
-            foreach (var item in secondArray) // a to z
-            {
-                superCell[s] = item + "4";  // item = F4 .... V4
-                s++;
-
-                superCell[s] = item + "6";  // item = F4 .... V4
-                s++;
-
-                //lockingCell[l] = item + "9";
-                //l++;
-            }
-        }
-
-        private static void SuperQuantityCellCalulationForOne(string[] firstArray, string[] secondArray, string[] superLockingCell, string[] superCell)
-        {
-            int s = 0; int sl = 0;
-
-            foreach (var item in firstArray)
-            {
-                superLockingCell[sl] = item + "4";
-                sl++;
-
-                superCell[s] = item + "6";  // item = F4 .... V4
-                s++;
-            }
-
-            foreach (var item in secondArray)
-            {
-                superCell[s] = item + "4";  // item = F4 .... V4
-                s++;
-
-                superCell[s] = item + "6";  // item = F4 .... V4
-                s++;
-            }
-        }
-
-        private static void SuperQuantityCellCalulation(string[] firstArray, string[] secondArray, string[] superLockingCell, string[] superCell)
-        {
-            int s = 0; int sl = 0;
-
-            foreach (var item in firstArray)
-            {
-                superLockingCell[sl] = item + "4";
-                sl++;
-            }
-
-            foreach (var item in secondArray)
-            {
-                superCell[s] = item + "4";  // item = F4 .... V4
-                s++;
-            }
-        }
-
-        private static void StandardQuantityCellCalulation(string[] firstArray, string[] secondArray, string[] lockingCell, string[] superCell)
-        {
-            int s = 0; int l = 0;
-
-            foreach (var item in firstArray) // dynamic a to e
-            {
-                lockingCell[l] = item + "8";
-                l++;
-            }
-
-            foreach (var item in secondArray) // a to z
-            {
-                superCell[s] = item + "4";
-                s++;
-
-                lockingCell[l] = item + "9";
-                l++;
-            }
-        }
-
-
-
-        private static Tuple<string[], string[], string[] , string[]> CellCalculationForBoth(int id, int customSuperQuantity, int customStandardQuantity, string config)
+      
+        private static Tuple<string[], string[], string[], string[]> CellCalculationForBoth(int id, int customSuperQuantity, int customStandardQuantity, string config)
         {
             string[] aToz = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
             string[] allCell;
@@ -3253,7 +3154,7 @@ namespace CodingConsoleApp
                         superCell = new[] { "A4", " B4", " C4", " D4", " E4", " F4", " G4" }; // same as Standard
                         superLockingCell = new[] { "H4", " I4", " J4", " K4", " L4", " M4", " N4", " O4", " P4", " Q4", " R4", " S4", " T4", " U4", " V4" };
                     }
-                    
+
 
                     return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
                 }
@@ -3271,7 +3172,7 @@ namespace CodingConsoleApp
 
                     if (customStandardQuantity == 5)
                     {
-                       stdCell = new[] { "A1"," B1"," C1"," D1"," E1"," F1"," G1"," H1"," I1"," J1"," K1"," L1"," M1"," N1"," O1"," P1"," Q1"," R1"," S1"," T1"," U1"," V1",
+                        stdCell = new[] { "A1"," B1"," C1"," D1"," E1"," F1"," G1"," H1"," I1"," J1"," K1"," L1"," M1"," N1"," O1"," P1"," Q1"," R1"," S1"," T1"," U1"," V1",
                             "A2"," B2"," C2"," D2"," E2"," F2"," G2"," H2"," I2"," J2"," K2"," L2"," M2"," N2"," O2"," P2"," Q2"," R2"," S2"," T2"," U2"," V2"
                             ,"A5"," B5"," C5"," D5"," E5"," F5"," G5"," H5"," I5"," J5"," K5"," L5"," M5"," N5"," O5"," P5"," Q5"," R5"," S5"," T5"," U5"," V5"
                             ,"A6"," B6"," C6"," D6"," E6"," F6"," G6"," H6"," I6"," J6"," K6"," L6"," M6"," N6"," O6"," P6"," Q6"," R6"," S6"," T6"," U6"," V6"
@@ -3408,7 +3309,7 @@ namespace CodingConsoleApp
                         superCell = new[] { "A4"," B4"," C4"," D4"," E4"," F4"," G4"," H4"," I4"," J4"," K4"," L4"," M4"," N4"," O4"," P4"," Q4"," R4"," S4"," T4"," U4"," V4"
                                              ,"A6"," B6"," C6"," D6"," E6"," F6"," G6" }; // same as Standard
                         superLockingCell = new[] { "H4", " I4", " J4", " K4", " L4", " M4", " N4", " O4", " P4", " Q4", " R4", " S4", " T4", " U4", " V4" };
-                    }                    
+                    }
 
                     return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
                 }
@@ -3465,7 +3366,7 @@ namespace CodingConsoleApp
                 else
                 {
                     stdCell = new string[0];
-                    superLockingCell = new string[0];                  
+                    superLockingCell = new string[0];
                     superCell = new string[0];
                     lockingCell = new string[0];
 
@@ -3542,8 +3443,8 @@ namespace CodingConsoleApp
 
                     return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell); // superLockingCell  null here
                 }
-               
-          
+
+
 
                 if (customSuperQuantity > 0)
                 {
@@ -3913,13 +3814,13 @@ namespace CodingConsoleApp
                     return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
 
                 }
-               
+
 
                 if (customSuperQuantity > 0)
                 {
                     superLockingCell = new string[customSuperQuantity];
                     superCell = new string[aToz.Length * 2 - customSuperQuantity];
-                   
+
 
                     stdCell = new[] { "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1",
                                             "T1","U1","V1","A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2",
@@ -3965,7 +3866,7 @@ namespace CodingConsoleApp
                     }
                     else
                     {
-                       
+
                     }
 
 
@@ -4477,7 +4378,7 @@ namespace CodingConsoleApp
                     allCell[198] = "Y";
                     allCell[199] = "Z";
                 }
-               
+
 
                 if (customSuperQuantity > 0)
                 {
@@ -4678,7 +4579,7 @@ namespace CodingConsoleApp
                     allCell[162] = "Y";
                     allCell[163] = "Z";
                 }
-               
+
                 if (customSuperQuantity > 0)
                 {
                     superLockingCell = new string[customSuperQuantity];
@@ -4852,7 +4753,7 @@ namespace CodingConsoleApp
                         }
                     }
                     superLockingCell[44] = "Y";
-                }             
+                }
 
                 if (customSuperQuantity > 0)
                 {
@@ -5024,7 +4925,7 @@ namespace CodingConsoleApp
                             }
                         }
                     }
-                }               
+                }
 
                 if (customSuperQuantity > 0)
                 {
@@ -6895,6 +6796,7 @@ namespace CodingConsoleApp
             string[] aToz = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
             string[] allCell;
             string[] superCell;
+            string[] newSuperCell;
             string[] superLockingCell;
             string[] stdCell2;
             string[] stdCell;
@@ -6965,6 +6867,27 @@ namespace CodingConsoleApp
                 allCell[155] = "Z";
 
                 stdCell = allCell.Except(superCell).ToArray(); // 154 for max2 154/22/2
+
+                if (customSuperQuantity > 0)
+                {
+                    superLockingCell = new string[customSuperQuantity];
+                    int last = superCell.Length;
+                    int idx = 0;
+                    for (int i = last - 1; i >= last - customSuperQuantity; i--)
+                    {
+                        superLockingCell[idx] = superCell[i];
+                        idx++;
+                    }
+
+                    newSuperCell = new string[superCell.Length - customSuperQuantity];
+                    for (int i = 0; i < newSuperCell.Length; i++)
+                    {
+                        newSuperCell[i] = superCell[i];
+                    }
+
+                }
+
+
                 return new Tuple<string[], string[]>(superCell, stdCell);
             }
 
@@ -7413,7 +7336,7 @@ namespace CodingConsoleApp
                                     ,"A6"," B6"," C6"," D6"," E6"," F6"," G6"," H6"," I6"," J6"," K6"," L6"," M6"," N6"," O6"," P6"," Q6"," R6"," S6"," T6"," U6"," V6"
                                     ,"A7"," B7"," C7"," D7"," E7"," F7"," G7"," H7"," I7"," J7"," K7"," L7"," M7"," N7"," O7"," P7"," Q7"," R7"," S7"," T7"," U7"," V7"
                                     ,"A8"," B8"," C8"," D8"," E8"," F8"," G8"," H8"," I8"," J8"," K8"," L8"," M8"," N8"," O8"," P8"," Q8"," R8"," S8"," T8"," U8"," V8"
-                                    ,"A9", " B9", " C9", " D9", " E9", " F9", " G9", " H9", " I9", " J9", " K9", " L9", " M9", " N9", " O9", " P9", " Q9", " R9", " S9", 
+                                    ,"A9", " B9", " C9", " D9", " E9", " F9", " G9", " H9", " I9", " J9", " K9", " L9", " M9", " N9", " O9", " P9", " Q9", " R9", " S9",
                                     " T9", " U9", " V9" ,"Y","Z" };
 
                     lockingCell = new string[0];
@@ -7473,7 +7396,7 @@ namespace CodingConsoleApp
                         ,"A7"," B7"," C7"," D7"," E7"," F7"," G7"," H7"," I7"," J7"," K7"," L7"," M7"," N7"," O7"," P7"," Q7"," R7"," S7"," T7"," U7"," V7"
                         ,"A8"," B8"," C8"," D8"," E8"," F8"," G8"," H8"," I8"," J8"," K8"," L8", "M8"," N8"," O8"," P8"," Q8"," R8"," S8"," T8"," U8"," V8"
                         ," A9"," B9"," C9"," D9"," E9"," F9"," G9"," H9"," I9"," J9"," K9"," L9" ,"Y","Z" };
-                         
+
                         lockingCell = new[] { "M9", " N9", " O9", " P9", " Q9", " R9", " S9", " T9", " U9", " V9" };
 
 
@@ -7568,7 +7491,7 @@ namespace CodingConsoleApp
                                         ,"A7"," B7"," C7"," D7"," E7"," F7"," G7"," H7"," I7"," J7"," K7"," L7"," M7"," N7"," O7"," P7"," Q7"," R7"," S7"," T7"," U7"," V7"
                                         ,"A8"," B8"," C8"," D8"," E8"," F8"," G8"," H8"," I8"," J8"," K8"," L8"," M8"," N8"," O8"," P8"," Q8"
                                         ,"R8"," S8"," T8"," U8"," V8"," A9"," B9"," C9"," D9"," E9"," F9"," G9"," H9"," I9"," J9"," K9"," L9"," M9"," N9",
-                                                " O9"," P9", "Q9","Y","Z" };
+                                        " O9"," P9", "Q9","Y","Z" };
 
 
                         lockingCell = new[] { "R9", " S9", " T9", " U9", " V9" };
@@ -7625,12 +7548,13 @@ namespace CodingConsoleApp
                     //string[] firstArray; string[] secondArray;
 
                     stdCell = new[] {      "A1","B1","C1","D1","E1","F1","G1","H1","I1","J1","K1","L1","M1","N1","O1","P1","Q1","R1","S1", "T1","U1","V1",
-                                          "A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2","Q2","R2","S2","T2","U2","V2",
+                                           "A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2","Q2","R2","S2","T2","U2","V2",
                                             "L5","M5","N5","O5","P5","Q5","R5","S5","T5","U5","V5",
                                             "L6","M6", "N6","O6","P6","Q6","R6","S6","T6","U6","V6",
                                             "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",  "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
                                             "A8","B8","C8","D8","E8","F8","G8", "H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8", "R8","S8","T8","U8","V8"
-                                            ,"A9","B9","C9","D9","E9","F9","G9","H9","I9","J9","K9","L9","M9","N9","O9","P9","Q9","R9","S9","T9","U9","V9","Y","Z" };
+                                            ,"A9","B9","C9","D9","E9","F9","G9","H9","I9","J9","K9","L9","M9","N9","O9","P9","Q9","R9","S9","T9","U9","V9",
+                                            "Y","Z" };
 
 
                     lockingCell = new string[0];
@@ -7665,7 +7589,7 @@ namespace CodingConsoleApp
                         superLockingCell = new[] { "S4", "T4", "U4", "V4", "A6", "B6", "C6", "D6", "E6", "F6", "G6", "H6", "I6", "J6", "K6" };
 
                     }
-                    
+
                     return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
                 }
 
@@ -7787,7 +7711,7 @@ namespace CodingConsoleApp
                         superCell = new[] { "A2","B2","C2","D2","E2","F2","G2","H2","I2","J2","K2","L2","M2","N2","O2","P2", "Q2","R2","S2","T2","U2","V2",
                         "A4","B4","C4", "D4","E4","F4", "G4","H4","I4", "J4","K4", "L4" };  // same as Standard
 
-                        superLockingCell = new[] { "M4", "N4", "O4", "P4", "Q4","R4", "S4", "T4", "U4", "V4" };
+                        superLockingCell = new[] { "M4", "N4", "O4", "P4", "Q4", "R4", "S4", "T4", "U4", "V4" };
 
                     }
                     else if (customSuperQuantity == 15)
@@ -8042,7 +7966,7 @@ namespace CodingConsoleApp
                                             "A6","B6","C6","D6","E6","F6","G6","H6","I6","J6","K6","L6","M6","N6","O6","P6","Q6","R6","S6","T6","U6","V6",
                                            "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",  "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
                                            "A8","B8","C8","D8","E8","F8","G8", "H8","I8","J8","K8","L8","M8","N8","O8","P8","Q8", "R8","S8","T8","U8","V8"
-                                           ,"A9", "B9", "C9", "D9", "E9", "F9", "G9", "H9", "I9", "J9", "K9", "L9", "M9", "N9", "O9", "P9", 
+                                           ,"A9", "B9", "C9", "D9", "E9", "F9", "G9", "H9", "I9", "J9", "K9", "L9", "M9", "N9", "O9", "P9",
                         "Q9", "R9", "S9", "T9", "U9", "V9" ,"Y","Z"  };
 
 
@@ -8173,7 +8097,7 @@ namespace CodingConsoleApp
                                             "A6","B6","C6","D6","E6","F6","G6","H6","I6","J6","K6","L6","M6","N6","O6","P6","Q6","R6","S6","T6","U6","V6",
                                            "A7","B7","C7","D7","E7","F7","G7","H7","I7","J7",  "K7","L7","M7","N7","O7","P7","Q7","R7","S7","T7","U7","V7",
                                            "A8","B8","C8","D8","E8","F8","G8", "H8", "I8", "J8", "K8", "L8", "M8", "N8", "O8", "P8", "Q8", "R8", "S8", "T8", "U8", "V8",
-                                        "A9", "B9", "C9", "D9", "E9", "F9", "G9", "H9", "I9", "J9", "K9", "L9", "M9", "N9", "O9", "P9", "Q9", "R9", "S9", 
+                                        "A9", "B9", "C9", "D9", "E9", "F9", "G9", "H9", "I9", "J9", "K9", "L9", "M9", "N9", "O9", "P9", "Q9", "R9", "S9",
                         "T9", "U9", "V9" ,"Y","Z"
                                             };
 
@@ -8577,99 +8501,539 @@ namespace CodingConsoleApp
 
         }
 
-
-
-        public static int calculateDesktopProductIDs(char[] productID)
+        private static Tuple<string[], string[], string[], string[]> NewCellCalculation(int? id, int customSuperQuantity, int customStandardQuantity)
         {
-            int answer = 0;
-            // Write your code here
+            string[] aToV = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
+            string[] aTok = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K" };
+            string[] lToV = new[] { "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
+            string[] aToN = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N" };
+            string[] oToV = new[] { "O", "P", "Q", "R", "S", "T", "U", "V" };
 
-            char[] laptopID = { 'a', 'i', 'e', 'o', 'u', 'A', 'I', 'E', 'O', 'U' };
+            string[] superCell = new string[0];
+            string[] newSuperCell = new string[0];
+            string[] superLockingCell = new string[0];
+            string[] stdCell = new string[0];
+            string[] newStdCell = new string[0];
+            string[] lockingCell = new string[0];
 
-            productID = productID.Except(laptopID).ToArray();
 
-            answer = productID.Length;
-
-
-            return answer;
-        }
-
-        public int LargestPerimeter(int[] A)
-        {
-            Array.Sort(A);
-            for (int i = A.Length - 3; i >= 0; --i)
-                if (A[i] + A[i + 1] > A[i + 2])
-                    return A[i] + A[i + 1] + A[i + 2];
-            return 0;
-        }
-       
-
-        public static List<int> inorderTraversal(TreeNode root, List<int> res)
-        {
-            if (root != null)
+            if (id == 1)// for max2 110/44/2  su
             {
-                inorderTraversal(root.left, res);
-                res.Add(root.val);
-                inorderTraversal(root.right, res);
-            }
-            return res;
-        }
-        public static bool IsSameTree(TreeNode p, TreeNode q)
-        {
-            List<string> resp = new List<string>();
-            List<string> resq = new List<string>();
-            resp = preorderTraversal1(p, resp);
-            resq = preorderTraversal1(q, resq);
+                superCell = new string[aToV.Length * 2]; //44               
+                stdCell = new string[112];
+                int s = 0; int sd = 0; 
 
-            bool b = resp.SequenceEqual(resq);
-            return b;
-        }
-        public static List<string> preorderTraversal1(TreeNode root, List<string> res)
-        {
-            if (root != null)
-            {
-                res.Add(root.val.ToString());
-                if (root.left != null)
-                {
-                    preorderTraversal1(root.left, res);
+                foreach (var item in aToV)
+                {                   
+                    superCell[s] = item + "2";
+                    s++;
                 }
-                else
-                {
-                    res.Add(null);
+                foreach (var item in aToV)
+                {                  
+                    superCell[s] = item + "4";
+                    s++;
                 }
-                if (root.right != null)
+
+                for (int i = 1; i < 10; i++)
                 {
-                    preorderTraversal1(root.right, res);
+                    if( (i == 5) || (i == 6) || (i == 7) || (i == 8) || (i == 9) )
+                    {
+                        foreach (var item in aToV)
+                        {
+                            stdCell[sd] = item + i.ToString();
+                            sd++;
+                        }
+                    }                   
                 }
-                else
+
+                stdCell[110] = "Y";
+                stdCell[111] = "Z";
+
+                if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
                 {
-                    res.Add(null);
+                   var val = SuperAndStandardQuantityCalculation((int)id, customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                   superCell = val.Item1;
+                   lockingCell = val.Item2;
+                   superLockingCell = val.Item3;
+                   stdCell = val.Item4;
                 }
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
             }
-           
-            return res;
-        }
-        public static List<string> preorderTraversal(TreeNode root, List<string> res)
-        {
-            if (root != null)
+            else if (id == 2)// for max2 132/33/2
             {
-                res.Add(root.val.ToString());
-                preorderTraversal(root.left, res);
-                preorderTraversal(root.right, res);
+                superCell = new string[33];              
+                stdCell = new string[134];
+                int s = 0; int sd = 0;
+
+                foreach (var item in aToV) // 22
+                {
+                    superCell[s] = item + "2";
+                    s++;
+                }
+                foreach (var item in aTok) // 11
+                {
+                    superCell[s] = item + "4";
+                    s++;
+                }
+
+                for (int i = 1; i < 10; i++)
+                {
+                    if ((i == 5) || (i == 6) || (i == 7) || (i == 8) || (i == 9))
+                    {
+                        foreach (var item in aToV)
+                        {
+                            stdCell[sd] = item + i.ToString();
+                            sd++;
+                        }
+                    }
+                    if ((i == 3) || (i == 4))
+                    {
+                        foreach (var item in lToV)
+                        {
+                            stdCell[sd] = item + i.ToString();
+                            sd++;
+                        }
+                    }
+                }
+
+                stdCell[132] = "Y";
+                stdCell[133] = "Z";
+
+                if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
+                {
+                    var val = SuperAndStandardQuantityCalculation((int)id, customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                    superCell = val.Item1;
+                    lockingCell = val.Item2;
+                    superLockingCell = val.Item3;
+                    stdCell = val.Item4;
+                }
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+            }
+            else if (id == 3)// for max2 154/22/2
+            {
+                superCell = new string[22];
+                stdCell = new string[156];
+                int s = 0; int sd = 0;
+
+                foreach (var item in aToV) // 22
+                {
+                    superCell[s] = item + "2";
+                    s++;
+                }
+               
+
+                for (int i = 3; i < 10; i++)
+                {
+                    foreach (var item in aToV)
+                    {
+                        stdCell[sd] = item + i.ToString();
+                        sd++;
+                    }
+                }
+
+                stdCell[154] = "Y";
+                stdCell[155] = "Z";
+
+                if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
+                {
+                    var val = SuperAndStandardQuantityCalculation((int)id, customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                    superCell = val.Item1;
+                    lockingCell = val.Item2;
+                    superLockingCell = val.Item3;
+                    stdCell = val.Item4;
+                }
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+            }
+            else if (id == 4)// for max2 110/44/2  su   same as id 1
+            {
+                superCell = new string[aToV.Length * 2]; //44               
+                stdCell = new string[112];
+                int s = 0; int sd = 0;
+
+                foreach (var item in aToV)
+                {
+                    superCell[s] = item + "2";
+                    s++;
+                }
+                foreach (var item in aToV)
+                {
+                    superCell[s] = item + "4";
+                    s++;
+                }
+
+                for (int i = 1; i < 10; i++)
+                {
+                    if ((i == 5) || (i == 6) || (i == 7) || (i == 8) || (i == 9))
+                    {
+                        foreach (var item in aToV)
+                        {
+                            stdCell[sd] = item + i.ToString();
+                            sd++;
+                        }
+                    }
+                }
+
+                stdCell[110] = "Y";
+                stdCell[111] = "Z";
+
+                if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
+                {
+                    var val = SuperAndStandardQuantityCalculation((int)id, customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                    superCell = val.Item1;
+                    lockingCell = val.Item2;
+                    superLockingCell = val.Item3;
+                    stdCell = val.Item4;
+                }
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+            }
+            else if (id == 5)// for max2 132/33/2  same as id 2
+            {
+                superCell = new string[33];
+                stdCell = new string[134];
+                int s = 0; int sd = 0;
+
+                foreach (var item in aToV) // 22
+                {
+                    superCell[s] = item + "2";
+                    s++;
+                }
+                foreach (var item in aTok) // 11
+                {
+                    superCell[s] = item + "4";
+                    s++;
+                }
+
+                for (int i = 1; i < 10; i++)
+                {
+                    if ((i == 5) || (i == 6) || (i == 7) || (i == 8) || (i == 9))
+                    {
+                        foreach (var item in aToV)
+                        {
+                            stdCell[sd] = item + i.ToString();
+                            sd++;
+                        }
+                    }
+                    if ((i == 3) || (i == 4))
+                    {
+                        foreach (var item in lToV)
+                        {
+                            stdCell[sd] = item + i.ToString();
+                            sd++;
+                        }
+                    }
+                }
+
+                stdCell[132] = "Y";
+                stdCell[133] = "Z";
+
+                if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
+                {
+                    var val = SuperAndStandardQuantityCalculation((int)id, customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                    superCell = val.Item1;
+                    lockingCell = val.Item2;
+                    superLockingCell = val.Item3;
+                    stdCell = val.Item4;
+                }
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+            }
+            else if (id == 6)// for max2 154/22/2   same as id 3
+            {
+                superCell = new string[22];
+                stdCell = new string[156];
+                int s = 0; int sd = 0;
+
+                foreach (var item in aToV) // 22
+                {
+                    superCell[s] = item + "2";
+                    s++;
+                }
+
+
+                for (int i = 3; i < 10; i++)
+                {
+                    foreach (var item in aToV)
+                    {
+                        stdCell[sd] = item + i.ToString();
+                        sd++;
+                    }
+                }
+
+                stdCell[154] = "Y";
+                stdCell[155] = "Z";
+
+                if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
+                {
+                    var val = SuperAndStandardQuantityCalculation((int)id, customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                    superCell = val.Item1;
+                    lockingCell = val.Item2;
+                    superLockingCell = val.Item3;
+                    stdCell = val.Item4;
+                }
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+            }
+            else if (id == 7)// for max2 176/11/2   
+            {
+                superCell = new string[11];
+                stdCell = new string[178];
+                int s = 0; int sd = 0;
+
+                foreach (var item in aTok) // 11
+                {
+                    superCell[s] = item + "2";
+                    s++;
+                }
+
+                for (int i = 1; i < 3; i++)
+                {
+                    foreach (var item in lToV)
+                    {
+                        stdCell[sd] = item + i.ToString();
+                        sd++;
+                    }
+                }
+
+                for (int i = 3; i < 10; i++)
+                {
+                    foreach (var item in aToV)
+                    {
+                        stdCell[sd] = item + i.ToString();
+                        sd++;
+                    }
+                }
+
+                stdCell[176] = "Y";
+                stdCell[177] = "Z";
+
+                if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
+                {
+                    var val = SuperAndStandardQuantityCalculation((int)id, customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                    superCell = val.Item1;
+                    lockingCell = val.Item2;
+                    superLockingCell = val.Item3;
+                    stdCell = val.Item4;
+                }
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+            }
+            else if (id == 11)// for max2 198/0/2   
+            {
+                superCell = new string[0];
+                stdCell = new string[200];
+                int sd = 0;                 
+
+                for (int i = 1; i < 10; i++)
+                {
+                    foreach (var item in aToV)
+                    {
+                        stdCell[sd] = item + i.ToString();
+                        sd++;
+                    }
+                }
+
+                stdCell[198] = "Y";
+                stdCell[199] = "Z";
+
+                if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
+                {
+                    var val = SuperAndStandardQuantityCalculation((int)id, customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                    superCell = val.Item1;
+                    lockingCell = val.Item2;
+                    superLockingCell = val.Item3;
+                    stdCell = val.Item4;
+                }
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+            }
+            else if (id == 8)// for max2 128L/36S/
+            {
+                superLockingCell = new string[36];
+                lockingCell = new string[128];
+                int s = 0; int sd = 0;
+
+                foreach (var item in aToV) // 22
+                {
+                    superLockingCell[s] = item + "2";
+                    s++;
+                }
+
+                foreach (var item in aToN) // 14
+                {
+                    superLockingCell[s] = item + "4";
+                    s++;
+                }
+
+                for (int i = 1; i < 10; i++)
+                {
+                    if ((i == 5) || (i == 6) || (i == 7) || (i == 8) || (i == 9))
+                    {
+                        foreach (var item in aToV)
+                        {
+                            lockingCell[sd] = item + i.ToString();
+                            sd++;
+                        }
+                    }
+                    if ((i == 3) || (i == 4))
+                    {
+                        foreach (var item in oToV)
+                        {
+                            lockingCell[sd] = item + i.ToString();
+                            sd++;
+                        }
+                    }
+                }
+
+                lockingCell[126] = "Y";
+                lockingCell[127] = "Z";
+
+                
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+            }
+            else if (id == 9)// for max2 110 L /45 SL
+            {
+                superLockingCell = new string[45]; //45              
+                lockingCell = new string[110];
+                int s = 0; int sd = 0;
+
+                foreach (var item in aToV)
+                {
+                    superLockingCell[s] = item + "2";
+                    s++;
+                }
+                foreach (var item in aToV)
+                {
+                    superLockingCell[s] = item + "4";
+                    s++;
+                }
+                superLockingCell[44] = "Z";
+
+                for (int i = 1; i < 10; i++)
+                {
+                    if ((i == 5) || (i == 6) || (i == 7) || (i == 8) || (i == 9))
+                    {
+                        foreach (var item in aToV)
+                        {
+                            lockingCell[sd] = item + i.ToString();
+                            sd++;
+                        }
+                    }
+                }
+
+               
+
+                if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
+                {
+                    var val = SuperAndStandardQuantityCalculation((int)id, customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                    superCell = val.Item1;
+                    lockingCell = val.Item2;
+                    superLockingCell = val.Item3;
+                    stdCell = val.Item4;
+                }
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+            }
+            else if (id == 10)// for max2 22/88
+            {
+                superCell = new string[88];
+                stdCell = new string[22];
+                int s = 0; int sd = 0;
+
+                foreach (var item in aToV) // 22
+                {
+                    stdCell[s] = item + "5";
+                    s++;
+                }
+
+
+                for (int i = 2; i < 10; i++)
+                {
+                    if ((i == 2) || (i == 4) || (i == 7) || (i == 9) )
+                    {
+                        foreach (var item in aToV)
+                        {
+                            superCell[sd] = item + i.ToString();
+                            sd++;
+                        }
+                    }
+                    
+                }
+
+               
+
+                if ((customSuperQuantity > 0) || (customStandardQuantity > 0))
+                {
+                    var val = SuperAndStandardQuantityCalculation((int)id, customSuperQuantity, customStandardQuantity, superCell, stdCell);
+                    superCell = val.Item1;
+                    lockingCell = val.Item2;
+                    superLockingCell = val.Item3;
+                    stdCell = val.Item4;
+                }
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+            }
+            return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+
+
+        }
+
+        private static Tuple<string[], string[], string[], string[]> SuperAndStandardQuantityCalculation(int id, int customSuperQuantity, int customStandardQuantity, string[] superCell, string[] stdCell)
+        {
+            string[] newSuperCell = new string[0];
+            string[] newStdCell = new string[0];
+            string[] superLockingCell = new string[0];
+            string[] lockingCell = new string[0];
+
+            if ((customSuperQuantity > 0) && (customStandardQuantity > 0) )
+            {
+                newSuperCell = new string[superCell.Length - customSuperQuantity];
+                for (int i = 0; i < newSuperCell.Length; i++)
+                {
+                    newSuperCell[i] = superCell[i];
+                }
+                superLockingCell = superCell.Except(newSuperCell).ToArray();
+
+                //.....................
+
+                newStdCell = new string[stdCell.Length - customStandardQuantity];
+                for (int i = 0; i < newStdCell.Length; i++)
+                {
+                    newStdCell[i] = stdCell[i];
+                }
+                if (id != 10)
+                {
+                    newStdCell[newStdCell.Length - 1] = "Z";
+                    newStdCell[newStdCell.Length - 2] = "Y";
+                }
+
+                lockingCell = stdCell.Except(newStdCell).ToArray();
+                return new Tuple<string[], string[], string[], string[]>(newSuperCell, lockingCell, superLockingCell, newStdCell);
+            } 
+            else if (customSuperQuantity > 0)
+            {
+                newSuperCell = new string[superCell.Length - customSuperQuantity];
+                for (int i = 0; i < newSuperCell.Length; i++)
+                {
+                    newSuperCell[i] = superCell[i];
+                }
+                superLockingCell = superCell.Except(newSuperCell).ToArray();
+
+                return new Tuple<string[], string[], string[], string[]>(newSuperCell, lockingCell, superLockingCell, stdCell);
 
             }
-            return res;
-        }
-
-        public static List<int> postorderTraversal(TreeNode root, List<int> res)
-        {
-            if (root != null)
+            else if (customStandardQuantity > 0)
             {
-                postorderTraversal(root.left, res);
-                postorderTraversal(root.right, res);
-                res.Add(root.val);
+                newStdCell = new string[stdCell.Length - customStandardQuantity];
+                for (int i = 0; i < newStdCell.Length; i++)
+                {
+                    newStdCell[i] = stdCell[i];
+                }
+                if (id != 10)
+                {
+                    newStdCell[newStdCell.Length - 1] = "Z";
+                    newStdCell[newStdCell.Length - 2] = "Y";
+                }
+
+                lockingCell = stdCell.Except(newStdCell).ToArray();
+
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, newStdCell);
             }
-            return res;
+
+            return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
         }
         public static double FindMedianSortedArrays(int[] nums1, int[] nums2)
         {
