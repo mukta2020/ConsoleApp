@@ -8973,34 +8973,36 @@ namespace CodingConsoleApp
         private static Tuple<string[], string[], string[], string[]> Max2CellCalculation(int? id,int superQt, int superLockQty, int lockingQty)
         {
             string[] aToV = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
-            string[] aTok = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K" };
-            string[] lToV = new[] { "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
-            string[] aToN = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N" };
-            string[] oToV = new[] { "O", "P", "Q", "R", "S", "T", "U", "V" };
-
+            
             string[] superCell = new string[0];
-            string[] newSuperCell = new string[0];
             string[] superLockingCell = new string[0];
-            string[] stdCell = new string[0];
-            string[] newStdCell = new string[0];
+            string[] regularCell = new string[0];
             string[] lockingCell = new string[0];
 
-            string[] supperLockingOrder = new[] { "4", "7", "9", "2" };
-            string[] regularOrder = new[] { "1", "2", "5", "6", "7", "8", "9" };
-
-
+            string[] regularOrder = new[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" }; // 3 
             string[] supperOrder = new[] { "4", "7", "9", "2" };
-            string[] regularLockingOrder = new[] { "1", "2", "5", "6", "7", "8", "9" };
+            int regularQty = 0;
 
-            //superQt = 88; // max 89,  min 22
-            //superQt = superQt - superLockQty;
-
-            lockingQty = 200 - superQt * 2; // 24
-
-            if (id == 1)// for max2 110/44/2  su
+            if (id == 3) //for max2 128L/36S/  "Max 2 – CVS Full"
             {
-                superCell = new string[superQt]; //44               
-                stdCell = new string[lockingQty];  // 112
+                superQt = 0; superLockQty = 36; lockingQty = 128;
+            }
+            else if (id == 4)  // "Max 2 – Kroger Std"
+            {
+                superQt = 0; superLockQty = 45; lockingQty = 110;
+            }
+            else if (id == 5)  // "Max 2 – Lite"
+            {
+                superQt = 88; regularQty = 22; //superLockQty = 0; lockingQty = 0; ?? 
+            }
+
+            regularQty = 200 - superQt * 2; 
+
+
+            if (id == 1 || id == 2) // std mainfold and full mainfold
+            {
+                superCell = new string[superQt]; //25               
+                regularCell = new string[regularQty];  // 150
 
                 int s = 0; int superCellSizeCount = 0; int supperOrderIndex = 0;
                 while (superCellSizeCount != superQt)
@@ -9025,13 +9027,13 @@ namespace CodingConsoleApp
                 int sd = 0;
                 int stdCellSizeCount = 0; int stdCellOrderIndex = 0;
 
-                while (stdCellSizeCount != lockingQty)
+                while (stdCellSizeCount != regularQty)
                 {
                     foreach (var item in aToV)
                     {
-                        if (sd < lockingQty)
+                        if (sd < regularQty)
                         {
-                            stdCell[sd] = item + regularOrder[stdCellOrderIndex]; // 22
+                            regularCell[sd] = item + regularOrder[stdCellOrderIndex]; // 22
                             sd++;
                             stdCellSizeCount++;
                         }
@@ -9042,19 +9044,96 @@ namespace CodingConsoleApp
                     }
                     stdCellOrderIndex++;
                 }
-               
 
-                //stdCell[110] = "Y";
-                //stdCell[111] = "Z";
+                if ((superLockQty > 0) || (lockingQty > 0))
+                {
+                    var val = CustomCalculation((int)id, superLockQty, lockingQty, superCell, regularCell);
+                    superCell = val.Item1;
+                    lockingCell = val.Item2;
+                    superLockingCell = val.Item3;
+                    regularCell = val.Item4;
+                }
 
-                
-                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, regularCell);
+            }
+                 
+           
+          
+
+
+            return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, regularCell);
+
+
+        }
+
+
+        private static Tuple<string[], string[], string[], string[]> CustomCalculation(int id, int customSuperQuantity, int customStandardQuantity, string[] superCell, string[] stdCell)
+        {
+            string[] newSuperCell = new string[0];
+            string[] newStdCell = new string[0];
+            string[] superLockingCell = new string[0];
+            string[] lockingCell = new string[0];
+
+
+            string[] supperLockingOrder = new[] { "9", "7", "4", "2" };
+            string[] regularLockingOrder = new[] { "9", "8", "7", "6", "5", "4", "3", "2", "1" };
+
+            if ((customSuperQuantity > 0) && (customStandardQuantity > 0))
+            {
+                newSuperCell = new string[superCell.Length - customSuperQuantity];
+                for (int i = 0; i < newSuperCell.Length; i++)
+                {
+                    newSuperCell[i] = superCell[i];
+                }
+                superLockingCell = superCell.Except(newSuperCell).ToArray();
+
+                //.....................
+
+                newStdCell = new string[stdCell.Length - customStandardQuantity];
+                for (int i = 0; i < newStdCell.Length; i++)
+                {
+                    newStdCell[i] = stdCell[i];
+                }
+                if (id != 10)
+                {
+                    newStdCell[newStdCell.Length - 1] = "Z";
+                    newStdCell[newStdCell.Length - 2] = "Y";
+                }
+
+                lockingCell = stdCell.Except(newStdCell).ToArray();
+                return new Tuple<string[], string[], string[], string[]>(newSuperCell, lockingCell, superLockingCell, newStdCell);
+            }
+            else if (customSuperQuantity > 0)
+            {
+                newSuperCell = new string[superCell.Length - customSuperQuantity];
+                for (int i = 0; i < newSuperCell.Length; i++)
+                {
+                    newSuperCell[i] = superCell[i];
+                }
+                superLockingCell = superCell.Except(newSuperCell).ToArray();
+
+                return new Tuple<string[], string[], string[], string[]>(newSuperCell, lockingCell, superLockingCell, stdCell);
+
+            }
+            else if (customStandardQuantity > 0)
+            {
+                newStdCell = new string[stdCell.Length - customStandardQuantity];
+                for (int i = 0; i < newStdCell.Length; i++)
+                {
+                    newStdCell[i] = stdCell[i];
+                }
+                if (id != 10)
+                {
+                    newStdCell[newStdCell.Length - 1] = "Z";
+                    newStdCell[newStdCell.Length - 2] = "Y";
+                }
+
+                lockingCell = stdCell.Except(newStdCell).ToArray();
+
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, newStdCell);
             }
 
-
             return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
-
-
         }
 
 
@@ -9122,6 +9201,8 @@ namespace CodingConsoleApp
 
             return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
         }
+
+
         public static double FindMedianSortedArrays(int[] nums1, int[] nums2)
         {
             int[] num = new int[nums1.Length + nums2.Length];
@@ -9176,7 +9257,7 @@ namespace CodingConsoleApp
             //CellCalculation(11,0,0);
             // CellCalculationCustom(6, -10, 15, "C");
 
-            Max2CellCalculation(1, 25, 25, 150);
+            Max2CellCalculation(1, 25, 5, 0); // super 20...where as min super 22
             #region Linked List
 
             //ListNode one = new ListNode(1);
