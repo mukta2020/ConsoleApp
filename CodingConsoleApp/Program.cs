@@ -7653,6 +7653,7 @@ namespace CodingConsoleApp
                 }
                 return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
             }
+
             else if (id == 8)// for max2 128L/36S/
             {
                 superLockingCell = new string[36];
@@ -7784,7 +7785,9 @@ namespace CodingConsoleApp
         private static Tuple<string[], string[], string[], string[]> Max2CellCalculation(int? id,int superQt, int superLockQty, int lockingQty)
         {
             string[] aToV = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V" };
-            
+            string[] aToN = new[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N" };
+            string[] oToV = new[] { "O", "P", "Q", "R", "S", "T", "U", "V" };
+
             string[] superCell = new string[0];
             string[] superLockingCell = new string[0];
             string[] regularCell = new string[0];
@@ -7873,10 +7876,131 @@ namespace CodingConsoleApp
 
                 return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, regularCell);
             }
-                 
-           
-          
+            else if (id == 3)
+            {
+                superLockingCell = new string[superLockQty];
+                lockingCell = new string[lockingQty];
+                int s = 0; int sd = 0;
 
+                foreach (var item in aToV) // 22
+                {
+                    superLockingCell[s] = item + "2";
+                    s++;
+                }
+
+                foreach (var item in aToN) // 14
+                {
+                    superLockingCell[s] = item + "4";
+                    s++;
+                }
+
+                for (int i = 1; i < 10; i++)
+                {
+                    if ((i == 5) || (i == 6) || (i == 7) || (i == 8) || (i == 9))
+                    {
+                        foreach (var item in aToV)
+                        {
+                            lockingCell[sd] = item + i.ToString();
+                            sd++;
+                        }
+                    }
+                    if ((i == 3) || (i == 4))
+                    {
+                        foreach (var item in oToV)
+                        {
+                            lockingCell[sd] = item + i.ToString();
+                            sd++;
+                        }
+                    }
+                }
+
+                lockingCell[126] = "Y";
+                lockingCell[127] = "Z";
+
+
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, regularCell);
+
+
+            }
+            else if (id == 4)
+            {
+                superLockingCell = new string[superLockQty]; //45              
+                lockingCell = new string[lockingQty];
+                int s = 0; int sd = 0;
+
+                foreach (var item in aToV)
+                {
+                    superLockingCell[s] = item + "2";
+                    s++;
+                }
+                foreach (var item in aToV)
+                {
+                    superLockingCell[s] = item + "4";
+                    s++;
+                }
+                superLockingCell[44] = "Z";
+
+                for (int i = 1; i < 10; i++)
+                {
+                    if ((i == 5) || (i == 6) || (i == 7) || (i == 8) || (i == 9))
+                    {
+                        foreach (var item in aToV)
+                        {
+                            lockingCell[sd] = item + i.ToString();
+                            sd++;
+                        }
+                    }
+                }
+
+                if ((superLockQty > 0) || (lockingQty > 0))
+                {
+                    var val = CustomCalculation((int)id, superLockQty, lockingQty, superCell, regularCell);
+                    superCell = val.Item1;
+                    lockingCell = val.Item2;
+                    superLockingCell = val.Item3;
+                    regularCell = val.Item4;
+                }
+
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, regularCell);
+
+            }
+            else if (id == 5)
+            {
+                superCell = new string[superQt];
+                regularCell = new string[22]; // formula wise regularQty = 24
+                int s = 0; int sd = 0;
+
+                foreach (var item in aToV) // 22
+                {
+                    regularCell[s] = item + "5";
+                    s++;
+                }
+
+                for (int i = 2; i < 10; i++)
+                {
+                    if ((i == 2) || (i == 4) || (i == 7) || (i == 9))
+                    {
+                        foreach (var item in aToV)
+                        {
+                            superCell[sd] = item + i.ToString();
+                            sd++;
+                        }
+                    }
+
+                }
+
+                if ((superLockQty > 0) || (lockingQty > 0))
+                {
+                    var val = CustomCalculation((int)id, superLockQty, lockingQty, superCell, regularCell);
+                    superCell = val.Item1;
+                    lockingCell = val.Item2;
+                    superLockingCell = val.Item3;
+                    regularCell = val.Item4;
+                }
+
+                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, regularCell);
+
+            }
 
             return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, regularCell);
 
@@ -8074,7 +8198,7 @@ namespace CodingConsoleApp
             //CellCalculation(11,0,0);
             // CellCalculationCustom(6, -10, 15, "C");
 
-            Max2CellCalculation(1, 88, 0, 0); // super 20...where as min super 22
+            Max2CellCalculation(1, 22, 0, 0); // super 20...where as min super 22
             #region Linked List
 
             //ListNode one = new ListNode(1);
