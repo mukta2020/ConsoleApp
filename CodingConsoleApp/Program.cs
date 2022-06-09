@@ -7791,12 +7791,14 @@ namespace CodingConsoleApp
             string[] superCell = new string[0];
             string[] superLockingCell = new string[0];
             string[] regularCell = new string[0];
+            string[] regularFinalCell = new string[0];
             string[] lockingCell = new string[0];
 
-            string[] regularOrder = new[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" }; // 3 
+            string[] regularOrder = new[] { "1", "2", "3", "4", "6", "7", "8", "9" }; // 3 
             string[] supperOrder = new[] { "4", "7", "9", "2" }; // max 88
             int superMax = 89; int superMin = 22;
             int regularQty = 0;
+            int regularFinal = 0;
 
             if (id == 3) //for max2 128L/36S/  "Max 2 – CVS Full"
             {
@@ -7811,13 +7813,23 @@ namespace CodingConsoleApp
                 superQt = 88; regularQty = 22; //superLockQty = 0; lockingQty = 0; ?? formula wise regularQty = 24
             }
 
-            regularQty = 200 - superQt * 2; 
+            if (superQt == superMax)
+            {
+                regularQty = (200 - superQt * 2); // 22
+            }
+            else
+            {
+                regularQty = (200 - superQt * 2) - 2; // 22
+            }
+
+            regularFinal = regularQty + 2; // 24
 
 
             if (id == 1 || id == 2) // std mainfold and full mainfold
             {
                 superCell = new string[superQt]; //25               
                 regularCell = new string[regularQty];  // 150
+                regularFinalCell = new string[regularFinal];
 
                 int s = 0; int superCellSizeCount = 0; int supperOrderIndex = 0;
                 while (superCellSizeCount != superQt)
@@ -7834,7 +7846,7 @@ namespace CodingConsoleApp
                         {
                             if (s == superMax-1)
                             {
-                                superCell[s] = "Y";
+                                superCell[s] = "7Y";
                                 superCellSizeCount++;
                             }
                             break;
@@ -7865,9 +7877,26 @@ namespace CodingConsoleApp
                     stdCellOrderIndex++;
                 }
 
+                if (superQt != superMax)
+                {
+                    regularCell.CopyTo(regularFinalCell, 0);
+                    regularFinalCell[regularFinal - 2] = "6X";
+                    regularFinalCell[regularFinal - 1] = "7Y";
+                }
+
+
                 if ((superLockQty > 0) || (lockingQty > 0))
                 {
-                    var val = CustomCalculation((int)id, superLockQty, lockingQty, superCell, regularCell);
+                    Tuple<string[], string[], string[], string[]> val = null;
+                    if (superQt != superMax)
+                    {
+                        val = CustomCalculation((int)id, superLockQty, lockingQty, superCell, regularFinalCell);
+                    }
+                    else
+                    {
+                        val = CustomCalculation((int)id, superLockQty, lockingQty, superCell, regularCell);
+                    }
+
                     superCell = val.Item1;
                     lockingCell = val.Item2;
                     superLockingCell = val.Item3;
@@ -8198,7 +8227,7 @@ namespace CodingConsoleApp
             //CellCalculation(11,0,0);
             // CellCalculationCustom(6, -10, 15, "C");
 
-            Max2CellCalculation(1, 22, 0, 0); // super 20...where as min super 22
+            Max2CellCalculation(1, 88, 0, 0); // super 20...where as min super 22
             #region Linked List
 
             //ListNode one = new ListNode(1);
