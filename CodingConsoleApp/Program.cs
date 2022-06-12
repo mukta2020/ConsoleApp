@@ -8199,69 +8199,27 @@ namespace CodingConsoleApp
             {
                 List<string> assignedSupperOrder = new List<string>();
                 List<string> assignedSupperFractionCell = new List<string>();
+                SuperCellCalculation(superCell,superQt, superMax,aTov, supperOrder, assignedSupperOrder, assignedSupperFractionCell);
 
-                int supperOrderIndex = 0;
+                List<string> assignedRegularOrder = new List<string>();
+                List<string> assignedRegularFractionCell = new List<string>();
+                RegularCellCalculationBasedOnSuper(regularCell, regularQty, superQt, superMax, aTov, regularOrder, assignedSupperOrder, assignedSupperFractionCell, assignedRegularOrder, assignedRegularFractionCell);
+                   
 
-                while (superCell.Count < superQt)
-                {
-                    if (superCell.Count == superMax-1)
-                    {
-                        superCell.Add("7Y");
-                        break;
-                    }
-                    foreach (var item in aTov)
-                    {
-                        if (superCell.Count < superQt && superCell.Count < superMax - 1)
-                        {
-                            superCell.Add(item + supperOrder[supperOrderIndex]); // 22
-                            assignedSupperFractionCell.Add(item);
-                        }
-                        else
-                        {
-                            break;
-                        }                         
-                    }                   
-                    if (assignedSupperFractionCell.Count == 22)
-                    {
-                        assignedSupperFractionCell.Clear();
-                    }
-                    assignedSupperOrder.Add(supperOrder[supperOrderIndex]);
-
-                    supperOrderIndex++;                    
-                }                               
-
-                int stdCellOrderIndex = 0;
-                while (regularCell.Count != regularQty)
-                {
-                    string curr = regularOrder[stdCellOrderIndex];
-                    int currNo = Convert.ToInt32(curr);
-                    int nextNo = Convert.ToInt32(curr) + 1;
-                    string last = assignedSupperOrder.LastOrDefault();
-
-                    if ((last == currNo.ToString() || last == nextNo.ToString()) && assignedSupperFractionCell.Count != 0)
-                    {
-                        List<string> newFractionList = aTov.Except(assignedSupperFractionCell).ToList();                        
-                        CellAssignment(newFractionList, regularCell, regularQty, regularOrder, stdCellOrderIndex);                          
-                    }
-                    else if (!assignedSupperOrder.Contains(currNo.ToString()) && !assignedSupperOrder.Contains(nextNo.ToString()))
-                    {
-                        CellAssignment(aTov, regularCell, regularQty, regularOrder, stdCellOrderIndex);
-                    }                    
-                    stdCellOrderIndex++;
-                }
-
-                if (superQt != superMax)
-                {
-                    regularCell.Add("6X");
-                    regularCell.Add("7Y");
-                }
                 if ((superLockQty > 0) || (lockingQty > 0))
-                {
-                    var val = CustomCalculation((int)id, superLockQty, lockingQty, superCell, regularCell);
-                    superCell = val.Item1;
-                    lockingCell = val.Item2;
-                    superLockingCell = val.Item3;
-                    regularCell = val.Item4;
+                {            
+                    List<string> supperLockingOrder = new List<string> { "9", "7", "4", "2"  };
+                    assignedSupperOrder = new List<string>();
+                    assignedSupperFractionCell = new List<string>();
+
+                    SuperCellCalculation(superLockingCell, superLockQty, superMax, aTov, supperLockingOrder, assignedSupperOrder, assignedSupperFractionCell);
+
+                    assignedRegularOrder.Reverse();
+                    RegularCellCalculationBasedOnRegular(lockingCell, lockingQty, aTov, assignedRegularOrder, assignedRegularFractionCell);
+
+                    superCell = superCell.Except(superLockingCell).ToList();
+                    regularCell = regularCell.Except(lockingCell).ToList();
+                    
                 }               
             }
 
@@ -8271,23 +8229,125 @@ namespace CodingConsoleApp
 
         }
 
+        private static void RegularCellCalculationBasedOnSuper(List<string> regularCell, int regularQty,int superQt, int superMax, List<string> aTov, List<string> regularOrder, List<string> assignedSupperOrder, List<string> assignedSupperFractionCell, List<string> assignedRegularOrder, List<string> assignedRegularFractionCell)
+        {
+            int stdCellOrderIndex = 0;
+            while (regularCell.Count != regularQty)
+            {
+                string curr = regularOrder[stdCellOrderIndex];
+                int currNo = Convert.ToInt32(curr);
+                int nextNo = Convert.ToInt32(curr) + 1;
+                string last = assignedSupperOrder.LastOrDefault();
+
+                if ((last == currNo.ToString() || last == nextNo.ToString()) && assignedSupperFractionCell.Count != 0)
+                {
+                    List<string> newFractionList = aTov.Except(assignedSupperFractionCell).ToList();
+                    if (assignedRegularFractionCell.Count == 0)
+                    {
+                        assignedRegularFractionCell.AddRange(newFractionList);
+                    }                  
+                    CellAssignment(newFractionList, regularCell, regularQty, regularOrder, stdCellOrderIndex);
+                    assignedRegularOrder.Add(regularOrder[stdCellOrderIndex]);
+                }
+                else if (!assignedSupperOrder.Contains(currNo.ToString()) && !assignedSupperOrder.Contains(nextNo.ToString()))
+                {
+                    CellAssignment(aTov, regularCell, regularQty, regularOrder, stdCellOrderIndex);
+                    assignedRegularOrder.Add(regularOrder[stdCellOrderIndex]);                    
+                }
+
+                stdCellOrderIndex++;
+
+            }
+
+            if (superQt != superMax)
+            {
+                regularCell.Add("6X");
+                regularCell.Add("7Y");
+            }
+        }
+
+       
+        private static void RegularCellCalculationBasedOnRegular(List<string> regularCell, int regularQty,  List<string> aTov, List<string> assignedRegularOrder, List<string> assignedRegularFractionCell)
+        {
+            int stdCellOrderIndex = 0; int counter = 0;
+            while (regularCell.Count != regularQty)
+            {               
+                if (regularQty-counter > 22)
+                {
+                    CellAssignment(aTov, regularCell, regularQty, assignedRegularOrder, stdCellOrderIndex);
+                    counter += 22;
+                }
+                else 
+                {
+                    List<string> newFractionList = assignedRegularFractionCell;
+                    if (regularQty - counter < newFractionList.Count)
+                    {
+                        newFractionList = newFractionList.Take(regularQty - counter).ToList();
+                    }
+                    CellAssignment(newFractionList, regularCell, regularQty, assignedRegularOrder, stdCellOrderIndex);
+                    counter += newFractionList.Count;
+                }
+                stdCellOrderIndex++;
+            }
+
+        }
+
+
+        private static void SuperCellCalculation(List<string> superCell, int superQt,int superMax, List<string> aTov, List<string> supperOrder, List<string> assignedSupperOrder, List<string> assignedSupperFractionCell)
+        {
+            int supperOrderIndex = 0;
+
+            while (superCell.Count < superQt)
+            {
+                if (superCell.Count == superMax - 1)
+                {
+                    superCell.Add("7Y");
+                    break;
+                }
+                foreach (var item in aTov)
+                {
+                    if (superCell.Count < superQt && superCell.Count < superMax - 1)
+                    {
+                        superCell.Add(item + supperOrder[supperOrderIndex]); // 22
+                        assignedSupperFractionCell.Add(item);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                if (assignedSupperFractionCell.Count == 22)
+                {
+                    assignedSupperFractionCell.Clear();
+                }
+                assignedSupperOrder.Add(supperOrder[supperOrderIndex]);
+
+                supperOrderIndex++;
+            }
+        }
+
         private static void CellAssignment(List<string> aTov, List<string> regularCell,int regularQty, List<string> regularOrder, int stdCellOrderIndex)
         {           
             foreach (var item in aTov)
             {
                 if (regularCell.Count < regularQty)
                 {
-                    regularCell.Add(item + regularOrder[stdCellOrderIndex]); // 22                                
+                    regularCell.Add(item + regularOrder[stdCellOrderIndex]);                   
                 }
                 else
                 {
                     break;
                 }
-            }
+            }           
         }
 
         private static Tuple<List<string>, List<string>, List<string>, List<string>> CustomCalculation(int id, int customSuperQuantity, int customStandardQuantity, List<string> superCell, List<string> stdCell)
         {
+
+
+
+           
+
             List<string> newSuperCell = new List<string>();
             List<string> newStdCell = new List<string>();
             List<string> superLockingCell = new List<string>();
@@ -8296,11 +8356,38 @@ namespace CodingConsoleApp
             List<string> superReorderLast = new List<string>();
             List<string> superReorderFirst = new List<string>();
 
+
             if ((customSuperQuantity > 0) && (customStandardQuantity > 0))
-            {               
+            {
+                if (superCell.Count > 66)
+                {
+                    superReorderLast = superCell.Skip(66).ToList();
+                    superReorderFirst = superCell.Take(66).ToList();
+
+                    if (superCell.Count == 89)
+                    {
+                        superReorderLast.Remove("7Y");
+                        superCell = new List<string> { "7Y" };
+                    }
+                    else
+                    {
+                        superCell = new List<string>();
+                    }
+
+                    superCell.AddRange(superReorderLast);
+                    superCell.AddRange(superReorderFirst);
+                }
+
                 newSuperCell = superCell.Take(superCell.Count - customSuperQuantity).ToList();
                 superLockingCell = superCell.Skip(superCell.Count - customSuperQuantity).ToList();
                 //.....................
+                stdCell.Remove("6X");
+                stdCell.Remove("7Y");
+                newStdCell = stdCell;
+
+                stdCell = new List<string> { "6X", "7Y" };
+                stdCell.AddRange(newStdCell);
+
                 newStdCell = stdCell.Take(stdCell.Count - customStandardQuantity).ToList();
                 lockingCell = stdCell.Skip(stdCell.Count - customStandardQuantity).ToList();
 
@@ -8317,9 +8404,13 @@ namespace CodingConsoleApp
                     if (superCell.Count == 89)
                     {
                         superReorderLast.Remove("7Y");
+                        superCell = new List<string> { "7Y" };
+                    }
+                    else
+                    {
+                        superCell = new List<string>();
                     }
 
-                    superCell = new List<string> { "7Y" };
                     superCell.AddRange(superReorderLast);
                     superCell.AddRange(superReorderFirst);
                 }
@@ -8330,6 +8421,13 @@ namespace CodingConsoleApp
             }
             else if (customStandardQuantity > 0)
             {
+                stdCell.Remove("6X");
+                stdCell.Remove("7Y");
+                newStdCell = stdCell;
+
+                stdCell = new List<string> { "6X" , "7Y"};
+                stdCell.AddRange(newStdCell);
+
                 newStdCell = stdCell.Take(stdCell.Count - customStandardQuantity).ToList();
                 lockingCell = stdCell.Skip(stdCell.Count - customStandardQuantity).ToList();
                 stdCell = newStdCell;
@@ -8593,7 +8691,7 @@ namespace CodingConsoleApp
 
             //NewCellCalculation(2,0,0);
 
-            Max2CellCalculationNew(1, 89, 23, 0); // 200 - 
+            Max2CellCalculationNew(1, 76, 27, 36); // 200 - 
             #region Linked List
 
             //ListNode one = new ListNode(1);
