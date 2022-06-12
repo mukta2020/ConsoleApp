@@ -8293,6 +8293,9 @@ namespace CodingConsoleApp
             List<string> superLockingCell = new List<string>();
             List<string> lockingCell = new List<string>();
 
+            List<string> superReorderLast = new List<string>();
+            List<string> superReorderFirst = new List<string>();
+
             if ((customSuperQuantity > 0) && (customStandardQuantity > 0))
             {               
                 newSuperCell = superCell.Take(superCell.Count - customSuperQuantity).ToList();
@@ -8306,6 +8309,21 @@ namespace CodingConsoleApp
             }
             else if (customSuperQuantity > 0)
             {
+                if (superCell.Count > 66)
+                {
+                    superReorderLast = superCell.Skip(66).ToList();
+                    superReorderFirst = superCell.Take(66).ToList();
+
+                    if (superCell.Count == 89)
+                    {
+                        superReorderLast.Remove("7Y");
+                    }
+
+                    superCell = new List<string> { "7Y" };
+                    superCell.AddRange(superReorderLast);
+                    superCell.AddRange(superReorderFirst);
+                }
+
                 newSuperCell = superCell.Take(superCell.Count - customSuperQuantity).ToList();
                 superLockingCell = superCell.Skip(superCell.Count - customSuperQuantity).ToList();
                 superCell = newSuperCell;
@@ -8575,7 +8593,7 @@ namespace CodingConsoleApp
 
             //NewCellCalculation(2,0,0);
 
-            Max2CellCalculationNew(1, 89, 0, 0); // 200 - 
+            Max2CellCalculationNew(1, 89, 23, 0); // 200 - 
             #region Linked List
 
             //ListNode one = new ListNode(1);
