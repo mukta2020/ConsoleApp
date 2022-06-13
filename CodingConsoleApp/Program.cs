@@ -8280,10 +8280,15 @@ namespace CodingConsoleApp
                 else 
                 {
                     List<string> newFractionList = assignedRegularFractionCell;
-                    if (regularQty - counter < newFractionList.Count)
+                    if (newFractionList.Count == 0)
+                    {
+                        newFractionList = aTov.Take(regularQty - counter).ToList();
+                    }
+                    else if (regularQty - counter < newFractionList.Count)
                     {
                         newFractionList = newFractionList.Take(regularQty - counter).ToList();
                     }
+                    
                     CellAssignment(newFractionList, regularCell, regularQty, assignedRegularOrder, stdCellOrderIndex);
                     counter += newFractionList.Count;
                 }
@@ -8691,7 +8696,7 @@ namespace CodingConsoleApp
 
             //NewCellCalculation(2,0,0);
 
-            Max2CellCalculationNew(1, 76, 27, 36); // 200 - 
+            Max2CellCalculationNew(1, 88, 58, 16); // 200 - 
             #region Linked List
 
             //ListNode one = new ListNode(1);
