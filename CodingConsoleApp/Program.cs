@@ -8670,22 +8670,182 @@ namespace CodingConsoleApp
             return total == num ? 1 : 0;
         }
 
+        public static int isSequencedArray(int[] a, int m, int n)
+        {
+            // {-5, -5, -4, -4, -4, -3, -3, -2, -2, -2}
+            int count = n - m + 1;
+            if ((a[0] != m) || (a[a.Length-1] != n))
+            {
+                return 0;
+            }
+            for (int i = 1; i < a.Length; i++)
+            {
+                if ( (a[i-1] == a[i]) || (a[i - 1] + 1 == a[i]) )
+                {
+                    continue;
+                }
+                else
+                {
+                    return 0;
+                }
+            }            
+            return 1;
+        }
 
+        public static int largestPrimeFactor1(int num)
+        {
+            if (num <= 1) return 0;
+            int number = num;
+            while (number > 1)
+            {
+                if (num % number == 0)
+                {
+                    bool isPrime = true;
+                    for (int i = 2; i < number; i++)
+                    {
+                        if (number % i == 0)
+                        {
+                            isPrime = false;
+                            break;
+                        }
+                    }
+                    if (isPrime) return number;
+                }
+                number--;
+            }
+            return 0;
+        }
+        public static int largestPrimeFactor2(int n)  // most efficient function
+        {
+            if (n <= 1) return 0;
+            List<int> primeFactors = new List<int>();
+
+            for (int i = 2; i < n; i++)
+            {
+                while (n % i == 0)
+                {
+                    primeFactors.Add(i);
+                    n = n / i;
+                }
+            }
+            if (n > 1) primeFactors.Add(n);
+            return primeFactors.Max();
+
+        }
+        public static int largestPrimeFactor(int num)
+        {
+            if (num <= 1) return 0;
+            for (int i = num; i > 1; i--)
+            {
+                if (num % i == 0)
+                {
+                    if (IsPrime(i))
+                    {
+                        return i;
+                    }
+                }
+               
+            }
+            return 0;
+        
+        }
+
+        public static bool IsPrime(int number) {
+
+            bool isPrime = true;
+            for (int i = 2; i < number; i++)
+            {
+                if (number % i == 0)
+                {
+                    isPrime = false;
+                    break;
+                }
+            }
+            return isPrime;
+        }
+
+        public static int[] encodeNumber(int n)
+        {
+            if (n <= 1) return null;
+            List<int> primeFactors = new List<int>();
+
+            for (int i = 2; i < n; i++)
+            {
+                while (n % i == 0)
+                {
+                    primeFactors.Add(i);
+                    n = n / i;
+                }
+            }
+
+
+            if (n > 1) primeFactors.Add(n);
+            int[] arrayToReturn = new int[primeFactors.Count];
+
+            primeFactors.CopyTo(arrayToReturn);
+
+            //for (int i = 0; i < primeFactors.Count; i++)
+            //{
+            //    arrayToReturn[i] = primeFactors[i];
+            //}
+
+
+            return arrayToReturn;
+        }
+
+        static int matchPattern(int[] a, int len, int[] pattern, int patternLen)
+        {
+            // {1, 1, 2, 2, 2, 2}
+            // {1, 2}
+            // {1, 1, 1, 2, 2, 1, 1, 3} array  {1, 2, 1, 3} pattern
+            int p = pattern[0];
+            int j = 0;
+            int s = 0;
+
+            while (j < pattern.Length)
+            {
+                for (int i = s; i < a.Length; i++)
+                {
+                    if (a[i] == p)
+                    {
+                        continue;
+                    }
+                    else if 
+                    {
+
+                    }
+                }
+            }
+
+           
+
+            return 0;
+
+        }
 
         static void Main(string[] args)
         {
 
             int[] nums1 = { 1, 2 };
             int[] nums2 = { 3 };
-            int[] n = { 1, 1, 1, 1, 1, 2, 1, 1, 1 };
-            Console.WriteLine(checkConcatenatedSum(2997, 3));
 
+            int[] n = { 1, 1, 2, 2, 2, 2 };
+            int[] p = {1, 2 };
+
+            Console.WriteLine(matchPattern(n, 5, p, 2));
+
+            //Console.WriteLine(isSequencedArray(new int[] { 1, 2, 3, 4, 5 }, 1, 5));
+            //Console.WriteLine(isSequencedArray(new int[] { 1, 3, 4, 2, 5 }, 1, 5));
+            //Console.WriteLine(isSequencedArray(new int[] { -5, -5, -4, -4, -4, -3, -3, -2, -2, -2 }, -5, -2));
+            //Console.WriteLine(isSequencedArray(new int[] { 0, 1, 2, 3, 4, 5 }, 1, 5));
+            //Console.WriteLine(isSequencedArray(new int[] { 1, 2, 3, 4 }, 1, 5));
+            //Console.WriteLine(isSequencedArray(new int[] { 5, 4, 3, 2, 1 }, 1, 5));
+
+            //Console.WriteLine(checkConcatenatedSum(2997, 3));
             //Console.WriteLine(FindMedianSortedArrays(nums1, nums2));
             //CellCalculation(11,0,0);
             // CellCalculationCustom(6, -10, 15, "C");
-
             //NewCellCalculation(2,0,0);
-
             //Max2CellCalculationNew(1, 12, 5, 12); // 200 - 
 
 
