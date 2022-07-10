@@ -8795,32 +8795,109 @@ namespace CodingConsoleApp
 
         static int matchPattern(int[] a, int len, int[] pattern, int patternLen)
         {
-            // {1, 1, 2, 2, 2, 2}
-            // {1, 2}
+            // { 1, 1, 2, 2, 2, 3 };
+            // {1, 2 ,3};
             // {1, 1, 1, 2, 2, 1, 1, 3} array  {1, 2, 1, 3} pattern
             int p = pattern[0];
             int j = 0;
-            int s = 0;
+            int s = 1;
 
-            while (j < pattern.Length)
+            while (j < pattern.Length-1)
             {
-                for (int i = s; i < a.Length; i++)
+                for (int i = 1; i < a.Length; i++)
                 {
-                    if (a[i] == p)
+                    if ((a[i] != p) && (a[i-1] != a[i]))
                     {
-                        continue;
+                        j++;
+                        p = pattern[j];
                     }
-                    else if 
+                    if (p != a[i])
                     {
+                        return 0;
+                    }
+                }                
+            } 
+            return 1;
+        }
 
-                    }
-                }
+        static int matchPattern2(int[] a, int len, int[] pattern, int patternLen)
+        {
+            int i = 0; // index into a
+            int k = 0; // index into pattern
+            int matches = 0; 
+            for (i = 0; i < len; i++)
+            {
+                if (a[i] == pattern[k])
+                    matches++; 
+                else if (matches == 0 || k == patternLen - 1)
+                    return 0; 
+                else  {
+                    //!!You write this code!!
+                      } // end of else
+            } // end of for
+            if (i==len && k==patternLen-1) 
+                return 1; 
+            else return 0;
+        }
+
+
+        static int isCubePowerful(int n)
+        {
+            // 153
+            if (n < 0)
+            {
+                return 0;
             }
+            int sum = 0;
+            int num = n;
+            while (n>0)
+            {
+                int r = n % 10;
+                int q = n / 10;
+                n = q;
+                sum += r * r * r;
+            }
+            if (num == sum)
+                return 1;
+            else
+                return 0;
+        }
 
-           
+        static int decodeArray(int[] a)
+        {
+            string n = "";
+            for (int i = 1; i < a.Length; i++)
+            {
+                int val = Math.Abs(a[i - 1] - a[i]);
+                n += val.ToString();
+            }
+            return Convert.ToInt32(n);
+        }
 
-            return 0;
+        static int isZeroPlentiful(int[] a)
+        {
+            int count = 0;
+            int ret = 0;
+            for (int i = 1; i < a.Length; i++)
+            {
+                if ((a[i - 1] == a[i]) && (a[i] == 0))
+                {
+                    count++;
+                }
+                else if (a[i] == 0)
+                {
+                    count++;
+                }
+                else
+                {
+                    count = 0;
+                }
 
+                if (count == 4)
+                    ret++;
+
+            }
+            return ret;
         }
 
         static void Main(string[] args)
@@ -8829,10 +8906,12 @@ namespace CodingConsoleApp
             int[] nums1 = { 1, 2 };
             int[] nums2 = { 3 };
 
-            int[] n = { 1, 1, 2, 2, 2, 2 };
-            int[] p = {1, 2 };
+            Console.WriteLine(isCubePowerful(87));
 
-            Console.WriteLine(matchPattern(n, 5, p, 2));
+            int[] n = { 1, 1, 10, 4, 4, 3 };
+            int[] p = { 1, 4, 3 };
+
+           // Console.WriteLine(matchPattern(n, 5, p, 2));
 
             //Console.WriteLine(isSequencedArray(new int[] { 1, 2, 3, 4, 5 }, 1, 5));
             //Console.WriteLine(isSequencedArray(new int[] { 1, 3, 4, 2, 5 }, 1, 5));
