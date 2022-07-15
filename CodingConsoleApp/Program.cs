@@ -9017,7 +9017,7 @@ namespace CodingConsoleApp
 
         static int areAnagrams(char[] a1, char[] a2)
         {
-            return 0
+            return 0;
         }
 
         static void Main(string[] args)
