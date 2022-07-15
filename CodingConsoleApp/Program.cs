@@ -1889,7 +1889,7 @@ namespace CodingConsoleApp
 
             foreach (char k in d.Keys)
             {
-                if (h.Keys.Contains(k))
+                if (!h.Keys.Contains(k))
                 {
                     return false;
                 }
@@ -8899,14 +8899,134 @@ namespace CodingConsoleApp
             }
             return ret;
         }
+       static int[] encodeArray(int n)
+        {
+            List<int> a = new List<int>();
+            int init = 0;
+            if (n < 0)
+            {
+                a.Add(-1);
+                init = 1;
+            }
+            string s = n.ToString(); // 1234
+            for (int i = init; i < s.Length; i++)
+            {
+                int num = Convert.ToInt32(s[i].ToString());
+                for (int j = 0; j < num; j++)
+                {
+                    a.Add(0);
+                }
+                a.Add(1);
+            }
+
+            int[] Arr = new int[a.Count];
+            a.CopyTo(Arr);
+            return Arr;
+
+        }
+        static int isSystematicallyIncreasing(int[] a)
+        {
+            //{1, 1, 2, 1, 2, 3}
+            if (a[0] != 1)
+                return 0;
+            for (int i = 1; i < a.Length; i++)
+            {
+                if (a[i - 1] + 1 != a[i])
+                {
+                    if (a[i] != 1)
+                        return 0;
+                }
+            }
+            return 1;
+
+        }
+
+
+        static int isFactorialPrime(int n)
+        {
+            if (IsPrime(n) && CheckFactorial(n))
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        private static bool CheckFactorial(int n)
+        {
+            // 7
+            int i = 2;
+            int num = 1;
+            while (num + 1 <= n)
+            {
+                if (num + 1 == n)
+                {
+                    return true;
+                }
+                num *= i;
+                i++;
+            }
+            return false;
+        }
+        static int largestDifferenceOfEvens(int[] a)
+        {
+            List<int> evenList = new List<int>();
+            for (int i = 0; i < a.Length; i++)
+            {
+                if (a[i] % 2 == 0)
+                {
+                    evenList.Add(a[i]);
+                }
+            }
+            if (evenList.Count < 2)
+            {
+                return 0;
+            }
+
+            return evenList.Max() - evenList.Min();
+        }
+
+        private static bool CheckHodder(int n)
+        {
+            //2 * 2 * 2
+            int i = 2;
+            int num = 2;
+            while (num - 1 <= n)
+            {
+                if (num - 1 == n)
+                {
+                    return true;
+                }
+                num *= i;
+            }
+            return false;
+        }
+        static int isHodder(int n)
+        {
+            if (CheckHodder(n)&& IsPrime(n))
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        static int areAnagrams(char[] a1, char[] a2)
+        {
+            return 0
+        }
 
         static void Main(string[] args)
         {
 
             int[] nums1 = { 1, 2 };
-            int[] nums2 = { 3 };
+            int[] a = { -2, 3, 4, 9 };
 
-            Console.WriteLine(isCubePowerful(87));
+           // Console.WriteLine(isHodder(30));
 
             int[] n = { 1, 1, 10, 4, 4, 3 };
             int[] p = { 1, 4, 3 };
@@ -9080,7 +9200,7 @@ namespace CodingConsoleApp
              //Console.WriteLine(FindDuplicates(a));
 
              //Console.WriteLine(IsValid("()[]{}"));
-             //Console.WriteLine(IsAnagram("amo", "ima"));
+             Console.WriteLine(IsAnagram("ami", "ima"));
              /*
              int[] a =  { 1,2,3 };
              int[][] b = {    new int[] { 1,2,3},
