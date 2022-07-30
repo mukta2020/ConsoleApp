@@ -3867,14 +3867,67 @@ namespace CodingConsoleApp
         {
             return 0;
         }
+        static int maxCoins(int[] numbers)
+        {
+            int length = numbers.Length;
+            int[] numbersExtra = new int[length + 2];
+
+            int n = 1;
+            foreach (var x in numbers)
+            {
+                if (x > 0)
+                {
+                    numbersExtra[n++] = x;
+                }
+            }
+            numbersExtra[0] = numbersExtra[n++] = 1;
+
+            int[][] memo = new int[n][];
+            for (int i = 0; i < n; i++)
+            {
+                memo[i] = new int[n];
+            }
+
+            return BurstBallonsUsingDPAnalysis(memo, numbersExtra, 0, n - 1);
+        }
+        static int BurstBallonsUsingDPAnalysis(int[][] memo, int[] numbers, int left, int right)
+        {
+            if (left + 1 == right)
+            {
+                return 0;
+            }
+
+            if (memo[left][right] > 0)
+            {
+                return memo[left][right];
+            }
+
+            int answer = 0;
+
+            // work on the range [left, right], go over the last ballon to burst,
+            // denote i, from left + 1 to right -1 
+            // 3 cases 
+            for (int i = left + 1; i < right; ++i)
+            {
+                int leftHand = BurstBallonsUsingDPAnalysis(memo, numbers, left, i);
+                int righHand = BurstBallonsUsingDPAnalysis(memo, numbers, i, right);
+                int defaultCase = numbers[left] * numbers[i] * numbers[right];
+
+                answer = Math.Max(answer, defaultCase + leftHand + righHand);
+            }
+
+            memo[left][right] = answer;
+            return answer;
+        }
+
 
         static void Main(string[] args)
         {
 
             int[] nums1 = { 1, 2 };
-            int[] a = { -2, 3, 4, 9 };
+            int[] a = { 3, 1, 5, 8 };
 
-           // Console.WriteLine(isHodder(30));
+            Console.WriteLine(maxCoins(a));
 
             int[] n = { 1, 1, 10, 4, 4, 3 };
             int[] p = { 1, 4, 3 };
