@@ -3867,57 +3867,88 @@ namespace CodingConsoleApp
         {
             return 0;
         }
-        static int maxCoins(int[] numbers)
+        static int MaxCoins(int[] nums)
         {
-            int length = numbers.Length;
-            int[] numbersExtra = new int[length + 2];
+            if (nums == null || nums.Length == 0) return 0;
 
-            int n = 1;
-            foreach (var x in numbers)
-            {
-                if (x > 0)
-                {
-                    numbersExtra[n++] = x;
-                }
-            }
-            numbersExtra[0] = numbersExtra[n++] = 1;
-
-            int[][] memo = new int[n][];
+            int n = nums.Length;
+            int[][] coins = new int[n][];
             for (int i = 0; i < n; i++)
             {
-                memo[i] = new int[n];
+                coins[i] = new int[n];
             }
 
-            return BurstBallonsUsingDPAnalysis(memo, numbersExtra, 0, n - 1);
+            for (int gap = 0; gap < n; gap++)
+            {
+                for (int r = 0, c = gap; c < n; c++, r++)
+                {
+                    int max_coins = 0;
+                    for (int k = r; k <= c; k++)
+                    {
+                        int left = (k == r) ? 0 : coins[r][k - 1];
+                        int right = (k == c) ? 0 : coins[k + 1][c];
+
+                        int leftNum = r == 0 ? 1 : nums[r - 1];
+                        int rightNum = c == n - 1 ? 1 : nums[c + 1];
+
+                        int curr_cost = leftNum * nums[k] * rightNum;
+
+                        int cost = left + right + curr_cost;
+
+                        max_coins = Math.Max(max_coins, cost);
+                    }
+
+                    coins[r][c] = max_coins;
+                }
+            }
+
+            return coins[0][n - 1];
         }
-        static int BurstBallonsUsingDPAnalysis(int[][] memo, int[] numbers, int left, int right)
+        static int maxCoins2(int[] nums)
         {
-            if (left + 1 == right)
+            int n = nums.Length;
+            int[][] dp = new int[n + 2][];
+            for (int i = 0; i < n+2; i++)
             {
-                return 0;
+                dp[i] = new int[n+2];
             }
 
-            if (memo[left][right] > 0)
+
+            int[] arr = new int[n + 2];
+            for (int i = 1; i <= n; i++)
             {
-                return memo[left][right];
+                arr[i] = nums[i - 1];
+            }
+            arr[0] = 1;
+            arr[n + 1] = 1;
+
+            for (int i = n; i >= 1; i--)
+            {
+                for (int j = i; j <= n; j++)
+                {
+                    for (int k = i; k <= j; k++)
+                    {
+                        dp[i][j] = (int)Math.Max(dp[i][j], arr[i - 1] * arr[j + 1] * arr[k] + dp[i][k - 1] + dp[k + 1][j]);
+                    }
+                }
             }
 
-            int answer = 0;
+            return dp[1][n];
+        }
 
-            // work on the range [left, right], go over the last ballon to burst,
-            // denote i, from left + 1 to right -1 
-            // 3 cases 
-            for (int i = left + 1; i < right; ++i)
-            {
-                int leftHand = BurstBallonsUsingDPAnalysis(memo, numbers, left, i);
-                int righHand = BurstBallonsUsingDPAnalysis(memo, numbers, i, right);
-                int defaultCase = numbers[left] * numbers[i] * numbers[right];
 
-                answer = Math.Max(answer, defaultCase + leftHand + righHand);
-            }
+        static int MaxNumberOfBalloons(string text)
+        {           
 
-            memo[left][right] = answer;
-            return answer;
+            int bCount = text.Count(c => c == 'b');  
+            int aCount = text.Count(c => c == 'a');  
+            int nCount = text.Count(c => c == 'n');  
+            int oCount = text.Count(c => c == 'o');   
+            int lCount = text.Count(c => c == 'l');
+
+            var m = Math.Min( Math.Min(Math.Min( bCount,aCount),nCount) , Math.Min( lCount/2,oCount/2) );
+            return m;
+
         }
 
 
@@ -3927,7 +3958,7 @@ namespace CodingConsoleApp
             int[] nums1 = { 1, 2 };
             int[] a = { 3, 1, 5, 8 };
 
-            Console.WriteLine(maxCoins(a));
+            Console.WriteLine(MaxNumberOfBalloons(""));
 
             int[] n = { 1, 1, 10, 4, 4, 3 };
             int[] p = { 1, 4, 3 };
