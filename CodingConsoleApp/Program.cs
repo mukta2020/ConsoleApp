@@ -3951,6 +3951,31 @@ namespace CodingConsoleApp
 
         }
 
+        static int BalancedStringSplit(string s)
+        {
+            int rCount = 0;
+            int lCount = 0;
+            int b = 0;
+            for (int c = 0; c < s.Length; c++)
+            {               
+                if (s[c].ToString() == "R")
+                {
+                    rCount += 1;
+                }
+                else if (s[c].ToString() == "L")
+                {
+                    lCount += 1;
+                }
+                if (rCount == lCount)
+                {
+                    b += 1;
+                    rCount = 0;
+                    lCount = 0;
+                }
+            }
+
+            return b;
+        }
 
         static void Main(string[] args)
         {
@@ -3958,7 +3983,11 @@ namespace CodingConsoleApp
             int[] nums1 = { 1, 2 };
             int[] a = { 3, 1, 5, 8 };
 
-            Console.WriteLine(MaxNumberOfBalloons(""));
+
+
+            Console.WriteLine(BalancedStringSplit(""));
+
+            // Console.WriteLine(MaxNumberOfBalloons(""));
 
             int[] n = { 1, 1, 10, 4, 4, 3 };
             int[] p = { 1, 4, 3 };
@@ -4132,7 +4161,7 @@ namespace CodingConsoleApp
              //Console.WriteLine(FindDuplicates(a));
 
              //Console.WriteLine(IsValid("()[]{}"));
-             Console.WriteLine(IsAnagram("ami", "ima"));
+             //Console.WriteLine(IsAnagram("ami", "ima"));
              /*
              int[] a =  { 1,2,3 };
              int[][] b = {    new int[] { 1,2,3},
