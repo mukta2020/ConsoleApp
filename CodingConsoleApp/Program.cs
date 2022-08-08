@@ -3143,11 +3143,6 @@ namespace CodingConsoleApp
                     List<string> newList = aTov.Take(regularQty).ToList();
                     CellAssignment(newList, regularCell, regularQty, assignedRegularOrder, stdCellOrderIndex);
                     counter += newList.Count;
-                }
-                else if (regularQty-counter > 22) 
-                {
-                    CellAssignment(aTov, regularCell, regularQty, assignedRegularOrder, stdCellOrderIndex);
-                    counter += 22;
                 }                
                 else  if(assignedRegularFractionCellOrder.Contains(assignedRegularOrder[stdCellOrderIndex]))
                 {
@@ -3163,6 +3158,11 @@ namespace CodingConsoleApp
                     
                     CellAssignment(newFractionList, regularCell, regularQty, assignedRegularOrder, stdCellOrderIndex);
                     counter += newFractionList.Count;
+                }
+                else if (regularQty - counter > 22)
+                {
+                    CellAssignment(aTov, regularCell, regularQty, assignedRegularOrder, stdCellOrderIndex);
+                    counter += 22;
                 }
                 else
                 {
@@ -3273,167 +3273,7 @@ namespace CodingConsoleApp
             }           
         }
 
-        private static Tuple<List<string>, List<string>, List<string>, List<string>> CustomCalculation(int id, int customSuperQuantity, int customStandardQuantity, List<string> superCell, List<string> stdCell)
-        {
-
-
-
-           
-
-            List<string> newSuperCell = new List<string>();
-            List<string> newStdCell = new List<string>();
-            List<string> superLockingCell = new List<string>();
-            List<string> lockingCell = new List<string>();
-
-            List<string> superReorderLast = new List<string>();
-            List<string> superReorderFirst = new List<string>();
-
-
-            if ((customSuperQuantity > 0) && (customStandardQuantity > 0))
-            {
-                if (superCell.Count > 66)
-                {
-                    superReorderLast = superCell.Skip(66).ToList();
-                    superReorderFirst = superCell.Take(66).ToList();
-
-                    if (superCell.Count == 89)
-                    {
-                        superReorderLast.Remove("7Y");
-                        superCell = new List<string> { "7Y" };
-                    }
-                    else
-                    {
-                        superCell = new List<string>();
-                    }
-
-                    superCell.AddRange(superReorderLast);
-                    superCell.AddRange(superReorderFirst);
-                }
-
-                newSuperCell = superCell.Take(superCell.Count - customSuperQuantity).ToList();
-                superLockingCell = superCell.Skip(superCell.Count - customSuperQuantity).ToList();
-                //.....................
-                stdCell.Remove("6X");
-                stdCell.Remove("7Y");
-                newStdCell = stdCell;
-
-                stdCell = new List<string> { "6X", "7Y" };
-                stdCell.AddRange(newStdCell);
-
-                newStdCell = stdCell.Take(stdCell.Count - customStandardQuantity).ToList();
-                lockingCell = stdCell.Skip(stdCell.Count - customStandardQuantity).ToList();
-
-                superCell = newSuperCell;
-                stdCell = newStdCell;
-            }
-            else if (customSuperQuantity > 0)
-            {
-                if (superCell.Count > 66)
-                {
-                    superReorderLast = superCell.Skip(66).ToList();
-                    superReorderFirst = superCell.Take(66).ToList();
-
-                    if (superCell.Count == 89)
-                    {
-                        superReorderLast.Remove("7Y");
-                        superCell = new List<string> { "7Y" };
-                    }
-                    else
-                    {
-                        superCell = new List<string>();
-                    }
-
-                    superCell.AddRange(superReorderLast);
-                    superCell.AddRange(superReorderFirst);
-                }
-
-                newSuperCell = superCell.Take(superCell.Count - customSuperQuantity).ToList();
-                superLockingCell = superCell.Skip(superCell.Count - customSuperQuantity).ToList();
-                superCell = newSuperCell;
-            }
-            else if (customStandardQuantity > 0)
-            {
-                stdCell.Remove("6X");
-                stdCell.Remove("7Y");
-                newStdCell = stdCell;
-
-                stdCell = new List<string> { "6X" , "7Y"};
-                stdCell.AddRange(newStdCell);
-
-                newStdCell = stdCell.Take(stdCell.Count - customStandardQuantity).ToList();
-                lockingCell = stdCell.Skip(stdCell.Count - customStandardQuantity).ToList();
-                stdCell = newStdCell;
-            }
-
-            return new Tuple<List<string>, List<string>, List<string>, List<string>>(superCell, lockingCell, superLockingCell, stdCell);
-        }
-
         #endregion
-
-        private static Tuple<string[], string[], string[], string[]> SuperAndStandardQuantityCalculation(int id, int customSuperQuantity, int customStandardQuantity, string[] superCell, string[] stdCell)
-        {
-            string[] newSuperCell = new string[0];
-            string[] newStdCell = new string[0];
-            string[] superLockingCell = new string[0];
-            string[] lockingCell = new string[0];
-
-            if ((customSuperQuantity > 0) && (customStandardQuantity > 0) )
-            {
-                newSuperCell = new string[superCell.Length - customSuperQuantity];
-                for (int i = 0; i < newSuperCell.Length; i++)
-                {
-                    newSuperCell[i] = superCell[i];
-                }
-                superLockingCell = superCell.Except(newSuperCell).ToArray();
-
-                //.....................
-
-                newStdCell = new string[stdCell.Length - customStandardQuantity];
-                for (int i = 0; i < newStdCell.Length; i++)
-                {
-                    newStdCell[i] = stdCell[i];
-                }
-                if (id != 10)
-                {
-                    newStdCell[newStdCell.Length - 1] = "Z";
-                    newStdCell[newStdCell.Length - 2] = "Y";
-                }
-
-                lockingCell = stdCell.Except(newStdCell).ToArray();
-                return new Tuple<string[], string[], string[], string[]>(newSuperCell, lockingCell, superLockingCell, newStdCell);
-            } 
-            else if (customSuperQuantity > 0)
-            {
-                newSuperCell = new string[superCell.Length - customSuperQuantity];
-                for (int i = 0; i < newSuperCell.Length; i++)
-                {
-                    newSuperCell[i] = superCell[i];
-                }
-                superLockingCell = superCell.Except(newSuperCell).ToArray();
-
-                return new Tuple<string[], string[], string[], string[]>(newSuperCell, lockingCell, superLockingCell, stdCell);
-
-            }
-            else if (customStandardQuantity > 0)
-            {
-                newStdCell = new string[stdCell.Length - customStandardQuantity];
-                for (int i = 0; i < newStdCell.Length; i++)
-                {
-                    newStdCell[i] = stdCell[i];
-                }
-                if (id != 10)
-                {
-                    newStdCell[newStdCell.Length - 1] = "Z";
-                    newStdCell[newStdCell.Length - 2] = "Y";
-                }
-
-                lockingCell = stdCell.Except(newStdCell).ToArray();
-
-                return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, newStdCell);
-            }
-
-            return new Tuple<string[], string[], string[], string[]>(superCell, lockingCell, superLockingCell, stdCell);
-        }
 
 
         public static double FindMedianSortedArrays(int[] nums1, int[] nums2)
@@ -3984,8 +3824,11 @@ namespace CodingConsoleApp
             int[] a = { 3, 1, 5, 8 };
 
 
+            //  S, SL, L
+            Max2CellCalculationNew(1, 76, 27, 36);
 
-            Console.WriteLine(BalancedStringSplit(""));
+            //Max2CellCalculationNew(1, 60, 40, 24); // 200 - 
+            //Console.WriteLine(BalancedStringSplit(""));
 
             // Console.WriteLine(MaxNumberOfBalloons(""));
 
