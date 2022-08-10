@@ -3839,11 +3839,22 @@ namespace CodingConsoleApp
 
 
             //  S, SL, L
+
+            Max2CellCalculationNew(1, 58, 57, 49);
+
+            Max2CellCalculationNew(1, 25, 20, 20);
+
+            //Max2CellCalculationNew(1, 23, 10, 5);
+
+            //Max2CellCalculationNew(1, 44, 34, 12);
+
+            //Max2CellCalculationNew(1, 88, 58 ,16);
+
             // Max2CellCalculationNew(1, 89, 80, 20);
-           
+
             //Max2CellCalculationNew(1, 76, 27, 36);
-           
-            Max2CellCalculationNew(1, 60, 40, 24); // 200 - 
+
+            // Max2CellCalculationNew(1, 60, 40, 24); // 200 - 
 
             //Console.WriteLine(BalancedStringSplit(""));
 
