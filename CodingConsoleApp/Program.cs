@@ -3631,6 +3631,74 @@ namespace CodingConsoleApp
 
                 }
             }
+            else if (id == 3)
+            {
+                superQt = 0;
+                superLockQty = 36;
+                lockingQty = 128;
+
+
+                foreach (var item in aTov) // 22
+                    superLockingCell.Add(item + "2");
+
+                foreach (var item in aToN) // 14
+                    superLockingCell.Add(item + "4");
+
+                for (var i = 1; i < 10; i++)
+                {
+                    if (i == 5 || i == 6 || i == 7 || i == 8 || i == 9)
+                        foreach (var item in aTov)
+                            lockingCell.Add(item + i);
+                    if (i == 3 || i == 4)
+                        foreach (var item in oToV)
+                            lockingCell.Add(item + i);
+                }
+
+                lockingCell.Add("6X");
+                lockingCell.Add("7Y");
+            }
+            else if (id == 4)
+            {
+                superQt = 0;
+                superLockQty = 45;
+                lockingQty = 110;
+
+                foreach (var item in aTov) superLockingCell.Add(item + "2");
+                foreach (var item in aTov) superLockingCell.Add(item + "4");
+                superLockingCell.Add("7Y");
+
+                for (var i = 1; i < 10; i++)
+                    if (i == 5 || i == 6 || i == 7 || i == 8 || i == 9)
+                        foreach (var item in aTov)
+                            lockingCell.Add(item + i);
+            }
+            else if (id == 5) // Max-Lite 2
+            {
+                superQt = 88;
+                regularQty = 22;
+
+                foreach (var item in aTov) // 22
+                    regularCell.Add(item + "5");
+
+                for (var i = 4; i < 10; i++) // { "4", "7", "9", "2" };
+                    if (i == 4 || i == 7 || i == 9)
+                        foreach (var item in aTov)
+                            superCell.Add(item + i);
+
+                foreach (var item in aTov) superCell.Add(item + "2");
+
+                var assignedSupperOrder = new List<string> { "4", "7", "9", "2" };
+                var assignedRegularOrder = new List<string> { "5" };
+                var assignedSupperFractionCell = new List<string>();
+                var assignedRegularFractionCell = new List<string>();
+                var assignedRegularFractionCellOrder = new List<string>();
+
+                DynamicLockingAndSuperLocking(superLockQty, lockingQty, superMax, aTov, assignedSupperOrder,
+                    assignedSupperFractionCell, assignedRegularOrder, superCell, superLockingCell, lockingCell, regularCell,
+                    assignedRegularFractionCell, assignedRegularFractionCellOrder);
+
+            }
+
 
 
             return new Tuple<List<string>, List<string>, List<string>, List<string>, string>(superCell, lockingCell, superLockingCell, regularCell, msg);
@@ -3638,7 +3706,41 @@ namespace CodingConsoleApp
 
         }
 
-        private static void RegularCellCalculationBasedOnSuper(List<string> regularCell, int regularQty, int superQt, int superMax, List<string> aTov, List<string> regularOrder, List<string> assignedSupperOrder, List<string> assignedSupperFractionCell, List<string> assignedRegularOrder, List<string> assignedRegularFractionCell, List<string> assignedRegularFractionCellOrder)
+        public static void DynamicLockingAndSuperLocking(int superLockQty, int lockingQty, int superMax, List<string> aTov,
+          List<string> assignedSupperOrder, List<string> assignedSupperFractionCell, List<string> assignedRegularOrder,
+          List<string> superCell, List<string> superLockingCell, List<string> lockingCell, List<string> regularCell,
+          List<string> assignedRegularFractionCell, List<string> assignedRegularFractionCellOrder)
+        {
+            if (superLockQty > 0 || lockingQty > 0)
+            {
+                if (assignedSupperOrder.Contains("2"))
+                {
+                    assignedSupperOrder.Remove("2");
+                    assignedSupperOrder.Reverse();
+                    assignedSupperOrder.Add("2");
+                }
+                else
+                {
+                    assignedSupperOrder.Reverse();
+                }
+
+                var supperLockingOrder = assignedSupperOrder;
+                assignedSupperOrder = new List<string>();
+                string assignedSupperFractionCellNo = "";
+                SuperLockingCellCalculation(superLockingCell, superLockQty, superMax, aTov, supperLockingOrder,
+                    assignedSupperOrder, assignedSupperFractionCell, assignedSupperFractionCellNo);
+                superCell = superCell.Except(superLockingCell).ToList();
+
+                assignedRegularOrder.Reverse();
+                RegularCellCalculationBasedOnRegular(lockingCell, lockingQty, aTov, assignedRegularOrder,
+                    assignedRegularFractionCell, assignedRegularFractionCellOrder);
+
+                regularCell = regularCell.Except(lockingCell).ToList();
+            }
+        }
+
+
+        public static void RegularCellCalculationBasedOnSuper(List<string> regularCell, int regularQty, int superQt, int superMax, List<string> aTov, List<string> regularOrder, List<string> assignedSupperOrder, List<string> assignedSupperFractionCell, List<string> assignedRegularOrder, List<string> assignedRegularFractionCell, List<string> assignedRegularFractionCellOrder)
         {
             int stdCellOrderIndex = 0;
             while (regularCell.Count != regularQty)
@@ -3677,7 +3779,7 @@ namespace CodingConsoleApp
         }
 
 
-        private static void RegularCellCalculationBasedOnRegular(List<string> regularCell, int regularQty, List<string> aTov, List<string> assignedRegularOrder, List<string> assignedRegularFractionCell, List<string> assignedRegularFractionCellOrder)
+        public static void RegularCellCalculationBasedOnRegular(List<string> regularCell, int regularQty, List<string> aTov, List<string> assignedRegularOrder, List<string> assignedRegularFractionCell, List<string> assignedRegularFractionCellOrder)
         {
             int stdCellOrderIndex = 0; int counter = 0;
             while (regularCell.Count != regularQty)
@@ -3720,7 +3822,7 @@ namespace CodingConsoleApp
         }
 
 
-        private static void SuperCellCalculation(List<string> superCell, int superQt, int superMax, List<string> aTov, List<string> supperOrder, List<string> assignedSupperOrder, List<string> assignedSupperFractionCell, ref string assignedSupperFractionCellNo)
+        public static void SuperCellCalculation(List<string> superCell, int superQt, int superMax, List<string> aTov, List<string> supperOrder, List<string> assignedSupperOrder, List<string> assignedSupperFractionCell, ref string assignedSupperFractionCellNo)
         {
             int supperOrderIndex = 0;
 
@@ -3757,7 +3859,7 @@ namespace CodingConsoleApp
             }
         }
 
-        private static void SuperLockingCellCalculation(List<string> superCell, int superQt, int superMax, List<string> aTov, List<string> supperOrder, List<string> assignedSupperOrder, List<string> assignedSupperFractionCell, string assignedSupperFractionCellNo)
+        public static void SuperLockingCellCalculation(List<string> superCell, int superQt, int superMax, List<string> aTov, List<string> supperOrder, List<string> assignedSupperOrder, List<string> assignedSupperFractionCell, string assignedSupperFractionCellNo)
         {
             int supperOrderIndex = 0; int counter = 0;
 
@@ -3797,7 +3899,7 @@ namespace CodingConsoleApp
             }
         }
 
-        private static void CellAssignmentForSuperAndSuperLocking(List<string> aTov, List<string> superCell, int superQt, int superMax, List<string> supperOrder, int supperOrderIndex, List<string> assignedSupperFractionCell)
+        public static void CellAssignmentForSuperAndSuperLocking(List<string> aTov, List<string> superCell, int superQt, int superMax, List<string> supperOrder, int supperOrderIndex, List<string> assignedSupperFractionCell)
         {
             foreach (var item in aTov)
             {
@@ -3814,7 +3916,7 @@ namespace CodingConsoleApp
 
         }
 
-        private static void CellAssignment(List<string> aTov, List<string> regularCell, int regularQty, List<string> regularOrder, int stdCellOrderIndex)
+        public static void CellAssignment(List<string> aTov, List<string> regularCell, int regularQty, List<string> regularOrder, int stdCellOrderIndex)
         {
             foreach (var item in aTov)
             {
@@ -3828,6 +3930,9 @@ namespace CodingConsoleApp
                 }
             }
         }
+
+
+
 
         #endregion
 
