@@ -3291,6 +3291,52 @@ namespace CodingConsoleApp
             return Convert.ToInt32(n);
         }
 
+        static int decodeArray1(int[] a)
+        {
+            //{0, 1, 1, 1, 1, 1, 0, 1}
+            // {0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1}
+            string s = "";
+
+            int countZero = 0;
+            if (a[0] == 0)
+            {
+                countZero = 1;
+            }
+            else if(a[0] == 1)
+            {
+                s = "1";
+            }
+            else if (a[0] < 0)
+            {
+                s = "-";
+            }
+
+
+            for (int i = 1; i < a.Length; i++)
+            {
+                if (a[i] == 0 && a[i-1] == a[i])
+                {
+                    countZero++;
+                }
+                else if (a[i] == 0 && a[i - 1] == 1)
+                {
+                    countZero++;
+                }
+                else if(a[i] == 1 && countZero > 0)
+                {
+                    s += countZero.ToString();
+                    countZero = 0;
+                }
+                else if (a[i] == 1 && countZero == 0)
+                {
+                    s += "1";
+                    countZero = 0;
+                }
+            }
+
+            return Convert.ToInt32(s);
+        }
+
         static int isZeroPlentiful(int[] a)
         {
             int count = 0;
@@ -3932,22 +3978,79 @@ namespace CodingConsoleApp
         }
 
 
+        static void  doIntegerBasedRounding(int[] a, int n)
+        {
+            //{-18, 1, 2, 3, 4, 5} 4
 
+            for (int i = 0; i < a.Length; i++)
+            {
+                if (a[i] > 0 && a[i] < n)
+                {
+                    int zer0Diff = a[i] - 0;
+                    int nDiff = n - a[i];
+
+                    if (zer0Diff == nDiff)
+                    {
+                        a[i] = n;
+                    }
+                    else if(zer0Diff < nDiff)
+                    {
+                        a[i] = 0; //
+                    }
+                    else if (nDiff < zer0Diff)
+                    {
+                        a[i] = n;
+                    }
+                }
+                else if (a[i] > 0 && a[i] > n)
+                {
+                    int d = a[i] / n;
+
+                    int zer0Diff = a[i] - d * n;
+                    int nDiff = (d + 1) * n - a[i];
+
+                    if (zer0Diff == nDiff)
+                    {
+                        a[i] = (d + 1) * n;
+                    }
+                    else if (zer0Diff < nDiff)
+                    {
+                        a[i] = d*n; //
+                    }
+                    else if (nDiff < zer0Diff)
+                    {
+                        a[i] = (d+1)*n;
+                    }
+
+                }
+            }
+
+            Console.WriteLine(".....");
+        }
 
         #endregion
+
+        static int isOnionArray(int[] a)
+        {
+            return 0;
+        }
 
         static void Main(string[] args)
         {
 
             int[] nums1 = { 1, 2 };
-            int[] a = { 3, 1, 5, 8 };
+            int[] a = { -18, 1, 2, 3, 4, 5 };
+            int[] b = { 1, 2, 3, 4, 5 };
+            //doIntegerBasedRounding(b, 3);
+            int[] c = { -1, 0, 1,1 };
 
+            int r = decodeArray1(c);
 
             //  S, SL, L
 
-            Max2CellCalculationNew(1, 58, 57, 49);
+            //Max2CellCalculationNew(1, 58, 57, 49);
 
-            Max2CellCalculationNew(1, 25, 20, 20);
+            //Max2CellCalculationNew(1, 25, 20, 20);
 
             //Max2CellCalculationNew(1, 23, 10, 5);
 
