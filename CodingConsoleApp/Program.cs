@@ -3671,7 +3671,15 @@ namespace CodingConsoleApp
                     superCell = superCell.Except(superLockingCell).ToList();
 
                     assignedRegularOrder.Reverse();
-                    RegularCellCalculationBasedOnRegular(lockingCell, lockingQty, aTov, assignedRegularOrder, assignedRegularFractionCell, assignedRegularFractionCellOrder);
+                   
+                    bool isfullLocking = false;
+                    if (superQt == superLockQty)
+                    {
+                        lockingQty = lockingQty - 2;
+                        isfullLocking = true;
+                    }
+
+                    RegularCellCalculationBasedOnRegular(lockingCell, lockingQty, aTov, assignedRegularOrder, assignedRegularFractionCell, assignedRegularFractionCellOrder, isfullLocking);
 
                     regularCell = regularCell.Except(lockingCell).ToList();
 
@@ -3778,8 +3786,12 @@ namespace CodingConsoleApp
                 superCell = superCell.Except(superLockingCell).ToList();
 
                 assignedRegularOrder.Reverse();
+
+
                 RegularCellCalculationBasedOnRegular(lockingCell, lockingQty, aTov, assignedRegularOrder,
-                    assignedRegularFractionCell, assignedRegularFractionCellOrder);
+                    assignedRegularFractionCell, assignedRegularFractionCellOrder, false);
+
+
 
                 regularCell = regularCell.Except(lockingCell).ToList();
             }
@@ -3825,11 +3837,12 @@ namespace CodingConsoleApp
         }
 
 
-        public static void RegularCellCalculationBasedOnRegular(List<string> regularCell, int regularQty, List<string> aTov, List<string> assignedRegularOrder, List<string> assignedRegularFractionCell, List<string> assignedRegularFractionCellOrder)
+        public static void RegularCellCalculationBasedOnRegular(List<string> regularCell, int regularQty, List<string> aTov, List<string> assignedRegularOrder, List<string> assignedRegularFractionCell, List<string> assignedRegularFractionCellOrder, bool isfullLocking)
         {
             int stdCellOrderIndex = 0; int counter = 0;
             while (regularCell.Count != regularQty)
             {
+
                 if (regularCell.Count == 0 && regularQty - counter < 22) // initial 0-200
                 {
                     List<string> newList = aTov.Take(regularQty).ToList();
@@ -3863,6 +3876,12 @@ namespace CodingConsoleApp
                     counter += newList.Count;
                 }
                 stdCellOrderIndex++;
+            }
+
+            if (isfullLocking)
+            {
+                regularCell.Add("6X");
+                regularCell.Add("7Y");
             }
 
         }
@@ -4044,25 +4063,27 @@ namespace CodingConsoleApp
             //doIntegerBasedRounding(b, 3);
             int[] c = { -1, 0, 1,1 };
 
-            int r = decodeArray1(c);
+            //int r = decodeArray1(c);
 
             //  S, SL, L
 
-            //Max2CellCalculationNew(1, 58, 57, 49);
+           // Max2CellCalculationNew(1, 44, 44, 112);
+
+           // Max2CellCalculationNew(1, 58, 57, 49);
 
             //Max2CellCalculationNew(1, 25, 20, 20);
 
-            //Max2CellCalculationNew(1, 23, 10, 5);
+           // Max2CellCalculationNew(1, 23, 10, 5);
 
-            //Max2CellCalculationNew(1, 44, 34, 12);
+           // Max2CellCalculationNew(1, 44, 34, 12);
 
             //Max2CellCalculationNew(1, 88, 58 ,16);
 
-            // Max2CellCalculationNew(1, 89, 80, 20);
+             //Max2CellCalculationNew(1, 89, 80, 20);
 
             //Max2CellCalculationNew(1, 76, 27, 36);
 
-            // Max2CellCalculationNew(1, 60, 40, 24); // 200 - 
+             Max2CellCalculationNew(1, 60, 40, 24); // 200 - 
 
             //Console.WriteLine(BalancedStringSplit(""));
 
