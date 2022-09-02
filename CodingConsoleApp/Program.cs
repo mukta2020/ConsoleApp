@@ -3649,41 +3649,52 @@ namespace CodingConsoleApp
                 List<string> assignedRegularFractionCellOrder = new List<string>();
 
                 RegularCellCalculationBasedOnSuper(regularCell, regularQty, superQt, superMax, aTov, regularOrder, assignedSupperOrder, assignedSupperFractionCell, assignedRegularOrder, assignedRegularFractionCell, assignedRegularFractionCellOrder);
+                
+                var tupleResult = DynamicLockingAndSuperLocking(superLockQty, lockingQty, superMax, aTov, assignedSupperOrder,
+                   assignedSupperFractionCell, assignedRegularOrder, superCell, superLockingCell, lockingCell, regularCell,
+                   assignedRegularFractionCell, assignedRegularFractionCellOrder, superQt);
+
+                superCell = tupleResult.Item1;
+                lockingCell = tupleResult.Item2;
+                superLockingCell = tupleResult.Item3;
+                regularCell = tupleResult.Item4;
 
 
-                if ((superLockQty > 0) || (lockingQty > 0))
-                {
-                    if (assignedSupperOrder.Contains("2"))
-                    {
-                        assignedSupperOrder.Remove("2");
-                        assignedSupperOrder.Reverse();
-                        assignedSupperOrder.Add("2");
-                    }
-                    else
-                    {
-                        assignedSupperOrder.Reverse();
-                    }
+                //if ((superLockQty > 0) || (lockingQty > 0))
+                //{
+                //    if (assignedSupperOrder.Contains("2"))
+                //    {
+                //        assignedSupperOrder.Remove("2");
+                //        assignedSupperOrder.Reverse();
+                //        assignedSupperOrder.Add("2");
+                //    }
+                //    else
+                //    {
+                //        assignedSupperOrder.Reverse();
+                //    }
 
-                    List<string> supperLockingOrder = assignedSupperOrder;
-                    assignedSupperOrder = new List<string>();
+                //    List<string> supperLockingOrder = assignedSupperOrder;
+                //    assignedSupperOrder = new List<string>();
 
-                    SuperLockingCellCalculation(superLockingCell, superLockQty, superMax, aTov, supperLockingOrder, assignedSupperOrder, assignedSupperFractionCell, assignedSupperFractionCellNo);
-                    superCell = superCell.Except(superLockingCell).ToList();
+                //    SuperLockingCellCalculation(superLockingCell, superLockQty, superMax, aTov, supperLockingOrder, assignedSupperOrder, assignedSupperFractionCell, assignedSupperFractionCellNo);
+                //    superCell = superCell.Except(superLockingCell).ToList();
 
-                    assignedRegularOrder.Reverse();
-                   
-                    bool isfullLocking = false;
-                    if (superQt == superLockQty)
-                    {
-                        lockingQty = lockingQty - 2;
-                        isfullLocking = true;
-                    }
+                //    assignedRegularOrder.Reverse();
 
-                    RegularCellCalculationBasedOnRegular(lockingCell, lockingQty, aTov, assignedRegularOrder, assignedRegularFractionCell, assignedRegularFractionCellOrder, isfullLocking);
+                //    bool isfullLocking = false;
+                //    if (superQt == superLockQty)
+                //    {
+                //        lockingQty = lockingQty - 2;
+                //        isfullLocking = true;
+                //    }
 
-                    regularCell = regularCell.Except(lockingCell).ToList();
+                //    RegularCellCalculationBasedOnRegular(lockingCell, lockingQty, aTov, assignedRegularOrder, assignedRegularFractionCell, assignedRegularFractionCellOrder, isfullLocking);
 
-                }
+                //    regularCell = regularCell.Except(lockingCell).ToList();
+
+                //}
+
+
             }
             else if (id == 3)
             {
@@ -3731,6 +3742,8 @@ namespace CodingConsoleApp
                 superQt = 88;
                 regularQty = 22;
 
+                // Note: Standard superQt = 88 and regularQty = 22 fixed.  so custom can not greater then that. right???
+
                 foreach (var item in aTov) // 22
                     regularCell.Add(item + "5");
 
@@ -3747,9 +3760,23 @@ namespace CodingConsoleApp
                 var assignedRegularFractionCell = new List<string>();
                 var assignedRegularFractionCellOrder = new List<string>();
 
-                DynamicLockingAndSuperLocking(superLockQty, lockingQty, superMax, aTov, assignedSupperOrder,
-                    assignedSupperFractionCell, assignedRegularOrder, superCell, superLockingCell, lockingCell, regularCell,
-                    assignedRegularFractionCell, assignedRegularFractionCellOrder);
+                if (superLockQty <= superQt && lockingQty <= regularQty)
+                {
+                    var tupleResult = DynamicLockingAndSuperLocking(superLockQty, lockingQty, superMax, aTov, assignedSupperOrder,
+                   assignedSupperFractionCell, assignedRegularOrder, superCell, superLockingCell, lockingCell, regularCell,
+                   assignedRegularFractionCell, assignedRegularFractionCellOrder, superQt);
+
+                    superCell = tupleResult.Item1;
+                    lockingCell = tupleResult.Item2;
+                    superLockingCell = tupleResult.Item3;
+                    regularCell = tupleResult.Item4;
+                }
+                else
+                {
+                    msg = "SuperLocking Quantity exceed the Super Quantity OR RegularLocking Quantity exceed the Regular Quantity";
+                }
+
+                
 
             }
 
@@ -3760,10 +3787,10 @@ namespace CodingConsoleApp
 
         }
 
-        public static void DynamicLockingAndSuperLocking(int superLockQty, int lockingQty, int superMax, List<string> aTov,
+        public static Tuple<List<string>, List<string>, List<string>, List<string> > DynamicLockingAndSuperLocking(int superLockQty, int lockingQty, int superMax, List<string> aTov,
           List<string> assignedSupperOrder, List<string> assignedSupperFractionCell, List<string> assignedRegularOrder,
           List<string> superCell, List<string> superLockingCell, List<string> lockingCell, List<string> regularCell,
-          List<string> assignedRegularFractionCell, List<string> assignedRegularFractionCellOrder)
+          List<string> assignedRegularFractionCell, List<string> assignedRegularFractionCellOrder, int superQt)
         {
             if (superLockQty > 0 || lockingQty > 0)
             {
@@ -3787,14 +3814,24 @@ namespace CodingConsoleApp
 
                 assignedRegularOrder.Reverse();
 
+                bool isfullLocking = false;
+                if (superQt == superLockQty)
+                {
+                    lockingQty = lockingQty - 2;
+                    isfullLocking = true;
+                }
 
                 RegularCellCalculationBasedOnRegular(lockingCell, lockingQty, aTov, assignedRegularOrder,
-                    assignedRegularFractionCell, assignedRegularFractionCellOrder, false);
+                    assignedRegularFractionCell, assignedRegularFractionCellOrder, isfullLocking);
 
 
 
                 regularCell = regularCell.Except(lockingCell).ToList();
             }
+
+            return new Tuple<List<string>, List<string>, List<string>, List<string> >(superCell, lockingCell, superLockingCell, regularCell );
+
+
         }
 
 
@@ -3849,7 +3886,7 @@ namespace CodingConsoleApp
                     CellAssignment(newList, regularCell, regularQty, assignedRegularOrder, stdCellOrderIndex);
                     counter += newList.Count;
                 }
-                else if (assignedRegularFractionCellOrder.Contains(assignedRegularOrder[stdCellOrderIndex]))
+                else if (stdCellOrderIndex > assignedRegularOrder.Count && assignedRegularFractionCellOrder.Contains(assignedRegularOrder[stdCellOrderIndex]))
                 {
                     List<string> newFractionList = assignedRegularFractionCell;
                     if (newFractionList.Count == 0)
@@ -4067,7 +4104,10 @@ namespace CodingConsoleApp
 
             //  S, SL, L
 
-           // Max2CellCalculationNew(1, 44, 44, 112);
+
+            //Max2CellCalculationNew(5, 44, 44, 24);
+
+            Max2CellCalculationNew(1, 44, 44, 112);
 
            // Max2CellCalculationNew(1, 58, 57, 49);
 
