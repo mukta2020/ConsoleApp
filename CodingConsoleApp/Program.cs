@@ -322,13 +322,33 @@ namespace CodingConsoleApp
 
         static bool isPrime(int n)
         {
-            for (int i = 2; i < n; i++)
+            if (n == 1) return false;
+            if (n == 2) return true;
+            if (n % 2 == 0) return false;
+
+            for (int i = 2; i <= n/2; i++)
             {
-                if (n % i == 0)
-                    return false;
+                if (n % i == 0)  return false;
             }
             return true;
         }
+
+        public static bool isPrime2(int n)
+        {
+            if (n == 1) return false;
+            if (n == 2) return true;
+            if (n % 2 == 0) return false;
+
+            for (int i = 2; i <= n / 2; i++)
+            {
+                if (n % i == 0) return false;
+            }
+
+            return true;
+
+        }
+
+
         static int isPrimeHappy(int n)
         {
             int primeSum = 0;
@@ -4091,8 +4111,263 @@ namespace CodingConsoleApp
             return 0;
         }
 
+
+        public static int[] computeHMS(int seconds)
+        {
+
+            int h = 0;
+            int m = 0;
+            int s = 0;
+
+            int[] a = new int[3];
+
+            if (seconds >= 3600)
+            {
+                h = seconds / 3600;
+                seconds = seconds % 3600;
+            }
+
+            if (seconds >= 60)
+            {
+                m = seconds / 60;
+                seconds = seconds % 60;
+            }
+
+            s = seconds;
+
+            a[0] = h;
+            a[1] = m;
+            a[2] = s;
+            return a;
+
+        }
+
+        public static int isMartian(int[] a)
+        {
+
+            int oneC = 0;
+            int twoC = 0;
+
+            if (a[0] == 1)
+                oneC += 1;
+            else if (a[0] == 2)
+                twoC += 1;
+
+            for (int i = 1; i < a.Length; i++)
+            {
+
+                if (a[i - 1] == a[i])
+                {
+                    return 0;
+                }
+
+                if (a[i] == 1)
+                    oneC += 1;
+                else if (a[i] == 2)
+                    twoC += 1;
+            }
+
+            if (oneC > twoC)
+                return 1;
+            else
+                return 0;
+
+        }
+
+        public static int isPairedN(int[] a, int n)
+        {
+            if (a.Length - 1 + a.Length - 2 < n)
+                return 0;
+
+            for (int i = 0; i < a.Length; i++)
+            {
+                for (int j = i + 1; j < a.Length; j++)
+                {
+                    if (i + j == n && a[i] + a[j] == n)
+                        return 1;
+
+                }
+            }
+
+            return 0;
+
+        }
+
+        public static int isNPrimeable1(int[] a, int n)
+        {
+            if (a.Length == 0)
+            {
+                return 1;
+            }
+
+            for (int i = 0; i < a.Length; i++)
+            {
+                int p = a[i] + n;
+                if (p == 1) return 0;
+
+                for (int j = 2; j <= p/2; j++)
+                {
+                    if (p % j == 0)
+                        return 0;
+                }
+
+            }
+            return 1;
+
+        }
+
+        public static int isNPrimeable(int[] a, int n)
+        {
+
+            if (a.Length == 0)
+            {
+                return 1;
+            }
+
+            for (int i = 0; i < a.Length; i++)
+            {
+                int p = a[i] + n;
+                if (!isPrime(p)) return 0;
+            }
+            return 1;
+
+        }
+
+        public static int is121Array1(int[] a)
+        {
+
+            if (a[0] != 1) return 0;
+            if (a[a.Length - 1] != 1) return 0;
+            int oneS = 1;
+            int oneE = 0;
+            int twoC = 0;
+
+            bool foneFound = true;
+            bool loneFound = false;
+            bool twoFound = false;
+
+            for (int i = 1; i < a.Length; i++)
+            {
+                if (foneFound && (a[i - 1] == a[i]) && (a[i] == 1)) { oneS += 1; }
+
+                else if ((a[i - 1] == 1) && (a[i] == 2)) { twoC = 1; twoFound = true; foneFound = false; }
+                else if (twoFound && (a[i - 1] == a[i]) && (a[i] == 2)) twoC += 1;
+
+                else if ((a[i - 1] == 2) && (a[i] == 1)) { oneE = 1; loneFound = true; twoFound = false; }
+                else if (loneFound && (a[i - 1] == a[i]) && (a[i] == 1)) oneE += 1;
+                else return 0;
+
+            }
+
+            if (oneS == oneE) return 1;
+            else return 0;
+
+        }
+
+        public static int[] pairwiseSum(int[] a)
+        {
+            if (a.Length % 2 != 0) return null;
+            if (a.Length == 0) return null;
+
+            int[] r = new int[a.Length / 2];
+            int k = 0;
+
+            for (int i = 0; i < a.Length; i = i + 2)
+            {
+                r[k] = a[i] + a[i + 1];
+                k += 1;
+            }
+
+            return r;
+
+        }
+
+
+        public static int isSquare(int n)
+        {
+
+            if (n < 0) return 0;
+
+            for (int i = 0; i < n / 2; i++)
+            {
+                if (i * i == n) return 1;
+            }
+
+            return 0;
+
+        }
+
+        public static int isComplete(int[] a)
+        {
+
+            bool even = false;
+            bool pSq = false;
+            bool sum8 = false;
+
+            for (int i = 0; i < a.Length; i++)
+            {
+                if (a[i] % 2 == 0) even = true;
+                if (!pSq) pSq = pSquare(a[i]);
+
+                for (int j = i + 1; j < a.Length; j++)
+                {
+                    if (a[i] + a[j] == 8) { sum8 = true; break; }
+                }
+
+            }
+
+            if (even && pSq && sum8) return 1;
+            else return 0;
+
+        }
+
+        public static bool pSquare(int n)
+        {
+            if (n < 0) return false;
+            for (int i = 0; i < n / 2; i++)
+            {
+                if (i * i == n) return true;
+            }
+            return false;
+        }
+
+        public static int loopSum(int[] a, int n)
+        {
+
+            int c = 0;
+            int s = 0;
+
+            while (c < n)
+            {
+                for (int i = 0; i < a.Length; i++)
+                {
+                    if (c == n) return s;
+                    s = s + a[i];
+                    c += 1;
+                }
+
+            }
+            return s;
+
+        }
+
         static void Main(string[] args)
         {
+
+            Console.WriteLine(loopSum(new int[] { 3 }, 10));
+
+            //Console.WriteLine(pairwiseSum(new int[] { 2, 1, 18, -5, -5, -15, 0, 0, 1, -1 } ));
+            //Console.WriteLine(pairwiseSum(new int[] { 2, 1, 18 } ));
+
+
+            //Console.WriteLine(is121Array1(new int[] { 1, 1, 2, 2, 2, 1, 1 }));
+            //Console.WriteLine(is121Array1(new int[] { 1, 1, 2, 2, 2, 1, 1, 1 }));
+            //Console.WriteLine(is121Array1(new int[] { 1, 1, 1, 2, 2, 2, 1, 1 }));
+            //Console.WriteLine(is121Array1(new int[] { 1, 1, 1, 2, 2, 2, 1, 1, 1, 3 }));
+            //Console.WriteLine(is121Array1(new int[] { 1, 1, 1, 2, 2, 2, 1, 1, 1, 2, 2 }));
+            //Console.WriteLine(is121Array1(new int[] { 1, 1, 1, 1, 1, 1 }));
+
+
 
             int[] nums1 = { 1, 2 };
             int[] a = { -18, 1, 2, 3, 4, 5 };
@@ -4102,28 +4377,38 @@ namespace CodingConsoleApp
 
             //int r = decodeArray1(c);
 
-            //  S, SL, L
 
+            //computeHMS(3735);
+            int[] d = {1, 2, 1, 2, 1, 2, 1, 2,1};
+            //Console.WriteLine(isMartian(d));
+
+            int[] e = {  };
+            //Console.WriteLine(isPairedN(e,0));
+            int[] f = { 2 };
+            //Console.WriteLine(isNPrimeable(f, 1));
+
+
+            //  S, SL, L
 
             //Max2CellCalculationNew(5, 44, 44, 24);
 
-            Max2CellCalculationNew(1, 44, 44, 112);
+            //Max2CellCalculationNew(1, 44, 44, 112);
 
-           // Max2CellCalculationNew(1, 58, 57, 49);
+            // Max2CellCalculationNew(1, 58, 57, 49);
 
             //Max2CellCalculationNew(1, 25, 20, 20);
 
-           // Max2CellCalculationNew(1, 23, 10, 5);
+            // Max2CellCalculationNew(1, 23, 10, 5);
 
-           // Max2CellCalculationNew(1, 44, 34, 12);
+            // Max2CellCalculationNew(1, 44, 34, 12);
 
             //Max2CellCalculationNew(1, 88, 58 ,16);
 
-             //Max2CellCalculationNew(1, 89, 80, 20);
+            //Max2CellCalculationNew(1, 89, 80, 20);
 
             //Max2CellCalculationNew(1, 76, 27, 36);
 
-             Max2CellCalculationNew(1, 60, 40, 24); // 200 - 
+            //Max2CellCalculationNew(1, 60, 40, 24); // 200 - 
 
             //Console.WriteLine(BalancedStringSplit(""));
 
