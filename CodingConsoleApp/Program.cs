@@ -449,6 +449,13 @@ namespace CodingConsoleApp
             else
                 return 0;
         }
+        public static int hasNValues(int[] a, int n)
+        {
+            var h = new HashSet<int>(a);
+            if (h.Count == n) return 1;
+            else return 0;
+        }
+
 
         static int is121ArrayFst(int[] a)
         {
@@ -4351,10 +4358,30 @@ namespace CodingConsoleApp
 
         }
 
+
+        public static int sameNumberOfFactors(int n1, int n2)
+        {
+            if (n1 == n2) return 1;
+            if (n1 < 0 || n2 < 0) return -1;
+
+            if (factor(n1) == factor(n2)) return 1;
+            else return 0;
+
+        }
+        public static int factor(int n)
+        {
+            int c = 0;
+            for (int i = 1; i <= n; i++)
+            {
+                if (n % i == 0) c += 1;
+            }
+            return c;
+        }
         static void Main(string[] args)
         {
 
-            Console.WriteLine(loopSum(new int[] { 3 }, 10));
+            Console.WriteLine(sameNumberOfFactors(23,97));
+            //Console.WriteLine(loopSum(new int[] { 3 }, 10));
 
             //Console.WriteLine(pairwiseSum(new int[] { 2, 1, 18, -5, -5, -15, 0, 0, 1, -1 } ));
             //Console.WriteLine(pairwiseSum(new int[] { 2, 1, 18 } ));
