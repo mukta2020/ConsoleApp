@@ -4377,10 +4377,45 @@ namespace CodingConsoleApp
             }
             return c;
         }
+
+        public static double eval(double x, int[] a)
+        {
+            double val = 0;
+            int l = a.Length;
+            val = a[0] + a[1] * x;
+            int i = 2;
+            while (i < l)
+            {
+                val += a[i] * pow(i, x);  // a[2] * x * x;
+                i++;
+            }
+            return val;
+        }
+
+        public static double pow(int i, double x)
+        {
+            double r = 1;
+            for (int j = 0; j < i; j++) { r = r * x; }
+            return r;
+        }
+
+        public static int isAllPossibilities(int[] a)
+        {
+
+            Array.Sort(a);
+
+            for (int i = 0; i < a.Length; i++)
+            {
+                if (i != a[i])  return 0;
+            }
+            return 1;
+
+        }
+
         static void Main(string[] args)
         {
 
-            Console.WriteLine(sameNumberOfFactors(23,97));
+            Console.WriteLine(eval(2.0,new int[] { 4, 0, 9 }));
             //Console.WriteLine(loopSum(new int[] { 3 }, 10));
 
             //Console.WriteLine(pairwiseSum(new int[] { 2, 1, 18, -5, -5, -15, 0, 0, 1, -1 } ));
