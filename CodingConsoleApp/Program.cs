@@ -4411,11 +4411,31 @@ namespace CodingConsoleApp
             return 1;
 
         }
+        public static int isLayered(int[] a)
+        {
+            int count = 1;
+            for (int i = 1; i < a.Length; i++)
+            {
+                if (a[i] >= a[i - 1])
+                {
+                    if ((count == 1) && (a[i] > a[i - 1])) return 0;
+                    if (a[i] > a[i - 1]) { count = 1; }
+                    else count++;
+                }
+                else return 0;
+            }
+
+            return 1;
+
+        }
 
         static void Main(string[] args)
         {
 
-            Console.WriteLine(eval(2.0,new int[] { 4, 0, 9 }));
+            Console.WriteLine(isLayered(new int[] { 1, 2, 2, 2, 3, 3 }));
+
+
+            //Console.WriteLine(eval(2.0,new int[] { 4, 0, 9 }));
             //Console.WriteLine(loopSum(new int[] { 3 }, 10));
 
             //Console.WriteLine(pairwiseSum(new int[] { 2, 1, 18, -5, -5, -15, 0, 0, 1, -1 } ));
