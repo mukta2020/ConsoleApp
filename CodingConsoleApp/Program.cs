@@ -3620,7 +3620,7 @@ namespace CodingConsoleApp
         }
         #region Dynamic cell calculation
 
-        private static Tuple<List<string>, List<string>, List<string>, List<string>, string> Max2CellCalculationNew(int? id, int superQt, int superLockQty, int lockingQty)
+        private static Tuple<List<string>, List<string>, List<string>, List<string>, string> Max2CellCalculationNew(int? id, int superQt, int superLockQty, int lockingQty, int configurationType)
         {
             List<string> superCell = new List<string>();
             List<string> superLockingCell = new List<string>();
@@ -3663,6 +3663,13 @@ namespace CodingConsoleApp
                 regularQty = (200 - superQt * 2) - 2; // 22
             }
 
+
+            if (configurationType == 3)
+            {
+                superLockQty = superQt;
+                lockingQty = regularQty;
+            }
+
             if (id == 1 || id == 2) // std mainfold and full mainfold
             {
                 List<string> assignedSupperOrder = new List<string>();
@@ -3676,50 +3683,15 @@ namespace CodingConsoleApp
                 List<string> assignedRegularFractionCellOrder = new List<string>();
 
                 RegularCellCalculationBasedOnSuper(regularCell, regularQty, superQt, superMax, aTov, regularOrder, assignedSupperOrder, assignedSupperFractionCell, assignedRegularOrder, assignedRegularFractionCell, assignedRegularFractionCellOrder);
-                
+
                 var tupleResult = DynamicLockingAndSuperLocking(superLockQty, lockingQty, superMax, aTov, assignedSupperOrder,
                    assignedSupperFractionCell, assignedRegularOrder, superCell, superLockingCell, lockingCell, regularCell,
-                   assignedRegularFractionCell, assignedRegularFractionCellOrder, superQt);
+                   assignedRegularFractionCell, assignedRegularFractionCellOrder, superQt, assignedSupperFractionCellNo);
 
                 superCell = tupleResult.Item1;
                 lockingCell = tupleResult.Item2;
                 superLockingCell = tupleResult.Item3;
                 regularCell = tupleResult.Item4;
-
-
-                //if ((superLockQty > 0) || (lockingQty > 0))
-                //{
-                //    if (assignedSupperOrder.Contains("2"))
-                //    {
-                //        assignedSupperOrder.Remove("2");
-                //        assignedSupperOrder.Reverse();
-                //        assignedSupperOrder.Add("2");
-                //    }
-                //    else
-                //    {
-                //        assignedSupperOrder.Reverse();
-                //    }
-
-                //    List<string> supperLockingOrder = assignedSupperOrder;
-                //    assignedSupperOrder = new List<string>();
-
-                //    SuperLockingCellCalculation(superLockingCell, superLockQty, superMax, aTov, supperLockingOrder, assignedSupperOrder, assignedSupperFractionCell, assignedSupperFractionCellNo);
-                //    superCell = superCell.Except(superLockingCell).ToList();
-
-                //    assignedRegularOrder.Reverse();
-
-                //    bool isfullLocking = false;
-                //    if (superQt == superLockQty)
-                //    {
-                //        lockingQty = lockingQty - 2;
-                //        isfullLocking = true;
-                //    }
-
-                //    RegularCellCalculationBasedOnRegular(lockingCell, lockingQty, aTov, assignedRegularOrder, assignedRegularFractionCell, assignedRegularFractionCellOrder, isfullLocking);
-
-                //    regularCell = regularCell.Except(lockingCell).ToList();
-
-                //}
 
 
             }
@@ -3786,12 +3758,13 @@ namespace CodingConsoleApp
                 var assignedSupperFractionCell = new List<string>();
                 var assignedRegularFractionCell = new List<string>();
                 var assignedRegularFractionCellOrder = new List<string>();
+                string assignedSupperFractionCellNo = "";
 
                 if (superLockQty <= superQt && lockingQty <= regularQty)
                 {
                     var tupleResult = DynamicLockingAndSuperLocking(superLockQty, lockingQty, superMax, aTov, assignedSupperOrder,
                    assignedSupperFractionCell, assignedRegularOrder, superCell, superLockingCell, lockingCell, regularCell,
-                   assignedRegularFractionCell, assignedRegularFractionCellOrder, superQt);
+                   assignedRegularFractionCell, assignedRegularFractionCellOrder, superQt, assignedSupperFractionCellNo);
 
                     superCell = tupleResult.Item1;
                     lockingCell = tupleResult.Item2;
@@ -3817,7 +3790,7 @@ namespace CodingConsoleApp
         public static Tuple<List<string>, List<string>, List<string>, List<string> > DynamicLockingAndSuperLocking(int superLockQty, int lockingQty, int superMax, List<string> aTov,
           List<string> assignedSupperOrder, List<string> assignedSupperFractionCell, List<string> assignedRegularOrder,
           List<string> superCell, List<string> superLockingCell, List<string> lockingCell, List<string> regularCell,
-          List<string> assignedRegularFractionCell, List<string> assignedRegularFractionCellOrder, int superQt)
+          List<string> assignedRegularFractionCell, List<string> assignedRegularFractionCellOrder, int superQt, string assignedSupperFractionCellNo)
         {
             if (superLockQty > 0 || lockingQty > 0)
             {
@@ -3834,7 +3807,8 @@ namespace CodingConsoleApp
 
                 var supperLockingOrder = assignedSupperOrder;
                 assignedSupperOrder = new List<string>();
-                string assignedSupperFractionCellNo = "";
+               // string assignedSupperFractionCellNo = "";
+
                 SuperLockingCellCalculation(superLockingCell, superLockQty, superMax, aTov, supperLockingOrder,
                     assignedSupperOrder, assignedSupperFractionCell, assignedSupperFractionCellNo);
                 superCell = superCell.Except(superLockingCell).ToList();
@@ -3851,10 +3825,9 @@ namespace CodingConsoleApp
                 RegularCellCalculationBasedOnRegular(lockingCell, lockingQty, aTov, assignedRegularOrder,
                     assignedRegularFractionCell, assignedRegularFractionCellOrder, isfullLocking);
 
-
-
                 regularCell = regularCell.Except(lockingCell).ToList();
             }
+
 
             return new Tuple<List<string>, List<string>, List<string>, List<string> >(superCell, lockingCell, superLockingCell, regularCell );
 
@@ -3913,7 +3886,7 @@ namespace CodingConsoleApp
                     CellAssignment(newList, regularCell, regularQty, assignedRegularOrder, stdCellOrderIndex);
                     counter += newList.Count;
                 }
-                else if (stdCellOrderIndex > assignedRegularOrder.Count && assignedRegularFractionCellOrder.Contains(assignedRegularOrder[stdCellOrderIndex]))
+                else if (stdCellOrderIndex < assignedRegularOrder.Count && assignedRegularFractionCellOrder.Contains(assignedRegularOrder[stdCellOrderIndex]))
                 {
                     List<string> newFractionList = assignedRegularFractionCell;
                     if (newFractionList.Count == 0)
@@ -4414,6 +4387,8 @@ namespace CodingConsoleApp
         public static int isLayered(int[] a)
         {
             int count = 1;
+            if (a.Length < 2) return 0;
+
             for (int i = 1; i < a.Length; i++)
             {
                 if (a[i] >= a[i - 1])
@@ -4429,10 +4404,53 @@ namespace CodingConsoleApp
 
         }
 
+        public static int isHollow(int[] a)
+        {
+            int pCount = 0;
+            int zCount = 0;
+            int fCount = 0;
+
+            for (int i = 0; i < a.Length; i++)
+            {
+                if ((zCount == 0) && (a[i] != 0)) pCount++;
+                else if ((pCount > 0) && (fCount == 0) && (a[i] == 0)) zCount++;
+                else if ((pCount > 0) && (zCount > 0) && (a[i] != 0)) fCount++;
+                else return 0;
+            }
+
+            if ((pCount == fCount) && (zCount > 2)) return 1;
+            else return 0;
+        }
+
+        public static int isConsectiveFactored(int n)
+        {
+            List<int> f = new List<int>();
+            while (n > 0)
+            {
+
+                int bn = n;
+                for (int i = 2; i < n / 2; i++)
+                {
+                    if (n % i == 0) { n = n / i; f.Add(i); break; }
+                }
+
+                if (bn == n) { f.Add(n); break; }
+            }
+
+            f.Sort();
+            for (int i = 1; i < f.Count; i++)
+            {
+                if (f[i - 1] + 1 == f[i]) return 1;
+            }
+            return 0;
+
+        }
+
         static void Main(string[] args)
         {
 
-            Console.WriteLine(isLayered(new int[] { 1, 2, 2, 2, 3, 3 }));
+            //Console.WriteLine(isConsectiveFactored(2));
+            //Console.WriteLine(isHollow(new int[] {2,0,1,0,0,0,2,2,2 }));
 
 
             //Console.WriteLine(eval(2.0,new int[] { 4, 0, 9 }));
@@ -4472,25 +4490,43 @@ namespace CodingConsoleApp
 
             //  S, SL, L
 
-            //Max2CellCalculationNew(5, 44, 44, 24);
 
-            //Max2CellCalculationNew(1, 44, 44, 112);
 
-            // Max2CellCalculationNew(1, 58, 57, 49);
+            // Max2CellCalculationNew(1, 27, 27, 144, 1);  // custom
 
-            //Max2CellCalculationNew(1, 25, 20, 20);
+            //Max2CellCalculationNew(1, 27, 27, 144, 1);  // standard
 
-            // Max2CellCalculationNew(1, 23, 10, 5);
+            // Max2CellCalculationNew(1, 27, 0, 0, 3); // full locking
 
-            // Max2CellCalculationNew(1, 44, 34, 12);
+            // Max2CellCalculationNew(1, 44, 0, 0, 3); // full locking
 
-            //Max2CellCalculationNew(1, 88, 58 ,16);
+            // Max2CellCalculationNew(1, 44, 44, 110, 2); // custom
 
-            //Max2CellCalculationNew(1, 89, 80, 20);
+            // Max2CellCalculationNew(5, 44, 44, 24, 3);
 
-            //Max2CellCalculationNew(1, 76, 27, 36);
 
-            //Max2CellCalculationNew(1, 60, 40, 24); // 200 - 
+
+           // Max2CellCalculationNew(1, 23, 10, 5,1);  // case no 1.
+
+           // Max2CellCalculationNew(1, 44, 34, 12,1);  // case no 2.
+
+           // Max2CellCalculationNew(1, 88, 58 ,16,1);  // case no 3.
+
+             //Max2CellCalculationNew(1, 89, 80, 20, 1); // case no 4.
+
+            // Max2CellCalculationNew(1, 76, 27, 36, 1); // case no 5.
+
+              Max2CellCalculationNew(1, 60, 40, 24,1);  // case no 6. 
+
+            // Max2CellCalculationNew(1, 25, 20, 20, 1);  // case no. 7. 
+
+            //Max2CellCalculationNew(1, 25, 23, 22, 1);  // case no. 8 
+
+            // Max2CellCalculationNew(1, 58, 57, 49,1);  // case no. 9 
+
+
+            // Max2CellCalculationNew(1, 27, 0, 0, 1);  // case no. 9.1  standard
+            Max2CellCalculationNew(1, 27, 27, 146, 1);  // case no. 9.1  standard
 
             //Console.WriteLine(BalancedStringSplit(""));
 
