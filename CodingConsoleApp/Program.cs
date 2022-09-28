@@ -3717,6 +3717,7 @@ namespace CodingConsoleApp
                 #endregion
 
 
+
                 List<string> assignedRegularOrder = new List<string>();
                 List<string> assignedRegularFractionCell = new List<string>();
                 List<string> assignedRegularFractionCellOrder = new List<string>();
