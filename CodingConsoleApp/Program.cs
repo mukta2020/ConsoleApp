@@ -3700,7 +3700,10 @@ namespace CodingConsoleApp
                     remainingCells = remainingCells.Except(exceptList).ToList();
                     newAssignedSupperOrder.AddRange(assignedSupperOrder);
                     newAssignedSupperOrder.RemoveAt(Convert.ToInt32(newAssignedSupperOrder.Count - 1));
-
+                }
+                else
+                {
+                    newAssignedSupperOrder.AddRange(assignedSupperOrder);
                 }
 
                 exceptList.Clear();
@@ -4561,15 +4564,18 @@ namespace CodingConsoleApp
 
 
 
-           // Max2CellCalculationNew(1, 27, 27, 146, 1);  // custom ok
+            // Max2CellCalculationNew(1, 27, 27, 146, 1);  // custom ok
 
             //Max2CellCalculationNew(1, 27, 0, 0, 3); // full locking
 
 
 
-            Max2CellCalculationNew(1, 23, 0, 0, 1);  // standard
+            // Max2CellCalculationNew(1, 23, 0, 0, 1);  // standard
 
-            // Max2CellCalculationNew(1, 44, 0, 0, 3); // full locking
+
+            Max2CellCalculationNew(1, 44, 0, 0, 1); // 66 , 22
+
+            //Max2CellCalculationNew(1, 44, 0, 0, 3); // full locking
 
 
 
