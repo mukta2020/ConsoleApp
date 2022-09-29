@@ -3682,44 +3682,8 @@ namespace CodingConsoleApp
                 string assignedSupperFractionCellNo ="";
 
                 SuperCellCalculation(superCell, superQt, superMax, aTov, supperOrder, assignedSupperOrder, assignedSupperFractionCell, ref assignedSupperFractionCellNo);
-
-                #region remainingCells
-
-                remainingCells = Max2FullCellLocation().Except(superCell).ToList();
-
-                List<string> exceptList = new List<string>();
-                List<string> newAssignedSupperOrder = new List<string>();
-
-                if (assignedSupperFractionCell.Count > 0)
-                {
-                    int last = Convert.ToInt32(assignedSupperOrder[assignedSupperOrder.Count - 1]) - 1;
-                    foreach (var item in assignedSupperFractionCell)
-                    {
-                        exceptList.Add(item + last.ToString());
-                    }
-                    remainingCells = remainingCells.Except(exceptList).ToList();
-                    newAssignedSupperOrder.AddRange(assignedSupperOrder);
-                    newAssignedSupperOrder.RemoveAt(Convert.ToInt32(newAssignedSupperOrder.Count - 1));
-                }
-                else
-                {
-                    newAssignedSupperOrder.AddRange(assignedSupperOrder);
-                }
-
-                exceptList.Clear();
-
-                foreach (var singleSupperOrder in newAssignedSupperOrder)
-                {
-                    string s = (Convert.ToInt32(singleSupperOrder) - 1).ToString();
-                    foreach (var item in aTov)
-                    {
-                        exceptList.Add(item + s);
-                    }
-                }
-                remainingCells = remainingCells.Except(exceptList).ToList();
-                #endregion
-
-
+               
+                ReverseCellCalculation(ref remainingCells, superCell, assignedSupperFractionCell,assignedSupperOrder,aTov);
 
                 List<string> assignedRegularOrder = new List<string>();
                 List<string> assignedRegularFractionCell = new List<string>();
@@ -3799,6 +3763,8 @@ namespace CodingConsoleApp
                             superCell.Add(item + i);
 
                 foreach (var item in aTov) superCell.Add(item + "2");
+
+
 
                 var assignedSupperOrder = new List<string> { "4", "7", "9", "2" };
                 var assignedRegularOrder = new List<string> { "5" };
@@ -3880,6 +3846,47 @@ namespace CodingConsoleApp
 
         }
 
+        public static void ReverseCellCalculation(ref List<string> remainingCells, List<string> superCell, 
+            List<string> assignedSupperFractionCell, List<string> assignedSupperOrder , List<string> aTov)
+        {
+            #region remainingCells
+
+            remainingCells = Max2FullCellLocation().Except(superCell).ToList();
+
+            List<string> exceptList = new List<string>();
+            List<string> newAssignedSupperOrder = new List<string>();
+
+            if (assignedSupperFractionCell.Count > 0)
+            {
+                int last = Convert.ToInt32(assignedSupperOrder[assignedSupperOrder.Count - 1]) - 1;
+                foreach (var item in assignedSupperFractionCell)
+                {
+                    exceptList.Add(item + last.ToString());
+                }
+                remainingCells = remainingCells.Except(exceptList).ToList();
+                newAssignedSupperOrder.AddRange(assignedSupperOrder);
+                newAssignedSupperOrder.RemoveAt(Convert.ToInt32(newAssignedSupperOrder.Count - 1));
+            }
+            else
+            {
+                newAssignedSupperOrder.AddRange(assignedSupperOrder);
+            }
+
+            exceptList.Clear();
+
+            foreach (var singleSupperOrder in newAssignedSupperOrder)
+            {
+                string s = (Convert.ToInt32(singleSupperOrder) - 1).ToString();
+                foreach (var item in aTov)
+                {
+                    exceptList.Add(item + s);
+                }
+            }
+            remainingCells = remainingCells.Except(exceptList).ToList();
+            #endregion
+
+
+        }
 
         public static void RegularCellCalculationBasedOnSuper(List<string> regularCell, int regularQty, int superQt, int superMax, List<string> aTov, List<string> regularOrder, List<string> assignedSupperOrder, List<string> assignedSupperFractionCell, List<string> assignedRegularOrder, List<string> assignedRegularFractionCell, List<string> assignedRegularFractionCellOrder)
         {
