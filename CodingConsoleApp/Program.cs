@@ -4573,7 +4573,7 @@ namespace CodingConsoleApp
             // Max2CellCalculationNew(1, 23, 0, 0, 1);  // standard
 
 
-            Max2CellCalculationNew(1, 44, 0, 0, 1); // 66 , 22
+            Max2CellCalculationNew(1, 66, 0, 0, 1); // 66 , 22
 
             //Max2CellCalculationNew(1, 44, 0, 0, 3); // full locking
 
