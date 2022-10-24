@@ -3765,13 +3765,16 @@ namespace CodingConsoleApp
                 foreach (var item in aTov) superCell.Add(item + "2");
 
 
-
                 var assignedSupperOrder = new List<string> { "4", "7", "9", "2" };
                 var assignedRegularOrder = new List<string> { "5" };
                 var assignedSupperFractionCell = new List<string>();
                 var assignedRegularFractionCell = new List<string>();
                 var assignedRegularFractionCellOrder = new List<string>();
                 string assignedSupperFractionCellNo = "";
+
+
+                ReverseCellCalculation(ref remainingCells, superCell, assignedSupperFractionCell, assignedSupperOrder, aTov);
+
 
                 if (superLockQty <= superQt && lockingQty <= regularQty)
                 {
@@ -3855,6 +3858,13 @@ namespace CodingConsoleApp
 
             List<string> exceptList = new List<string>();
             List<string> newAssignedSupperOrder = new List<string>();
+
+            if (superCell.Count % 22 != 0)
+            {
+                int r = superCell.Count / 22;
+
+                //assignedSupperFractionCell = superCell.Take(r).ToList();
+            }
 
             if (assignedSupperFractionCell.Count > 0)
             {
@@ -4525,8 +4535,146 @@ namespace CodingConsoleApp
 
         }
 
+        public static List<string> ReverseSuperCellCalculation( List<string> superCell)
+        {
+            List<string> oppositeSuperCell = new List<string>();            
+
+            //        oposite Super Cell order = {"3", "6", "8", "1"};
+            var aTov = new List<string>
+            {
+                "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V"
+            };
+
+            foreach (var item in aTov) // 22
+            {
+                oppositeSuperCell.Add(item + "3");
+                oppositeSuperCell.Add(item + "6");
+                oppositeSuperCell.Add(item + "8");
+                oppositeSuperCell.Add(item + "1");
+            }
+
+            return oppositeSuperCell;
+        }
+
+        public static void updateMileagecounter1(int[] a, int miles) {
+
+            int total = a[0] + miles;
+            int carry = 0;
+            if (total > 9)
+            {
+                a[0] = total % 10;
+                carry = total / 10;
+            }
+            else
+            {
+                a[0] = total;
+            }
+
+            for (int i = 1; i < a.Length; i++)
+            {
+                if (carry > 0)
+                {
+                    total = a[i] + carry;
+                    a[i] = total % 10;
+                    carry = total / 10;
+                }
+                else
+                {
+                    a[i] = total;
+                }               
+            }
+
+        }
+
+
+        public static void updateMileagecounter(int[] a, int miles)
+        {
+            string[] resArr = new string[a.Length];
+            string digit = "";
+            int cout = 0;
+            for (int i = 0; i < a.Length; i++)
+            {
+                digit = digit + a[i].ToString();
+                cout++;
+            }
+            string revNum = reverseNumber(Convert.ToInt32(digit), cout, miles);
+
+            for (int j = resArr.Length - 1; j >= 0; j--)
+            {
+                resArr[j] = revNum[j].ToString();
+            }
+
+        }
+        public static string reverseNumber(int n, int numOfdigit, int miles)
+        {
+
+            int sum = 0;
+            while (n != 0)
+            {
+                int r = n % 10;
+                sum = sum * 10 + r;
+                n = n / 10;
+
+            }
+            sum = sum + miles;
+            var newString = sum.ToString().PadLeft(numOfdigit, '0');
+            return newString;
+        }
+
+        public static int isTwinPrime(int n)
+        {
+            if (! isPrime(n))
+            {
+                return 0;
+            }
+
+            if (isPrime(n) && isPrime(n+2))
+            {
+                return 1;
+            }
+            else if (isPrime(n) && isPrime(n - 2))
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+            
+
+        }
+        public static int isZeroBalanced(int[] a)
+        {
+            if (a.Length == 0) return 0;
+            if (a.Sum() != 0) return 0;
+            if (a.Length % 2 != 0) return 0;
+            Array.Sort(a);
+
+            for (int i = 0; i < a.Length/2 ; i++)
+            {
+                bool found = false;
+                for (int j = a.Length/2; j< a.Length ; j++)
+                {
+                    if (-a[i] == a[j])
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+                if (found == false) return 0;
+            }
+            return 1;
+                    
+        }
+
         static void Main(string[] args)
         {
+            int[] a1 = new int[] { 9, 9, 9 };
+            //updateMileagecounter(a1, 15);
+
+            
+
+            Console.WriteLine(isZeroBalanced(new int[] { 1, 4, -3, -2 }));
 
             //Console.WriteLine(isConsectiveFactored(2));
             //Console.WriteLine(isHollow(new int[] {2,0,1,0,0,0,2,2,2 }));
@@ -4567,24 +4715,15 @@ namespace CodingConsoleApp
             //Console.WriteLine(isNPrimeable(f, 1));
 
 
-            //  S, SL, L
-
-
+            //  S, SL, L , full locking option 3 for full
 
             // Max2CellCalculationNew(1, 27, 27, 146, 1);  // custom ok
-
             //Max2CellCalculationNew(1, 27, 0, 0, 3); // full locking
-
-
-
             // Max2CellCalculationNew(1, 23, 0, 0, 1);  // standard
 
-
-            Max2CellCalculationNew(1, 66, 0, 0, 1); // 66 , 22
+           // Max2CellCalculationNew(5, 0, 22, 22, 1); // 66 , 22
 
             //Max2CellCalculationNew(1, 44, 0, 0, 3); // full locking
-
-
 
 
 
