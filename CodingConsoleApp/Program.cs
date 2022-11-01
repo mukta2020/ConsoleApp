@@ -364,7 +364,26 @@ namespace CodingConsoleApp
             return 1;
         }
 
-        static int isDigitIncreasing(int n)
+        static int isDigitIncreasing(int n) 
+        {
+            int l = n.ToString().Length;
+            string f = n.ToString()[0].ToString();
+            for (int i = 1; i <= Convert.ToInt32(f); i++)
+            {
+                int sum = 0;
+                string s = i.ToString();
+
+                for (int j = 0; j < l; j++)
+                {
+                    sum = sum + Convert.ToInt32(s);
+                    s = s + s;
+                }
+                if (sum == n) return 1;
+            }
+            return 0;
+        }
+
+        static int isDigitIncreasing1(int n)
         {
             for (int i = 1; i < 10; i++)
             {
@@ -2753,6 +2772,43 @@ namespace CodingConsoleApp
             }
             return next;
         }
+
+        public static int closestFibonacci1(int n) // was wrong 
+        {
+            int index = int.MaxValue;
+            int[] a = new int[500];
+            a[0] = 1;
+            a[1] = 1;
+            int result = 0;
+            for (int i = 2; i < index; i++)
+            {
+                a[i] = a[i - 1] + a[i - 2];
+                if (a[i] >= n)
+                {
+                    result = a[i - 2] + a[i - 3];
+                    break;
+                }
+                
+            }
+            return result;
+        }
+
+        public static int closestFibonacci(int n) 
+        {
+            int n1 = 1;
+            int n2 = 1;
+            int next = n1 + n2;
+
+            while (next < n)
+            {
+                n1 = n2;
+                n2 = next;
+                next = n1 + n2;
+            }
+            return n2;
+        }
+
+
         public static bool CheckPerfectNumber(int num)
         {
             int s = 1;
@@ -3078,7 +3134,7 @@ namespace CodingConsoleApp
 
         public static int largestAdjacentSum(int[] a)
         {
-            int maxSum = Int32.MinValue;
+            int maxSum = int.MinValue;
             for (int i = 1; i < a.Length; i++)
             {
                 if (a[i-1] + a[i] > maxSum)
@@ -3090,6 +3146,23 @@ namespace CodingConsoleApp
         }
 
         public static int checkConcatenatedSum(int n, int catlen)
+        {
+            int sum = 0;
+            string num = n.ToString();
+            for (int i = 0; i < num.Length; i++)
+            {
+                string s = num[i].ToString();
+                for (int j = 1; j < catlen; j++)
+                {
+                    s = s + num[i];
+                }
+                sum = sum + Convert.ToInt32(s);
+            }
+            if (n == sum) return 1;
+            else return 0;         
+        }
+
+        public static int checkConcatenatedSum1(int n, int catlen)
         {
 
             int remainder = 0;
@@ -3115,6 +3188,20 @@ namespace CodingConsoleApp
         }
 
         public static int isSequencedArray(int[] a, int m, int n)
+        {
+            if (a[0] != m) return 0;
+            else if (a[a.Length - 1] != n) return 0;
+            else if (n - m + 1 != a.Length) return 0;
+
+            for (int i = 1; i < a.Length; i++)
+            {
+                if (a[i] >= a[i - 1]) continue;
+                else return 0;
+            }
+            return 1;
+        
+        }
+        public static int isSequencedArray1(int[] a, int m, int n)
         {
             // {-5, -5, -4, -4, -4, -3, -3, -2, -2, -2}
             int count = n - m + 1;
@@ -3194,6 +3281,22 @@ namespace CodingConsoleApp
         
         }
 
+        public static int largestPrime(int n)  // written in copy
+        {
+            int l = 0;
+            for (int i = 2; i <= n; i++)
+            {
+                if (n % i == 0)
+                {
+                    if (IsPrime(i))
+                    {
+                        l = Math.Max(l, i);
+                    }
+
+                }
+            }
+            return l;
+        }
         public static bool IsPrime(int number) {
 
             bool isPrime = true;
@@ -3207,8 +3310,32 @@ namespace CodingConsoleApp
             }
             return isPrime;
         }
+        public static int[] encodeNumber(int n) 
+        {
+            if (n < 2) return null;
+            List<int> l = new List<int>();
+            for (int i = n; i > n; i--)
+            {
+                if (n % i == 0)
+                {
+                    if (IsPrime(i))
+                        l.Add(i);
+                }
+            }
 
-        public static int[] encodeNumber(int n)
+            int[] a = new int[l.Count];
+            for (int i = 0; i < l.Count - 1; i++)
+            {
+                a[i] = l[i];
+            }
+
+            //l.CopyTo(a);
+
+            return a;
+        
+        }
+
+        public static int[] encodeNumber1(int n)
         {
             if (n <= 1) return null;
             List<int> primeFactors = new List<int>();
@@ -3237,7 +3364,7 @@ namespace CodingConsoleApp
             return arrayToReturn;
         }
 
-        static int matchPattern(int[] a, int len, int[] pattern, int patternLen)
+        static int matchPattern1(int[] a, int len, int[] pattern, int patternLen)
         {
             // { 1, 1, 2, 2, 2, 3 };
             // {1, 2 ,3};
@@ -3264,6 +3391,27 @@ namespace CodingConsoleApp
             return 1;
         }
 
+        static int matchPattern(int[] a, int len, int[] pattern, int patternLen)
+        {
+            var h = new HashSet<int>(a);
+            if (h.Count != pattern.Length) return 0;
+            foreach (int i in h)
+            {
+                bool found = false;
+                for (int j = 0; j < pattern.Length; j++)
+                {
+                    if (pattern[j] == i)
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+                if (found == false) return 0;     
+                
+            }
+            return 1;
+        }
+
         static int matchPattern2(int[] a, int len, int[] pattern, int patternLen)
         {
             int i = 0; // index into a
@@ -3285,7 +3433,7 @@ namespace CodingConsoleApp
         }
 
 
-        static int isCubePowerful(int n)
+        static int isCubePowerful1(int n)
         {
             // 153
             if (n < 0)
@@ -3307,7 +3455,27 @@ namespace CodingConsoleApp
                 return 0;
         }
 
-        static int decodeArray(int[] a)
+        static int isCubePowerful(int n)
+        {
+            if (n < 1) return 0;
+            int s = 0;
+            while (n>0)
+            {
+                int r = n % 10;
+                s = s + (r * r * r);
+                n = n / 10;
+            }
+            if (s == n)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        static int decodeArray2(int[] a)
         {
             string n = "";
             for (int i = 1; i < a.Length; i++)
@@ -3318,7 +3486,7 @@ namespace CodingConsoleApp
             return Convert.ToInt32(n);
         }
 
-        static int decodeArray1(int[] a)
+        static int decodeArray(int[] a)  // wrong
         {
             //{0, 1, 1, 1, 1, 1, 0, 1}
             // {0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1}
@@ -3364,7 +3532,45 @@ namespace CodingConsoleApp
             return Convert.ToInt32(s);
         }
 
-        static int isZeroPlentiful(int[] a)
+        static int decodeArray1(int[] a) 
+        {
+            string s = "";
+            int zc = 0;
+            if (a[0] == -1) s = "-";
+            for (int i = 0; i < a.Length; i++)
+            {
+                if (a[i] == 0) zc++;
+                else if (a[i] == 1)
+                {
+                    s = s + zc.ToString();
+                    zc = 0;
+                }
+            }
+            return Convert.ToInt32(s);
+        }
+
+        static int isZeroPlentiful1(int[] a)
+        {
+            if (a.Length < 4) return 0;
+            int c = 0; int zero = 0;
+            for (int i = 0; i < a.Length; i++)
+            {
+                if ((a[i] == 0) && (zero == 0))
+                    zero = 1;
+                else if ((zero > 0) && (a[i] == 0) && (a[i - 1]) == 0)
+                    zero++;
+                else if((a[i] != 0)&&(zero>0))
+                {
+                    if (zero >= 4) { c++; zero = 0; }
+                    else { zero = 0; return 0; }
+                }
+            }
+            if (zero > 0) c++;
+            return c;
+        }
+       
+
+       static int isZeroPlentiful(int[] a)  // wrong
         {
             int count = 0;
             int ret = 0;
@@ -3383,13 +3589,13 @@ namespace CodingConsoleApp
                     count = 0;
                 }
 
-                if (count == 4)
+                if (count >= 4)
                     ret++;
 
             }
             return ret;
         }
-       static int[] encodeArray(int n)
+       static int[] encodeArray1(int n)
         {
             List<int> a = new List<int>();
             int init = 0;
@@ -3414,7 +3620,35 @@ namespace CodingConsoleApp
             return Arr;
 
         }
-        static int isSystematicallyIncreasing(int[] a)
+        static int[] encodeArray(int n) 
+        {
+            string s = n.ToString();
+            List<int> l = new List<int>();
+            if (n < 0) l.Add(-1);
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (s[i].ToString() == "0")
+                {
+                    l.Add(1);
+                }
+                else
+                {
+                    int c = Convert.ToInt32(s[i].ToString());
+                    for (int j = 0; j < c; j++)
+                    {
+                        l.Add(0);
+                        l.Add(1);
+                    }
+                }
+            }
+            int[] a = new int[l.Count];
+            l.CopyTo(a);
+            return a;
+        }
+
+
+        static int isSystematicallyIncreasing1(int[] a)
         {
             //{1, 1, 2, 1, 2, 3}
             if (a[0] != 1)
@@ -3428,9 +3662,24 @@ namespace CodingConsoleApp
                 }
             }
             return 1;
-
         }
-
+        static int isSystematicallyIncreasing(int[] a) 
+        {
+            if ((a.Length == 2) &&(a[0] != 1) ) return 0;
+            if ( (a.Length == 3)&&(a[1] != 1)&&(a[2] != 2) ) return 0;
+            int l = 1;
+            for (int i = 3; i < a.Length; i++)
+            {
+                if (a[i] == 1)
+                {
+                    if (l + 1 == a[i - 1]) 
+                        l = a[i - 1]; // l assignment
+                    else return 0;
+                }                
+            }
+            if (l+1 == a[a.Length-1]) return 1;
+            else return 0;
+        }
 
         static int isFactorialPrime(int n)
         {
@@ -3507,8 +3756,28 @@ namespace CodingConsoleApp
 
         static int areAnagrams(char[] a1, char[] a2)
         {
-            return 0;
+
+            if (a1.Length != a2.Length) return 0;
+
+            for (int i = 0; i < a1.Length; i++)
+            {
+                bool found = false;
+                for (int j = 0; j < a2.Length; j++)
+                {
+                    if (a1[i] == a2[j])
+                    {
+                        a1[i] = '*';
+                        a2[j] = '*';
+                        found = true; break;
+                    }
+                }
+                if (found == false) return 0;
+            }
+            if (a1.SequenceEqual(a2) ) return 1;
+            else return 0;
         }
+
+
         static int MaxCoins(int[] nums)
         {
             if (nums == null || nums.Length == 0) return 0;
@@ -4667,14 +4936,21 @@ namespace CodingConsoleApp
                     
         }
 
+
+ 
+
+
         static void Main(string[] args)
         {
             int[] a1 = new int[] { 9, 9, 9 };
+            //Console.WriteLine(isDigitIncreasing(36));
+
+            // Console.WriteLine(checkConcatenatedSum(198, 3));
+
             //updateMileagecounter(a1, 15);
+            //largestPrime(10);
 
-            
-
-            Console.WriteLine(isZeroBalanced(new int[] { 1, 4, -3, -2 }));
+            //Console.WriteLine(isZeroBalanced(new int[] { 1, 4, -3, -2 }));
 
             //Console.WriteLine(isConsectiveFactored(2));
             //Console.WriteLine(isHollow(new int[] {2,0,1,0,0,0,2,2,2 }));
@@ -4693,6 +4969,42 @@ namespace CodingConsoleApp
             //Console.WriteLine(is121Array1(new int[] { 1, 1, 1, 2, 2, 2, 1, 1, 1, 3 }));
             //Console.WriteLine(is121Array1(new int[] { 1, 1, 1, 2, 2, 2, 1, 1, 1, 2, 2 }));
             //Console.WriteLine(is121Array1(new int[] { 1, 1, 1, 1, 1, 1 }));
+
+
+            //Console.WriteLine(isZeroPlentiful(new int[] { 0,0,0,0,0 }));
+            //Console.WriteLine(isZeroPlentiful(new int[] { 1, 1, 0,0,0,0, 2, -2, 0,0,0,0,0,21, 1 }));
+            //Console.WriteLine(isZeroPlentiful(new int[] { 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1 }));
+            //Console.WriteLine(isZeroPlentiful(new int[] { 1, 1, 1, 2 }));
+            //Console.WriteLine(isZeroPlentiful(new int[] { 1, 0, 0, 0, 1, 2, 0, 0, 0, 0 }));
+            //Console.WriteLine(isZeroPlentiful(new int[] { 0 }));
+
+
+            //Console.WriteLine(isSystematicallyIncreasing(new int[] { 1, 2, 1, 2, 3 }));
+            //Console.WriteLine(isSystematicallyIncreasing(new int[] { 1, 1, 3 }));
+            //Console.WriteLine(isSystematicallyIncreasing(new int[] { 1, 2, 1, 2, 1, 2 }));
+            //Console.WriteLine(isSystematicallyIncreasing(new int[] { 1, 2, 3, 1, 2, 1 }));
+            //Console.WriteLine(isSystematicallyIncreasing(new int[] { 1, 1, 2, 3 }));
+            //Console.WriteLine(isSystematicallyIncreasing(new int[] { 1, 1, 2, 1, 2, 3 }));
+
+
+            //Console.WriteLine(decodeArray(new int[] { 1 }));
+            //Console.WriteLine(decodeArray(new int[] {0, 1 }));
+            //Console.WriteLine(decodeArray(new int[] { -1, 0, 1 }));
+            //Console.WriteLine(decodeArray(new int[] { 0, 1, 1, 1, 1, 1, 0, 1 }));
+            //Console.WriteLine(decodeArray(new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 }));
+
+
+            //Console.WriteLine(encodeArray(0));
+            //Console.WriteLine(encodeArray(1));
+            //Console.WriteLine(encodeArray(-1));
+            //Console.WriteLine(encodeArray(100001));
+            //Console.WriteLine(encodeArray(999));
+
+
+            //Console.WriteLine(areAnagrams(new char[] {'s','i','t' }, new char[] { 's', 't', 'i' }));
+           // Console.WriteLine(areAnagrams(new char[] {'p','o','o' }, new char[] { 'o', 'p', 'o' }));
+
+            //Console.WriteLine(closestFibonacci(13));
 
 
 
@@ -4771,7 +5083,6 @@ namespace CodingConsoleApp
             //Console.WriteLine(isSequencedArray(new int[] { 1, 2, 3, 4 }, 1, 5));
             //Console.WriteLine(isSequencedArray(new int[] { 5, 4, 3, 2, 1 }, 1, 5));
 
-            //Console.WriteLine(checkConcatenatedSum(2997, 3));
             //Console.WriteLine(FindMedianSortedArrays(nums1, nums2));
             //CellCalculation(11,0,0);
             // CellCalculationCustom(6, -10, 15, "C");
