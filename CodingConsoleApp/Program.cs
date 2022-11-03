@@ -3680,8 +3680,31 @@ namespace CodingConsoleApp
             if (l+1 == a[a.Length-1]) return 1;
             else return 0;
         }
+        static int isFactorialPrime(int n) 
+        {
+            if (isPrime(n))
+            {
+                for (int i = 1; i < n; i++)
+                {
+                    if (factorial(i) + 1 == n) return 1;
+                    // return 0;
+                }
+                return 0;
+            }
+            else return 0;
+        }
 
-        static int isFactorialPrime(int n)
+        public static int factorial(int n) {
+
+            int f = 1;
+            for (int i = 1; i <= n; i++)
+            {
+                f = f * i;
+            }
+            return f;
+        }
+
+        static int isFactorialPrime1(int n)
         {
             if (IsPrime(n) && CheckFactorial(n))
             {
@@ -3721,7 +3744,7 @@ namespace CodingConsoleApp
             }
             if (evenList.Count < 2)
             {
-                return 0;
+                return -1;
             }
 
             return evenList.Max() - evenList.Min();
@@ -3742,9 +3765,11 @@ namespace CodingConsoleApp
             }
             return false;
         }
+
+
         static int isHodder(int n)
         {
-            if (CheckHodder(n)&& IsPrime(n))
+            if (pow(n)&& IsPrime(n))
             {
                 return 1;
             }
@@ -3754,6 +3779,22 @@ namespace CodingConsoleApp
             }
         }
 
+
+        public static bool pow(int n)
+        {
+            n = n + 1;
+            int j = 2;
+            while (j<n)
+            {
+                j = j * 2;
+            }
+            if (j == n)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
         static int areAnagrams(char[] a1, char[] a2)
         {
 
@@ -4943,6 +4984,8 @@ namespace CodingConsoleApp
         static void Main(string[] args)
         {
             int[] a1 = new int[] { 9, 9, 9 };
+
+
             //Console.WriteLine(isDigitIncreasing(36));
 
             // Console.WriteLine(checkConcatenatedSum(198, 3));
@@ -5002,9 +5045,17 @@ namespace CodingConsoleApp
 
 
             //Console.WriteLine(areAnagrams(new char[] {'s','i','t' }, new char[] { 's', 't', 'i' }));
-           // Console.WriteLine(areAnagrams(new char[] {'p','o','o' }, new char[] { 'o', 'p', 'o' }));
+            // Console.WriteLine(areAnagrams(new char[] {'p','o','o' }, new char[] { 'o', 'p', 'o' }));
 
             //Console.WriteLine(closestFibonacci(13));
+
+            //Console.WriteLine(isFactorialPrime(3));
+
+
+            //Console.WriteLine(largestDifferenceOfEvens(new int[] { 1,2,4,6 }));
+
+
+            Console.WriteLine(isHodder(32));
 
 
 
