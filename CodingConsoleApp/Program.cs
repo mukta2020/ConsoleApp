@@ -1839,7 +1839,7 @@ namespace CodingConsoleApp
         }
 
 
-        public static bool IsAnagram(string s, string t)
+        public static bool IsAnagram1(string s, string t)
         {
             Dictionary<char, int> d = new Dictionary<char, int>();
 
@@ -1882,6 +1882,52 @@ namespace CodingConsoleApp
             }
             return true;
         }
+
+        public static int IsAnagram(char[] a1, char[] a2)
+        {
+            if (a1.Length != a2.Length) return 0;
+            for (int i = 0; i < a1.Length; i++)
+            {
+                bool found = false;
+                for (int j = 0; j < a2.Length; j++)
+                {
+                    if (a1[i] == a2[j])
+                    {
+                        a1[i] = '*';
+                        a2[j] = '*'; found = true; break;
+                    }
+                }
+                if (found == false) return 0;
+            }
+            if (a1.SequenceEqual(a2)) return 1;
+            else return 0;           
+
+        }
+
+        static int areAnagrams(char[] a1, char[] a2)
+        {
+
+            if (a1.Length != a2.Length) return 0;
+
+            for (int i = 0; i < a1.Length; i++)
+            {
+                bool found = false;
+                for (int j = 0; j < a2.Length; j++)
+                {
+                    if (a1[i] == a2[j])
+                    {
+                        a1[i] = '*';
+                        a2[j] = '*';
+                        found = true; break;
+                    }
+                }
+                if (found == false) return 0;
+            }
+            if (a1.SequenceEqual(a2)) return 1;
+            else return 0;
+        }
+
+
         public static bool IsPalindrome(int x)
         {
             string s = x.ToString();
@@ -2892,9 +2938,9 @@ namespace CodingConsoleApp
                 return true;
             else
                 return false;
-
-
         }
+
+
 
         public static bool isValidSubsequence(string array, string sequence)
         {
@@ -3186,6 +3232,9 @@ namespace CodingConsoleApp
 
             return total == num ? 1 : 0;
         }
+
+
+       
 
         public static int isSequencedArray(int[] a, int m, int n)
         {
@@ -3795,29 +3844,7 @@ namespace CodingConsoleApp
             else
                 return false;
         }
-        static int areAnagrams(char[] a1, char[] a2)
-        {
-
-            if (a1.Length != a2.Length) return 0;
-
-            for (int i = 0; i < a1.Length; i++)
-            {
-                bool found = false;
-                for (int j = 0; j < a2.Length; j++)
-                {
-                    if (a1[i] == a2[j])
-                    {
-                        a1[i] = '*';
-                        a2[j] = '*';
-                        found = true; break;
-                    }
-                }
-                if (found == false) return 0;
-            }
-            if (a1.SequenceEqual(a2) ) return 1;
-            else return 0;
-        }
-
+       
 
         static int MaxCoins(int[] nums)
         {
@@ -4490,8 +4517,27 @@ namespace CodingConsoleApp
             return 0;
         }
 
+        public static int isOneBalanced(int[] a) 
+        {
+            int bOne = 0; int eOne = 0;
+            int nonOne = 0;
+            for (int i = 0; i < a.Length; i++)
+            {
+                if ((a[i] == 1) && (nonOne == 0) && (eOne == 0))
+                    bOne++;
+                else if ((a[i] != 1) && (eOne == 0))
+                    nonOne++;
+                else if ((a[i] == 1) && (nonOne > 0))
+                    eOne++;
+                else if ((a[i] != 1) && (eOne > 0))
+                    return 0;
+            }
 
-        public static int[] computeHMS(int seconds)
+            if (bOne + eOne == nonOne) return 1;
+            else return 0;
+        }
+
+        public static int[] computeHMS1(int seconds)
         {
 
             int h = 0;
@@ -4521,7 +4567,62 @@ namespace CodingConsoleApp
 
         }
 
-        public static int isMartian(int[] a)
+        public static int[] computeHMS(int seconds) 
+        {
+
+            int[] a = new int[3];
+            if (seconds>0)
+            {
+                a[0] = seconds/ 3600;
+                a[1] = (seconds % 3600) / 60;
+                a[2] = (seconds % 3600) % 60;
+            }
+            return a;
+        }
+
+
+        public static int isMercurial(int[] a)
+        {
+            int initOnePos = -1;
+            int endOnePos = -1;
+            int mid3Pos = -1;
+            for (int i = 0; i < a.Length; i++)
+             {
+                if ((a[i] == 1) && (mid3Pos == -1) && (endOnePos == -1))
+                    initOnePos = i;
+                else if ((a[i] == 3) && (initOnePos > -1) && (endOnePos == -1))
+                    mid3Pos = i;
+                else if ((a[i] == 1) && (initOnePos > -1) && (mid3Pos > -1))
+                    endOnePos = i;
+            }
+            if (initOnePos < mid3Pos && endOnePos > mid3Pos) return 0;
+            else    return 1;
+        }
+
+        public static int isMartian(int[] a) 
+        {
+            int one = 0;
+            int two = 0;
+            bool aa = false;
+
+            for (int i = 0; i < a.Length -1; i++)
+            {
+                if (a[i] == 1) one++;
+                else if (a[i] == 2) two++;
+
+                if (a[i] == a[i + 1]) aa = true;
+            }
+            if (a[a.Length - 1] == 1) 
+                one++;
+            if (a[a.Length - 1] == 2)
+                two++;
+
+
+            if ((one > two) && (aa == false)) return 1;
+            else return 0;
+        
+        }
+        public static int isMartian1(int[] a)
         {
 
             int oneC = 0;
@@ -4612,6 +4713,30 @@ namespace CodingConsoleApp
 
         }
 
+        public static int is121Array3(int[] a) 
+        {
+            int initOne = 0;
+            int endOne = 0;
+            bool two = false;
+            if (a[0] != 1) return 0; else initOne = 1;
+
+            for (int i = 1; i < a.Length; i++)
+            {
+                if ((endOne == 0) && (two == false) && (a[i] == 1))
+                    initOne++;
+                else if ((a[i] == 2) && (initOne > 0) && (endOne == 0))
+                    two = true;
+                else if ((a[i] == 1) && (two == true) && (initOne > 0))
+                    endOne++;
+                else
+                    return 0;
+            }
+
+            if ((initOne == endOne)&& (two == true)) 
+                return 1; 
+            else return 0;
+        }
+
         public static int is121Array1(int[] a)
         {
 
@@ -4651,16 +4776,33 @@ namespace CodingConsoleApp
             int[] r = new int[a.Length / 2];
             int k = 0;
 
-            for (int i = 0; i < a.Length; i = i + 2)
+            //for (int i = 0; i < a.Length; i = i + 2)
+            //{
+            //    r[k] = a[i] + a[i + 1];
+            //    k += 1;
+            //}
+            for (int i = 1; i < a.Length; i = i + 2)
             {
-                r[k] = a[i] + a[i + 1];
+                r[k] = a[i-1] + a[i];
                 k += 1;
             }
-
             return r;
 
         }
 
+        public static int isVesuvian(int n)
+        {
+            int c = 0;
+            if (isSquare(n - 1) == 1) c = 1;
+            for (int i = 4; i < n; i++)
+            {
+                if ((isSquare(i) == 1) && (isSquare(n - i) == 1))
+                    c++;
+                if (c == 2) return 1;
+            }
+            if (c == 2) return 1;
+            else return 0;
+        }
 
         public static int isSquare(int n)
         {
@@ -5002,8 +5144,6 @@ namespace CodingConsoleApp
             //Console.WriteLine(eval(2.0,new int[] { 4, 0, 9 }));
             //Console.WriteLine(loopSum(new int[] { 3 }, 10));
 
-            //Console.WriteLine(pairwiseSum(new int[] { 2, 1, 18, -5, -5, -15, 0, 0, 1, -1 } ));
-            //Console.WriteLine(pairwiseSum(new int[] { 2, 1, 18 } ));
 
 
             //Console.WriteLine(is121Array1(new int[] { 1, 1, 2, 2, 2, 1, 1 }));
@@ -5048,14 +5188,61 @@ namespace CodingConsoleApp
             // Console.WriteLine(areAnagrams(new char[] {'p','o','o' }, new char[] { 'o', 'p', 'o' }));
 
             //Console.WriteLine(closestFibonacci(13));
-
             //Console.WriteLine(isFactorialPrime(3));
-
-
             //Console.WriteLine(largestDifferenceOfEvens(new int[] { 1,2,4,6 }));
+            // Console.WriteLine(isHodder(32));
+            // Console.WriteLine(IsAnagram(32));
+            // Console.WriteLine(isVesuvian(50));
 
 
-            Console.WriteLine(isHodder(32));
+            //Console.WriteLine(isOneBalanced(new int[] { 1,1,1,2,3,-18,45,1 }));
+            //Console.WriteLine(isOneBalanced(new int[] { 1, 1, 1, 2, 3, -18, 45, 1,0 }));
+            //Console.WriteLine(isOneBalanced(new int[] { 1, 1,  2, 3, 1, -18, 45, 1 }));
+            //Console.WriteLine(isOneBalanced(new int[] {  }));
+            //Console.WriteLine(isOneBalanced(new int[] { 2, 3, 1, 1 }));
+            //Console.WriteLine(isOneBalanced(new int[] { 1, 1,  2, 3 }));
+            //Console.WriteLine(isOneBalanced(new int[] { 3,3 }));
+            //Console.WriteLine(isOneBalanced(new int[] { 1, 1, 1}));
+            //Console.WriteLine(decodeArray(new int[] {0, 1 }));
+
+
+            //Console.WriteLine(isMercurial(new int[] { 1,3,1 }));
+            //Console.WriteLine(isMercurial(new int[] { 2, 3, -18, 45, 1 }));
+            //Console.WriteLine(isMercurial(new int[] { 1, 2, 3 }));
+            //Console.WriteLine(isMercurial(new int[] { 3, 1, 3, -18, 1, 3 }));
+            //Console.WriteLine(isMercurial(new int[] { 2, 3, -18, 1, 1 }));
+            //Console.WriteLine(isMercurial(new int[] { 1, 1, 3 }));
+            //Console.WriteLine(isMercurial(new int[] { 3, 3 }));
+            //Console.WriteLine(isMercurial(new int[] { 1 }));
+            //Console.WriteLine(isMercurial(new int[] { }));
+
+
+            //Console.WriteLine(computeHMS(3650));
+
+
+
+            //Console.WriteLine(isMartian(new int[] { 1 ,3}));
+            //Console.WriteLine(isMartian(new int[] { 1,2,1,2}));
+            //Console.WriteLine(isMartian(new int[] { 1, 2, 3}));
+            //Console.WriteLine(isMartian(new int[] { 1, 2, -18,-18,1, 2 }));
+            //Console.WriteLine(isMartian(new int[] { }));
+            //Console.WriteLine(isMartian(new int[] { 1 }));
+            //Console.WriteLine(isMartian(new int[] { 2 }));
+
+
+            //Console.WriteLine(is121Array3(new int[] { 1, 2,1 }));
+            //Console.WriteLine(is121Array3(new int[] { 1,1, 2, 1,1 }));
+            //Console.WriteLine(is121Array3(new int[] { 1, 1, 2, 1, 1 ,1}));
+            //Console.WriteLine(is121Array3(new int[] { 1,1, 1, 2, 1, 1 }));
+            //Console.WriteLine(is121Array3(new int[] { 1, 2, 1,3 }));
+            //Console.WriteLine(is121Array3(new int[] { 1,  1 }));
+            //Console.WriteLine(is121Array3(new int[] {  2, 1 }));
+            //Console.WriteLine(is121Array3(new int[] { 1,2, 1 ,2}));
+            //Console.WriteLine(is121Array3(new int[] { 2, 2}));
+
+
+            Console.WriteLine(pairwiseSum(new int[] { 2, 1, 18, -5 }));
+            Console.WriteLine(pairwiseSum(new int[] { 2, 1, 18, -5, -5, -15, 0, 0, 1, -1 }));
 
 
 
