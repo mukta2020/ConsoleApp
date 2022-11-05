@@ -5120,13 +5120,90 @@ namespace CodingConsoleApp
         }
 
 
- 
+        public static Tuple<List<int>, List<int>, List<int>> ATPDeviceConfiguration(int atp) 
+        {
+            List<int> SD = new List<int>();  
+            List<int> HD = new List<int>(); 
+            List<int> RD = new List<int>();
+
+            if (atp == 64)
+            {
+                SD = new List<int>() { 1, 4 };
+                HD = new List<int>();
+                RD = new List<int>() { 2, 3 };
+            }
+            else if (atp == 128)
+            {
+                SD = new List<int>() { 5, 8 };
+                HD = new List<int>() { 2, 3 };
+                RD = new List<int>() { 1, 4 };
+            }
+            else if (atp >= 192)
+            {
+                SD = new List<int>() { 9, 12, 13, 16, 17, 18, 19, 20 };
+                HD = new List<int>() { 2, 3, 10, 11 };
+                RD = new List<int>() { 1, 4, 5, 8, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 };
+            }
+            Tuple<List<int>, List<int>, List<int>> t = new Tuple<List<int>, List<int>, List<int>>(SD, HD, RD);
+            return t;
+        }
+
+        public static Tuple<List<int>, List<int>, List<int>> ATPDeviceConfigurationByCustomerInput(int sdInput, int hdInput, int atp)
+        {
+
+            List<int> SD = new List<int>();
+            List<int> HD = new List<int>();
+            List<int> RD = new List<int>();
+
+            List<int> SDNew = new List<int>();
+            List<int> HDNew = new List<int>();
+            List<int> RDNew = new List<int>();
+
+            Tuple<List<int>, List<int>, List<int>> t = ATPDeviceConfiguration(atp);
+            SD = t.Item1;
+            HD = t.Item2;
+            RD = t.Item3;
+
+            if (sdInput <= SD.Count)
+            {
+                for (int i = 0; i < sdInput; i++)
+                {
+                    SDNew.Add(SD[i]);
+                }
+                RDNew.AddRange(SD.Except(SDNew) );
+                SD = SDNew;
+            }
+
+
+            if (hdInput <= HD.Count)
+            {
+                for (int i = 0; i < hdInput; i++)
+                {
+                    HDNew.Add(HD[i]);
+                }
+                RDNew.AddRange(HD.Except(HDNew));
+                HD = HDNew;
+            }
+
+            if (RDNew.Count>0)
+            {
+                RDNew.AddRange(RD);
+                RD = RDNew;
+            }
+
+            t = new Tuple<List<int>, List<int>, List<int>>(SD, HD, RD);
+            return t;
+        }
+
+
+
 
 
         static void Main(string[] args)
         {
             int[] a1 = new int[] { 9, 9, 9 };
 
+            ATPDeviceConfigurationByCustomerInput(2,2,192);
 
             //Console.WriteLine(isDigitIncreasing(36));
 
@@ -5241,8 +5318,8 @@ namespace CodingConsoleApp
             //Console.WriteLine(is121Array3(new int[] { 2, 2}));
 
 
-            Console.WriteLine(pairwiseSum(new int[] { 2, 1, 18, -5 }));
-            Console.WriteLine(pairwiseSum(new int[] { 2, 1, 18, -5, -5, -15, 0, 0, 1, -1 }));
+            //Console.WriteLine(pairwiseSum(new int[] { 2, 1, 18, -5 }));
+            //Console.WriteLine(pairwiseSum(new int[] { 2, 1, 18, -5, -5, -15, 0, 0, 1, -1 }));
 
 
 
