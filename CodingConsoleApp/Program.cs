@@ -4852,7 +4852,7 @@ namespace CodingConsoleApp
             return false;
         }
 
-        public static int loopSum(int[] a, int n)
+        public static int loopSum1(int[] a, int n)
         {
 
             int c = 0;
@@ -4869,6 +4869,36 @@ namespace CodingConsoleApp
 
             }
             return s;
+
+        }
+        public static int loopSum(int[] a, int n)
+        {
+           
+            int s = 0;
+            if(a.Length >= n) 
+            {
+                for (int i = 0; i < n; i++)
+                {
+                    s = s + a[i];
+                }
+            }
+            else if(a.Length < n)
+            {
+                for (int i = 0; i < a.Length; i++)
+                {
+                    s = s + a[i];
+                }
+                int r = n % a.Length;
+                int q = n / a.Length;
+                s = s * q;
+                for (int i = 0; i < r; i++)
+                {
+                    s = s + a[i];
+                }
+            }
+
+            return s;
+            
 
         }
 
@@ -4925,7 +4955,7 @@ namespace CodingConsoleApp
             return 1;
 
         }
-        public static int isLayered(int[] a)
+        public static int isLayered1(int[] a)
         {
             int count = 1;
             if (a.Length < 2) return 0;
@@ -4944,6 +4974,29 @@ namespace CodingConsoleApp
             return 1;
 
         }
+        public static int isLayered(int[] a) 
+        {
+            if (a.Length < 2) return 0;
+            Dictionary<int, int> d = new Dictionary<int, int>();
+            for (int i = 0; i < a.Length; i++)
+            {
+                if (i != 0 && a[i - 1] < a[i]) 
+                    return 0;
+
+                if (!d.Keys.Contains(a[i]))
+                    d[a[i]] = 1;
+                else
+                    d[a[i]] += 1;
+            }
+
+            foreach (int k in d.Keys)
+            {
+                if (d[k] < 2) return 0;
+            }
+
+            return 1;
+        
+        }
 
         public static int isHollow(int[] a)
         {
@@ -4954,8 +5007,8 @@ namespace CodingConsoleApp
             for (int i = 0; i < a.Length; i++)
             {
                 if ((zCount == 0) && (a[i] != 0)) pCount++;
-                else if ((pCount > 0) && (fCount == 0) && (a[i] == 0)) zCount++;
-                else if ((pCount > 0) && (zCount > 0) && (a[i] != 0)) fCount++;
+                else if ( (fCount == 0) && (a[i] == 0)) zCount++;
+                else if ( (zCount > 0) && (a[i] != 0)) fCount++;
                 else return 0;
             }
 
@@ -4963,7 +5016,54 @@ namespace CodingConsoleApp
             else return 0;
         }
 
-        public static int isConsectiveFactored(int n)
+        public static int isMadhavArray(int[] a) 
+        {
+            int l = a.Length;
+            int c = 2;
+            int lc = 0;
+
+            while (lc+1 < l)
+            {
+                int sum = 0;
+                int k;
+                for (k = lc + 1; k <= lc + c; k++)
+                {
+                    sum = sum + a[k];
+                }
+                if (sum != a[0]) return 0;
+                lc = k-1; c++;               
+            }
+
+            if (lc + 1 == l) return 1;
+            else return 0;
+        
+        }
+
+        public static int isInertial(int[] a) 
+        {
+            Array.Sort(a); int m = a.Max();
+
+            if (a[a.Length - 1] % 2 != 0) return 0;
+            List<int> evenList = new List<int>();
+            List<int> oddList = new List<int>();
+
+            for (int i = 0; i < a.Length - 1; i++)
+            {
+                if (a[i] % 2 == 0 && m != a[i])
+                    evenList.Add(a[i]);
+                else
+                    oddList.Add(a[i]);
+            }
+            if (oddList.Count == 0) return 0;
+            for (int i = 0; i < evenList.Count; i++)
+            {
+                if (evenList[i] > oddList[0])
+                    return 0;
+            }
+            return 1;
+        }
+
+        public static int isConsectiveFactored1(int n)
         {
             List<int> f = new List<int>();
             while (n > 0)
@@ -4986,6 +5086,26 @@ namespace CodingConsoleApp
             return 0;
 
         }
+
+        public static int isConsectiveFactored(int n)
+        {
+            List<int> f = new List<int>();
+
+            for (int i = 2; i <= n; i++)
+            {
+                if (n % i == 0)
+                    f.Add(i);
+            }
+
+            f.Sort();
+            for (int i = 1; i < f.Count; i++)
+            {
+                if (f[i - 1] + 1 == f[i]) return 1;
+            }
+            return 0;
+
+        }
+
 
         public static List<string> ReverseSuperCellCalculation( List<string> superCell)
         {
@@ -5037,9 +5157,31 @@ namespace CodingConsoleApp
             }
 
         }
-
-
         public static void updateMileagecounter(int[] a, int miles)
+        {
+
+            int carry = 0;
+
+            carry = (a[0] + miles) / 10;
+            a[0] = (a[0] + miles) % 10;
+
+            for (int i = 1; i < a.Length; i++)
+            {
+                int temp = (a[i] + carry);
+                if (carry > 0)
+                {
+                    carry = temp / 10;
+                    a[i] = temp % 10;
+                }
+                else
+                    a[i] = temp;
+                
+            }
+
+        }
+
+
+        public static void updateMileagecounter3(int[] a, int miles)
         {
             string[] resArr = new string[a.Length];
             string digit = "";
@@ -5203,13 +5345,13 @@ namespace CodingConsoleApp
         {
             int[] a1 = new int[] { 9, 9, 9 };
 
-            ATPDeviceConfigurationByCustomerInput(2,2,192);
+            //ATPDeviceConfigurationByCustomerInput(2,2,192);
 
             //Console.WriteLine(isDigitIncreasing(36));
 
             // Console.WriteLine(checkConcatenatedSum(198, 3));
 
-            //updateMileagecounter(a1, 15);
+
             //largestPrime(10);
 
             //Console.WriteLine(isZeroBalanced(new int[] { 1, 4, -3, -2 }));
@@ -5322,6 +5464,33 @@ namespace CodingConsoleApp
             //Console.WriteLine(pairwiseSum(new int[] { 2, 1, 18, -5, -5, -15, 0, 0, 1, -1 }));
 
 
+            // Console.WriteLine(loopSum1(new int[] { -1, 2, -1 }, 7));
+            //.WriteLine(loopSum1(new int[] { 3}, 10));
+
+            //Console.WriteLine(isLayered(new int[] { 2, 2, 3,3 }));
+
+            //updateMileagecounter(new int[] { 9,9 ,9}, 13);
+
+            //Console.WriteLine(isConsectiveFactored(-2));
+
+            //Console.WriteLine(isHollow(new int[] {0,0,0 }));
+
+
+            //Console.WriteLine(isInertial(new int[] {1 }));
+            //Console.WriteLine(isInertial(new int[] { 2 }));
+           // Console.WriteLine(isInertial(new int[] { 1, 2, 3, 4 }));
+           // Console.WriteLine(isInertial(new int[] { 1 ,1,2}));
+
+           // Console.WriteLine(isInertial(new int[] { 2,12,4,6,8,11 }));
+
+            Console.WriteLine(isInertial(new int[] { 2, 12,12, 4, 6, 8, 11 }));
+
+            //Console.WriteLine(isInertial(new int[] { -2,-4,-6,-8,-11 }));
+            //Console.WriteLine(isInertial(new int[] { 2,3,5,7 }));
+            //Console.WriteLine(isInertial(new int[] { 2,4,6,8,10 }));
+
+
+            // Console.WriteLine(isMadhavArray(new int[] {6,2,4,2,2,2,1,5,0,0 }));
 
             int[] nums1 = { 1, 2 };
             int[] a = { -18, 1, 2, 3, 4, 5 };
