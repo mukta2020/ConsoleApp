@@ -5063,6 +5063,332 @@ namespace CodingConsoleApp
             return 1;
         }
 
+        public static int computeDepth1(int n)
+        {
+            //int[] a = new int[10]; int k = 0; 
+            List<int> a = new List<int>();
+            int i = 1;
+
+            while (a.Count < 10)
+            {
+                int m = n * i;
+
+                while (m!= 0)
+                {
+                    int r = m % 10 ;
+                    int q = m / 10; m = q;
+
+                    //bool found = false;
+                    //for (int z = 0; z < k; z++)
+                    //{
+                    //    if (a[z]==r)
+                    //    {
+                    //        found = true; break;
+                    //    }
+                    //}
+                    //if (found == false)
+                    //{
+                    //    a[k] = r; k++;
+                    //}
+
+                    if (!a.Contains(r))
+                    {
+                        a.Add(r);
+                    }                   
+                }
+                i++;
+            }
+            return i-1;        
+        }
+
+        public static int computeDepth(int n)
+        {
+            List<int> a = new List<int>();
+            int i = 1;
+
+            while (a.Count < 10)
+            {
+                int m = n * i;
+                while (m != 0)
+                {
+                    int r = m % 10;
+                    m = m / 10; 
+                    if (!a.Contains(r))
+                    {
+                        a.Add(r); // could be 10 after this line.....but i++-0
+                    }
+                }
+                i++;
+            }
+            return i - 1;
+        }
+
+        public static int isLegalNumber(int[]a, int b) 
+        {
+            for (int i = 0; i < a.Length; i++)
+            {
+                if (a[i] >= b)
+                {
+                    return 0;
+                }
+            }
+            return 1;
+        }
+
+        public static int convertToBase10(int[]a, int b) 
+        {
+            if (isLegalNumber(a,b) == 0)
+            {
+                return 0;
+            }
+
+            a = a.Reverse().ToArray();
+            int s = a[0];
+
+            for (int i = 1; i < a.Length; i++)
+            {
+                int d = 1; int c = 1;
+                while (c <= i)
+                {
+                    d = d * b; c++; // b for base
+                }
+                s = s + a[i] * d;
+            }
+
+            return s;
+        }
+
+
+        public static List<int> numberToArray(int n) {
+            List<int> l = new List<int>();
+            while (n>0)
+            {
+                l.Add(n % 10);
+                n = n / 10;
+            }
+            return l;
+        }
+
+        public static int isVanilla(int[] a)
+        {
+            List<int> l = numberToArray(a[0]);
+            var h = new HashSet<int>(l);
+
+            for (int i = 1; i < a.Length; i++)
+            {
+                l = numberToArray(a[i]);
+                var h1 = new HashSet<int>(l);
+
+                if (h1.Count > 1) return 1;
+                if (h1.FirstOrDefault() != h.FirstOrDefault()) return 0;                
+               
+            }
+            return 1;
+        }
+
+
+        #region ATP ALgorithm
+
+
+        public static Dictionary<string, int[]> Drawers(int deviceTypeId)
+        {
+            Dictionary<string, int[]> drawer = new Dictionary<string, int[]>();
+            if (deviceTypeId == 9)//64
+            {
+                drawer = new Dictionary<string, int[]>()
+                {
+                    ["SmartDrawer"] = new int[] { 1, 2, 3, 4 },
+                    ["HighCapDrawer"] = new int[] { },
+                    ["RegularDrawer"] = new int[] { },
+                };
+            }
+            else if (deviceTypeId == 10)//128
+            {
+                drawer = new Dictionary<string, int[]>()
+                {
+                    ["SmartDrawer"] = new int[] { 5, 8 },
+                    ["HighCapDrawer"] = new int[] { 2, 3, 6, 7 },
+                    ["RegularDrawer"] = new int[] { 1, 4 },
+                };
+            }
+            else if (deviceTypeId == 11)//192
+            {
+                drawer = new Dictionary<string, int[]>()
+                {
+                    ["SmartDrawer"] = new int[] { 9, 10, 11, 12 },
+                    ["HighCapDrawer"] = new int[] { 2, 3, 6, 7 },
+                    ["RegularDrawer"] = new int[] { 1, 4, 5, 8 },
+                };
+            }
+            else if (deviceTypeId == 12)//256
+            {
+                drawer = new Dictionary<string, int[]>()
+                {
+                    ["SmartDrawer"] = new int[] { 9, 12, 13, 16 },
+                    ["HighCapDrawer"] = new int[] { 2, 3, 6, 7, 10, 14, 11, 15 },
+                    ["RegularDrawer"] = new int[] { 1, 4, 5, 8 },
+                };
+            }
+            else if (deviceTypeId == 13)//320
+            {
+                drawer = new Dictionary<string, int[]>()
+                {
+                    ["SmartDrawer"] = new int[] { 9, 12, 13, 16, 17, 18, 19, 20 },
+                    ["HighCapDrawer"] = new int[] { 2, 3, 6, 7, 10, 14, 11, 15 },
+                    ["RegularDrawer"] = new int[] { 1, 4, 5, 8 },
+                };
+            }
+            else if (deviceTypeId == 14)//400
+            {
+                drawer = new Dictionary<string, int[]>()
+                {
+                    ["SmartDrawer"] = new int[] { 9, 12, 13, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 },
+                    ["HighCapDrawer"] = new int[] { 2, 3, 6, 7, 10, 14, 11, 15 },
+                    ["RegularDrawer"] = new int[] { 1, 4, 5, 8 },
+                };
+            }
+            else if (deviceTypeId == 15)//480
+            {
+                drawer = new Dictionary<string, int[]>()
+                {
+                    ["SmartDrawer"] = new int[] { 9, 12, 13, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 },
+                    ["HighCapDrawer"] = new int[] { 2, 3, 6, 7, 10, 14, 11, 15 },
+                    ["RegularDrawer"] = new int[] { 1, 4, 5, 8 },
+                };
+            }
+
+            return drawer;
+
+        }
+        public static Dictionary<string, List<int>> DrawerSelection(int deviceTypeId, int? customerSmartDrawer, int? customerHighCapDrawer)
+        {
+
+            deviceTypeId = 12;
+            customerSmartDrawer = 3;
+            customerHighCapDrawer = 3;
+
+            var availableDrawers = Drawers(deviceTypeId);
+
+            var smartDrawerItems = availableDrawers.ElementAt(0);
+            var highCapDrawerItems = availableDrawers.ElementAt(1);
+            var regularDrawerItems = availableDrawers.ElementAt(2);
+
+            List<int> selectedSmartDrawers = new List<int>();
+            List<int> selectedHighCapDrawers = new List<int>();
+            List<int> selectedRegularDrawers = new List<int>();
+
+            int startPosition = 0;
+
+            #region device + Customer input wise High cap
+
+            if (deviceTypeId == 9)
+            {
+                startPosition = 1;
+            }
+            else if (deviceTypeId == 10)
+            {
+                startPosition = 5;
+                if (customerHighCapDrawer == 1)
+                {
+                    selectedHighCapDrawers.AddRange(new List<int>() { 2, 6 });
+                }
+                else if (customerHighCapDrawer == 2)
+                {
+                    selectedHighCapDrawers.AddRange(new List<int>() { 2, 3, 6, 7 });
+                }
+
+            }
+            else if (deviceTypeId == 11)
+            {
+                startPosition = 9;
+                if (customerHighCapDrawer == 1)
+                {
+                    selectedHighCapDrawers.AddRange(new List<int>() { 2, 6 });
+                }
+                else if (customerHighCapDrawer == 2)
+                {
+                    selectedHighCapDrawers.AddRange(new List<int>() { 2, 3, 6, 7 });
+                }
+            }
+            else if (deviceTypeId == 12)
+            {
+                startPosition = 9;
+                CommonHcAllocationAboveAtp192(customerHighCapDrawer, selectedHighCapDrawers);
+
+            }
+            else if (deviceTypeId == 13)
+            {
+                startPosition = 9;
+                CommonHcAllocationAboveAtp192(customerHighCapDrawer, selectedHighCapDrawers);
+
+            }
+            else if (deviceTypeId == 14)
+            {
+                startPosition = 9;
+                CommonHcAllocationAboveAtp192(customerHighCapDrawer, selectedHighCapDrawers);
+
+            }
+            else if (deviceTypeId == 15)
+            {
+                startPosition = 9;
+                CommonHcAllocationAboveAtp192(customerHighCapDrawer, selectedHighCapDrawers);
+            }
+            #endregion
+            var remainingHighCapDrawer = highCapDrawerItems.Value.Except(selectedHighCapDrawers).ToList();
+            foreach (var item in remainingHighCapDrawer)
+            {
+                if (startPosition > item)
+                {
+                    selectedRegularDrawers.Add(item);
+                }
+                else if (startPosition < item)
+                {
+                    selectedSmartDrawers.Add(item);
+                }
+            }
+
+            selectedSmartDrawers.AddRange(smartDrawerItems.Value);
+
+            var customerBasedSelectedSd = selectedSmartDrawers.OrderBy(a => a).Take((int)customerSmartDrawer).ToList();
+
+            selectedRegularDrawers.AddRange(regularDrawerItems.Value);
+            selectedRegularDrawers.AddRange(selectedSmartDrawers.Except(customerBasedSelectedSd));
+            selectedSmartDrawers = customerBasedSelectedSd;
+
+
+            var s = selectedSmartDrawers.OrderBy(a => a).ToList();
+            var hInts = selectedHighCapDrawers.OrderBy(a => a).ToList();
+            var rs = selectedRegularDrawers.OrderBy(a => a).ToList();
+
+            return new Dictionary<string, List<int>>()
+            {
+                ["SmartDrawer"] = selectedSmartDrawers.OrderBy(a => a).ToList(),
+                ["HighCapDrawer"] = selectedHighCapDrawers.OrderBy(a => a).ToList(),
+                ["RegularDrawer"] = selectedRegularDrawers.OrderBy(a => a).ToList(),
+            };
+        }
+        private static void CommonHcAllocationAboveAtp192(int? customerHighCapDrawer, List<int> selectedHighCapDrawers)
+        {
+            if (customerHighCapDrawer == 1)
+            {
+                selectedHighCapDrawers.AddRange(new List<int>() { 2, 6 });
+            }
+            else if (customerHighCapDrawer == 2)
+            {
+                selectedHighCapDrawers.AddRange(new List<int>() { 2, 3, 6, 7 });
+            }
+            else if (customerHighCapDrawer == 3)
+            {
+                selectedHighCapDrawers.AddRange(new List<int>() { 2, 3, 6, 7, 10, 14 });
+            }
+            else if (customerHighCapDrawer == 4)
+            {
+                selectedHighCapDrawers.AddRange(new List<int>() { 2, 3, 6, 7, 10, 11, 14, 15 });
+            }
+        }
+
+        #endregion
+
         public static int isConsectiveFactored1(int n)
         {
             List<int> f = new List<int>();
@@ -5478,19 +5804,30 @@ namespace CodingConsoleApp
 
             //Console.WriteLine(isInertial(new int[] {1 }));
             //Console.WriteLine(isInertial(new int[] { 2 }));
-           // Console.WriteLine(isInertial(new int[] { 1, 2, 3, 4 }));
-           // Console.WriteLine(isInertial(new int[] { 1 ,1,2}));
+            // Console.WriteLine(isInertial(new int[] { 1, 2, 3, 4 }));
+            // Console.WriteLine(isInertial(new int[] { 1 ,1,2}));
 
-           // Console.WriteLine(isInertial(new int[] { 2,12,4,6,8,11 }));
-
-            Console.WriteLine(isInertial(new int[] { 2, 12,12, 4, 6, 8, 11 }));
-
+            // Console.WriteLine(isInertial(new int[] { 2,12,4,6,8,11 }));
+            //Console.WriteLine(isInertial(new int[] { 2, 12,12, 4, 6, 8, 11 }));
             //Console.WriteLine(isInertial(new int[] { -2,-4,-6,-8,-11 }));
             //Console.WriteLine(isInertial(new int[] { 2,3,5,7 }));
             //Console.WriteLine(isInertial(new int[] { 2,4,6,8,10 }));
 
 
             // Console.WriteLine(isMadhavArray(new int[] {6,2,4,2,2,2,1,5,0,0 }));
+
+            //Console.WriteLine(computeDepth(25));
+
+            //Console.WriteLine(convertToBase10(new int[] { 3,2,5 }, 8));
+
+            //Console.WriteLine(isVanilla(new int[] { 11, 22}));
+
+            DrawerSelection(0, 0, 0);
+
+
+
+
+
 
             int[] nums1 = { 1, 2 };
             int[] a = { -18, 1, 2, 3, 4, 5 };
