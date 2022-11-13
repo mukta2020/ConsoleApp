@@ -13,6 +13,7 @@ namespace CodingConsoleApp
 
         /// ////////////////////////////////////////// Ether //////////////////////////////////////////////////////////////
 
+        #region Ether
         void convert2DArray(int[,] array)
         {
             int row = array.GetLength(0);
@@ -167,10 +168,12 @@ namespace CodingConsoleApp
             return 0;
         }
 
-
+        #endregion
 
 
         /// ///////////////////////////////////////// MUKTA ///////////////////////////////////////////////////////////////
+
+        #region Mukta
         static public Tuple<int, int> MaxMin(int[] a)
         {
             int maxV = int.MinValue;
@@ -5665,18 +5668,213 @@ namespace CodingConsoleApp
 
 
 
+        #endregion
+
+        #region OOP Method
+
+        class OOP
+        {
+            // method overloading example
+            public int Add(int a, int b)
+            {
+                int sum = a + b;
+                return sum;
+            }
+
+            // method overloading example
+            public int Add(int a, int b, int c)
+            {
+                int sum = a + b + c;
+                return sum;
+            }
+
+        }
+        // method overridding example
+        class baseClass
+        {
+            public virtual void show()
+            {
+                Console.WriteLine("Base class");
+            }
+        }
+
+        class derived : baseClass
+        {
+
+            //'show()' is 'override' here
+            public override void show()
+            {
+                Console.WriteLine("Derived class");
+            }
+        }
+
+        // abstract class
+
+        public abstract class GeeksForGeeks
+        {
+            public abstract void gfg();
+
+        }
+
+        public class Geek1 : GeeksForGeeks
+        {
+            // abstract method 'gfg()'        // declare here with        // 'override' keyword
+            public override void gfg()
+            {
+                Console.WriteLine("class Geek1");
+            }
+        }
+
+        // Interface
+
+        interface Vehicle
+        {
+
+            // all are the abstract methods.
+            void changeGear(int a);
+            void speedUp(int a);
+            void applyBrakes(int a);
+        }
+
+        // class implements interface
+        class Bicycle : Vehicle
+        {
+
+            int speed;
+            int gear;
+
+            // to change gear
+            public void changeGear(int newGear)
+            {
+
+                gear = newGear;
+            }
+
+            // to increase speed
+            public void speedUp(int increment)
+            {
+
+                speed = speed + increment;
+            }
+
+            // to decrease speed
+            public void applyBrakes(int decrement)
+            {
+
+                speed = speed - decrement;
+            }
+
+            public void printStates()
+            {
+                Console.WriteLine("speed: " + speed +
+                                  " gear: " + gear);
+            }
+        }
+
+        // class implements interface
+        class Bike : Vehicle
+        {
+
+            int speed;
+            int gear;
+
+            // to change gear
+            public void changeGear(int newGear)
+            {
+
+                gear = newGear;
+            }
+
+            // to increase speed
+            public void speedUp(int increment)
+            {
+
+                speed = speed + increment;
+            }
+
+            // to decrease speed
+            public void applyBrakes(int decrement)
+            {
+
+                speed = speed - decrement;
+            }
+
+            public void printStates()
+            {
+                Console.WriteLine("speed: " + speed +
+                                  " gear: " + gear);
+            }
+
+        }
+
+
+        #endregion
 
 
         static void Main(string[] args)
         {
+
+            #region OOP
+
+            // 'obj' is the object of  class 'baseClass'
+            baseClass ob = new baseClass();
+
+            // GeeksForGeeks' cannot  be instantiate
+            GeeksForGeeks g;
+
+            // instantiate class 'Geek1'
+            g = new Geek1();
+           
+
+            #endregion
+
+            //DrawerSelection(0, 0, 0);
+
             int[] a1 = new int[] { 9, 9, 9 };
 
+            #region FunctionCall
+            int[] nums1 = { 1, 2 };
+            int[] a = { -18, 1, 2, 3, 4, 5 };
+            int[] b = { 1, 2, 3, 4, 5 };
+            //doIntegerBasedRounding(b, 3);
+            int[] c = { -1, 0, 1, 1 };
+
+            //int r = decodeArray1(c);
+            //computeHMS(3735);
+
+            int[] d = { 1, 2, 1, 2, 1, 2, 1, 2, 1 };
+            //Console.WriteLine(isMartian(d));
+
+            int[] e = { };
+            //Console.WriteLine(isPairedN(e,0));
+            int[] f = { 2 };
+            //Console.WriteLine(isNPrimeable(f, 1));
+
+            //Console.WriteLine(BalancedStringSplit(""));
+
+            // Console.WriteLine(MaxNumberOfBalloons(""));
+
+            int[] n = { 1, 1, 10, 4, 4, 3 };
+            int[] p = { 1, 4, 3 };
+
+            // Console.WriteLine(matchPattern(n, 5, p, 2));
+
+            //Console.WriteLine(isSequencedArray(new int[] { 1, 2, 3, 4, 5 }, 1, 5));
+            //Console.WriteLine(isSequencedArray(new int[] { 1, 3, 4, 2, 5 }, 1, 5));
+            //Console.WriteLine(isSequencedArray(new int[] { -5, -5, -4, -4, -4, -3, -3, -2, -2, -2 }, -5, -2));
+            //Console.WriteLine(isSequencedArray(new int[] { 0, 1, 2, 3, 4, 5 }, 1, 5));
+            //Console.WriteLine(isSequencedArray(new int[] { 1, 2, 3, 4 }, 1, 5));
+            //Console.WriteLine(isSequencedArray(new int[] { 5, 4, 3, 2, 1 }, 1, 5));
+
+            //Console.WriteLine(FindMedianSortedArrays(nums1, nums2));
+            //CellCalculation(11,0,0);
+            // CellCalculationCustom(6, -10, 15, "C");
+            //NewCellCalculation(2,0,0);
+            //Max2CellCalculationNew(1, 12, 5, 12); // 200 - 
+
             //ATPDeviceConfigurationByCustomerInput(2,2,192);
-
             //Console.WriteLine(isDigitIncreasing(36));
-
             // Console.WriteLine(checkConcatenatedSum(198, 3));
-
 
             //largestPrime(10);
 
@@ -5688,7 +5886,6 @@ namespace CodingConsoleApp
 
             //Console.WriteLine(eval(2.0,new int[] { 4, 0, 9 }));
             //Console.WriteLine(loopSum(new int[] { 3 }, 10));
-
 
 
             //Console.WriteLine(is121Array1(new int[] { 1, 1, 2, 2, 2, 1, 1 }));
@@ -5815,100 +6012,33 @@ namespace CodingConsoleApp
 
 
             // Console.WriteLine(isMadhavArray(new int[] {6,2,4,2,2,2,1,5,0,0 }));
-
             //Console.WriteLine(computeDepth(25));
-
             //Console.WriteLine(convertToBase10(new int[] { 3,2,5 }, 8));
-
             //Console.WriteLine(isVanilla(new int[] { 11, 22}));
 
-            DrawerSelection(0, 0, 0);
-
-
-
-
-
-
-            int[] nums1 = { 1, 2 };
-            int[] a = { -18, 1, 2, 3, 4, 5 };
-            int[] b = { 1, 2, 3, 4, 5 };
-            //doIntegerBasedRounding(b, 3);
-            int[] c = { -1, 0, 1,1 };
-
-            //int r = decodeArray1(c);
-
-
-            //computeHMS(3735);
-            int[] d = {1, 2, 1, 2, 1, 2, 1, 2,1};
-            //Console.WriteLine(isMartian(d));
-
-            int[] e = {  };
-            //Console.WriteLine(isPairedN(e,0));
-            int[] f = { 2 };
-            //Console.WriteLine(isNPrimeable(f, 1));
-
+            #endregion
+                       
 
             //  S, SL, L , full locking option 3 for full
-
             // Max2CellCalculationNew(1, 27, 27, 146, 1);  // custom ok
             //Max2CellCalculationNew(1, 27, 0, 0, 3); // full locking
             // Max2CellCalculationNew(1, 23, 0, 0, 1);  // standard
-
            // Max2CellCalculationNew(5, 0, 22, 22, 1); // 66 , 22
-
             //Max2CellCalculationNew(1, 44, 0, 0, 3); // full locking
-
-
-
             // Max2CellCalculationNew(1, 23, 10, 5,1);  // case no 1.
-
             // Max2CellCalculationNew(1, 44, 34, 12,1);  // case no 2.
-
             // Max2CellCalculationNew(1, 88, 58 ,16,1);  // case no 3.
-
             //Max2CellCalculationNew(1, 89, 80, 20, 1); // case no 4.
-
             // Max2CellCalculationNew(1, 76, 27, 36, 1); // case no 5.
-
             // Max2CellCalculationNew(1, 60, 40, 24,1);  // case no 6. 
-
             // Max2CellCalculationNew(1, 25, 20, 20, 1);  // case no. 7. 
-
             //Max2CellCalculationNew(1, 25, 23, 22, 1);  // case no. 8 
-
             // Max2CellCalculationNew(1, 58, 57, 49,1);  // case no. 9 
-
-
             // Max2CellCalculationNew(1, 27, 0, 0, 1);  // case no. 9.1  standard
             // Max2CellCalculationNew(1, 27, 27, 146, 1);  // case no. 9.1  standard
-
             // Max2CellCalculationNew(1, 27, 27, 144, 1);  // case no. 9.1  standard
-
             // Max2CellCalculationNew(1, 44, 44, 112, 2); // custom
-
             // Max2CellCalculationNew(1, 44, 44, 24, 3);
-
-            //Console.WriteLine(BalancedStringSplit(""));
-
-            // Console.WriteLine(MaxNumberOfBalloons(""));
-
-            int[] n = { 1, 1, 10, 4, 4, 3 };
-            int[] p = { 1, 4, 3 };
-
-           // Console.WriteLine(matchPattern(n, 5, p, 2));
-
-            //Console.WriteLine(isSequencedArray(new int[] { 1, 2, 3, 4, 5 }, 1, 5));
-            //Console.WriteLine(isSequencedArray(new int[] { 1, 3, 4, 2, 5 }, 1, 5));
-            //Console.WriteLine(isSequencedArray(new int[] { -5, -5, -4, -4, -4, -3, -3, -2, -2, -2 }, -5, -2));
-            //Console.WriteLine(isSequencedArray(new int[] { 0, 1, 2, 3, 4, 5 }, 1, 5));
-            //Console.WriteLine(isSequencedArray(new int[] { 1, 2, 3, 4 }, 1, 5));
-            //Console.WriteLine(isSequencedArray(new int[] { 5, 4, 3, 2, 1 }, 1, 5));
-
-            //Console.WriteLine(FindMedianSortedArrays(nums1, nums2));
-            //CellCalculation(11,0,0);
-            // CellCalculationCustom(6, -10, 15, "C");
-            //NewCellCalculation(2,0,0);
-            //Max2CellCalculationNew(1, 12, 5, 12); // 200 - 
 
 
             #region Linked List
@@ -5929,273 +6059,279 @@ namespace CodingConsoleApp
             two.next = three;
             three.next = four;
             //four.next = one;
-           // Console.WriteLine(HasCycle(one));
-           
+            // Console.WriteLine(HasCycle(one));
 
-             //DeleteMiddle(one);
-             //ReorderList(one);
+
+            //DeleteMiddle(one);
+            //ReorderList(one);
 
             #endregion
+            //........................Tree...................
 
+            #region Tree
+            //TreeNode one = new TreeNode(1);
+            //TreeNode two = new TreeNode(2);
 
-             //........................Tree...................
+            //TreeNode three = new TreeNode(3);
+            //TreeNode four = new TreeNode(4);
+            //TreeNode five = new TreeNode(5);
 
-             //#region Tree
-             //TreeNode one = new TreeNode(1);
-             //TreeNode two = new TreeNode(2);
+            //one.left = two;
 
-             //TreeNode three = new TreeNode(3);
-             //TreeNode four = new TreeNode(4);
-             //TreeNode five = new TreeNode(5);
+            ////one.right = three;
+            ////two.left = four;
+            ////two.right = five;
 
-             //one.left = two;
+            //List<int> res = new List<int>();
 
-             ////one.right = three;
-             ////two.left = four;
-             ////two.right = five;
+            //TreeNode onee = new TreeNode(1);
+            //TreeNode twoo = new TreeNode(2);
+            //onee.right = twoo;
 
-             //List<int> res = new List<int>();
+            ////postorderTraversal(one, res);
 
-             //TreeNode onee = new TreeNode(1);
-             //TreeNode twoo = new TreeNode(2);
-             //onee.right = twoo;
+            //var found = IsSameTree(one, onee);
 
-             ////postorderTraversal(one, res);
+            //foreach (var item in res)
+            //{
+            //    Console.Write(item + " ");
+            //}
 
-             //var found = IsSameTree(one, onee);
-
-             //foreach (var item in res)
-             //{
-             //    Console.Write(item + " ");
-             //}
-
-             //#endregion
-             //.....................End Tree...............
-
-
+            #endregion
+            //.....................End Tree...............
             #region Array
 
 
-             //string[] w = { "cool", "lock", "cook" };
-             // Console.WriteLine(CommonChars(w));
+            //string[] w = { "cool", "lock", "cook" };
+            // Console.WriteLine(CommonChars(w));
 
-             //int[][] a = new int[3][];
-             //a[0] = new int[] { 1, 3, 4 };
-             //a[1] = new int[] { 2, 1, 3 };
-             //a[2] = new int[] { 5, 2, 1 };
+            //int[][] a = new int[3][];
+            //a[0] = new int[] { 1, 3, 4 };
+            //a[1] = new int[] { 2, 1, 3 };
+            //a[2] = new int[] { 5, 2, 1 };
 
-             //Console.WriteLine(IsToeplitzMatrix(a));
+            //Console.WriteLine(IsToeplitzMatrix(a));
 
-             //int[] a = { 5, 1, 22, 25, 6, -1, 8, 10 };
-             //int[] b = { 1, 6, -1, 10 };
-             //isValidSubsequence2(a, b);
-             // isValidSubsequence("ahbgdc", "abc");
+            //int[] a = { 5, 1, 22, 25, 6, -1, 8, 10 };
+            //int[] b = { 1, 6, -1, 10 };
+            //isValidSubsequence2(a, b);
+            // isValidSubsequence("ahbgdc", "abc");
 
-             //Floyed1(5);
+            //Floyed1(5);
 
-             //Console.WriteLine(MySqrt(65));
-             // int[] a = { 1, 0, 0, 3, 2 };
-             //MoveZeroesToFirst(a);
-             //moveZeroesF(a);
-             // int[] a = { 3, 2, 2, 3 };
-             // Console.WriteLine(RemoveElement(a,3));
+            //Console.WriteLine(MySqrt(65));
+            // int[] a = { 1, 0, 0, 3, 2 };
+            //MoveZeroesToFirst(a);
+            //moveZeroesF(a);
+            // int[] a = { 3, 2, 2, 3 };
+            // Console.WriteLine(RemoveElement(a,3));
 
-             //int[] a = { 0, 0, 1, 1, 1, 2, 2, 3, 3, 4 };
-             //Console.WriteLine(removeDuplicates1(a));
-             //Console.WriteLine(CheckPerfectNumber(8128));
-             // Console.WriteLine(fib(0));
-
-
-             //int[][] a = new int[1][];
-
-             //a[0] = new int[] { 1, 2, 3 };
-             //a[1] = new int[] { 4, 5, 6 };
-             //a[2] = new int[] { 7, 8, 9 };
-
-             //Console.WriteLine(Transpose(a));
-
-             //int[][] a = new int[3][];
-
-             //a[0] = new int[]{ 3,7,8};
-             //a[1] = new int[]{ 9,11,13};
-             //a[2] = new int[]{ 15,16,17};
-
-             //Console.WriteLine(LuckyNumbers(a));
-
-             //int[] a = { -100,-98,-1,2,3,4 };
-             //Console.WriteLine(MaximumProduct(a));
-
-             //int[] a = { 1, 2, 3, 4 };
-
-             //Console.WriteLine(Construct2DArray(a, 2, 2));
-             // int[][] a = new int[2][];
-             //a[0] = new int[] { 1,2};
-             // a[1] = new int[] { 3,4};
-             // Console.WriteLine(MatrixReshape(a, 1, 4));
-
-             //int[] a = { 6, 2, 6, 5, 1, 2 };
-             // Console.WriteLine(ArrayPairSum(a));
-
-             // string[] words1 = { "leetcode", "is", "amazing", "as", "is" };
-             // string[] words2 = { "amazing", "leetcode", "is" };
-             // Console.WriteLine(CountWords(words1, words2));
+            //int[] a = { 0, 0, 1, 1, 1, 2, 2, 3, 3, 4 };
+            //Console.WriteLine(removeDuplicates1(a));
+            //Console.WriteLine(CheckPerfectNumber(8128));
+            // Console.WriteLine(fib(0));
 
 
-             //string s = "leetcode";
-             //Console.WriteLine(CheckIfPangram(s));
+            //int[][] a = new int[1][];
 
-             //int[] a = { 1, 3, 2, 2, 5, 2, 3, 7 };
-             //Console.WriteLine(FindLHS(a));
-             //int[] a = { 1, 2, 2,  1, 3 };
-             //Console.WriteLine(UniqueOccurrences(a));
+            //a[0] = new int[] { 1, 2, 3 };
+            //a[1] = new int[] { 4, 5, 6 };
+            //a[2] = new int[] { 7, 8, 9 };
 
-             //int[] a = { 28, 6, 22, 8, 44, 17 };
-             //int[] b = { 22, 28, 8, 6 };
-             //Console.WriteLine(RelativeSortArray(a,b));
-             //string s1 = "gw pk xy";
-             //string s2 = "gw aje zqd";
-             //Console.WriteLine(UncommonFromSentences(s1,s2));
+            //Console.WriteLine(Transpose(a));
 
+            //int[][] a = new int[3][];
 
-             //Console.WriteLine(IsHappy2(19));
-             //int[] a = { 4, 3, 2, 7, 8, 2, 3, 1 };
+            //a[0] = new int[]{ 3,7,8};
+            //a[1] = new int[]{ 9,11,13};
+            //a[2] = new int[]{ 15,16,17};
 
-             //Console.WriteLine(FindDuplicates(a));
+            //Console.WriteLine(LuckyNumbers(a));
 
-             //Console.WriteLine(IsValid("()[]{}"));
-             //Console.WriteLine(IsAnagram("ami", "ima"));
-             /*
-             int[] a =  { 1,2,3 };
-             int[][] b = {    new int[] { 1,2,3},
-                              new int[] { 4,5,6},
-                              new int[] { 7,8,9}
-                             };
-             int[,] c = { { 1,2,3},
-                          { 4,5,6},
-                          {7,8,9 } };
+            //int[] a = { -100,-98,-1,2,3,4 };
+            //Console.WriteLine(MaximumProduct(a));
 
-             Console.WriteLine(DiagonalSum(c)); */
+            //int[] a = { 1, 2, 3, 4 };
 
+            //Console.WriteLine(Construct2DArray(a, 2, 2));
+            // int[][] a = new int[2][];
+            //a[0] = new int[] { 1,2};
+            // a[1] = new int[] { 3,4};
+            // Console.WriteLine(MatrixReshape(a, 1, 4));
+
+            //int[] a = { 6, 2, 6, 5, 1, 2 };
+            // Console.WriteLine(ArrayPairSum(a));
+
+            // string[] words1 = { "leetcode", "is", "amazing", "as", "is" };
+            // string[] words2 = { "amazing", "leetcode", "is" };
+            // Console.WriteLine(CountWords(words1, words2));
 
 
-             //int[] id1 = { 1, 2, 2, 1 };
-             //int[] id2 = { 2, 2 };
+            //string s = "leetcode";
+            //Console.WriteLine(CheckIfPangram(s));
 
-             //Console.WriteLine(Intersection(id1, id2));
+            //int[] a = { 1, 3, 2, 2, 5, 2, 3, 7 };
+            //Console.WriteLine(FindLHS(a));
+            //int[] a = { 1, 2, 2,  1, 3 };
+            //Console.WriteLine(UniqueOccurrences(a));
 
-             // int[] nums = { 0, 1, 0, 3, 12 };
-
-             //MoveZeroes(nums);
-
-             //int[] nums1 = { 1, 2, 3, 0, 0, 0 };
-             //int m = nums1.Length;
-             //int[] nums2 = { 2, 5, 6 };
-             //int n = nums2.Length;
-
-             //Merge(nums1, m, nums2, n);
-
-             // int[] a = { 9,9,9 };
-             // Console.WriteLine(PlusOne(a));
-
-             //int[] a = { 100, 4, 200, 1, 3, 2 };
-             // Console.WriteLine(LongestConsecutive(a));
-             //int [,] d = pascal(5);
+            //int[] a = { 28, 6, 22, 8, 44, 17 };
+            //int[] b = { 22, 28, 8, 6 };
+            //Console.WriteLine(RelativeSortArray(a,b));
+            //string s1 = "gw pk xy";
+            //string s2 = "gw aje zqd";
+            //Console.WriteLine(UncommonFromSentences(s1,s2));
 
 
-             /*
-             IList<IList<int>> resultList = new List<IList<int>>();
+            //Console.WriteLine(IsHappy2(19));
+            //int[] a = { 4, 3, 2, 7, 8, 2, 3, 1 };
 
-             List<int> r1 = new List<int>() { 2 };
-             List<int> r2 = new List<int>() { 3, 4 };
-             List<int> r3 = new List<int>() { 6, 5, 7 };
-             List<int> r4 = new List<int>() { 4, 1, 8, 3 };
-             resultList.Add(r1);
-             resultList.Add(r2);
-             resultList.Add(r3);
-             resultList.Add(r4);
-             // Console.WriteLine(MinimumTotal1(resultList));
+            //Console.WriteLine(FindDuplicates(a));
 
-             // row column fixed size
-             int[,] c = { { 2, 0, 0, 0 }, { 3, 4, 0, 0 }, { 6, 5, 7, 0 }, { 4, 1, 8, 3 } };
-             // Console.WriteLine(MinimumTotal3(c));
+            //Console.WriteLine(IsValid("()[]{}"));
+            //Console.WriteLine(IsAnagram("ami", "ima"));
+            /*
+            int[] a =  { 1,2,3 };
+            int[][] b = {    new int[] { 1,2,3},
+                             new int[] { 4,5,6},
+                             new int[] { 7,8,9}
+                            };
+            int[,] c = { { 1,2,3},
+                         { 4,5,6},
+                         {7,8,9 } };
 
-             // Declare the array of two elements:
-             int[][] arr = new int[4][];
-
-             // Initialize the elements:
-             arr[0] = new int[] { 2 };
-             arr[1] = new int[] { 3, 4 };
-             arr[2] = new int[] { 6, 5, 7 };
-             arr[3] = new int[] { 4, 1, 8, 3 };
-
-             // Another way of Declare and
-             // Initialize of elements  Column not fixed
-             int[][] arr1 = { new int[] { 2},
-                              new int[] { 3,4 } ,
-                              new int[] { 6, 5, 7  },
-                              new int[] { 4, 1, 8, 3 }
-                             };
-
-             //Console.WriteLine(MinimumTotal2(arr));
-
-             int[][] d = {   new int[] { -1 },
-                             new int[] { 2, 3 },
-                             new int[] { 1, -1, -3 } };
-
-             IList<IList<int>> dList = new List<IList<int>>();
-             dList.Add(new List<int>() { -1 } );
-             dList.Add(new List<int>() { 2, 3 } );
-             dList.Add(new List<int>() { 1, -1, -3 } );
-
-             */
-
-             //Console.WriteLine(MinimumTotal(dList));
-
-             //reverse(12345);
-             //piramid4(4);
-             //int[] a = { 9,4,9,8,4};
-             //int[] b = { 4,9,5};
-             //Console.WriteLine(Intersect(a, b));
-
-             //int[] a = {1,1,1};
-             //Console.WriteLine(is121Array(a));
-
-             //int[] a = { 4, 3, 2, 7, 8, 2, 3, 1 };
-             //Console.WriteLine(FindDisappearedNumbers1(a));
-
-             //int[] a = { 0, 2, 1, 2 };
-             //int[] b = { 3, 1, 2, 0 };
-             //Console.WriteLine(equivalantArray(a, b));
+            Console.WriteLine(DiagonalSum(c)); */
 
 
-             // int[] a = { 1, 2,2,1};
 
-             //Console.WriteLine(hasNValue(a, 2));
+            //int[] id1 = { 1, 2, 2, 1 };
+            //int[] id2 = { 2, 2 };
 
-             // int[] a = { 1, 1, 1,  5, 5, 8, 8, 8 };
-             //Console.WriteLine(isStepped(a));
+            //Console.WriteLine(Intersection(id1, id2));
 
-             //Console.WriteLine(isPrimeHappy(8));
-             //Console.WriteLine(isDigitIncreasingMukta(36));
+            // int[] nums = { 0, 1, 0, 3, 12 };
 
-             //int[] nums = { 1, 2};
-             //Console.WriteLine(MajorityElement(nums));
+            //MoveZeroes(nums);
 
-             //Console.WriteLine(CanConstruct("aa", "aab"));
-             //Console.WriteLine(FirstUniqChar("aabb"));
+            //int[] nums1 = { 1, 2, 3, 0, 0, 0 };
+            //int m = nums1.Length;
+            //int[] nums2 = { 2, 5, 6 };
+            //int n = nums2.Length;
 
-             //Console.WriteLine(reverseNumber(-1234));
+            //Merge(nums1, m, nums2, n);
 
-             //int[] a = { 1, 8, 3, 2, 6 };
-             //int[] b =  {1,4};
-             //Console.WriteLine(commonArray(a, b));
-             // int[] p = { 3, 4, 5, 10 };
+            // int[] a = { 9,9,9 };
+            // Console.WriteLine(PlusOne(a));
 
-             //Console.WriteLine(POE(p));
+            //int[] a = { 100, 4, 200, 1, 3, 2 };
+            // Console.WriteLine(LongestConsecutive(a));
+            //int [,] d = pascal(5);
+
+
+            /*
+            IList<IList<int>> resultList = new List<IList<int>>();
+
+            List<int> r1 = new List<int>() { 2 };
+            List<int> r2 = new List<int>() { 3, 4 };
+            List<int> r3 = new List<int>() { 6, 5, 7 };
+            List<int> r4 = new List<int>() { 4, 1, 8, 3 };
+            resultList.Add(r1);
+            resultList.Add(r2);
+            resultList.Add(r3);
+            resultList.Add(r4);
+            // Console.WriteLine(MinimumTotal1(resultList));
+
+            // row column fixed size
+            int[,] c = { { 2, 0, 0, 0 }, { 3, 4, 0, 0 }, { 6, 5, 7, 0 }, { 4, 1, 8, 3 } };
+            // Console.WriteLine(MinimumTotal3(c));
+
+            // Declare the array of two elements:
+            int[][] arr = new int[4][];
+
+            // Initialize the elements:
+            arr[0] = new int[] { 2 };
+            arr[1] = new int[] { 3, 4 };
+            arr[2] = new int[] { 6, 5, 7 };
+            arr[3] = new int[] { 4, 1, 8, 3 };
+
+            // Another way of Declare and
+            // Initialize of elements  Column not fixed
+            int[][] arr1 = { new int[] { 2},
+                             new int[] { 3,4 } ,
+                             new int[] { 6, 5, 7  },
+                             new int[] { 4, 1, 8, 3 }
+                            };
+
+            //Console.WriteLine(MinimumTotal2(arr));
+
+            int[][] d = {   new int[] { -1 },
+                            new int[] { 2, 3 },
+                            new int[] { 1, -1, -3 } };
+
+            IList<IList<int>> dList = new List<IList<int>>();
+            dList.Add(new List<int>() { -1 } );
+            dList.Add(new List<int>() { 2, 3 } );
+            dList.Add(new List<int>() { 1, -1, -3 } );
+
+            */
+
+            //Console.WriteLine(MinimumTotal(dList));
+
+            //reverse(12345);
+            //piramid4(4);
+            //int[] a = { 9,4,9,8,4};
+            //int[] b = { 4,9,5};
+            //Console.WriteLine(Intersect(a, b));
+
+            //int[] a = {1,1,1};
+            //Console.WriteLine(is121Array(a));
+
+            //int[] a = { 4, 3, 2, 7, 8, 2, 3, 1 };
+            //Console.WriteLine(FindDisappearedNumbers1(a));
+
+            //int[] a = { 0, 2, 1, 2 };
+            //int[] b = { 3, 1, 2, 0 };
+            //Console.WriteLine(equivalantArray(a, b));
+
+
+            // int[] a = { 1, 2,2,1};
+
+            //Console.WriteLine(hasNValue(a, 2));
+
+            // int[] a = { 1, 1, 1,  5, 5, 8, 8, 8 };
+            //Console.WriteLine(isStepped(a));
+
+            //Console.WriteLine(isPrimeHappy(8));
+            //Console.WriteLine(isDigitIncreasingMukta(36));
+
+            //int[] nums = { 1, 2};
+            //Console.WriteLine(MajorityElement(nums));
+
+            //Console.WriteLine(CanConstruct("aa", "aab"));
+            //Console.WriteLine(FirstUniqChar("aabb"));
+
+            //Console.WriteLine(reverseNumber(-1234));
+
+            //int[] a = { 1, 8, 3, 2, 6 };
+            //int[] b =  {1,4};
+            //Console.WriteLine(commonArray(a, b));
+            // int[] p = { 3, 4, 5, 10 };
+
+            //Console.WriteLine(POE(p));
 
             #endregion
 
-             Program obj = new Program();
+            // Creating Object
+            //OOP ob = new OOP();
+
+            //int sum1 = ob.Add(1, 2);
+            //Console.WriteLine("sum of the two "  + "integer value : " + sum1);
+            //int sum2 = ob.Add(1, 2, 3);
+            //Console.WriteLine("sum of the three " + "integer value : " + sum2);
+
+
+
+            Program obj = new Program();
             Console.WriteLine("The generation number of object obj is: "
                                           + GC.GetGeneration(obj));
             Console.WriteLine("Total Memory:" + GC.GetTotalMemory(false));
@@ -6434,8 +6570,6 @@ namespace CodingConsoleApp
 
     }
 
-
-
     public class ListNode
     {
         public int val;
@@ -6457,9 +6591,7 @@ namespace CodingConsoleApp
           this.left = left;
           this.right = right;
       }
- }
-
-    
+ }       
 
     public class MyHashMap
     {
@@ -6537,4 +6669,6 @@ namespace CodingConsoleApp
     }
 
 
+
+   
 }
