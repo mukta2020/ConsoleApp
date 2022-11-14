@@ -304,6 +304,28 @@ namespace CodingConsoleApp
             return -1;
         }
 
+        public static int isSequentiallyBounded(int[] a)
+        {
+            if (a.Length == 0) return 1;
+            int c = 0;
+            for (int i = 1; i < a.Length; i++)
+            {
+                if (a[i] < 0) return 0;
+
+                if (a[i - 1] > a[i]) return 0;
+                else if (a[i - 1] == a[i]) c++;
+                else if (a[i - 1] < a[i]) 
+                {
+                    if (a[i - 1] <= c) return 0;
+                    else c = 1;
+                }
+            }
+
+            if (c >= a[a.Length - 1]) return 0;
+            else return 1;
+        }
+
+
         static int isStepped(int[] a)
         {
             var hasset = new HashSet<int>(a);
@@ -6014,16 +6036,18 @@ namespace CodingConsoleApp
             // Console.WriteLine(isMadhavArray(new int[] {6,2,4,2,2,2,1,5,0,0 }));
             //Console.WriteLine(computeDepth(25));
             //Console.WriteLine(convertToBase10(new int[] { 3,2,5 }, 8));
-            //Console.WriteLine(isVanilla(new int[] { 11, 22}));
+            //Console.WriteLine(isVanilla(new int[] { 11, 22}));            
+
+            Console.WriteLine(isSequentiallyBounded(new int[] { 5,5,5,2,5 }));
 
             #endregion
-                       
+
 
             //  S, SL, L , full locking option 3 for full
             // Max2CellCalculationNew(1, 27, 27, 146, 1);  // custom ok
             //Max2CellCalculationNew(1, 27, 0, 0, 3); // full locking
             // Max2CellCalculationNew(1, 23, 0, 0, 1);  // standard
-           // Max2CellCalculationNew(5, 0, 22, 22, 1); // 66 , 22
+            // Max2CellCalculationNew(5, 0, 22, 22, 1); // 66 , 22
             //Max2CellCalculationNew(1, 44, 0, 0, 3); // full locking
             // Max2CellCalculationNew(1, 23, 10, 5,1);  // case no 1.
             // Max2CellCalculationNew(1, 44, 34, 12,1);  // case no 2.
