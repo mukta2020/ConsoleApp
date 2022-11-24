@@ -326,6 +326,38 @@ namespace CodingConsoleApp
         }
 
 
+        public static int isMinMaxDisjoint(int[] a)
+        {
+
+            if (a.Length == 0) return 0;
+            int min = a.Min();
+            int max = a.Max();
+            int minC = 0;
+            int maxC = 0;
+            bool mequal = false;
+            bool mAdjacent = false;
+            bool minOne = false;
+            bool maxOne = false;
+
+            if (min != max) mequal = true;
+            if (max - min > 1) mAdjacent = true;
+
+            for (int i = 0; i < a.Length; i++)
+            {
+                if (a[i] == min) minC++;
+                if (a[i] == max) maxC++;
+            }
+
+            if (minC == 1) minOne = true;
+            if (maxC == 1) maxOne = true;
+
+            if (mequal && mAdjacent && minOne && maxOne)
+                return 1;
+            else return 0;            
+
+            
+        }
+
         static int isStepped(int[] a)
         {
             var hasset = new HashSet<int>(a);
@@ -5211,6 +5243,148 @@ namespace CodingConsoleApp
             return 1;
         }
 
+        public static int countRepresentations1(int numRupees)
+        {
+            int count = 0;
+
+            for (int rupee20 = 0; rupee20 <= (numRupees) / 20; rupee20++)
+            {
+                int rupe10Limit = (numRupees - (rupee20 * 20)) / 10;
+
+                for (int rupee10 = 0; rupee10 <= rupe10Limit; rupee10++)
+                {
+                    int rupe5Limit = (numRupees - (rupee10 * 10 + rupee20 * 20)) / 5;
+
+                    for (int rupee5 = 0; rupee5 <= rupe5Limit; rupee5++)
+                    {
+                        int rupee2Limit = (numRupees - (rupee5 * 5 + rupee10 * 10 + rupee20 * 20)) / 2;
+
+                        for (int rupee2 = 0; rupee2 <=  rupee2Limit; rupee2++)
+                        {
+                            int rupee1Limit = (numRupees - (rupee2 * 2 + rupee5 * 5 + rupee10 * 10 + rupee20 * 20));
+
+                            for (int rupee1 = 0; rupee1 <= rupee1Limit; rupee1++)
+                            {
+
+                                if (rupee1 + rupee2 * 2 + rupee5 * 5 + rupee10 * 10 + rupee20 * 20 == numRupees)
+                                {
+                                    count++;
+
+                                }
+
+                            }
+
+                        }
+                    }
+                }
+
+            }
+
+            return count;
+        }
+
+        public static int countRepresentations(int numRupees)
+        {
+            int count = 0;
+
+            for (int rupee20 = 0; rupee20 <= (numRupees) / 20; rupee20++)
+            {
+                for (int rupee10 = 0; rupee10 <= (numRupees - (rupee20 * 20)) / 10; rupee10++)
+                {
+                    for (int rupee5 = 0; rupee5 <= (numRupees - (rupee10 * 10 + rupee20 * 20)) / 5; rupee5++)
+                    {
+                        for (int rupee2 = 0; rupee2 <= (numRupees - (rupee5 * 5 + rupee10 * 10 + rupee20 * 20)) / 2; rupee2++)
+                        {
+                            for (int rupee1 = 0; rupee1 <= (numRupees - (rupee2 * 2 + rupee5 * 5 + rupee10 * 10 + rupee20 * 20)); rupee1++)
+                            {
+                                if (rupee1 + rupee2 * 2 + rupee5 * 5 + rupee10 * 10 + rupee20 * 20 == numRupees)
+                                {
+                                    count++;
+                                }
+
+                            }
+
+                        }
+                    }
+                }
+
+            }
+
+            return count;
+        }
+
+        public static int[] filterArray1(int[] a, int n) 
+        { 
+            List<int> r = new List<int>();
+            List<int> l = new List<int>();
+
+            int p = 1;  l.Add(p);
+            while (p<= n)
+            {
+                p = p * 2;
+                if (p > n) break;
+                l.Add(p);
+            }
+
+            int s = l[l.Count-1];
+            for (int i = l.Count - 1; i >= 0; i-- )
+            {
+                if(s==n) { r.Add(i); break; }
+                else if(s<n)
+                {
+                    n = n - s;
+                    r.Add(i);
+                }
+                if(i>0) s = l[i-1];
+            }
+            r.Sort();
+
+            for (int i = 0; i < r.Count; i++)
+            {
+                if(r[i] < a.Length)
+                     r[i] = a[ r[i] ];
+            }
+
+            return r.ToArray();
+        
+        }
+
+        public static int[] filterArray(int[] a, int n)
+        {
+            List<int> index = new List<int>();
+            List<int> l = new List<int>();
+
+            int p = 1; l.Add(p);
+            while (p <= n)
+            {
+                p = p * 2;
+                if (p > n) break;
+                l.Add(p);
+            }
+
+            //int s = l[l.Count - 1];
+
+            for (int j = l.Count - 1; j >= 0; j--)
+            {
+                if (n >= l[j])
+                {
+                    index.Add(j);
+                    n = n - l[j];
+                }
+                if (n == 0) break;
+
+            }
+            index.Sort();
+
+            for (int i = 0; i < index.Count; i++)
+            {
+                if (index[i] < a.Length)
+                    index[i] = a[index[i]];
+            }
+
+            return index.ToArray();
+
+        }
 
         #region ATP ALgorithm
 
@@ -6038,7 +6212,14 @@ namespace CodingConsoleApp
             //Console.WriteLine(convertToBase10(new int[] { 3,2,5 }, 8));
             //Console.WriteLine(isVanilla(new int[] { 11, 22}));            
 
-            Console.WriteLine(isSequentiallyBounded(new int[] { 5,5,5,2,5 }));
+            // Console.WriteLine(isSequentiallyBounded(new int[] { 5,5,5,2,5 }));
+
+
+            //Console.WriteLine(isMinMaxDisjoint(new int[] { 5, 4, 1,3, 2}));
+
+            // Console.WriteLine(countRepresentations(12));
+
+                Console.WriteLine(filterArray(new int[] { 8,4,9,0,3,1,2 }, 88));
 
             #endregion
 
