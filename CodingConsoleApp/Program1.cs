@@ -6518,9 +6518,33 @@ namespace CodingConsoleApp
 
         #endregion
 
+        #region Leetcode target 300
+        static public int[] TwoSum(int[] nums, int target)
+        {
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                int a = nums[i];
+                for (int j = i + 1; j < nums.Length; j++)
+                {
+                    if (a + nums[j] == target) 
+                        return new int[] { i, j };
+                }
+            }
+            return null;
+        }
+        #endregion
 
         static void Main(string[] args)
         {
+            #region Leetcode 300 function call
+
+            int[] nums = { 2, 7, 11, 15 };
+            int target = 9;
+            Console.WriteLine(TwoSum(nums,target));
+
+            #endregion
+
 
             #region OOP
 
@@ -6762,7 +6786,7 @@ namespace CodingConsoleApp
 
             //Console.WriteLine(isPrimeProduct(23));
 
-            Console.WriteLine(countOnes(15));
+            //Console.WriteLine(countOnes(15));
             
 
             #endregion
