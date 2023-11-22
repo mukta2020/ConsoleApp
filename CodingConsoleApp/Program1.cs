@@ -6533,15 +6533,858 @@ namespace CodingConsoleApp
             }
             return null;
         }
+
+        static public IList<IList<int>> FindDifference(int[] nums1, int[] nums2)
+        {
+            //Input: nums1 = [1, 2, 3], nums2 = [2, 4, 6]
+            //Output: [[1,3],[4,6]]
+            List<int> a = new List<int>();
+            List<int> b = new List<int>();            
+
+            Dictionary<int, int> d1 = new Dictionary<int, int>();
+
+            for (int i = 0; i < nums1.Length; i++)
+            {
+                if (!d1.Keys.Contains(nums1[i]))
+                {
+                    d1[nums1[i]] = 1;
+                }
+                else
+                {
+                    d1[nums1[i]] += 1;
+                }
+            }
+
+            Dictionary<int, int> d2 = new Dictionary<int, int>();
+
+            for (int i = 0; i < nums2.Length; i++)
+            {
+                if (!d2.Keys.Contains(nums2[i]))
+                {
+                    d2[nums2[i]] = 1;
+                }
+                else
+                {
+                    d2[nums2[i]] += 1;
+                }
+            }
+            foreach (var key in d1.Keys)
+            {
+                if (!d2.Keys.Contains(key))
+                {
+                    a.Add(key);
+                }
+            }
+
+            foreach (var key in d2.Keys)
+            {
+                if (!d1.Keys.Contains(key))
+                {
+                    b.Add(key);
+                }
+            }
+            IList<IList<int>> c = new List<IList<int>>();
+            c.Add(a);
+            c.Add(b);
+            return c;
+
+        }
+
+        static public IList<int> Intersection(int[][] nums)
+        {
+            List<int> a = nums[0].ToList();
+
+            for (int i = 1; i < nums.Length; i++)
+            {
+                a = a.Intersect(nums[i]).ToList();
+            }
+
+            return a.OrderBy(o=>o).ToList();
+
+        }
+
+        static public int EqualPairs(int[][] grid)
+        {
+            int count = 0;
+
+            IList<IList<int>> allCol = new List<IList<int>>();
+            //row
+            for (int i = 0; i < grid.Length; i++)
+            {
+                List<int> cols = new List<int>();
+                //col
+                for (int j = 0; j < grid[i].Length; j++)
+                {
+                    cols.Add(grid[j][i]);
+                }
+                allCol.Add(cols);                
+            }
+
+            for (int i = 0; i < grid.Length; i++)
+            {
+                List<int> rows = grid[i].ToList();
+                foreach (var singleCol in allCol)
+                {
+                    if (rows.SequenceEqual(singleCol))
+                    {
+                        count++;
+                    }
+                }
+            }
+
+            return count;
+        }
+
+        static public int DeleteGreatestValue(int[][] grid)
+        {
+            int maxSum = 0;
+            int c = grid[0].Length;
+
+            while(c != 0)
+            {
+                List<int> maxList = new List<int>();
+                for (int i = 0; i < grid.Length; i++)
+                {
+                    List<int> rows = grid[i].ToList();
+                    int max = rows.Max();
+                    int j = rows.IndexOf(max);
+                    maxList.Add(max);
+                    grid[i][j] = 0;
+                }
+                maxSum += maxList.Max();
+                c--;
+            }           
+
+            return maxSum;
+
+        }
+
+
+        static public int LargestAltitude(int[] gain)
+        {
+            int sum = 0;
+            List<int> altList = new List<int>();
+            altList.Add(0);
+            for (int i = 0; i < gain.Length; i++)
+            {
+                sum += gain[i];
+                altList.Add(sum);
+            }
+            return altList.Max();
+
+        }
+        static public int LargestAltitude1(int[] gain)
+        {
+            for (int i = 1; i < gain.Length; i++)
+            {
+                gain[i] = gain[i] + gain[i - 1];
+            }
+
+            int gMax = gain.Max();
+            return gMax > 0 ? gMax : 0;
+        }
+        public int MinSubArrayLen1(int target, int[] nums)
+        {
+            int n = nums.Length;
+            int ans = int.MaxValue;
+            int left = 0;
+            int sum = 0;
+            for (int i = 0; i < n; i++)
+            {
+                sum += nums[i];
+                while (sum >= target)
+                {                    
+                    ans = ans < i + 1 - left ? ans : i + 1 - left;
+                    sum -= nums[left++];
+                }
+            }
+            return (ans != int.MaxValue) ? ans : 0;
+
+        }
+        static public int MinSubArrayLen(int target, int[] nums)
+        {
+            int start = 0;
+            int end = 0;
+            int w_sum = nums[0];
+            int maxLen = int.MaxValue;
+            while (end < nums.Length)
+            {
+                if (w_sum < target)
+                {
+                    end++;
+                    if (end < nums.Length)
+                        w_sum += nums[end];
+                }
+                else
+                {
+                    maxLen = Math.Min(maxLen, end - start + 1);
+                    w_sum -= nums[start];
+                    start++;
+                }
+            }
+            return maxLen == int.MaxValue ? 0 : maxLen;
+        }
+
+        static public string MergeAlternately(string word1, string word2)
+        {
+            string s = "";
+            int l = Math.Min(word1.Length, word2.Length);
+            for (int i = 0; i < l; i++)
+            {
+                s += word1[i].ToString() + word2[i].ToString();
+            }
+
+            if (l == word1.Length)
+            {
+                s += word2.Substring(l);
+            }
+            else if (l == word2.Length)
+            {
+                s += word1.Substring(l);
+            }
+
+            return s;
+
+        }
+
+        public bool CanPlaceFlowers(int[] flowerbed, int n)
+        {
+            if (flowerbed.Length == 1 && flowerbed[0] == 0 && n > 0)
+            {
+                n--;
+            }
+            else if (flowerbed.Length > 1 && flowerbed[0] == 0 && flowerbed[1] == 0 && n>0)
+            {
+                flowerbed[0] = 1;n--;
+            }
+
+           
+            for (int i = 1; i < flowerbed.Length-1; i++)
+            {
+                if (n == 0)
+                    break;
+                
+                if (flowerbed[i-1] == 0 && flowerbed[i+1] == 0 && flowerbed[i] == 0)
+                {
+                    flowerbed[i] = 1;
+                    n--;
+                }
+            }
+
+            int l = flowerbed.Length;
+            if (flowerbed.Length > 1 && flowerbed[l-2] == 0 && flowerbed[l-1] == 0 && n>0)
+            {
+                flowerbed[l-1] = 1; n--;
+            }
+
+            if (n == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public int[] AsteroidCollision(int[] asteroids)
+        {
+            List<int> result = new List<int>(asteroids);
+            int i = 0;
+            while (i < result.Count)
+            {
+                if (result[i] > 0 && i < result.Count - 1 && result[i + 1] < 0) //if collision
+                {
+                    int ast1 = Math.Abs(result[i]);
+                    int ast2 = Math.Abs(result[i + 1]);
+                    if (ast1 > ast2)
+                    {
+                        result.RemoveAt(i + 1);
+                        continue;
+                    }
+                    else if (ast1 < ast2)
+                    {
+                        result.RemoveAt(i);
+                    }
+                    else
+                    {
+                        result.RemoveAt(i + 1);
+                        result.RemoveAt(i);
+                    }
+                    i = i > 0 ? --i : i;
+                    continue;
+                }
+                i++;
+            }
+            return result.ToArray();
+        }
+
+        static public string ReverseWords(string s)
+        {
+            s.Trim(' ');
+            string str = "";
+            var words = s.Split(' ');
+            for (int i = words.Length-1; i >=0 ; i--)
+            {
+                if (words[i] == "")
+                    continue;
+                str += words[i] + " ";
+            }
+            return str.Trim();
+
+        }
+
+        static public int[] ProductExceptSelf1(int[] nums)
+        {
+            //Input: nums = [1, 2, 3, 4]
+            //Output: [24,12,8,6]
+
+            int p = 1;
+            foreach (var num in nums)
+            {
+                if (num == 0)
+                {
+                    p = 0; break;
+                }
+                else
+                {
+                    p = p * num;
+                }                
+            }
+
+
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] != 0)
+                {
+                    nums[i] = p / nums[i];
+                }
+                else
+                {
+                        
+                }
+            }
+            return nums;
+
+        }
+
+        static public int[] ProductExceptSelf(int[] nums)
+        {
+            int n = nums.Length;
+
+            int[] pre = new int[n];
+            int[] suff = new int[n];
+            pre[0] = 1;
+            suff[n - 1] = 1;
+
+            for (int i = 1; i < n; i++)
+            {
+                pre[i] = pre[i - 1] * nums[i - 1];
+            }
+            for (int i = n - 2; i >= 0; i--)
+            {
+                suff[i] = suff[i + 1] * nums[i + 1];
+            }
+
+            int[] ans = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                ans[i] = pre[i] * suff[i];
+            }
+            return ans;
+        }
+
+        static public int[] productExceptSelf(int[] nums)
+        {
+            int numsLength = nums.Length;
+            int prefixProduct = 1;
+            int suffixProduct = 1;
+            int[] result = new int[numsLength];
+            for (int i = 0; i < numsLength; i++)
+            {
+                result[i] = prefixProduct;
+                prefixProduct *= nums[i];
+            }
+            for (int i = numsLength - 1; i >= 0; i--)
+            {
+                result[i] *= suffixProduct;
+                suffixProduct *= nums[i];
+            }
+            return result;
+        }
+
+        static public bool IncreasingTriplet(int[] nums)
+        {
+            int max1 = int.MaxValue;
+            int max2 = int.MaxValue;
+            foreach (var n in nums)
+            {
+                if (n <= max1) max1 = n;
+                else if (n <= max2) max2 = n;
+                else return true;
+            }            
+            return false;
+        }
+
+        public int[] DecompressRLElist(int[] nums)
+        {
+            List<int> a = new List<int>();
+            for (int i = 1; i < nums.Length; i++)
+            {
+                if (i%2 != 0) // value
+                {
+                    int c = nums[i - 1];
+                    while (c >0)
+                    {
+                        a.Add(nums[i]);
+                        c--;
+                    }
+                }
+            }
+            return a.ToArray();
+
+        }
+
+        static public int PivotIndex(int[] nums)
+        {
+            int sum = nums.Sum();
+            int leftSum = 0;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if ((sum - nums[i]) % 2 == 0 &&
+                    (sum - nums[i]) / 2 == leftSum)
+                    return i;
+
+                leftSum += nums[i];
+            }
+
+            return -1;
+        }
+
+        public int pivotIndex(int[] nums)
+        {
+            if (nums.Length == 0) return -1;
+            int leftSum = 0, rightSum = nums.Sum(); 
+
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                rightSum -= nums[i];
+                if (rightSum == leftSum) return i;
+                leftSum += nums[i];
+            }
+            return -1;
+        }
+
+        public int[] LeftRightDifference(int[] nums)
+        {
+            List<int> l = new List<int>();
+            int leftSum = 0, rightSum = nums.Sum();
+
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                rightSum -= nums[i];
+                l.Add(Math.Abs(leftSum - rightSum));
+                leftSum += nums[i];
+            }
+            return l.ToArray();
+
+        }
+
+        static public int[] DistinctDifferenceArray(int[] nums)
+        {
+            List<int> l = new List<int>();
+
+            HashSet<int> h1 = new HashSet<int>();
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                h1.Add(nums[i]);
+                HashSet<int> h2 = new HashSet<int>();
+
+                for (int j = i+1; j < nums.Length; j++)
+                {
+                    h2.Add(nums[j]);
+                }
+                l.Add(h1.Count - h2.Count);
+            }
+            return l.ToArray();
+        }
+
+        public bool CanThreePartsEqualSum(int[] arr)
+        {
+            if (arr.Sum() % 3 != 0)
+            {
+                return false;
+            }
+
+            int sum = 0;
+            int counter = 0;
+            int average = arr.Sum() / 3;
+            foreach (int number in arr)
+            {
+                sum += number;
+                if (sum == average)
+                {
+                    counter++;
+                    sum = 0;
+                }
+            }
+
+            return counter >= 3;
+        }
+
+        public int findJudge(int n, int[][] trust)
+        {
+            int[] count = new int[n + 1];
+
+            Dictionary<int, int> map = new Dictionary<int, int>();
+            for (int i = 0; i < trust.Length; i++)
+            {
+                count[trust[i][1]]++;
+
+                if (!map.ContainsKey(trust[i][0]))
+                {
+                    map.Add(trust[i][0], 1);
+                }
+            }
+            for (int i = 1; i <= n; i++)
+            {
+                if (map.ContainsKey(i) == false)
+                {
+                    if (count[i] == (n - 1))
+                        return i;
+                }
+
+            }
+            return -1;
+
+        }
+        static public int TitleToNumber(string columnTitle)
+        {
+            int ans = 0;
+            int doubler = 0;
+            for (int i = columnTitle.Length - 1; i > -1; i--)
+            {
+                var c = columnTitle[i] - 'A' + 1;
+                ans += (c) * (int)Math.Pow(26, doubler);
+                doubler += 1;
+            }
+            return ans;
+        }
+
+        public int HammingWeight(int n)
+        {
+            int count = 0;
+            while (n != 0)
+            {
+                n = n & (n - 1);
+                count++;
+            }
+            return count;
+        }
+        static public uint reverseBits(uint n)
+        {
+            uint reversed = 0;
+            for (int i = 0; i < 32; i++)
+            {
+                reversed = reversed << 1;
+                if (n % 2 == 1)
+                    reversed++;
+                n = n >> 1;
+            }
+            return reversed;
+        }
+
+        static public int[] countBits(int n)
+        {
+            int[] R = new int[n + 1];
+            if (n == 0) return R;
+
+            for (int i = 1; i < n + 1; i++)
+            {
+                if (i % 2 == 0)
+                { // number is even
+                    R[i] = R[i / 2];
+                }
+                else
+                { // is odd
+                    R[i] = R[i - 1] + 1;
+                }
+            }
+            return R;
+        }
+
+        public int hammingDistance(int x, int y)
+        {
+            int count = 0;
+            while (x > 0 || y > 0)
+            {
+                if (x % 2 != y % 2) count++;
+                x /= 2;
+                y /= 2;
+            }
+            return count;
+        }
+
+        static public int TotalHammingDistance(int[] nums)
+        {
+            int total = 0; ;
+            for (int i = 0; i <= nums.Length - 2; i++)
+            {             
+                
+                for (int j = i + 1; j <= nums.Length - 1; j++)
+                {
+                    int x = nums[i];
+                    int y = nums[j];
+                    int count = 0;
+                    while (x > 0 || y > 0)
+                    {
+                        if (x % 2 != y % 2) count++;
+                        x /= 2;
+                        y /= 2;
+                    }
+                    total += count;
+                }
+            }
+            return total;
+            
+        }
+
+        bool hasAlternatingBits2(int n)
+        {
+            /*
+            n =         1 0 1 0 1 0 1 0
+            n >> 1      0 1 0 1 0 1 0 1
+            n ^ n>>1    1 1 1 1 1 1 1 1
+            n           1 1 1 1 1 1 1 1
+            n + 1     1 0 0 0 0 0 0 0 0
+            n & (n+1)   0 0 0 0 0 0 0 0
+            */
+
+            n = n ^ (n >> 1);
+            return (n & n + 1) == 0;
+        }
+
+
+        static public void rotate(int[] nums, int k)
+        {
+            k %= nums.Length;
+            int n = nums.Length;
+            reverseNum(nums, 0, n - 1);
+            reverseNum(nums, 0, k - 1);
+            reverseNum(nums, k, n - 1);
+        }
+        static public void reverseNum(int[] nums, int start, int end)
+        {
+            while (start < end)
+            {
+                int temp = nums[start];
+                nums[start] = nums[end];
+                nums[end] = temp;
+                start++;
+                end--;
+            }
+        }
+
+        public int FindComplement(int num)
+        {
+            string r = "";
+            while (num > 0)
+            {
+                r += (num % 2).ToString();
+                num /= 2;
+            }
+            
+
+            return 0;
+        }
+
+       static public int findComplement1(int num)
+        {
+            int dup = num, c = 1;
+            while (dup != 0)
+            {
+                num = num ^ c; // XOR
+                c = c << 1;
+                dup = dup >> 1;
+            }
+            return num;
+        }
+
+        //100110, its complement is 011001, the sum is 111111.
+        //So we only need get the min number large or equal to num,
+        //then do substraction
+        static public int findComplement(int num)
+        {
+            int ans = 1;
+            while (num >= ans)
+            {
+                ans *= 2;
+            }
+            return ans - num - 1;
+        }
+        public void duplicateZeros(int[] arr)
+        {
+            if (arr == null || arr.Length == 0) return;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] == 0)
+                {
+                    for (int j = arr.Length - 1; j > i; j--)
+                    {
+                        arr[j] = arr[j - 1];
+                    }
+                    i++; // we don't want to traverse over the duplicate zero
+                }
+            }
+        }
+
+        static public string MostCommonWord(string paragraph, string[] banned)
+        {
+            var allWords = paragraph.ToLower().Split(" !?',;.".ToCharArray(),  StringSplitOptions.RemoveEmptyEntries);
+
+            Dictionary<string, int> d = new Dictionary<string, int>();
+
+            foreach (var word in allWords)
+            {
+                string s = word.Trim().ToLower();
+
+                if (!d.ContainsKey(s))
+                {
+                    d[s] = 1;
+                }
+                else
+                {
+                    d[s] += 1;
+                }
+            }
+            int max = 0;
+            string str = "";
+            foreach (var key in d.Keys)
+            {
+                if (!banned.Contains(key) && d[key] > max)
+                {
+                    max = d[key];
+                    str = key;
+                }
+            }
+
+            return str;
+        }
+
+       static public bool DigitCount(string num)
+        {
+            Dictionary<int, int> d = new Dictionary<int, int>();
+            for (int i = 0; i < num.Length; i++)
+            {
+                int t = Convert.ToInt32(num[i].ToString());
+                if (!d.ContainsKey(t))
+                {
+                    d[t] = 1;
+                }
+                else
+                {
+                    d[t] += 1;
+                }
+            }
+
+            for (int i = 0; i < num.Length; i++)
+            {
+                int c = Convert.ToInt32(num[i].ToString());
+                if ( c > 0 && !d.ContainsKey(i))
+                {
+                    return false;
+                }
+                if (d.ContainsKey(i) && ( c != d[i]))
+                {
+                    return false;
+                }
+            }
+            return true;
+
+        }
+
+        //We can turn similarity into equality: two words A and B are similar if f(A) equals to f(B)
+        //where f takes distinct characters from the word and sorts them:
+        //f(abracadabra) => abcdr
+        //then we can group by similar words and perform a simple arithmetics
+        // n (n-1) / 2
+        public int SimilarPairs(string[] words) => words
+       .GroupBy(word => string.Concat(word.Distinct().OrderBy(c => c)))
+       .Sum(group => (group.Count() - 1) * group.Count() / 2);
+
+       static public int SimilarPairs1(string[] words)
+        {
+            //foreach (var word in words)
+            //{
+            //    var dis = word.Distinct();
+            //}
+
+            var g = words.GroupBy(word => string.Concat(word.Distinct().OrderBy(c => c)));
+
+            var s = g.Sum(group => (group.Count() - 1) * group.Count() / 2);
+
+            return 0;
+        }
+
+
         #endregion
 
         static void Main(string[] args)
         {
             #region Leetcode 300 function call
 
-            int[] nums = { 2, 7, 11, 15 };
-            int target = 9;
-            Console.WriteLine(TwoSum(nums,target));
+            string[] words = { "aba", "aabb", "abcd", "bac", "aabc" };
+            SimilarPairs1(words);
+
+            //DigitCount("1");
+            //string s = "Bob hit a ball, the hit BALL flew far after it was hit.";
+            
+            // MostCommonWord(s,str);
+
+            //string s = "";
+            //return s.ToLower();
+
+            int[] nums = { 1,2,3,4 }; //{ -1, 1, 0, -3, 3 };
+            //rotate(nums,2);
+
+            //Console.WriteLine(reverseBits(0010100101000001111010011100));
+
+
+            //int[] nums = { 2, 3, 1, 2, 4, 3 };
+            //Console.WriteLine(MinSubArrayLen(7, nums));
+
+            //int[] nums = { 1,2,3 };
+            //int[] num2 = { 2, 4,6 };
+
+            // Console.WriteLine(FindDifference(nums, num2));
+            //int[][] a = new int[2][];
+            //a[0] = new int[] { 7,13, 34, 45, 10, 12, 27, 13 };
+            //a[1] = new int[] { 27, 21, 45, 10, 12, 13 };
+            //a[2] = new int[] { 4, 3, 6, 5 };
+
+            //Console.WriteLine(Intersection(a));
+
+
+            //int[][] a = new int[4][];
+            //a[0] = new int[] { 3,1,2,2 };
+            //a[1] = new int[] { 1,4,4,5 };
+            //a[2] = new int[] { 2,4,2 ,2};
+            //a[3] = new int[] { 2, 4, 2,2 };
+
+            //Console.WriteLine(EqualPairs(a));
+
+            //int[][] a = new int[2][];
+            //a[0] = new int[] { 1, 2, 4 };
+            //a[1] = new int[] { 3,3,1 };
+
+            //Console.WriteLine(DeleteGreatestValue(a));
+
+
+
 
             #endregion
 
@@ -6566,7 +7409,7 @@ namespace CodingConsoleApp
 
             #region FunctionCall
             int[] nums1 = { 1, 2 };
-            int[] a = { -18, 1, 2, 3, 4, 5 };
+            int[] aa = { -18, 1, 2, 3, 4, 5 };
             int[] b = { 1, 2, 3, 4, 5 };
             //doIntegerBasedRounding(b, 3);
             int[] c = { -1, 0, 1, 1 };
