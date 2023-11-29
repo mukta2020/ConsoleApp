@@ -1974,6 +1974,7 @@ namespace CodingConsoleApp
 
         }
 
+
         static int areAnagrams(char[] a1, char[] a2)
         {
 
