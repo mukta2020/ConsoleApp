@@ -3280,6 +3280,30 @@ namespace CodingConsoleApp
 
         }
 
+        public bool hasCycle(ListNode head)
+        {
+            if (head == null || head.next == null)
+            {
+                return false; // No cycle if there are less than two nodes.
+            }
+
+            ListNode slow = head;
+            ListNode fast = head;
+
+            while (fast != null && fast.next != null)
+            {
+                slow = slow.next; // Move one step.
+                fast = fast.next.next; // Move two steps.
+
+                if (slow == fast)
+                {
+                    return true; // Cycle detected.
+                }
+            }
+
+            return false; // No cycle found.
+        }
+
         public static int largestAdjacentSum(int[] a)
         {
             int maxSum = int.MinValue;
@@ -7226,7 +7250,7 @@ namespace CodingConsoleApp
             }
             return ans - num - 1;
         }
-        public void duplicateZeros(int[] arr)
+       static public void duplicateZeros(int[] arr)
         {
             if (arr == null || arr.Length == 0) return;
             for (int i = 0; i < arr.Length; i++)
@@ -7322,14 +7346,152 @@ namespace CodingConsoleApp
             //{
             //    var dis = word.Distinct();
             //}
-
             var g = words.GroupBy(word => string.Concat(word.Distinct().OrderBy(c => c)));
-
             var s = g.Sum(group => (group.Count() - 1) * group.Count() / 2);
 
             return 0;
         }
 
+        public int CountConsistentStrings(string allowed, string[] words)
+        {
+
+            int notAllowed = 0;
+            foreach (string word in words)
+            {
+                foreach (char letter in word.ToCharArray())
+                {
+                    if (!allowed.Contains(letter + ""))
+                    {
+                        notAllowed++;
+                        break;
+                    }
+                }
+            }
+
+            return words.Length - notAllowed;
+        }
+
+
+       static public int DistinctAverages(int[] nums)
+        {
+            HashSet<double> h = new HashSet<double>();            
+            List<int> n = nums.ToList();
+
+            while (n.Count>0)
+            {
+                int min = n.Min();
+                int max = n.Max();
+
+                n.Remove(min);
+                n.Remove(max);
+
+                double avg = (min + max) / 2.0;
+                h.Add(avg);
+            }
+            return h.Count;
+        }
+
+        static public bool IsLongPressedName(string name, string typed)
+        {
+            int n = name.Length;
+            int m = typed.Length;
+            if (n > m) return false;
+            if (name[0].ToString() != typed[0].ToString()) return false;
+            int i = 0, j = 0;
+            while (i < n && j < m)
+            {
+                if (name[i].ToString() == typed[i].ToString())
+                {
+                    i++;
+                    j++;
+                }
+                else if (name[i - 1].ToString() == typed[j].ToString())
+                {
+                    j++;
+                }
+                else
+                    return false;
+
+            }
+            while (j < m)
+            {
+                if (name[i - 1].ToString() == typed[j].ToString())
+                    j++;
+                else
+                    return false;
+
+            }
+            if (i < n)
+                return false;
+
+            return true;
+        }
+
+        public int SubtractProductAndSum(int n)
+        {
+            int p = 1;
+            int sum = 0;
+
+            while (n>0)
+            {
+                int num = n % 10;
+                n = n / 10;
+                p *= num;
+                sum += num;
+            }
+            return p - sum;
+        }
+        public int FindSpecialInteger1(int[] arr)
+        {
+            var count = arr.Length / 4;
+            var current = arr[0];
+            var currentCount = 1;
+
+            for (var i = 1; i < arr.Length; i++)
+            {
+                if (arr[i] != current)
+                {
+                    current = arr[i];
+                    currentCount = 1;
+                }
+                else
+                {
+                    currentCount++;
+                    if (currentCount > count)
+                    {
+                        return current;
+                    }
+                }
+            }
+
+            return current;
+        }
+
+       static public int FindSpecialInteger(int[] arr)
+        {
+
+            int target = arr.Length/4;
+            Dictionary<int, int> d = new Dictionary<int, int>();
+            foreach (var item in arr)
+            {
+                if (!d.ContainsKey(item))
+                {
+                    d.Add(item, 1);
+                }
+                else
+                {
+                    d[item] += 1;
+                }
+
+                if (d[item] > target)
+                {
+                    return item;
+                }
+            }
+
+            return -1;
+
+        }
 
         #endregion
 
@@ -7337,8 +7499,10 @@ namespace CodingConsoleApp
         {
             #region Leetcode 300 function call
 
+
+
             string[] words = { "aba", "aabb", "abcd", "bac", "aabc" };
-            SimilarPairs1(words);
+            //SimilarPairs1(words);
 
             //DigitCount("1");
             //string s = "Bob hit a ball, the hit BALL flew far after it was hit.";
@@ -7348,7 +7512,10 @@ namespace CodingConsoleApp
             //string s = "";
             //return s.ToLower();
 
-            int[] nums = { 1,2,3,4 }; //{ -1, 1, 0, -3, 3 };
+            int[] nums = { 1, 2, 2, 6, 6, 6, 6, 7, 10 }; //{ -1, 1, 0, -3, 3 };
+
+            //FindSpecialInteger(nums);
+
             //rotate(nums,2);
 
             //Console.WriteLine(reverseBits(0010100101000001111010011100));
@@ -7398,7 +7565,7 @@ namespace CodingConsoleApp
             GeeksForGeeks g;
 
             // instantiate class 'Geek1'
-            g = new Geek1();
+            //g = new Geek1();
            
 
             #endregion
@@ -7667,15 +7834,16 @@ namespace CodingConsoleApp
             //ReverseList(one);
 
 
-            ListNode one = new ListNode(1);
-            ListNode two = new ListNode(2);
-            ListNode three = new ListNode(3);
-            ListNode four = new ListNode(4);
+            ListNode one = new ListNode(4);
+            ListNode two = new ListNode(1);
+            ListNode three = new ListNode(6);
+            //ListNode four = new ListNode(2);
+            
             one.next = two;
             two.next = three;
-            three.next = four;
+            //three.next = four;
             //four.next = one;
-            // Console.WriteLine(HasCycle(one));
+            Console.WriteLine(RemoveNodes(one));
 
 
             //DeleteMiddle(one);
@@ -7978,6 +8146,123 @@ namespace CodingConsoleApp
 
         }
 
+        static public bool IsPalindrome(ListNode head)
+        {            
+            List<int> values = new List<int>();
+
+            while (head != null)
+            {
+                values.Add(head.val);
+                head = head.next;
+            }
+
+            int l = values.Count - 1;
+            for (int i = 0; i < l; i++)
+            {
+                if (values[i] != values[l])
+                {
+                    return false;
+                }
+                l--;
+            }
+            return true;
+        }
+
+
+        public ListNode RemoveNodes(ListNode head)
+        {
+            if (head.next == null)
+                return head;
+            head.next = RemoveNodes(head.next);
+
+            if (head.next.val > head.val)
+                return head.next;
+
+            return head;
+        }
+
+        static public ListNode ReverseList(ListNode head)
+        {
+
+            ListNode prev = null;
+            ListNode cur = head;
+
+            while (cur != null)
+            {
+                ListNode nextTemp = null;
+                if (head.next != null)
+                {
+                    nextTemp = head.next;
+                }
+
+                cur.next = prev;
+
+                prev = cur;
+                cur = nextTemp;
+
+            }
+
+            return prev;
+        }
+
+        static public ListNode RemoveElements(ListNode head, int val)
+        {
+            // 6 -> 3 -> 6 -> 4 -> 6 remove 6
+            if (head == null)
+            {
+                return null;
+            }
+
+            ListNode root = head;
+
+            while (head != null)
+            {
+                if (head.val == val)
+                {
+                    head = head.next;
+                    root = head;
+                }
+                else if ( head.next != null && head.next.val == val)
+                {
+                    if (head.next.next == null)
+                    {
+                        head.next = null;
+                    }
+                    else
+                    {
+                        head.next = head.next.next;
+                    }
+                }
+                else
+                {
+                    head = head.next;
+                }
+            }
+            return root;
+
+        }
+
+        public static ListNode DeleteDuplicates(ListNode head)
+        {
+            if (head == null)
+            {
+                return null;
+            }
+            ListNode root = head;
+            while (head.next != null)
+            {
+                if (head.val == head.next.val)
+                {                    
+                    head.next = head.next.next;
+                }
+                else
+                {
+                    head = head.next;
+                }
+            }
+            return root;
+        }
+
         private static int isSmart(int num)
         {
             int c = 1;
@@ -8086,7 +8371,7 @@ namespace CodingConsoleApp
             }
             
         }
-        public static ListNode RemoveElements(ListNode head, int val)
+        public static ListNode RemoveElements1(ListNode head, int val)
         {
             if (head == null)
             {
@@ -8155,8 +8440,9 @@ namespace CodingConsoleApp
             return reformLinkroot;
         }
 
-        public static ListNode ReverseList(ListNode head)
+        public static ListNode ReverseList2(ListNode head)
         {
+            // 1 -> 2 -> 3
             ListNode Prev = null;
             ListNode curr = head;
             while (curr != null)
@@ -8164,11 +8450,11 @@ namespace CodingConsoleApp
                 ListNode nextTemp = null;
                 if (curr.next != null)
                 {
-                    nextTemp = curr.next;
+                    nextTemp = curr.next; // 2 store at temp
                 }
-                curr.next = Prev;
-                Prev = curr;
-                curr = nextTemp;
+                curr.next = Prev; // 1 <- 2
+                Prev = curr; // 1
+                curr = nextTemp; // curr restore from temp 2 -> 3
             }
             return Prev;
         }
@@ -8198,6 +8484,8 @@ namespace CodingConsoleApp
 
 
     }
+
+   
 
     public class ListNode
     {
