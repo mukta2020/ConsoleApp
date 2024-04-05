@@ -1,10 +1,14 @@
-﻿using Lucene.Net.Support;
+﻿using CsvHelper;
+using Lucene.Net.Support;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace CodingConsoleApp
 {
@@ -6544,6 +6548,30 @@ namespace CodingConsoleApp
         #endregion
 
         #region Leetcode target 300
+
+        static public bool HalvesAreAlike(string s)
+        {
+            int fc = 0;
+            int lc = 0;
+            string[] vow =  {"a", "e", "i", "o", "u", "A", "E", "I", "O", "U"};
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (vow.Contains(s[i].ToString()) )
+                {
+                    if (i < s.Length/2)
+                    {
+                        fc++;
+                    }
+                    else
+                    {
+                        lc++;
+                    }
+                }
+            }
+            return fc == lc ;
+        }
+
         static public int[] TwoSum(int[] nums, int target)
         {
 
@@ -7496,18 +7524,192 @@ namespace CodingConsoleApp
 
         #endregion
 
-        static void Main(string[] args)
+        #region LeetCode target 400
+        static public int[] FindMissingAndRepeatedValues(int[][] grid)
+        {
+            List<int> list = new List<int>();
+            Dictionary<int, int> d = new Dictionary<int, int>();
+
+            for (int i = 0; i < grid.Length; i++)
+            {
+                for (int j = 0; j < grid[i].Length; j++)
+                {
+                    if (!d.ContainsKey(grid[i][j]))
+                    {
+                        d[grid[i][j]] = 1;
+                    }
+                    else
+                    {
+                        d[grid[i][j]] += 1;
+                    }
+                }
+            }
+
+            for (int i = 1; i <= grid.Length*grid.Length; i++)
+            {
+                if (d.ContainsKey(i) && d[i] > 1)
+                {
+                    list.Add(i);
+                }
+            }
+
+            for (int i = 1; i <= grid.Length * grid.Length; i++)
+            {
+                if (!d.ContainsKey(i))
+                {
+                    list.Add(i);
+                }
+            }
+
+            return list.ToArray();
+        }
+
+        static public bool IsFascinating(int n)
+        {
+            string s = (n.ToString() + (n * 2).ToString() + (n * 3).ToString());
+            var charArray = s.ToArray().OrderBy(o=>o).ToArray();
+            //char[] charArray = { '1', '2', '3', '4', '5' };
+            int[] intArray = charArray.Select(c1 => (int)Char.GetNumericValue(c1)).ToArray();
+
+
+            for (int i = 0; i < intArray.Length; i++)
+            {
+                if (intArray[i] != i+1)
+                {
+                    return false;
+                }
+            }
+            return true;            
+        }
+
+        static public Boolean IsFascinating2(int n)
+        {
+            int a = 2 * n;
+            int b = 3 * n;
+            String s = "";
+            s = s + a + b + n;
+            int[] arr = new int[10];
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                int t = Convert.ToInt32(s[i].ToString());
+                arr[t]++;
+            }
+
+            if (arr[0] >= 1)
+            {
+                return false;
+            }
+            for (int i = 1; i < arr.Length; i++)
+            {
+                if (arr[i] != 1)
+                {
+                    return false;
+                }
+            }
+            return true;
+            
+        }
+
+       static public string MaximumOddBinaryNumber(string s)
+        {
+            var count = 0;
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (s[i] == '1') count++;
+            }
+            //var a = new string('1', count - 1);
+            //var b = new string('0', s.Length - count);
+            var rs = new string('1', count - 1) + new string('0', s.Length - count) + new string('1', 1);
+            return rs;
+        }
+
+
+        #endregion
+
+        static public async Task<string> StoreManufacturingCsv(string pathToStoreCSV)
+        {
+            pathToStoreCSV = @"D:\\";  //Projects\
+            //string folderPath = @"\\fserver\shared\RPO\!Public\MaxMDL\";
+            //S:\Manufacturing\Production\!Private
+            //var msg = new MessageHelperDto();
+            List<CellLocatorSheet> cellLocatorSheetList = new List<CellLocatorSheet>();
+            if (true)
+            {
+                var cls = new CellLocatorSheet
+                {
+                    DrugName = "DULOXETINE HCL DR 20 MG CAP",
+                    LabelName = "",
+                    Baffle = 3,
+                    Height = 1.5,
+                    Width = "B.75",
+                    Cell = "9V",
+                    CellType = "",
+                    MaxCapacity = 716,
+                    SuperCellMaxCapacity = 1123,
+                    NDC = "57237001760",
+                    Pressure = 30,
+                    ThirtyDramCapacity = 159
+                };
+                cellLocatorSheetList.Add(cls);
+            }
+
+            try
+            {
+                XmlWriterSettings settings = new XmlWriterSettings { Async = true };
+                settings.Encoding = Encoding.UTF8;
+                settings.Indent = true;
+                settings.NewLineChars = "\n";
+                settings.OmitXmlDeclaration = true;
+
+                using (FileStream fileStream = new FileStream(pathToStoreCSV, FileMode.Create, FileAccess.Write, FileShare.None, 4096, FileOptions.Asynchronous | FileOptions.WriteThrough))
+                {
+                    using (var bufferedStream = new BufferedStream(fileStream, 65536))
+                    {
+                        using (StreamWriter writer = new StreamWriter(bufferedStream))
+                        {
+                            using (CsvWriter csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+                            {
+                                await csv.WriteRecordsAsync(cellLocatorSheetList);
+                                await csv.FlushAsync();
+                            }
+                            writer.Close();
+                        }
+                    }
+                    fileStream.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return "";
+
+        }
+
+
+        static async void Main(string[] args)
         {
             #region Leetcode 300 function call
 
+            int[][] grid = new int[3][];
+            grid[0] = new int[] { 9, 1, 7 };
+            grid[1] = new int[] { 8, 9, 2 };
+            grid[2] = new int[] { 3, 4, 6 };
 
+            await StoreManufacturingCsv("");
+
+            //MaximumOddBinaryNumber("0101");
+            // FindMissingAndRepeatedValues(grid);
+
+            //IsFascinating(192);
 
             string[] words = { "aba", "aabb", "abcd", "bac", "aabc" };
-            //SimilarPairs1(words);
+            //HalvesAreAlike("book");
 
             //DigitCount("1");
             //string s = "Bob hit a ball, the hit BALL flew far after it was hit.";
-            
+
             // MostCommonWord(s,str);
 
             //string s = "";
@@ -7844,7 +8046,7 @@ namespace CodingConsoleApp
             two.next = three;
             //three.next = four;
             //four.next = one;
-            Console.WriteLine(RemoveNodes(one));
+            //Console.WriteLine(RemoveNodes(one));
 
 
             //DeleteMiddle(one);
@@ -8146,6 +8348,8 @@ namespace CodingConsoleApp
 
 
         }
+
+
 
         static public bool IsPalindrome(ListNode head)
         {            
@@ -8486,7 +8690,22 @@ namespace CodingConsoleApp
 
     }
 
-   
+    public class CellLocatorSheet
+    {
+        public string DrugName { get; set; }
+        public string LabelName { get; set; }
+        public string NDC { get; set; }
+        public double? Height { get; set; }
+        public string Width { get; set; }
+        public int? Baffle { get; set; }
+        public int? Pressure { get; set; }
+        public int? ThirtyDramCapacity { get; set; }
+        public string Cell { get; set; }
+        public string CellType { get; set; }
+        public int? MaxCapacity { get; set; }
+        public int? SuperCellMaxCapacity { get; set; }
+        public bool S { get; set; } = false;
+    }
 
     public class ListNode
     {
