@@ -7802,6 +7802,10 @@ namespace CodingConsoleApp
 
             #endregion
 
+
+
+
+
             //  S, SL, L , full locking option 3 for full
             // Max2CellCalculationNew(1, 27, 27, 146, 1);  // custom ok
             //Max2CellCalculationNew(1, 27, 0, 0, 3); // full locking
