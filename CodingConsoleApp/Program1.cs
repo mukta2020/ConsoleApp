@@ -7688,8 +7688,98 @@ namespace CodingConsoleApp
         }
 
 
-        static async void Main(string[] args)
+        static void Main(string[] args)
         {
+
+            //    var superLockingCell = new List<string> { "9A", "9B", "7A", "7B" };
+            //    var superCell = new List<string> { "4A", "4B", "7C", "7D" };
+
+            //    // Get the last elements
+            //    var lastSuper = superCell.LastOrDefault();
+            //    var lastSuperLocking = superLockingCell.LastOrDefault();
+
+            //    // Extract integer parts from the last elements
+            //    int lastSuperNum = lastSuper != null ? int.Parse(lastSuper.Substring(0, lastSuper.Length - 1)) : -1;
+            //    int lastSuperLockingNum = lastSuperLocking != null ? int.Parse(lastSuperLocking.Substring(0, lastSuperLocking.Length - 1)) : -1;
+
+            //    // Check if the integer parts match
+            //    bool isMatch = lastSuperNum == lastSuperLockingNum;
+
+            //    // Filter superCell based on the match condition
+            //    var filteredSuperCell = isMatch
+            //        ? superCell.Where(item => int.Parse(item.Substring(0, item.Length - 1)) == lastSuperNum).ToList()
+            //        : superCell;
+
+
+            var superCell = new List<string> { "7C", "7D" };
+            var updatedSuperCell = new List<string>();
+
+            // Remove digits and keep only letters
+            foreach (var item in superCell)
+            {
+                string newItem = new string(item.Where(cc => !char.IsDigit(cc)).ToArray());
+                updatedSuperCell.Add(newItem);
+            }
+
+            // Add missing letters from 'A' to the last letter in the list
+            var lastLetter = updatedSuperCell.LastOrDefault();
+            var ca = Convert.ToChar(lastLetter);
+
+            for (char ch = 'A'; ch <= ca; ch++)
+            {
+                if (!updatedSuperCell.Contains(ch.ToString()))
+                {
+                    updatedSuperCell.Add(ch.ToString());
+                }
+            }
+
+            // Sort the list alphabetically (optional)
+            updatedSuperCell.Sort();
+
+            //var supper = new List<string> { "2A", "2B", "4B", "4C", "7C", "9D" };
+            //var uniqueIntegers = new HashSet<string>();
+
+            //foreach (var item in supper)
+            //{
+            //    // Extract the numeric part and convert it to an integer
+            //    int number = int.Parse(new string(item.Where(char.IsDigit).ToArray()));
+
+            //    // Add the number to the HashSet to ensure uniqueness
+            //    uniqueIntegers.Add(number.ToString());
+            //}
+
+            //// Convert the HashSet to a List if needed
+            //var uniqueIntegerList = uniqueIntegers.ToList();
+
+            var supper = new List<string> { "2A", "2B", "4B", "4C", "7C", "9D" };
+
+            var uniqueIntegers = new HashSet<int>();
+
+            foreach (var item in supper)
+            {
+                int number = int.Parse(new string(item.Where(char.IsDigit).ToArray()));
+                uniqueIntegers.Add(number);
+            }
+            var uniqueIntegerList = uniqueIntegers.ToList();
+            uniqueIntegerList.Sort();
+
+            // Step 2: Find the alphabetic letters associated with the last integer
+            var lastInteger = uniqueIntegerList.Last();
+            var alphabeticLetters = new HashSet<string>();
+
+            foreach (var item in supper)
+            {
+                // Extract the numeric part and check if it matches the last integer
+                int number = int.Parse(new string(item.Where(char.IsDigit).ToArray()));
+                if (number == lastInteger)
+                {
+                    // Extract the alphabetic part and add it to the HashSet
+                    string letter = new string(item.Where(char.IsLetter).ToArray());
+                    alphabeticLetters.Add(letter);
+                }
+            }
+            var alphabeticLetterList = alphabeticLetters.ToList();
+
             #region Leetcode 300 function call
 
             int[][] grid = new int[3][];
@@ -7697,7 +7787,7 @@ namespace CodingConsoleApp
             grid[1] = new int[] { 8, 9, 2 };
             grid[2] = new int[] { 3, 4, 6 };
 
-            await StoreManufacturingCsv("");
+            //await StoreManufacturingCsv("");
 
             //MaximumOddBinaryNumber("0101");
             // FindMissingAndRepeatedValues(grid);
