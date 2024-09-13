@@ -7711,30 +7711,30 @@ namespace CodingConsoleApp
             //        : superCell;
 
 
-            var superCell = new List<string> { "7C", "7D" };
-            var updatedSuperCell = new List<string>();
+            //var superCell = new List<string> { "7C", "7D" };
+            //var updatedSuperCell = new List<string>();
 
-            // Remove digits and keep only letters
-            foreach (var item in superCell)
-            {
-                string newItem = new string(item.Where(cc => !char.IsDigit(cc)).ToArray());
-                updatedSuperCell.Add(newItem);
-            }
+            //// Remove digits and keep only letters
+            //foreach (var item in superCell)
+            //{
+            //    string newItem = new string(item.Where(cc => !char.IsDigit(cc)).ToArray());
+            //    updatedSuperCell.Add(newItem);
+            //}
 
-            // Add missing letters from 'A' to the last letter in the list
-            var lastLetter = updatedSuperCell.LastOrDefault();
-            var ca = Convert.ToChar(lastLetter);
+            //// Add missing letters from 'A' to the last letter in the list
+            //var lastLetter = updatedSuperCell.LastOrDefault();
+            //var ca = Convert.ToChar(lastLetter);
 
-            for (char ch = 'A'; ch <= ca; ch++)
-            {
-                if (!updatedSuperCell.Contains(ch.ToString()))
-                {
-                    updatedSuperCell.Add(ch.ToString());
-                }
-            }
+            //for (char ch = 'A'; ch <= ca; ch++)
+            //{
+            //    if (!updatedSuperCell.Contains(ch.ToString()))
+            //    {
+            //        updatedSuperCell.Add(ch.ToString());
+            //    }
+            //}
 
-            // Sort the list alphabetically (optional)
-            updatedSuperCell.Sort();
+            //// Sort the list alphabetically (optional)
+            //updatedSuperCell.Sort();
 
             //var supper = new List<string> { "2A", "2B", "4B", "4C", "7C", "9D" };
             //var uniqueIntegers = new HashSet<string>();
